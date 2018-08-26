@@ -93,4 +93,77 @@ router.post(
   }
 );
 
+// @route POST api/posts/likes/:id
+// @desc add a like to a post
+// @access Private
+
+router.post(
+  '/like/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Post.findById(req.params.id)
+        .then(post => {
+          // check if previously liked
+          if (
+            post.likes.filter(like => like.user.toString() === req.user.id)
+              .length > 0
+          ) {
+            return res
+              .status(400)
+              .json({ likedAlready: 'User has already liked post!' });
+          }
+
+          // add to likes array then save
+          post.likes.unshift({ user: req.user.id });
+
+          post.save().then(post => res.json(post));
+        })
+        .catch(err =>
+          res
+            .status(404)
+            .json({ postNotFound: 'Could not find post with the id provided' })
+        );
+    });
+  }
+);
+
+// @route POST api/posts/unlike/:id
+// @desc unlike a post
+// @access Private
+
+router.post(
+  '/unlike/:id',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Post.findById(req.params.id)
+        .then(post => {
+          // check if previously unliked
+          if (
+            post.likes.filter(like => like.user.toString() === req.user.id)
+              .length === 0
+          ) {
+            return res
+              .status(400)
+              .json({ cannotUnlike: 'You have not yet liked this post!' });
+          }
+
+          const removeIndex = post.likes
+            .map(item => item.user.toString())
+            .indexOf(req.user.id);
+
+          post.likes.splice(removeIndex, 1);
+
+          post.save().then(post => res.json(post));
+        })
+        .catch(err =>
+          res
+            .status(404)
+            .json({ postNotFound: 'Could not find post with the id provided' })
+        );
+    });
+  }
+);
+
 module.exports = router;
