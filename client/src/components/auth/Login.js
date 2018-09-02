@@ -20,6 +20,12 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
@@ -57,6 +63,10 @@ class Login extends Component {
               <h1 className="display-4 text-center">Log In</h1>
               <p className="lead text-center">
                 Sign in to your DevConnector account
+                <br />
+                put styling of navbar in a stylesheet and fix backend so that a
+                gravatar link is contained as part of the user info within the
+                decoded token
               </p>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
