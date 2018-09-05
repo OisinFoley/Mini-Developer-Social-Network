@@ -22,7 +22,6 @@ const TextFieldGroup = ({
         })}
         placeholder={placeholder}
         name={name}
-        onChange={this.onChange}
         value={value}
         onChange={onChange}
         disabled={disabled}
