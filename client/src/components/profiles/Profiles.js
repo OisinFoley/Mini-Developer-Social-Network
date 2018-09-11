@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 import { getProfiles } from '../../actions/profileActions';
+import ProfileItem from './ProfileItem';
 
 class Profiles extends Component {
   componentDidMount() {
@@ -10,14 +11,16 @@ class Profiles extends Component {
   }
 
   render() {
-    const { profiles, loading } = this.props.profiles;
+    const { profiles, loading } = this.props.profile;
     let profileItems;
 
     if (profiles === null || loading) {
       profileItems = <Spinner />;
     } else {
       if (profiles.length > 0) {
-        profileItems = <h1>profiles here</h1>;
+        profileItems = profiles.map(profile => (
+          <ProfileItem key={profile._id} profile={profile} />
+        ));
       } else {
         profileItems = <h4>No profiles found ...</h4>;
       }
@@ -47,8 +50,9 @@ Profiles.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  profiles: state.profile,
-  loading: state.loading
+  profile: state.profile
+  // ,
+  // loading: state.loading
 });
 
 export default connect(
