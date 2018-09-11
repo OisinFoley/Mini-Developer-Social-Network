@@ -100,6 +100,24 @@ export const getProfiles = () => dispatch => {
     );
 };
 
+export const getProfileByHandle = handle => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/handle/${handle}`)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
+      })
+    );
+};
+
 export const deleteExperience = id => dispatch => {
   axios
     .delete(`/api/profile/experience/${id}`)
