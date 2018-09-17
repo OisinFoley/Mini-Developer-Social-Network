@@ -26,7 +26,7 @@ class ProfileAbout extends Component {
               {isEmpty(profile.bio) ? (
                 <span> at {firstName} does not have a bio </span>
               ) : (
-                <span> at {profile.bio} </span>
+                <span> {profile.bio} </span>
               )}
             </p>
             <hr />
@@ -42,5 +42,9 @@ class ProfileAbout extends Component {
     );
   }
 }
+
+ProfileAbout.propTypes = {
+  profile: PropTypes.object.isRequired
+};
 
 export default ProfileAbout;
