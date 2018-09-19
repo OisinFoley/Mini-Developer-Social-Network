@@ -26,6 +26,8 @@ import Profile from './components/profile/Profile';
 
 import NotFound from './components/not-found/NotFound';
 
+import Posts from './components/posts/Posts';
+
 import './App.css';
 
 // check if token exists
@@ -100,6 +102,10 @@ class App extends Component {
                 />
               </Switch>
               <Route exact path="/not-found" component={NotFound} />
+
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
             </div>
             <Footer />
           </div>
