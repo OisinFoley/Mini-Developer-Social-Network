@@ -46,7 +46,6 @@ class PostItem extends Component {
             <p className="lead">{post.text}</p>
             {showActions ? (
               <span>
-                {' '}
                 <button
                   onClick={this.onLikeClick.bind(this, post._id)}
                   type="button"
@@ -77,7 +76,7 @@ class PostItem extends Component {
                   >
                     <i className="fas fa-times" />
                   </button>
-                ) : null}{' '}
+                ) : null}
               </span>
             ) : null}
           </div>
