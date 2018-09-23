@@ -5,6 +5,7 @@ import PostItem from '../posts/PostItem';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPost } from '../../actions/postActions';
+import CommentForm from './CommentForm';
 
 class Post extends Component {
   componentDidMount() {
@@ -15,23 +16,14 @@ class Post extends Component {
     const { post, loading } = this.props.post;
     let postContent;
 
-    // loading || post === null || Object.keys(post).length === 0
-    //   ? (postContent = <Spinner />)
-    //   : (postContent = (
-    //       <div>
-    //         <PostItem post={post} showActions={false} />
-    //       </div>
-    //     ));
-
-    if (post === null || loading || Object.keys(post).length === 0) {
-      postContent = <Spinner />;
-    } else {
-      postContent = (
-        <div>
-          <PostItem post={post} showActions={false} />
-        </div>
-      );
-    }
+    loading || post === null || Object.keys(post).length === 0
+      ? (postContent = <Spinner />)
+      : (postContent = (
+          <div>
+            <PostItem post={post} showActions={false} />
+            <CommentForm postId={post._id} />
+          </div>
+        ));
 
     return (
       <div className="post">
