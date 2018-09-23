@@ -7,23 +7,15 @@ import { getPosts } from '../../actions/postActions';
 import PostFeed from './PostFeed';
 
 class Posts extends Component {
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
-    }
-  }
-
   componentDidMount() {
     this.props.getPosts();
   }
 
   render() {
-    const { posts, loading } = this.props.post;
-    // const { posts, loading } = this.props.posts;
+    const { posts, loading } = this.props.posts;
     let postContent;
 
     if (posts === null || loading) {
-      // if (posts === undefined || loading) {
       postContent = <Spinner />;
     } else {
       postContent = <PostFeed posts={posts} />;
@@ -45,14 +37,12 @@ class Posts extends Component {
 }
 
 Posts.propTypes = {
-  post: PropTypes.object.isRequired,
-  // posts: PropTypes.object.isRequired,
+  posts: PropTypes.object.isRequired,
   getPosts: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  post: state.post
-  // posts: state.post
+  posts: state.post
 });
 
 export default connect(

@@ -101,11 +101,12 @@ class App extends Component {
                   component={AddEducation}
                 />
               </Switch>
-              <Route exact path="/not-found" component={NotFound} />
 
               <Switch>
                 <PrivateRoute exact path="/feed" component={Posts} />
               </Switch>
+
+              <Route exact path="/not-found" component={NotFound} />
             </div>
             <Footer />
           </div>
