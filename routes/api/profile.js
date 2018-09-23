@@ -51,8 +51,6 @@ router.get(
 router.get('/all', (req, res) => {
   const errors = {};
 
-  console.log('i hit /api/profile/all');
-
   Profile.find()
     .populate('user', ['name', 'avatar'])
     .then(profiles => {
