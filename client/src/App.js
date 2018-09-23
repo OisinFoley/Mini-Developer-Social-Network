@@ -79,7 +79,6 @@ class App extends Component {
                   component={CreateProfile}
                 />
               </Switch>
-
               <Switch>
                 <PrivateRoute
                   exact
@@ -87,7 +86,6 @@ class App extends Component {
                   component={EditProfile}
                 />
               </Switch>
-
               <Switch>
                 <PrivateRoute
                   exact
@@ -95,7 +93,6 @@ class App extends Component {
                   component={AddExperience}
                 />
               </Switch>
-
               <Switch>
                 <PrivateRoute
                   exact
@@ -103,11 +100,9 @@ class App extends Component {
                   component={AddEducation}
                 />
               </Switch>
-
               <Switch>
                 <PrivateRoute exact path="/feed" component={Posts} />
               </Switch>
-
               <Switch>
                 <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
