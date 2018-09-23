@@ -23,6 +23,7 @@ router.get('/test', (req, res) =>
 // @access Public
 
 router.get('/', (req, res) => {
+  console.log('i hit /api/posts');
   Post.find()
     .sort({ date: -1 })
     .then(posts => {
