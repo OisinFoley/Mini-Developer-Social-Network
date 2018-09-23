@@ -31,7 +31,8 @@ const PostSchema = new Schema({
         ref: 'user'
       },
       name: {
-        type: String
+        type: String,
+        required: true
       },
       avatar: {
         type: String
