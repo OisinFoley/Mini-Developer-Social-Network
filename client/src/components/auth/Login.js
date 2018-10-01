@@ -61,9 +61,6 @@ class Login extends Component {
               <p className="lead text-center">
                 Sign in to your DevConnector account
                 <br />
-                put styling of navbar in a stylesheet and fix backend so that a
-                gravatar link is contained as part of the user info within the
-                decoded token
               </p>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
