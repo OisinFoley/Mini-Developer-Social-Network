@@ -40,7 +40,7 @@ class ProfileCreds extends Component {
       <li className="list-group-item" key={edu._id}>
         <h4>{edu.school}</h4>
         <p>
-          <Moment format="DD/MM/YYYY">{edu.from}</Moment> -
+          <Moment format="DD/MM/YYYY">{edu.from}</Moment> -&nbsp;
           {edu.to === null ? (
             ' Now'
           ) : (
