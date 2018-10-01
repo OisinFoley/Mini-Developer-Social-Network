@@ -34,10 +34,9 @@ class Navbar extends Component {
             className="nav-link"
           >
             <img
-              className="rounded-circle"
+              className="rounded-circle navbar-user-icon"
               src={user.avatar}
               alt={user.name}
-              style={{ width: '25px', marginRight: '5px' }}
               title="You must have a gravatar associated ith your email in order for a custom image to be displayed."
             />
             Logout

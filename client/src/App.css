@@ -2,6 +2,21 @@ img {
   width: 100%;
 }
 
+.navbar-user-icon {
+  width: 25px;
+  margin-right: 5px;
+}
+
+.spinner {
+  width: 200px;
+  margin: auto;
+  display: block;
+}
+
+.btn-margin-spacing {
+  margin-top: 60px;
+}
+
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat;
