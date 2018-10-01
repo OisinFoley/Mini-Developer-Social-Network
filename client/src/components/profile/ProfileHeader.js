@@ -60,7 +60,9 @@ class ProfileHeader extends Component {
                   </a>
                 )}
 
-                {isEmpty(profile.social && profile.social.instagram) ? null : (
+                {isEmpty(
+                  profile.social && profile.social[0].instagram
+                ) ? null : (
                   <a
                     className="text-white p-2"
                     href={profile.social.instagram}
@@ -70,7 +72,9 @@ class ProfileHeader extends Component {
                   </a>
                 )}
 
-                {isEmpty(profile.social && profile.social.facebook) ? null : (
+                {isEmpty(
+                  profile.social && profile.social[0].facebook
+                ) ? null : (
                   <a
                     className="text-white p-2"
                     href={profile.social.facebook}
@@ -80,7 +84,7 @@ class ProfileHeader extends Component {
                   </a>
                 )}
 
-                {isEmpty(profile.social && profile.social.youtube) ? null : (
+                {isEmpty(profile.social && profile.social[0].youtube) ? null : (
                   <a
                     className="text-white p-2"
                     href={profile.social.youtube}
