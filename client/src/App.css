@@ -17,6 +17,14 @@ img {
   margin-top: 60px;
 }
 
+.dashboard-heading {
+  margin-left: -10px;
+}
+
+.dashboard-content {
+  margin: 0px -7px;
+}
+
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat;

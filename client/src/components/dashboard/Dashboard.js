@@ -28,7 +28,7 @@ class Dashboard extends Component {
     } else {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
-          <div>
+          <div className="dashboard-content">
             <p className="lead text-muted">
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
@@ -63,7 +63,7 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4"> Dashboard </h1>
+              <h1 className="display-4 dashboard-heading">Dashboard</h1>
               {dashboardContent}
             </div>
           </div>
