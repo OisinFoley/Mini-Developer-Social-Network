@@ -89,7 +89,7 @@ router.post(
       avatar: req.body.avatar
     });
 
-    newPost.save().then(post => res.json({ message: 'Success', post: post }));
+    newPost.save().then(post => res.json(post));
   }
 );
 
