@@ -11,10 +11,10 @@ class Experience extends Component {
 
   render() {
     const experience = this.props.experience.map(exp => (
-      <tr key={exp._id}>
-        <td> {exp.company} </td>
-        <td> {exp.title} </td>
-        <td>
+      <tr className='row' key={exp._id}>
+        <td className='col-3'> {exp.company} </td>
+        <td className='col-3'> {exp.title} </td>
+        <td className='col-3'>
           <Moment format="DD/MM/YYYY">{exp.from}</Moment> -&nbsp;
           {exp.to === null ? (
             'Now'
@@ -38,10 +38,10 @@ class Experience extends Component {
         <h4 className="mb-4">Experience Credentials</h4>
         <table className="table">
           <thead>
-            <tr>
-              <th>Company</th>
-              <th>Title</th>
-              <th>Years</th>
+            <tr className='row'>
+              <th className="col-3">Company</th>
+              <th className="col-3">Title</th>
+              <th className="col-3">Years</th>
               <th />
             </tr>
           </thead>
