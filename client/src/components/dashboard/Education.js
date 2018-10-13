@@ -11,10 +11,10 @@ class Education extends Component {
 
   render() {
     const education = this.props.education.map(edu => (
-      <tr key={edu._id}>
-        <td> {edu.school} </td>
-        <td> {edu.degree} </td>
-        <td>
+      <tr className='row' key={edu._id}>
+        <td className='col-3'> {edu.school} </td>
+        <td className='col-3'> {edu.degree} </td>
+        <td className='col-3'>
           <Moment format="DD/MM/YYYY">{edu.from}</Moment> -&nbsp;
           {edu.to === null ? (
             'Now'
@@ -39,10 +39,10 @@ class Education extends Component {
         <h4 className="mb-4">Education</h4>
         <table className="table">
           <thead>
-            <tr>
-              <th>School</th>
-              <th>Degree</th>
-              <th>Years</th>
+            <tr className='row'>
+              <th className="col-3">School</th>
+              <th className="col-3">Degree</th>
+              <th className="col-3">Years</th>
               <th />
             </tr>
           </thead>

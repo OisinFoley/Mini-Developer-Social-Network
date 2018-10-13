@@ -86,7 +86,7 @@ class Register extends Component {
                 />
 
                 <TextFieldGroup
-                  placeholder="password"
+                  placeholder="Password"
                   name="password"
                   type="password"
                   value={this.state.password}
@@ -95,7 +95,7 @@ class Register extends Component {
                 />
 
                 <TextFieldGroup
-                  placeholder="password 2"
+                  placeholder="Verify password"
                   name="password2"
                   type="password"
                   value={this.state.password2}

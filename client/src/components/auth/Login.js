@@ -73,7 +73,7 @@ class Login extends Component {
                 />
 
                 <TextFieldGroup
-                  placeholder="password"
+                  placeholder="Password"
                   name="password"
                   type="password"
                   value={this.state.password}
