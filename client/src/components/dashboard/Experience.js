@@ -12,9 +12,9 @@ class Experience extends Component {
   render() {
     const experience = this.props.experience.map(exp => (
       <tr className='row' key={exp._id}>
-        <td className='col-3'> {exp.company} </td>
-        <td className='col-3'> {exp.title} </td>
-        <td className='col-3'>
+        <td className='col-3 table-item-xs'> {exp.company} </td>
+        <td className='col-3 table-item-xs'> {exp.title} </td>
+        <td className='col-3 table-item-xs'>
           <Moment format="DD/MM/YYYY">{exp.from}</Moment> -&nbsp;
           {exp.to === null ? (
             'Now'
@@ -22,10 +22,10 @@ class Experience extends Component {
             <Moment format="DD/MM/YYYY">{exp.to}</Moment>
           )}
         </td>
-        <td>
+        <td id='tableCellDeleteContainer'>
           <button
             onClick={this.onDelete.bind(this, exp._id)}
-            className="btn btn-danger"
+            className="btn-sm btn-danger deleteDashboardContent"
           >
             Delete
           </button>
@@ -35,14 +35,13 @@ class Experience extends Component {
 
     return (
       <div>
-        <h4 className="mb-4">Experience Credentials</h4>
+        <h4 className="mb-4">Experience</h4>
         <table className="table">
           <thead>
             <tr className='row'>
-              <th className="col-3">Company</th>
-              <th className="col-3">Title</th>
-              <th className="col-3">Years</th>
-              <th />
+              <th className="col-3 table-item-xs">Company</th>
+              <th className="col-3 table-item-xs">Title</th>
+              <th className="col-3 table-item-xs">Years</th>
             </tr>
           </thead>
           <tbody>{experience}</tbody>

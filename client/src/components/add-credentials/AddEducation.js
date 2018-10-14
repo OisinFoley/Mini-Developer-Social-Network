@@ -71,7 +71,7 @@ class AddEducation extends Component {
               </Link>
               <h1 className="display-4 text-center"> Add Education </h1>
               <p className="lead text-center">
-                Add a school or coding bootcamp you've attended
+                Add academic education or coding training you've attended
               </p>
               <small className="d-block pb-3">* Required fields </small>
               <form onSubmit={this.onSubmit}>

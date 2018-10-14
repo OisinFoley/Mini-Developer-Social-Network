@@ -2,6 +2,33 @@ img {
   width: 100%;
 }
 
+
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-sm {
+  border-radius: .25rem;
+  margin-top: -4px;
+}
+
+.delete-account-hr {
+  display: none;
+}
+
+/* .deleteDashboardContent {
+  margin-left: -7px;
+} */
+
+#tableCellDeleteContainer {
+  border: 0px;
+}
+
+.row {
+  margin: 0px;
+}
+
 .navbar-user-icon {
   width: 25px;
   margin-right: 5px;
@@ -14,7 +41,7 @@ img {
 }
 
 .btn-margin-spacing {
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 .dashboard-heading {
@@ -59,4 +86,41 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+@media only screen and (max-width: 500px) {
+  .profileActions {
+    display: grid;
+  }
+
+  .dashboardWelcomeLabel, .dashboard-heading {
+    text-align: center;
+    margin-left: 0px;
+  }
+
+  .table-item-xs {
+    max-width: 33.33%;
+    flex: 0 0 33%;
+  }
+
+  #tableCellDeleteContainer, .deleteDashboardContent {
+    width: 100%;
+  }
+
+  .btnDeleteAccount {
+    width: 94%;
+    margin-left: 12px;
+  }
+
+  .delete-account-hr {
+    display: block;
+    width: 98%;
+    margin-top: 45px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .form-text {
+    font-size: 80%;
+  }
 }

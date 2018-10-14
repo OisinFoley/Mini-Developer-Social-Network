@@ -12,9 +12,9 @@ class Education extends Component {
   render() {
     const education = this.props.education.map(edu => (
       <tr className='row' key={edu._id}>
-        <td className='col-3'> {edu.school} </td>
-        <td className='col-3'> {edu.degree} </td>
-        <td className='col-3'>
+        <td className='col-3 table-item-xs'> {edu.school} </td>
+        <td className='col-3 table-item-xs'> {edu.degree} </td>
+        <td className='col-3 table-item-xs'>
           <Moment format="DD/MM/YYYY">{edu.from}</Moment> -&nbsp;
           {edu.to === null ? (
             'Now'
@@ -22,13 +22,12 @@ class Education extends Component {
             <Moment format="DD/MM/YYYY">{edu.to}</Moment>
           )}
         </td>
-        <td>
+        <td id='tableCellDeleteContainer'>
           <button
             onClick={this.onDelete.bind(this, edu._id)}
-            className="btn btn-danger"
+            className="btn-sm btn-danger deleteDashboardContent"
           >
-            {' '}
-            Delete{' '}
+            Delete
           </button>
         </td>
       </tr>
@@ -40,14 +39,14 @@ class Education extends Component {
         <table className="table">
           <thead>
             <tr className='row'>
-              <th className="col-3">School</th>
-              <th className="col-3">Degree</th>
-              <th className="col-3">Years</th>
-              <th />
+              <th className="col-3 table-item-xs">School</th>
+              <th className="col-3 table-item-xs">Degree</th>
+              <th className="col-3 table-item-xs">Years</th>
             </tr>
           </thead>
           <tbody>{education}</tbody>
         </table>
+        <hr className='delete-account-hr' />
       </div>
     );
   }

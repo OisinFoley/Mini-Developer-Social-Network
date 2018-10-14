@@ -67,13 +67,11 @@ class AddExperience extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">
-                {' '}
-                Go back{' '}
+                Go back
               </Link>
               <h1 className="display-4 text-center"> Add Experience </h1>
               <p className="lead text-center">
-                {' '}
-                Add a job or position you've had in the past or currently.{' '}
+                Add a job or position you currently work at or have in the past
               </p>
               <small className="d-block pb-3">* Required fields </small>
               <form onSubmit={this.onSubmit}>
@@ -98,7 +96,7 @@ class AddExperience extends Component {
                   onChange={this.onChange}
                   error={errors.location}
                 />
-                <h6> From Date </h6>
+                <h6> Start Date </h6>
                 <TextFieldGroup
                   placeholder="mm/dd/yyy"
                   type="date"
@@ -107,7 +105,7 @@ class AddExperience extends Component {
                   onChange={this.onChange}
                   error={errors.from}
                 />
-                <h6> To Date </h6>
+                <h6> End Date </h6>
                 <TextFieldGroup
                   placeholder="mm/dd/yyy"
                   type="date"
