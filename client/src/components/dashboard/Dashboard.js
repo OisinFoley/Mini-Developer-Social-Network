@@ -29,7 +29,7 @@ class Dashboard extends Component {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div className="dashboard-content">
-            <p className="lead text-muted">
+            <p className="lead text-muted dashboardWelcomeLabel">
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
             <ProfileActions />
@@ -38,7 +38,7 @@ class Dashboard extends Component {
 
             <button
               onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-danger btn-margin-spacing"
+              className="btn btn-danger btn-margin-spacing btnDeleteAccount"
             >
               Delete my Account
             </button>
