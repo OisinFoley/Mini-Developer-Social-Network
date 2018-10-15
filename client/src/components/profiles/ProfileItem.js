@@ -10,18 +10,18 @@ class ProfileItem extends Component {
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row">
-          <div className="col-2">
-            <img src={profile.user.avatar} alt="" className="rounded-circle" />
+          <div className="col-2 col-lg-2 offset-sm-4 offset-md-0 offset-lg-0 col-sm-4 profileImageContainer">
+            <img src={profile.user.avatar} alt="" className="rounded-circle profilePhoto" />
           </div>
-          <div className="col-lg-6 col-md-4 col-8">
+          <div className="mainProfileInfoContainer col-lg-6 col-md-4 col-8 col-sm-6">
             <h3>{profile.user.name}</h3>
-            <p>
+            <p className='profileCurrentPosition'>
               {profile.status}{' '}
               {isEmpty(profile.company) ? null : (
                 <span> at {profile.company} </span>
               )}
             </p>
-            <p>
+            <p className='profileLocation'>
               {isEmpty(profile.location) ? null : (
                 <span>{profile.location}</span>
               )}
@@ -30,8 +30,8 @@ class ProfileItem extends Component {
               View Profile
             </Link>
           </div>
-          <div className="col-md-4 d-none d-md-block">
-            <h4>Skill set</h4>
+          <div className="col-md-4 col-sm-6 d-md-block">
+            <h4 className='headingSkillSet'>Skill set</h4>
             <ul className="list-group">
               {profile.skills.slice(0, 4).map((skill, index) => (
                 <li key={index} className="list-group-item">
