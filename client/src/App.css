@@ -119,6 +119,35 @@ td {
   }
 }
 
+@media only screen and (max-width: 991px) {
+  .profilePhoto {
+    position: relative;
+    top: 35%;
+  }
+
+  .profileImageContainer {
+    display: -webkit-box;
+    margin-bottom: 30px;
+  }
+
+  .mainProfileInfoContainer {
+    padding-top: 10px;
+  }
+
+  .profileCurrentPosition {
+    margin-top: 15px;
+  }
+
+  .profileLocation {
+    margin-top: -5px;
+  }
+
+  .headingSkillSet {
+    display: none;
+  }
+}
+
+
 @media only screen and (max-width: 576px) {
   .form-text {
     font-size: 80%;
