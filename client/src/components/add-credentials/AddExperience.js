@@ -5,6 +5,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addExperience } from '../../actions/profileActions';
+import BackButton from '../common/BackButton';
 
 class AddExperience extends Component {
   constructor(props) {
@@ -66,9 +67,7 @@ class AddExperience extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
-                Go back
-              </Link>
+              <BackButton route='dashboard' />
               <h1 className="display-4 text-center"> Add Experience </h1>
               <p className="lead text-center">
                 Add a job or position you currently work at or have in the past

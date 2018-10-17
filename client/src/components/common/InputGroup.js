@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 const InputGroup = ({ name, value, error, onChange, icon, placeholder }) => {
   return (
     <div className="input-group mb-3">
-      <div className="input-group-prepend">
-        <span className="input-group-text">
+      <div className="input-group-prepend edit-profile--social-icon-wrapper">
+        <span className="input-group-text edit-profile--social-icon-span">
           <i className={icon} />
         </span>
       </div>

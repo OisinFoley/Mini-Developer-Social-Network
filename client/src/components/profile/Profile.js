@@ -10,6 +10,9 @@ import ProfileGithub from './ProfileGithub';
 import ProfileHeader from './ProfileHeader';
 import Spinner from '../common/Spinner';
 
+import BackButton from '../common/BackButton';
+
+
 class Profile extends Component {
   componentDidMount() {
     if (this.props.match.params.handle) {
@@ -34,9 +37,7 @@ class Profile extends Component {
         <div>
           <div className="row">
             <div className="col-md-6">
-              <Link to="/profiles" className="btn btn-light mb-3 float-left">
-                Back To Profiles
-              </Link>
+              <BackButton route='dashboard' additionalClasses='mb-3 float-left' />
             </div>
             <div className="col-md-6" />
           </div>
