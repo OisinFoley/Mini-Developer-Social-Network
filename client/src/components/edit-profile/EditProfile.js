@@ -8,6 +8,7 @@ import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 import isEmpty from '../../validation/is-empty';
+import BackButton from '../common/BackButton';
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -192,9 +193,7 @@ class CreateProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
-                Go Back
-              </Link>
+              <BackButton route='dashboard' />
               <h1 className="display-4 text-center">Edit Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
@@ -265,7 +264,7 @@ class CreateProfile extends Component {
                   info="Tell us a little about yourself"
                 />
 
-                <div className="mb-3">
+                <div className="mb-3 edit-profile--optional-label__centering-wrapper">
                   <button
                     type="button"
                     onClick={() => {
@@ -277,7 +276,7 @@ class CreateProfile extends Component {
                   >
                     Add Social Network Links
                   </button>
-                  <span className="text-muted">Optional</span>
+                  <span className="text-muted edit-profile--optional-label">Optional</span>
                 </div>
                 {socialInputs}
                 <input

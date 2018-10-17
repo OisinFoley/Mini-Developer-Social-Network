@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { getPost } from '../../actions/postActions';
 import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
+import BackButton from '../common/BackButton';
 
 class Post extends Component {
   componentDidMount() {
@@ -32,9 +33,7 @@ class Post extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Link to="/feed" className="btn btn-light mb-3">
-                Back to posts
-              </Link>
+              <BackButton route='feed' additionalClasses='mb-3' />
               {postContent}
             </div>
           </div>

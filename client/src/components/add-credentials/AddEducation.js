@@ -5,6 +5,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addEducation } from '../../actions/profileActions';
+import BackButton from '../common/BackButton';
 
 class AddEducation extends Component {
   constructor(props) {
@@ -66,9 +67,7 @@ class AddEducation extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
-                Go back
-              </Link>
+              <BackButton route='dashboard' />
               <h1 className="display-4 text-center"> Add Education </h1>
               <p className="lead text-center">
                 Add academic education or coding training you've attended

@@ -52,6 +52,10 @@ td {
   margin: 0px -7px;
 }
 
+.deleteDashboardContent {
+  cursor: pointer;
+}
+
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat;
@@ -86,6 +90,26 @@ td {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+.edit-profile--optional-label {
+  margin: 0px 10px;
+}
+
+.edit-profile--social-icon-wrapper {
+  width: 9%;
+}
+
+.edit-profile--social-icon-span {
+  width: 100%;
+}
+
+.edit-profile--optional-label__centering-wrapper {
+  text-align: center;
+}
+
+.fab {
+  margin: 0 auto;
 }
 
 @media only screen and (max-width: 500px) {
@@ -144,6 +168,10 @@ td {
 
   .headingSkillSet {
     display: none;
+  }
+
+  .edit-profile--social-icon-wrapper {
+    width: 10%;
   }
 }
 
