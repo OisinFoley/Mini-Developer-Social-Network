@@ -29,7 +29,7 @@ class PostItem extends Component {
   render() {
     const { post, auth, showActions } = this.props;
     return (
-      <div className="card card-body mb-3">
+      <div className="card card-body mb-3 comment-feed--individual-comment-container__padding">
         <div className="row">
           <div className="col-md-2">
             <a href="profile.html">
@@ -43,13 +43,24 @@ class PostItem extends Component {
             <p className="text-center">{post.name}</p>
           </div>
           <div className="col-md-10">
+            {post.user === auth.user.id ? (
+                    <button
+                      onClick={this.onDeleteClick.bind(this, post._id)}
+                      type="button"
+                      className="btn btn-danger mr-1 comment-feed--delete-comment-button__float"
+                    >
+                      <i className="fas fa-times" />
+                    </button>
+                  ) : null}
             <p className="lead">{post.text}</p>
-            {showActions ? (
-              <span>
+          </div>
+        </div>
+        {showActions ? (
+              <span className='comment-feed--post-interaction-container__bottom'>
                 <button
                   onClick={this.onLikeClick.bind(this, post._id)}
                   type="button"
-                  className="btn btn-light mr-1"
+                  className="btn btn-light mr-1 comment-feed--post-unlike-button__width"
                 >
                   <i
                     className={classnames('fas fa-thumbs-up', {
@@ -61,26 +72,15 @@ class PostItem extends Component {
                 <button
                   onClick={this.onUnlikeClick.bind(this, post._id)}
                   type="button"
-                  className="btn btn-light mr-1"
+                  className="btn btn-light mr-1 comment-feed--post-unlike-button__width-margin"
                 >
                   <i className="text-secondary fas fa-thumbs-down" />
                 </button>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
+                <Link to={`/post/${post._id}`} className="btn btn-info mr-1 comment-feed--comments-link-button__width">
                   Comments
                 </Link>
-                {post.user === auth.user.id ? (
-                  <button
-                    onClick={this.onDeleteClick.bind(this, post._id)}
-                    type="button"
-                    className="btn btn-danger mr-1"
-                  >
-                    <i className="fas fa-times" />
-                  </button>
-                ) : null}
               </span>
             ) : null}
-          </div>
-        </div>
       </div>
     );
   }
