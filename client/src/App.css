@@ -108,6 +108,37 @@ td {
   text-align: center;
 }
 
+.comment-feed--individual-comment-container__padding {
+  padding-right: 0;
+}
+
+.comment-feed--delete-comment-button__float {
+  float: right;
+}
+
+.comment-feed--post-interaction-container__bottom {
+  display: flex;
+  padding-left: 15px;
+}
+
+.comment-feed--comments-link-button__width {
+  width: 77.5%;
+  margin-left: 32px;
+}
+
+.comment-feed--post-unlike-button__width {
+  width: 5%;
+}
+
+.comment-feed--post-unlike-button__width-margin {
+  margin-left: 30px;
+  width: 5%;
+}
+
+.post-form--button__width {
+  width: 100%;
+}
+
 .fab {
   margin: 0 auto;
 }
