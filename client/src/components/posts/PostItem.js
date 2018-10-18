@@ -47,20 +47,20 @@ class PostItem extends Component {
                     <button
                       onClick={this.onDeleteClick.bind(this, post._id)}
                       type="button"
-                      className="btn btn-danger mr-1 comment-feed--delete-comment-button__float"
+                      className="btn btn-danger mr-1 post-feed--delete-comment-button__float"
                     >
                       <i className="fas fa-times" />
                     </button>
                   ) : null}
-            <p className="lead">{post.text}</p>
+            <p className="lead post-feed--post-text-__width">{post.text}</p>
           </div>
         </div>
         {showActions ? (
-              <span className='comment-feed--post-interaction-container__bottom'>
+              <span className='post-feed--post-interaction-container__bottom'>
                 <button
                   onClick={this.onLikeClick.bind(this, post._id)}
                   type="button"
-                  className="btn btn-light mr-1 comment-feed--post-unlike-button__width"
+                  className="btn btn-light mr-1 post-feed--post-unlike-button__width"
                 >
                   <i
                     className={classnames('fas fa-thumbs-up', {
@@ -72,11 +72,11 @@ class PostItem extends Component {
                 <button
                   onClick={this.onUnlikeClick.bind(this, post._id)}
                   type="button"
-                  className="btn btn-light mr-1 comment-feed--post-unlike-button__width-margin"
+                  className="btn btn-light mr-1 post-feed--post-unlike-button__width-margin"
                 >
                   <i className="text-secondary fas fa-thumbs-down" />
                 </button>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1 comment-feed--comments-link-button__width">
+                <Link to={`/post/${post._id}`} className="btn btn-info mr-1 post-feed--comments-link-button__width">
                   Comments
                 </Link>
               </span>
