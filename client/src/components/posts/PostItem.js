@@ -31,18 +31,18 @@ class PostItem extends Component {
     return (
       <div className="card card-body mb-3 comment-feed--individual-comment-container__padding">
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-3 col-md-3 col-lg-2">
             <a href="profile.html">
               <img
-                className="rounded-circle d-none d-md-block"
+                className="rounded-circle d-md-block"
                 src={post.avatar}
                 alt=""
               />
             </a>
             <br />
-            <p className="text-center">{post.name}</p>
+            <p className="text-center" id='users-profile-name'>{post.name}</p>
           </div>
-          <div className="col-md-10">
+          <div className="col-md-9 col-lg-10 col-9" id='post-content-body'>
             {post.user === auth.user.id ? (
                     <button
                       onClick={this.onDeleteClick.bind(this, post._id)}
@@ -60,21 +60,21 @@ class PostItem extends Component {
                 <button
                   onClick={this.onLikeClick.bind(this, post._id)}
                   type="button"
-                  className="btn btn-light mr-1 post-feed--post-unlike-button__width"
+                  className="btn btn-light mr-1 post-feed--post-like-button__width"
                 >
                   <i
-                    className={classnames('fas fa-thumbs-up', {
+                    className={classnames('fas fa-thumbs-up fa-thumbs-general', {
                       'text-info': this.findUserLikes(post.likes)
                     })}
                   />
-                  <span className="badge badge-light">{post.likes.length}</span>
+                  <span className="badge badge-light" id='post-like-counter'>{post.likes.length}</span>
                 </button>
                 <button
                   onClick={this.onUnlikeClick.bind(this, post._id)}
                   type="button"
                   className="btn btn-light mr-1 post-feed--post-unlike-button__width-margin"
                 >
-                  <i className="text-secondary fas fa-thumbs-down" />
+                  <i className="text-secondary fas fa-thumbs-down fa-thumbs-general" />
                 </button>
                 <Link to={`/post/${post._id}`} className="btn btn-info mr-1 post-feed--comments-link-button__width">
                   Comments
