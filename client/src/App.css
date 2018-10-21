@@ -143,7 +143,7 @@ td {
   width: 90%;
 }
 
-.post-form--button__width {
+.posts-comments-submit-button {
   width: 100%;
 }
 
@@ -160,6 +160,10 @@ td {
 }
 
 @media only screen and (max-width: 500px) {
+  #create-profile-button {
+    width: 100%;
+  }
+  
   .profileActions {
     display: grid;
   }
@@ -172,6 +176,7 @@ td {
   .table-item-xs {
     max-width: 33.33%;
     flex: 0 0 33%;
+    text-align: center;
   }
 
   #tableCellDeleteContainer, .deleteDashboardContent {
@@ -278,7 +283,31 @@ td {
   }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  #main-navbar {
+    font-size: .9rem;
+  }
+
+  #dashboard-nav-link {
+    /* margin-top: 7px; */
+    margin-top: 5px;
+  }
+
+  .posts-dashboard-link {
+    /* margin-top: 9px; */
+    margin-top: 7px;
+  }
+
+  #navbar-logout-list-item {
+    /* margin-top: 5px; */
+    margin-top: 4px;
+  }
+
+  .navbar-user-icon {
+    vertical-align: bottom;
+    margin-right: 15px;
+  }
+
   .post-feed--post-like-button__width {
     width: 8%;
   }

@@ -60,7 +60,7 @@ class PostForm extends Component {
                   error={errors.text}
                 />
               </div>
-              <button type="submit" className="btn btn-dark post-form--button__width">
+              <button type="submit" className="btn btn-dark posts-comments-submit-button">
                 Submit
               </button>
             </form>
