@@ -2,6 +2,10 @@ img {
   width: 100%;
 }
 
+#post-content-body {
+  padding-right: 0px;
+}
+
 
 td {
   overflow: hidden;
@@ -250,10 +254,6 @@ td {
     margin-left: -3px;
   }
 
-  #post-content-body {
-    padding-right: 0px;
-  }
-
   .post-feed--comments-link-button__width {
     width: 64.0%;
     margin-left: 12px;
@@ -289,7 +289,21 @@ td {
   }
 
   .post-feed--comments-link-button__width {
-    width: 64.5%;
+    width: 67%;
+    margin-left: 25px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .post-feed--comments-link-button__width {
+    width: 78%;
+    margin-left: 25px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .post-feed--comments-link-button__width {
+    width: 79.5%;
     margin-left: 25px;
   }
 }
