@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { deleteEducation } from '../../actions/profileActions';
+import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
 class Education extends Component {
-  onDelete(id) {
+  // onDelete(id) {
+  onDeleteEducation = id => {
     this.props.deleteEducation(id);
   }
 
   render() {
-    const education = this.props.education.map(edu => (
+    const education = this.props.education.map((edu, i) => (
       <tr className='row' key={edu._id}>
         <td className='col-3 table-item-xs'> {edu.school} </td>
         <td className='col-3 table-item-xs'> {edu.degree} </td>
@@ -24,11 +26,14 @@ class Education extends Component {
         </td>
         <td id='tableCellDeleteContainer'>
           <button
-            onClick={this.onDelete.bind(this, edu._id)}
+            // onClick={this.onDelete.bind(this, edu._id)}
+            data-toggle="modal"
+            data-target={`#deleteEducationModal-${i+1}`}
             className="btn-sm btn-danger deleteDashboardContent"
           >
             Delete
           </button>
+          <ConfirmDeleteModal onDelete={this.onDeleteEducation} modalId={`deleteEducationModal-${i+1}`} id={edu._id} modalTitle='Delete Education' modalBody='Are you sure you want to delete this Education? This cannot be undone.' />
         </td>
       </tr>
     ));

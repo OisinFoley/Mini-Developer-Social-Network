@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { deleteExperience } from '../../actions/profileActions';
+import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
 class Experience extends Component {
-  onDelete(id) {
+  // onDelete(id) {
+  onDeleteExperience = id => {
     this.props.deleteExperience(id);
   }
 
   render() {
-    const experience = this.props.experience.map(exp => (
+    const experience = this.props.experience.map((exp, i) => (
       <tr className='row' key={exp._id}>
         <td className='col-3 table-item-xs'> {exp.company} </td>
         <td className='col-3 table-item-xs'> {exp.title} </td>
@@ -24,11 +26,16 @@ class Experience extends Component {
         </td>
         <td id='tableCellDeleteContainer'>
           <button
-            onClick={this.onDelete.bind(this, exp._id)}
+            // onClick={this.onDelete.bind(this, exp._id)}
+            className="btn-sm btn-danger deleteDashboardContent"
+            data-toggle="modal"
+            data-target={`#deleteExperienceModal-${i+1}`}
             className="btn-sm btn-danger deleteDashboardContent"
           >
             Delete
           </button>
+          <ConfirmDeleteModal onDelete={this.onDeleteExperience} modalId={`deleteExperienceModal-${i+1}`} id={exp._id} modalTitle='Delete Experience' modalBody='Are you sure you want to delete this Experience? This cannot be undone.' />
+
         </td>
       </tr>
     ));
