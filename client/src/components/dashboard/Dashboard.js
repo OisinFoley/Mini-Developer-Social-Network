@@ -7,13 +7,14 @@ import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
 import Experience from './Experience';
 import Education from './Education';
+import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
 
-  onDeleteClick() {
+  onDeleteProfileClick = () => {
     this.props.deleteAccount();
   }
 
@@ -37,11 +38,13 @@ class Dashboard extends Component {
             <Education education={profile.education} />
 
             <button
-              onClick={this.onDeleteClick.bind(this)}
               className="btn btn-danger btn-margin-spacing btnDeleteAccount"
+              data-toggle="modal"
+              data-target={`#deleteProfileModal`}
             >
               Delete my Account
             </button>
+          <ConfirmDeleteModal onDelete={this.onDeleteProfileClick} modalId={`deleteProfileModal`} id={null} nestedId={null} modalTitle='Delete Profile' modalBody="Are you sure you want to delete your entire Profile? This cannot be undone. Your posts will remain after you're going." />
           </div>
         );
       } else {

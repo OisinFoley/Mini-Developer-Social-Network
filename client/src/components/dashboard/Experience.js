@@ -6,7 +6,6 @@ import { deleteExperience } from '../../actions/profileActions';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
 class Experience extends Component {
-  // onDelete(id) {
   onDeleteExperience = id => {
     this.props.deleteExperience(id);
   }
@@ -26,7 +25,6 @@ class Experience extends Component {
         </td>
         <td id='tableCellDeleteContainer'>
           <button
-            // onClick={this.onDelete.bind(this, exp._id)}
             className="btn-sm btn-danger deleteDashboardContent"
             data-toggle="modal"
             data-target={`#deleteExperienceModal-${i+1}`}
@@ -35,7 +33,6 @@ class Experience extends Component {
             Delete
           </button>
           <ConfirmDeleteModal onDelete={this.onDeleteExperience} modalId={`deleteExperienceModal-${i+1}`} id={exp._id} modalTitle='Delete Experience' modalBody='Are you sure you want to delete this Experience? This cannot be undone.' />
-
         </td>
       </tr>
     ));
