@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { deletePost, addLike, deleteLike } from '../../actions/postActions';
+import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
 class PostItem extends Component {
-  onDeleteClick(id) {
+  onDeleteClick = id => {
     this.props.deletePost(id);
   }
 
@@ -27,7 +28,7 @@ class PostItem extends Component {
   }
 
   render() {
-    const { post, auth, showActions } = this.props;
+    const { post, i, auth, showActions } = this.props;
     return (
       <div className="card card-body mb-3 comment-feed--individual-comment-container__padding">
         <div className="row">
@@ -45,13 +46,15 @@ class PostItem extends Component {
           <div className="col-md-9 col-lg-10 col-9" id='post-content-body'>
             {post.user === auth.user.id ? (
                     <button
-                      onClick={this.onDeleteClick.bind(this, post._id)}
                       type="button"
                       className="btn btn-danger mr-1 post-feed--delete-comment-button__float"
+                      data-toggle="modal"
+                      data-target={`#deletePostModal-${i+1}`}
                     >
                       <i className="fas fa-times" />
                     </button>
                   ) : null}
+            <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deletePostModal-${i+1}`} id={post._id} modalTitle='Delete Post and its Comments' modalBody='Are you sure you want to delete this Post? This cannot be undone.' />
             <p className="lead post-feed--post-text-__width">{post.text}</p>
           </div>
         </div>

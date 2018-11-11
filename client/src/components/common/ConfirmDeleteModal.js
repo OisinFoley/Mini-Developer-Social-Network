@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// const ConfirmDeleteModal = ({ modalTitle, modalBody, id, onDelete }) => {
 class ConfirmDeleteModal extends Component {
 
   constructor(props) {
@@ -12,8 +11,9 @@ class ConfirmDeleteModal extends Component {
  }
 
   handleClick() {
-    let clicked_id = this.props.id;
-    this.props.onDelete(clicked_id);
+    let clickedId = this.props.id;
+    let clickedNestedId = this.props.nestedId;
+    this.props.onDelete(clickedId, clickedNestedId);
   }
 
   render() {
@@ -37,8 +37,7 @@ class ConfirmDeleteModal extends Component {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              {/* we're doing something silly here that means we end up passing the first occurance of the delete button as the bound "this" */}
-              <button type="button" className="btn btn-primary" onClick={this.handleClick.bind(this, this.props.id)} data-dismiss="modal">Confirm Delete</button>
+              <button type="button" className="btn btn-primary" onClick={this.handleClick.bind(this, this.props.id, (this.props.nestedId !== null ? (this.props.nestedId) : null ))} data-dismiss="modal">Confirm Delete</button>
             </div>
           </div>
         </div>

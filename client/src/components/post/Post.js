@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 import PostItem from '../posts/PostItem';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getPost } from '../../actions/postActions';
 import CommentForm from './CommentForm';

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteComment } from '../../actions/postActions';
+import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
 class CommentItem extends Component {
-  onDeleteClick(postId, commentId) {
+  onDeleteClick = (postId, commentId) => {
     this.props.deleteComment(postId, commentId);
   }
   render() {
-    const { comment, postId, auth } = this.props;
+    const { comment, i, postId, auth } = this.props;
 
     return (
       <div className="card card-body mb-3">
@@ -28,13 +29,15 @@ class CommentItem extends Component {
             <p className="lead">{comment.text}</p>
             {comment.user === auth.user.id ? (
               <button
-                onClick={this.onDeleteClick.bind(this, postId, comment._id)}
                 type="button"
                 className="btn btn-danger mr-1"
+                data-toggle="modal"
+                data-target={`#deleteCommentModal-${i+1}`}
               >
                 <i className="fas fa-times" />
               </button>
             ) : null}
+          <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deleteCommentModal-${i+1}`} id={postId} nestedId={comment._id} modalTitle='Delete Comment' modalBody='Are you sure you want to delete this Comment? This cannot be undone.' />
           </div>
         </div>
       </div>

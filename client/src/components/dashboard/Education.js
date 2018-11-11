@@ -6,7 +6,6 @@ import { deleteEducation } from '../../actions/profileActions';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
 class Education extends Component {
-  // onDelete(id) {
   onDeleteEducation = id => {
     this.props.deleteEducation(id);
   }
@@ -26,7 +25,6 @@ class Education extends Component {
         </td>
         <td id='tableCellDeleteContainer'>
           <button
-            // onClick={this.onDelete.bind(this, edu._id)}
             data-toggle="modal"
             data-target={`#deleteEducationModal-${i+1}`}
             className="btn-sm btn-danger deleteDashboardContent"

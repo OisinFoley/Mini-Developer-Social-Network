@@ -51,8 +51,6 @@ Profiles.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile
-  // ,
-  // loading: state.loading
 });
 
 export default connect(
