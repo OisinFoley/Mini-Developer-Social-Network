@@ -289,17 +289,14 @@ td {
   }
 
   #dashboard-nav-link {
-    /* margin-top: 7px; */
     margin-top: 5px;
   }
 
   .posts-dashboard-link {
-    /* margin-top: 9px; */
     margin-top: 7px;
   }
 
   #navbar-logout-list-item {
-    /* margin-top: 5px; */
     margin-top: 4px;
   }
 
@@ -307,7 +304,9 @@ td {
     vertical-align: bottom;
     margin-right: 15px;
   }
+}
 
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   .post-feed--post-like-button__width {
     width: 8%;
   }
