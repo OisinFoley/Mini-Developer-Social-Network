@@ -12,9 +12,9 @@ class CommentItem extends Component {
     const { comment, i, postId, auth } = this.props;
 
     return (
-      <div className="card card-body mb-3">
+      <div className="card card-body mb-3 comment-feed--individual-comment-container__padding">
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-3 col-md-3 col-lg-2">
             <a href="profile.html">
               <img
                 className="rounded-circle d-block"
@@ -23,14 +23,13 @@ class CommentItem extends Component {
               />
             </a>
             <br />
-            <p className="text-center">{comment.name}</p>
+            <p className="text-center" id='users-profile-name'>{comment.name}</p>
           </div>
-          <div className="col-md-10">
-            <p className="lead">{comment.text}</p>
+          <div className="col-md-9 col-lg-10 col-9" id='post-content-body'>
             {comment.user === auth.user.id ? (
               <button
                 type="button"
-                className="btn btn-danger mr-1"
+                className="btn btn-danger mr-1 post-feed--delete-comment-button__float"
                 data-toggle="modal"
                 data-target={`#deleteCommentModal-${i+1}`}
               >
@@ -38,6 +37,7 @@ class CommentItem extends Component {
               </button>
             ) : null}
           <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deleteCommentModal-${i+1}`} id={postId} nestedId={comment._id} modalTitle='Delete Comment' modalBody='Are you sure you want to delete this Comment? This cannot be undone.' />
+          <p className="lead post-feed--post-text-__width">{comment.text}</p>
           </div>
         </div>
       </div>
