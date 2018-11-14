@@ -252,7 +252,7 @@ class EditProfile extends Component {
                     HTML,CSS,JavaScript,PHP"
                 />
                 <TextFieldGroup
-                  placeholder="Github Username only not full URL"
+                  placeholder="Github Username"
                   name="githubUsername"
                   value={this.state.githubUsername}
                   onChange={this.onChange}

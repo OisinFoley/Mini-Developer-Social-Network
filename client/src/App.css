@@ -21,10 +21,6 @@ td {
   display: none;
 }
 
-/* .deleteDashboardContent {
-  margin-left: -7px;
-} */
-
 #tableCellDeleteContainer {
   border: 0px;
 }
@@ -101,7 +97,7 @@ td {
 }
 
 .edit-profile--social-icon-wrapper {
-  width: 9%;
+  width: 10%;
 }
 
 .edit-profile--social-icon-span {
@@ -159,13 +155,34 @@ td {
   margin-left: -6px;
 }
 
+@media only screen and (max-width: 450px) {
+  .display-3 {
+    font-size: 3.5em;
+  }
+
+
+  #btnSignupLink, #btnLoginLink {
+    padding: .375rem .75rem;
+    font-size: 1em;
+  }
+
+  #profile-heading {
+    font-size: 2.5rem;
+  }
+
+}
+
 @media only screen and (max-width: 500px) {
   #create-profile-button {
     width: 100%;
   }
   
   .profileActions {
-    display: grid;
+    display: block;
+  }
+
+  .profileActions > a {
+    width: 100%;
   }
 
   .dashboardWelcomeLabel, .dashboard-heading {
@@ -192,6 +209,10 @@ td {
     display: block;
     width: 98%;
     margin-top: 45px;
+  }
+
+  .edit-profile--social-icon-wrapper {
+    width: calc(5vw + 25px);
   }
 }
 
@@ -220,10 +241,6 @@ td {
 
   .headingSkillSet {
     display: none;
-  }
-
-  .edit-profile--social-icon-wrapper {
-    width: 10%;
   }
 }
 
