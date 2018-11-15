@@ -160,14 +160,22 @@ td {
     font-size: 3.5em;
   }
 
-
   #btnSignupLink, #btnLoginLink {
     padding: .375rem .75rem;
     font-size: 1em;
   }
 
+  #profile--container-wrapper {
+    text-align: center;
+  }
+
   #profile-heading {
     font-size: 2.5rem;
+  }
+
+  #profile--skillset {
+    overflow-y: scroll;
+    max-height: 250px;
   }
 
 }
