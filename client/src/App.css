@@ -163,24 +163,6 @@ td {
   margin-left: -6px;
 }
 
-@media only screen and (max-width: 320px) {
-  .table-item-xs {  
-    font-size: 0.7em;
-  }
-}
-
-@media only screen and (min-width: 321px) and (max-width: 375px) {
-  .table-item-xs {
-    font-size: 0.8em;
-  }
-}
-
-@media only screen and (min-width: 376px) and (max-width: 575px) {
-  .table-item-xs {
-    font-size: 0.9em;
-  }
-}
-
 @media only screen and (max-width: 450px) {
   .display-3 {
     font-size: 3.5em;
@@ -274,7 +256,8 @@ td {
   }
 
   .headingSkillSet {
-    display: none;
+    /* display: none; */
+    font-size: 3vw;
   }
 }
 
@@ -331,6 +314,94 @@ td {
   .post-feed--comments-link-button__width {
     padding: .25rem .5rem;
     font-size: .875rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .table-item-xs {  
+    font-size: 0.7em;
+  }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 375px) {
+  .table-item-xs {
+    font-size: 0.8em;
+  }
+
+  #profile-item-skillset-padding {
+    padding-right: 0;
+  }
+
+  .post-feed--comments-link-button__width {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (min-width: 425px) and (max-width: 500px) {
+  .list-group-item {
+    font-size: .6em;
+  }
+
+  .profileCurrentPosition {
+    font-size: .55em;
+  }
+
+  .profileLocation {
+    font-size: .55em;
+  }
+}
+
+@media only screen and (min-width: 501px) and (max-width: 768px) {
+  .list-group-item {
+    font-size: .8em;
+  }
+
+  .profileCurrentPosition {
+    font-size: .8em;
+  }
+
+  .profileLocation {
+    font-size: .8em;
+  }
+}
+
+
+@media only screen and (min-width: 375px) and (max-width: 425px) {
+  #profile-item-skillset-padding {
+    padding-right: 7%;
+  }
+
+  .post-feed--comments-link-button__width {
+    margin-right: 17px;
+    margin-left: 10px;
+  }
+
+  .list-group-item {
+    font-size: .5em;
+  }
+
+  .profileCurrentPosition {
+    font-size: .4em;
+  }
+
+  .profileLocation {
+    font-size: .4em;
+  }
+
+  #users-profile-name {
+    font-size: .5rem;
+  }
+}
+
+@media only screen and (min-width: 426px) and (max-width: 500px) {
+  #profile-item-skillset-padding {
+    padding-right: 7%;
+  }
+}
+
+@media only screen and (min-width: 376px) and (max-width: 575px) {
+  .table-item-xs {
+    font-size: 0.9em;
   }
 }
 
