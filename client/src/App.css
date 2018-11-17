@@ -163,6 +163,24 @@ td {
   margin-left: -6px;
 }
 
+@media only screen and (max-width: 320px) {
+  .table-item-xs {  
+    font-size: 0.7em;
+  }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 375px) {
+  .table-item-xs {
+    font-size: 0.8em;
+  }
+}
+
+@media only screen and (min-width: 376px) and (max-width: 575px) {
+  .table-item-xs {
+    font-size: 0.9em;
+  }
+}
+
 @media only screen and (max-width: 450px) {
   .display-3 {
     font-size: 3.5em;
