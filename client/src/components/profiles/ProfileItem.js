@@ -10,10 +10,28 @@ class ProfileItem extends Component {
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row">
-          <div className="col-2 col-lg-2 offset-sm-4 offset-md-0 offset-lg-0 col-sm-4 profileImageContainer">
+          {/* <div className="col-4 offset-4 col-lg-2 offset-md-0 offset-lg-0 profileImageContainer"> */}
+          <div className="col-3 col-md-3 col-lg-2 ">
+          
             <img src={profile.user.avatar} alt="" className="rounded-circle profilePhoto" />
+            <br/>
+            <br/>
+            {/* <h3>{profile.user.name}</h3> */}
+            <p class="text-center" id="users-profile-name">{profile.user.name}</p>
+            <hr/>
+            <p className='profileCurrentPosition'>
+              {profile.status}{' '}
+              {isEmpty(profile.company) ? null : (
+                <span> at {profile.company} </span>
+              )}
+            </p>
+            <p className='profileLocation'>
+              {isEmpty(profile.location) ? null : (
+                <span>{profile.location}</span>
+              )}
+            </p>
           </div>
-          <div className="mainProfileInfoContainer col-lg-6 col-md-4 col-8 col-sm-6">
+          {/* <div className="mainProfileInfoContainer col-6 col-lg-6 col-md-4">
             <h3>{profile.user.name}</h3>
             <p className='profileCurrentPosition'>
               {profile.status}{' '}
@@ -29,8 +47,10 @@ class ProfileItem extends Component {
             <Link to={`/profile/${profile.handle}`} className="btn btn-info">
               View Profile
             </Link>
-          </div>
-          <div className="col-md-4 col-sm-6 d-md-block">
+          </div> */}
+
+          {/* <div className="col-6 col-md-10 d-md-block" id="profile-item-skillset-padding"> */}
+          <div className="col-md-9 col-lg-10 col-9" id="profile-item-skillset-padding">
             <h4 className='headingSkillSet'>Skill set</h4>
             <ul className="list-group">
               {profile.skills.slice(0, 4).map((skill, index) => (
@@ -41,6 +61,26 @@ class ProfileItem extends Component {
             </ul>
           </div>
         </div>
+        <span className='post-feed--post-interaction-container__bottom'>
+          <button
+            type="button"
+            className="btn btn-light mr-1 post-feed--post-like-button__width"
+            id="hide-like-btn"
+          >
+            <i className='fas fa-thumbs-up fa-thumbs-general' />
+            <span className="badge badge-light" id='post-like-counter'></span>
+          </button>
+          <button
+            type="button"
+            className="btn btn-light mr-1 post-feed--post-unlike-button__width-margin"
+            id="hide-like-btn"
+          >
+            <i className="text-secondary fas fa-thumbs-down fa-thumbs-general" />
+          </button>
+          <Link to={`/profile/${profile.handle}`} className="btn btn-info offset-2 post-feed--comments-link-button__width">
+            View Profile
+          </Link>
+        </span>
       </div>
     );
   }
