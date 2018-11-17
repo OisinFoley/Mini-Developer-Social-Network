@@ -6,6 +6,13 @@ img {
   padding-right: 0px;
 }
 
+#hide-like-btn {
+  visibility: hidden;
+}
+
+#profile-item-skillset-padding {
+  padding-right: 2.5em;
+}
 
 td {
   overflow: hidden;
@@ -119,6 +126,7 @@ td {
 .post-feed--post-interaction-container__bottom {
   display: flex;
   padding-left: 15px;
+  margin: 15px 0px;
 }
 
 .post-feed--comments-link-button__width {
