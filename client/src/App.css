@@ -125,13 +125,14 @@ td {
 
 .post-feed--post-interaction-container__bottom {
   display: flex;
-  padding-left: 15px;
-  margin: 15px 0px;
+  /* padding-left: 15px; */
+  margin: 25px auto;
+  width: 83%;
 }
 
 .post-feed--comments-link-button__width {
-  width: 76%;
-  margin-left: 20px;
+  width: 100%;
+  /* margin-left: 20px; */
 }
 
 .post-feed--post-like-button__width {
@@ -163,6 +164,37 @@ td {
   margin-left: -6px;
 }
 
+.profilePhoto {
+  height: calc(30vw + 8vh);
+  margin-left: 20%;
+  width: 60%;
+}
+
+
+#users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
+  font-size: calc(4vw - 10px);
+}
+
+/* #users-profile-name {
+  font-size: 4vw;
+}
+
+.profileCurrentPosition {
+  font-size: 4vw;
+}
+
+.profileLocation {
+  font-size: 4vw;
+} */
+
+
+
+@media only screen and (max-width: 650px) {
+  #users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
+    font-size: 4vw;
+  }
+}
+
 @media only screen and (max-width: 450px) {
   .display-3 {
     font-size: 3.5em;
@@ -184,6 +216,12 @@ td {
   #profile--skillset {
     overflow-y: scroll;
     max-height: 250px;
+  }
+
+  .profilePhoto {
+    height: 33vw;
+    margin-left: 25%;
+    width: 50%;
   }
 
 }
@@ -230,6 +268,10 @@ td {
   .edit-profile--social-icon-wrapper {
     width: calc(5vw + 25px);
   }
+
+  /* .profilePhoto {
+    height: 33vw;
+  } */
 }
 
 @media only screen and (max-width: 991px) {
@@ -256,8 +298,18 @@ td {
   }
 
   .headingSkillSet {
-    /* display: none; */
-    font-size: 3vw;
+    font-size: 3.5vw;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .profilePhoto {
+    height: calc(30vw + 7vh);
+    margin-left: 25%;
+    width: 50%;
+  }
+
+  #users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
+    font-size: calc(3vw - 10px);
   }
 }
 
@@ -268,7 +320,8 @@ td {
 
   .post-feed--post-interaction-container__bottom {
     display: flex;
-    padding-left: 7px;
+    margin: 25px auto;
+    /* padding-left: 7px; */
   }
 
   .post-feed--post-like-button__width {
@@ -281,9 +334,9 @@ td {
     font-weight: 300;
   }
 
-  #users-profile-name {
+  /* #users-profile-name {
     font-size: .8rem;
-  }
+  } */
 
   .fa-thumbs-general {
     vertical-align: top;
@@ -294,8 +347,8 @@ td {
   }
 
   .post-feed--comments-link-button__width {
-    width: 64.0%;
-    margin-left: 12px;
+    width: 100%;
+    /* margin-left: 12px; */
     margin-top: 0px;
     height: 30px;
     text-align: center;
@@ -342,13 +395,13 @@ td {
     font-size: .6em;
   }
 
-  .profileCurrentPosition {
+  /* .profileCurrentPosition {
     font-size: .55em;
-  }
+  } */
 
-  .profileLocation {
+  /* .profileLocation {
     font-size: .55em;
-  }
+  } */
 }
 
 @media only screen and (min-width: 501px) and (max-width: 768px) {
@@ -356,13 +409,13 @@ td {
     font-size: .8em;
   }
 
-  .profileCurrentPosition {
+  /* .profileCurrentPosition {
     font-size: .8em;
-  }
+  } */
 
-  .profileLocation {
+  /* .profileLocation {
     font-size: .8em;
-  }
+  } */
 }
 
 
@@ -372,25 +425,25 @@ td {
   }
 
   .post-feed--comments-link-button__width {
-    margin-right: 17px;
-    margin-left: 10px;
+    /* margin-right: 17px;
+    margin-left: 10px; */
   }
 
-  .list-group-item {
+  /* .list-group-item {
     font-size: .5em;
-  }
+  } */
 
-  .profileCurrentPosition {
+  /* .profileCurrentPosition {
     font-size: .4em;
-  }
+  } */
 
-  .profileLocation {
+  /* .profileLocation {
     font-size: .4em;
-  }
+  } */
 
-  #users-profile-name {
+  /* #users-profile-name {
     font-size: .5rem;
-  }
+  } */
 }
 
 @media only screen and (min-width: 426px) and (max-width: 500px) {
@@ -439,21 +492,29 @@ td {
   }
 
   .post-feed--comments-link-button__width {
-    width: 67%;
-    margin-left: 25px;
+    width: 100%;
+    /* margin-left: 25px; */
+  }
+}
+
+@media only screen and (min-width: 991px) and (max-width: 1199px) {
+  .profilePhoto {
+    height: calc(30vw + 7vh);
+    margin-left: 25%;
+    width: 50%;
   }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   .post-feed--comments-link-button__width {
-    width: 78%;
-    margin-left: 25px;
+    width: 100%;
+    /* margin-left: 25px; */
   }
 }
 
 @media only screen and (min-width: 1200px) {
   .post-feed--comments-link-button__width {
-    width: 79.5%;
-    margin-left: 25px;
+    width: 100%;
+    /* margin-left: 25px; */
   }
 }
