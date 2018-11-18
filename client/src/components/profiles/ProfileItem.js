@@ -9,51 +9,38 @@ class ProfileItem extends Component {
 
     return (
       <div className="card card-body bg-light mb-3">
+      <p>
+        don't use this layout <br/> 
+        the layout we want is the following: <br/>
+        3 rows. <br/>
+        1st row: img in one col, then another col w/ user's name and under that their position, if it looks good then in a 3rd col show their location <br/>
+        2nd row: the skillset table
+        3rd row: link to full profile
+      </p>
         <div className="row">
-          {/* <div className="col-4 offset-4 col-lg-2 offset-md-0 offset-lg-0 profileImageContainer"> */}
-          <div className="col-3 col-md-3 col-lg-2 ">
-          
-            <img src={profile.user.avatar} alt="" className="rounded-circle profilePhoto" />
+          <img src={profile.user.avatar} alt="" className="rounded-circle profilePhoto" />
+          <div className="col-10 offset-1">
             <br/>
             <br/>
             {/* <h3>{profile.user.name}</h3> */}
-            <p class="text-center" id="users-profile-name">{profile.user.name}</p>
+            <p className="text-center" id="users-profile-name">{profile.user.name}</p>
             <hr/>
-            <p className='profileCurrentPosition'>
+            <p className='profileCurrentPosition text-center'>
               {profile.status}{' '}
               {isEmpty(profile.company) ? null : (
                 <span> at {profile.company} </span>
               )}
             </p>
-            <p className='profileLocation'>
+            <p className='profileLocation text-center'>
               {isEmpty(profile.location) ? null : (
                 <span>{profile.location}</span>
               )}
             </p>
           </div>
-          {/* <div className="mainProfileInfoContainer col-6 col-lg-6 col-md-4">
-            <h3>{profile.user.name}</h3>
-            <p className='profileCurrentPosition'>
-              {profile.status}{' '}
-              {isEmpty(profile.company) ? null : (
-                <span> at {profile.company} </span>
-              )}
-            </p>
-            <p className='profileLocation'>
-              {isEmpty(profile.location) ? null : (
-                <span>{profile.location}</span>
-              )}
-            </p>
-            <Link to={`/profile/${profile.handle}`} className="btn btn-info">
-              View Profile
-            </Link>
-          </div> */}
-
-          {/* <div className="col-6 col-md-10 d-md-block" id="profile-item-skillset-padding"> */}
-          <div className="col-md-9 col-lg-10 col-9" id="profile-item-skillset-padding">
-            <h4 className='headingSkillSet'>Skill set</h4>
+          <h4 className='headingSkillSet text-center' style={{width: 100 + "%"}}>Skill set</h4>
+          <div className="col-10 offset-1" id="profile-item-skillset-padding" style={{padding: 0, maxHeight: 150 + "px", overflowY: "scroll"}}>
             <ul className="list-group">
-              {profile.skills.slice(0, 4).map((skill, index) => (
+              {profile.skills.slice(0, 6).map((skill, index) => (
                 <li key={index} className="list-group-item">
                   <i className="fa fa-check pr-1" /> {skill}
                 </li>
@@ -62,23 +49,8 @@ class ProfileItem extends Component {
           </div>
         </div>
         <span className='post-feed--post-interaction-container__bottom'>
-          <button
-            type="button"
-            className="btn btn-light mr-1 post-feed--post-like-button__width"
-            id="hide-like-btn"
-          >
-            <i className='fas fa-thumbs-up fa-thumbs-general' />
-            <span className="badge badge-light" id='post-like-counter'></span>
-          </button>
-          <button
-            type="button"
-            className="btn btn-light mr-1 post-feed--post-unlike-button__width-margin"
-            id="hide-like-btn"
-          >
-            <i className="text-secondary fas fa-thumbs-down fa-thumbs-general" />
-          </button>
-          <Link to={`/profile/${profile.handle}`} className="btn btn-info offset-2 post-feed--comments-link-button__width">
-            View Profile
+          <Link to={`/profile/${profile.handle}`} className="btn btn-info post-feed--comments-link-button__width">
+            View Full Profile
           </Link>
         </span>
       </div>
