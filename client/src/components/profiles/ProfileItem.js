@@ -18,25 +18,60 @@ class ProfileItem extends Component {
         3rd row: link to full profile
       </p>
         <div className="row">
-          <img src={profile.user.avatar} alt="" className="rounded-circle profilePhoto" />
-          <div className="col-10 offset-1">
-            <br/>
-            <br/>
-            {/* <h3>{profile.user.name}</h3> */}
-            <p className="text-center" id="users-profile-name">{profile.user.name}</p>
-            <hr/>
-            <p className='profileCurrentPosition text-center'>
-              {profile.status}{' '}
-              {isEmpty(profile.company) ? null : (
-                <span> at {profile.company} </span>
-              )}
-            </p>
-            <p className='profileLocation text-center'>
-              {isEmpty(profile.location) ? null : (
-                <span>{profile.location}</span>
-              )}
-            </p>
-          </div>
+          {/* <img src={profile.user.avatar} alt="" className="rounded-circle profilePhoto" /> */}
+          {/* this is what you had before trying float */}
+          <span className="col-12">
+            <img style={{float: "left"}} src={profile.user.avatar} alt="" className="rounded-circle profilePhoto col-2" />
+            {/* <span > */}
+              {/* <span style={{display: "inline"}}> */}
+              <div id="profile-short-details-text">
+                <p id="users-profile-name">{profile.user.name}</p>
+                <p className='profileCurrentPosition'>
+                    {profile.status}{' '}
+                    {isEmpty(profile.company) ? null : (
+                      <span> at {profile.company} </span>
+                    )}
+                </p>
+                <p className='profileLocation'>
+                  {isEmpty(profile.location) ? null : (
+                    <span>{profile.location}</span>
+                  )}
+                </p>
+              </div>
+
+              {/* <div className="offset-2 col-8"> */}
+                {/* <p style={{display: "inline"}} className="text-center" id="users-profile-name">{profile.user.name}</p> */}
+                {/* <p className="text-center" id="users-profile-name">{profile.user.name}</p> */}
+                {/* <p id="users-profile-name">{profile.user.name}</p> */}
+              {/* </div> */}
+
+              {/* <div className="offset-2 col-8"> */}
+                {/* <p style={{display: "inline"}} className='profileCurrentPosition text-center'> */}
+                {/* <p className='profileCurrentPosition text-center'> */}
+                {/* <p className='profileCurrentPosition'>
+                  {profile.status}{' '}
+                  {isEmpty(profile.company) ? null : (
+                    <span> at {profile.company} </span>
+                  )}
+                </p> */}
+              {/* </div> */}
+                
+                {/* <hr/> */}
+                <br/>
+                
+              {/* </span> */}
+              
+              
+              
+              
+              {/* <p className='profileLocation'>
+                {isEmpty(profile.location) ? null : (
+                  <span>{profile.location}</span>
+                )}
+              </p> */}
+            {/* </span> */}
+          </span>
+          
           <h4 className='headingSkillSet text-center' style={{width: 100 + "%"}}>Skill set</h4>
           <div className="col-10 offset-1" id="profile-item-skillset-padding" style={{padding: 0, maxHeight: 150 + "px", overflowY: "scroll"}}>
             <ul className="list-group">

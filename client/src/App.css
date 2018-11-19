@@ -164,35 +164,27 @@ td {
   margin-left: -6px;
 }
 
-.profilePhoto {
-  height: calc(30vw + 8vh);
-  margin-left: 20%;
-  width: 60%;
+.col-2, .col-8, .col-12 {
+  padding: 0;
 }
 
-
-#users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
-  font-size: calc(4vw - 10px);
+#profile-short-details-text {
+  /* margin: 15px 0 0 13px; */
+  margin: 0px 0 0 13px;
+  float: left;
+  /* font-size: calc(16px - 2vw); */
 }
 
-/* #users-profile-name {
-  font-size: 4vw;
+#users-profile-name, .profileCurrentPosition, .profileLocation {
+  /* margin: 3vw 0; */
+  margin: 2vw 0;
 }
-
-.profileCurrentPosition {
-  font-size: 4vw;
-}
-
-.profileLocation {
-  font-size: 4vw;
-} */
-
 
 
 @media only screen and (max-width: 650px) {
-  #users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
+  /* #users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
     font-size: 4vw;
-  }
+  } */
 }
 
 @media only screen and (max-width: 450px) {
@@ -218,12 +210,23 @@ td {
     max-height: 250px;
   }
 
-  .profilePhoto {
+  /* .profilePhoto {
     height: 33vw;
     margin-left: 25%;
     width: 50%;
+  } */
+
+}
+
+@media only screen and (min-width: 500px) and (max-width: 768px) {
+  #profile-short-details-text {
+    margin: 35px 0 0 13px;
+    font-size: 11px;
   }
 
+  #users-profile-name, .profileCurrentPosition, .profileLocation {
+    margin: .25vw 0;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -289,28 +292,30 @@ td {
     padding-top: 10px;
   }
 
-  .profileCurrentPosition {
+  /* .profileCurrentPosition {
     margin-top: 15px;
-  }
+  } */
 
-  .profileLocation {
+  /* .profileLocation {
     margin-top: -5px;
-  }
+  } */
 
   .headingSkillSet {
     font-size: 3.5vw;
+    width: 100%;
+    margin-top: 20px;
   }
 }
 @media only screen and (min-width: 1200px) {
-  .profilePhoto {
+  /* .profilePhoto {
     height: calc(30vw + 7vh);
     margin-left: 25%;
     width: 50%;
-  }
+  } */
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
+  /* #users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
     font-size: calc(3vw - 10px);
-  }
+  } */
 }
 
 @media only screen and (max-width: 767px) {
@@ -333,10 +338,6 @@ td {
     font-size: 0.8rem;
     font-weight: 300;
   }
-
-  /* #users-profile-name {
-    font-size: .8rem;
-  } */
 
   .fa-thumbs-general {
     vertical-align: top;
@@ -376,7 +377,7 @@ td {
   }
 }
 
-@media only screen and (min-width: 321px) and (max-width: 375px) {
+@media only screen and (max-width: 375px) {
   .table-item-xs {
     font-size: 0.8em;
   }
@@ -388,33 +389,48 @@ td {
   .post-feed--comments-link-button__width {
     margin-left: 0;
   }
+
+  #users-profile-name, .profileCurrentPosition, .profileLocation {
+    margin: .07vw 0;
+  }
+
+  #profile-short-details-text {
+    font-size: 7px;
+    margin: 19px 0 0 7px;
+  }
+
+  .list-group-item {
+    font-size: .6em;
+    padding: .3rem .7rem;
+  }
 }
 
 @media only screen and (min-width: 425px) and (max-width: 500px) {
+  #profile-item-skillset-padding {
+    padding-right: 7%;
+  }
+  
   .list-group-item {
     font-size: .6em;
   }
 
-  /* .profileCurrentPosition {
-    font-size: .55em;
-  } */
-
-  /* .profileLocation {
-    font-size: .55em;
-  } */
-}
-
-@media only screen and (min-width: 501px) and (max-width: 768px) {
-  .list-group-item {
-    font-size: .8em;
+  #users-profile-name, .profileCurrentPosition, .profileLocation {
+    margin: .15vw 0;
   }
 
+  #profile-short-details-text {
+    font-size: 9px;
+    margin: 25px 0 0 13px;
+  }
+  
+
+
   /* .profileCurrentPosition {
-    font-size: .8em;
+    font-size: .55em;
   } */
 
   /* .profileLocation {
-    font-size: .8em;
+    font-size: .55em;
   } */
 }
 
@@ -424,31 +440,18 @@ td {
     padding-right: 7%;
   }
 
-  .post-feed--comments-link-button__width {
-    /* margin-right: 17px;
-    margin-left: 10px; */
+  #users-profile-name, .profileCurrentPosition, .profileLocation {
+    margin: .1vw 0;
   }
 
-  /* .list-group-item {
-    font-size: .5em;
-  } */
+  #profile-short-details-text {
+    font-size: 8px;
+    margin: 25px 0 0 13px;
+  }
 
-  /* .profileCurrentPosition {
-    font-size: .4em;
-  } */
-
-  /* .profileLocation {
-    font-size: .4em;
-  } */
-
-  /* #users-profile-name {
-    font-size: .5rem;
-  } */
-}
-
-@media only screen and (min-width: 426px) and (max-width: 500px) {
-  #profile-item-skillset-padding {
-    padding-right: 7%;
+  .list-group-item {
+    font-size: .6em;
+    padding: .3rem .7rem;
   }
 }
 
@@ -495,20 +498,37 @@ td {
     width: 100%;
     /* margin-left: 25px; */
   }
+
+  #profile-short-details-text {
+    margin: 45px 0 0 13px;
+  }
+
+  #users-profile-name, .profileCurrentPosition, .profileLocation {
+    margin: 1vw 0;
+  }
+
+  .profile-short-details-text {
+    font-size: 13px;
+  }
+
 }
 
 @media only screen and (min-width: 991px) and (max-width: 1199px) {
-  .profilePhoto {
+  /* .profilePhoto {
     height: calc(30vw + 7vh);
     margin-left: 25%;
     width: 50%;
-  }
+  } */
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   .post-feed--comments-link-button__width {
     width: 100%;
     /* margin-left: 25px; */
+  }
+
+  #users-profile-name, .profileCurrentPosition, .profileLocation {
+    margin: 1.5vw 0;
   }
 }
 
