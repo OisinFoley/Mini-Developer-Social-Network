@@ -9,67 +9,31 @@ class ProfileItem extends Component {
 
     return (
       <div className="card card-body bg-light mb-3">
-      <p>
+      {/* <p>
         don't use this layout <br/> 
         the layout we want is the following: <br/>
         3 rows. <br/>
         1st row: img in one col, then another col w/ user's name and under that their position, if it looks good then in a 3rd col show their location <br/>
         2nd row: the skillset table
         3rd row: link to full profile
-      </p>
+      </p> */}
         <div className="row">
-          {/* <img src={profile.user.avatar} alt="" className="rounded-circle profilePhoto" /> */}
-          {/* this is what you had before trying float */}
           <span className="col-12">
             <img style={{float: "left"}} src={profile.user.avatar} alt="" className="rounded-circle profilePhoto col-2" />
-            {/* <span > */}
-              {/* <span style={{display: "inline"}}> */}
-              <div id="profile-short-details-text">
-                <p id="users-profile-name">{profile.user.name}</p>
-                <p className='profileCurrentPosition'>
-                    {profile.status}{' '}
-                    {isEmpty(profile.company) ? null : (
-                      <span> at {profile.company} </span>
-                    )}
-                </p>
-                <p className='profileLocation'>
-                  {isEmpty(profile.location) ? null : (
-                    <span>{profile.location}</span>
-                  )}
-                </p>
-              </div>
-
-              {/* <div className="offset-2 col-8"> */}
-                {/* <p style={{display: "inline"}} className="text-center" id="users-profile-name">{profile.user.name}</p> */}
-                {/* <p className="text-center" id="users-profile-name">{profile.user.name}</p> */}
-                {/* <p id="users-profile-name">{profile.user.name}</p> */}
-              {/* </div> */}
-
-              {/* <div className="offset-2 col-8"> */}
-                {/* <p style={{display: "inline"}} className='profileCurrentPosition text-center'> */}
-                {/* <p className='profileCurrentPosition text-center'> */}
-                {/* <p className='profileCurrentPosition'>
+            <div id="profile-short-details-text">
+              <p id="users-profile-name">{profile.user.name}</p>
+              <p className='profileCurrentPosition'>
                   {profile.status}{' '}
                   {isEmpty(profile.company) ? null : (
                     <span> at {profile.company} </span>
                   )}
-                </p> */}
-              {/* </div> */}
-                
-                {/* <hr/> */}
-                <br/>
-                
-              {/* </span> */}
-              
-              
-              
-              
-              {/* <p className='profileLocation'>
+              </p>
+              <p className='profileLocation'>
                 {isEmpty(profile.location) ? null : (
                   <span>{profile.location}</span>
                 )}
-              </p> */}
-            {/* </span> */}
+              </p>
+            </div>
           </span>
           
           <h4 className='headingSkillSet text-center' style={{width: 100 + "%"}}>Skill set</h4>
