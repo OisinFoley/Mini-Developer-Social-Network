@@ -36,7 +36,7 @@ class Dashboard extends Component {
             <ProfileActions />
             <Experience experience={profile.experience} />
             <Education education={profile.education} />
-
+            <hr/>
             <button
               className="btn btn-danger btn-margin-spacing btnDeleteAccount"
               data-toggle="modal"
@@ -44,7 +44,7 @@ class Dashboard extends Component {
             >
               Delete my Account
             </button>
-          <ConfirmDeleteModal onDelete={this.onDeleteProfileClick} modalId={`deleteProfileModal`} id={null} nestedId={null} modalTitle='Delete Profile' modalBody="Are you sure you want to delete your entire Profile? This cannot be undone. Your posts will remain after you're going." />
+          <ConfirmDeleteModal onDelete={this.onDeleteProfileClick} modalId={`deleteProfileModal`} id={null} nestedId={null} modalTitle='Delete Profile' modalBody="Are you sure you want to delete your entire Profile? This cannot be undone. Your posts will remain after your profile is removed.." />
           </div>
         );
       } else {
@@ -65,7 +65,7 @@ class Dashboard extends Component {
       <div className="dashboard">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4 dashboard-heading">Dashboard</h1>
+              <h1 className="dashboard-heading">Dashboard</h1>
               {dashboardContent}
             </div>
           </div>

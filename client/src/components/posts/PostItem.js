@@ -45,60 +45,45 @@ class PostItem extends Component {
               </button>
             ) : null}
             <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deletePostModal-${i+1}`} id={post._id} modalTitle='Delete Post and its Comments' modalBody='Are you sure you want to delete this Post? This cannot be undone.' />
-            <img style={{float: "left"}} src={post.avatar} alt="" className="rounded-circle profilePhoto col-2" />
+            <img src={post.avatar} alt="" className="rounded-circle profilePhoto col-2" />
             <div id="profile-short-details-text">
-              {/* <p id="users-profile-name">{post.name}</p> */}
               <p id="posters-profile-name">{post.name}</p>
+              <span>
+                <button
+                  onClick={this.onLikeClick.bind(this, post._id)}
+                  type="button"
+                  className="btn btn-light mr-1 post-feed--post-like-button__width"
+                >
+                  <i
+                    className={classnames('fas fa-thumbs-up fa-thumbs-general', {
+                      'text-info': this.findUserLikes(post.likes)
+                    })}
+                  />
+                  <span className="badge badge-light" id='post-like-counter'>{post.likes.length}</span>
+                </button>
+                <button
+                  onClick={this.onUnlikeClick.bind(this, post._id)}
+                  type="button"
+                  className="btn btn-light mr-1 post-feed--post-unlike-button__width-margin"
+                >
+                  <i className="text-secondary fas fa-thumbs-down fa-thumbs-general" />
+                </button>
+              </span>
             </div>
             <p className="lead post-feed--post-text-__width">{post.text}</p>
           </span>
-
-          {/* <div className="col-10 offset-1" id='post-content-body'> */}
           <div className="col-10 offset-1" id='post-content-body'>
-            {/* {post.user === auth.user.id ? (
-                    <button
-                      type="button"
-                      className="btn btn-danger mr-1 post-feed--delete-comment-button__float"
-                      data-toggle="modal"
-                      data-target={`#deletePostModal-${i+1}`}
-                    >
-                      <i className="fas fa-times" />
-                    </button>
-                  ) : null}
-            <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deletePostModal-${i+1}`} id={post._id} modalTitle='Delete Post and its Comments' modalBody='Are you sure you want to delete this Post? This cannot be undone.' /> */}
-            
           </div>
         </div>
 
         {showActions ? (
-          <span id="post-likes-wrapper">
-            <span>
-              <button
-                onClick={this.onLikeClick.bind(this, post._id)}
-                type="button"
-                className="btn btn-light mr-1 post-feed--post-like-button__width"
-              >
-                <i
-                  className={classnames('fas fa-thumbs-up fa-thumbs-general', {
-                    'text-info': this.findUserLikes(post.likes)
-                  })}
-                />
-                <span className="badge badge-light" id='post-like-counter'>{post.likes.length}</span>
-              </button>
-              <button
-                onClick={this.onUnlikeClick.bind(this, post._id)}
-                type="button"
-                className="btn btn-light mr-1 post-feed--post-unlike-button__width-margin"
-              >
-                <i className="text-secondary fas fa-thumbs-down fa-thumbs-general" />
-              </button>
-            </span>
+          <div id="post-likes-wrapper">
             <span className='post-feed--post-interaction-container__bottom'>
               <Link to={`/post/${post._id}`} className="btn btn-info post-feed--comments-link-button__width">
                 Comments
               </Link>
             </span>
-          </span>
+          </div>
           ) : null}
           
       </div>

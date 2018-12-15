@@ -68,7 +68,7 @@ class AddExperience extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <BackButton route='dashboard' />
-              <h1 className="display-4 text-center"> Add Experience </h1>
+              <h1 className="text-center"> Add Experience </h1>
               <p className="lead text-center">
                 Add a job or position you currently work at or have in the past
               </p>
