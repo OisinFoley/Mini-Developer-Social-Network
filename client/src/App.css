@@ -19,6 +19,10 @@ td {
   text-overflow: ellipsis;
 }
 
+.profilePhoto {
+  float: left;
+}
+
 .btn-sm {
   border-radius: .25rem;
   margin-top: -4px;
@@ -48,7 +52,12 @@ td {
 }
 
 .btn-margin-spacing {
-  margin-top: 40px;
+  /* margin-top: 40px; */
+  margin-top: 5vh;
+}
+
+hr {
+  width: 95%;
 }
 
 .dashboard-heading {
@@ -61,6 +70,12 @@ td {
 
 .deleteDashboardContent {
   cursor: pointer;
+}
+
+#table-header-filler-item {
+  max-width: 10%;
+  flex: 0 0 10%;
+  background: aqua;
 }
 
 .landing {
@@ -125,23 +140,12 @@ td {
 
 .post-feed--post-interaction-container__bottom {
   display: flex;
-  /* padding-left: 15px; */
   margin: 25px auto;
   width: 83%;
 }
 
 .post-feed--comments-link-button__width {
   width: 100%;
-  /* margin-left: 20px; */
-}
-
-.post-feed--post-like-button__width {
-  width: 6%;
-}
-
-.post-feed--post-unlike-button__width-margin {
-  margin-left: 15px;
-  width: 6%;
 }
 
 .post-feed--post-text-__width {
@@ -171,15 +175,12 @@ td {
 }
 
 #profile-short-details-text {
-  /* margin: 15px 0 0 13px; */
   margin: 0px 0 0 13px;
   float: left;
-  /* font-size: calc(16px - 2vw); */
   width: 70%
 }
 
-#users-profile-name, .profileCurrentPosition, .profileLocation {
-  /* margin: 3vw 0; */
+#users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
   margin: 2vw 0;
 }
 
@@ -188,14 +189,16 @@ td {
 }
 
 #post-likes-wrapper {
-  margin: 20px 0 0 20px;
+  margin: 20px 0 0 0px;
 }
 
+#dashboard-content-table {
+  width: 97%;
+  margin: 0px 1.5%;
+}
 
-@media only screen and (max-width: 650px) {
-  /* #users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
-    font-size: 4vw;
-  } */
+.dashboard-content-container {
+  border: 1px solid rgba(0,0,0,.125);
 }
 
 @media only screen and (max-width: 450px) {
@@ -221,22 +224,29 @@ td {
     max-height: 250px;
   }
 
-  /* .profilePhoto {
-    height: 33vw;
-    margin-left: 25%;
-    width: 50%;
-  } */
-
+  #dashboard-content-table {
+    width: 98%;
+    margin: 0px 1%;
+  }
 }
 
-@media only screen and (min-width: 500px) and (max-width: 768px) {
+@media only screen and (min-width: 500px) and (max-width: 767px) {
   #profile-short-details-text {
-    margin: 5px 0 0 13px;
+    margin: 5px 0 0 7px;
     font-size: 11px;
   }
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation {
+  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
     margin: .25vw 0;
+  }
+
+  .lead {
+    font-size: 0.8rem;
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+    font-size: 10px;
+    padding: 5px 2px 0 8px;
   }
 }
 
@@ -245,20 +255,20 @@ td {
     width: 100%;
   }
   
-  .profileActions {
+  /* .profileActions {
     display: block;
   }
 
   .profileActions > a {
     width: 100%;
-  }
+  } */
 
-  .dashboardWelcomeLabel, .dashboard-heading {
+  /* .dashboardWelcomeLabel, .dashboard-heading {
     text-align: center;
     margin-left: 0px;
   }
 
-  .table-item-xs {
+  .table-item-sm {
     max-width: 33.33%;
     flex: 0 0 33%;
     text-align: center;
@@ -266,7 +276,7 @@ td {
 
   #tableCellDeleteContainer, .deleteDashboardContent {
     width: 100%;
-  }
+  } 
 
   .btnDeleteAccount {
     width: 94%;
@@ -277,23 +287,18 @@ td {
     display: block;
     width: 98%;
     margin-top: 45px;
-  }
+  } */
 
   .edit-profile--social-icon-wrapper {
     width: calc(5vw + 25px);
   }
 
-  /* .profilePhoto {
-    height: 33vw;
-  } */
+  #profile-short-details-text {
+    width: 60%;
+  }
 }
 
 @media only screen and (max-width: 991px) {
-  /* .profilePhoto {
-    position: relative;
-    top: 35%;
-  } */
-
   .profileImageContainer {
     display: -webkit-box;
     margin-bottom: 30px;
@@ -303,30 +308,11 @@ td {
     padding-top: 10px;
   }
 
-  /* .profileCurrentPosition {
-    margin-top: 15px;
-  } */
-
-  /* .profileLocation {
-    margin-top: -5px;
-  } */
-
   .headingSkillSet {
     font-size: 3.5vw;
     width: 100%;
     margin-top: 20px;
   }
-}
-@media only screen and (min-width: 1200px) {
-  /* .profilePhoto {
-    height: calc(30vw + 7vh);
-    margin-left: 25%;
-    width: 50%;
-  } */
-
-  /* #users-profile-name, .profileCurrentPosition, .profileLocation, .list-group {
-    font-size: calc(3vw - 10px);
-  } */
 }
 
 @media only screen and (max-width: 767px) {
@@ -337,17 +323,6 @@ td {
   .post-feed--post-interaction-container__bottom {
     display: flex;
     margin: 25px auto;
-    /* padding-left: 7px; */
-  }
-
-  .post-feed--post-like-button__width {
-    width: 11%;
-    height: 30px
-  }
-
-  .lead {
-    font-size: 0.8rem;
-    font-weight: 300;
   }
 
   .fa-thumbs-general {
@@ -360,16 +335,9 @@ td {
 
   .post-feed--comments-link-button__width {
     width: 100%;
-    /* margin-left: 12px; */
     margin-top: 0px;
     height: 30px;
     text-align: center;
-  }
-
-  .post-feed--post-unlike-button__width-margin {
-    margin-left: 0px;
-    height: 30px;
-    width: 11%;
   }
 
   #post-like-counter {
@@ -380,17 +348,82 @@ td {
     padding: .25rem .5rem;
     font-size: .875rem;
   }
-}
 
-@media only screen and (max-width: 320px) {
-  .table-item-xs {  
-    font-size: 0.7em;
+  /* #delete-button-icon {
+    display: none;
+  } */
+
+  .dashboard-content-container {
+    /* border: 2px solid blue; */
+    /* border: 1px solid rgba(0,0,0,.125); */
+    
+    border-radius: 5px;
+    margin-bottom: 10vh;
+  }
+
+  .dashboardWelcomeLabel, .dashboard-heading {
+    text-align: center;
+    margin-left: 0px;
+  }
+
+  
+
+  /* #tableCellDeleteContainer, .deleteDashboardContent {
+    width: 100%;
+  } */
+
+  .btnDeleteAccount {
+    width: 94%;
+    margin-left: 12px;
+  }
+
+  /* .delete-account-hr {
+    display: block;
+    width: 98%;
+    margin-top: 45px;
+  } */
+
+
+
+  #tableCellDeleteContainer {
+    padding: 0px;
+    margin-top: 15px;
+    /* margin-left: 8px; */
+    margin-left: 0;
+
+    max-width: 10%;
+    flex: 0 0 10%;
+    text-align: center;
+  }
+
+  .deleteDashboardContent {
+    border-radius: 40px;
+    margin-bottom: 0px;
+  }
+
+  .table-item-sm {
+    max-width: 30%;
+    flex: 0 0 30%;
+    text-align: center;
+  }
+
+  .dashboard-content-heading {
+    text-align: center;
+    padding: 15px 0px 5px 0;
+  }
+
+  .profileActions {
+    display: block;
+  }
+
+  .profileActions > a {
+    width: 100%;
   }
 }
 
 @media only screen and (max-width: 375px) {
-  .table-item-xs {
-    font-size: 0.8em;
+  .table-item-sm {
+    font-size: 0.7em;
   }
 
   #profile-item-skillset-padding {
@@ -401,7 +434,7 @@ td {
     margin-left: 0;
   }
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation {
+  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
     margin: .07vw 0;
   }
 
@@ -414,6 +447,20 @@ td {
     font-size: .6em;
     padding: .3rem .7rem;
   }
+
+  .post-feed--post-text-__width {
+    width: 66%;
+    margin: 0px 7px;
+  }
+
+  .lead {
+    font-size: 0.65rem;
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+    font-size: 9px;
+    padding: 2px 2px 0 4px;
+  }
 }
 
 @media only screen and (min-width: 425px) and (max-width: 500px) {
@@ -425,24 +472,27 @@ td {
     font-size: .6em;
   }
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation {
+  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
     margin: .15vw 0;
   }
 
   #profile-short-details-text {
     font-size: 9px;
-    margin: 5px 0 0 13px;
+    margin: 5px 0 0 7px;
   }
   
+  .post-feed--post-text-__width {
+    width: 69.5%;
+  }
 
+  .lead {
+    font-size: 0.7rem;
+  }
 
-  /* .profileCurrentPosition {
-    font-size: .55em;
-  } */
-
-  /* .profileLocation {
-    font-size: .55em;
-  } */
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+    font-size: 9px;
+    padding: 5px 2px 0 5px;
+  }
 }
 
 
@@ -451,23 +501,36 @@ td {
     padding-right: 7%;
   }
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation {
+  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
     margin: .1vw 0;
   }
 
   #profile-short-details-text {
     font-size: 8px;
-    margin: 2px 0 0 13px;
+    margin: 2px 0 0 7px;
   }
 
   .list-group-item {
     font-size: .6em;
     padding: .3rem .7rem;
   }
+
+  .lead {
+    font-size: .65rem;
+  }
+
+  .post-feed--post-text-__width {
+    width: 66%;
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+    font-size: 9px;
+    padding: 2px 2px 5px 4px;
+  }
 }
 
 @media only screen and (min-width: 376px) and (max-width: 575px) {
-  .table-item-xs {
+  .table-item-sm {
     font-size: 0.9em;
   }
 }
@@ -505,21 +568,69 @@ td {
     vertical-align: bottom;
     margin-right: 15px;
   }
+
+  .post-feed--post-text-__width {
+    width: 73%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+    font-size: 12px;
+  }
+
+  #delete-button-text {
+    display: none;
+  }
+
+  #tableCellDeleteContainer {
+    width: 7%;
+    max-width: 7%;
+    flex: 0 0 7%;
+    text-align: center;
+  }
+
+  /* .table {
+    margin-left: 1.5vw;
+  } */
+
+  .dashboard-content-heading {
+    padding: 19px 0 0 2vw;
+  }
+
+  .dashboard-content-container {
+    /* border: 2px solid blue; */
+    border-radius: 5px;
+    margin-bottom: 10vh;
+  }
+
+  .deleteDashboardContent {
+    border-radius: 40px;
+    margin-bottom: 0px;
+  }
+
+  .table-item-md {
+    -webkit-box-flex: 0;
+    flex: 0 0 31%;
+    max-width: 31%;
+  }
+
+  /* #dashboard-content-table {
+    width: 97%;
+    margin: 0px 1.5%;
+  } */
+
+  #table-header-filler-item {
+    width: 7%;
+    max-width: 7%;
+    flex: 0 0 7%;
+    /* max-width: 75px; */
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .post-feed--post-like-button__width {
-    width: 8%;
-  }
-  
-  .post-feed--post-unlike-button__width-margin {
-    margin-left: 25px;
-    width: 8%;
-  }
-
   .post-feed--comments-link-button__width {
     width: 100%;
-    /* margin-left: 25px; */
   }
 
   #profile-short-details-text {
@@ -530,34 +641,90 @@ td {
     margin: 1vw 0;
   }
 
+  #posters-profile-name {
+    margin-top: 1vw;
+  }
+
   .profile-short-details-text {
     font-size: 13px;
   }
 
+  
+
+  /* #table-header-filter-item{
+    max-width: 75px;
+    flex: 0 0 6%;
+    background: aqua;
+  } */
+
 }
 
-@media only screen and (min-width: 991px) and (max-width: 1199px) {
-  /* .profilePhoto {
-    height: calc(30vw + 7vh);
-    margin-left: 25%;
-    width: 50%;
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+  /* #tableCellDeleteContainer {
+    padding: 10px 25px;
+    width: 10%;
+    max-width: 75px;
+
+  } */
+
+  /* .table {
+    margin-left: 1.5vw;
+  } */
+
+  /* .dashboard-content-heading {
+    padding: 19px 0 0 2vw;
+  } */
+
+  /* .dashboard-content-container {
+    border: 2px solid blue;
+    border-radius: 5px;
+    margin-bottom: 10vh;
+  } */
+
+  /* .deleteDashboardContent {
+    border-radius: 40px;
+    margin-bottom: 0px;
+  } */
+
+  /* .table-item-md {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 30%;
+    flex: 0 0 30%;
+    max-width: 30%;
+  } */
+
+  /* #dashboard-content-table {
+    width: 96.5%;
+  } */
+
+  /* #table-header-filler-item {
+    width: 10%;
+    max-width: 75px;
   } */
 }
+
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   .post-feed--comments-link-button__width {
     width: 100%;
-    /* margin-left: 25px; */
   }
 
   #users-profile-name, .profileCurrentPosition, .profileLocation {
     margin: 1.5vw 0;
+  }
+
+  #posters-profile-name {
+    margin-top: 1.5vw;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   .post-feed--comments-link-button__width {
     width: 100%;
-    /* margin-left: 25px; */
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+    margin-bottom: -8px;
+    margin-top: -5px;
   }
 }

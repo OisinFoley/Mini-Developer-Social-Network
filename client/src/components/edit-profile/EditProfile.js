@@ -100,6 +100,15 @@ class EditProfile extends Component {
   onSubmit(e) {
     e.preventDefault();
 
+    if (this.state.status === "0") {
+      this.setState({
+        errors: {
+          status: 'Select a value from this dropdown.'
+        }
+      });
+      return;
+    }
+
     const profileData = {
       handle: this.state.handle,
       company: this.state.company,
@@ -189,7 +198,7 @@ class EditProfile extends Component {
       { label: 'Student or Learning', value: 'Student or Learning' },
       { label: 'Instructor or Teacher', value: 'Instructor or Teacher' },
       { label: 'Intern', value: 'Intern' },
-      { label: 'Other', value: 'Other' }
+      { label: 'Other (Non-affiliated)', value: 'Other' }
     ];
 
     return (

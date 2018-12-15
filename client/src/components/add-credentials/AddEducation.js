@@ -68,7 +68,7 @@ class AddEducation extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <BackButton route='dashboard' />
-              <h1 className="display-4 text-center"> Add Education </h1>
+              <h1 className="text-center"> Add Education </h1>
               <p className="lead text-center">
                 Add academic education or coding training you've attended
               </p>
