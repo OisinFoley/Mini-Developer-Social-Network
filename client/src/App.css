@@ -2,6 +2,10 @@ img {
   width: 100%;
 }
 
+#Landing-Title {
+  font-size: 3rem;
+}
+
 #post-content-body {
   padding-right: 0px;
 }
@@ -52,7 +56,6 @@ td {
 }
 
 .btn-margin-spacing {
-  /* margin-top: 40px; */
   margin-top: 5vh;
 }
 
@@ -201,6 +204,10 @@ hr {
   border: 1px solid rgba(0,0,0,.125);
 }
 
+.profile-form-container {
+  padding: 1.25rem;
+}
+
 @media only screen and (max-width: 450px) {
   .display-3 {
     font-size: 3.5em;
@@ -244,7 +251,7 @@ hr {
     font-size: 0.8rem;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     font-size: 10px;
     padding: 5px 2px 0 8px;
   }
@@ -254,40 +261,6 @@ hr {
   #create-profile-button {
     width: 100%;
   }
-  
-  /* .profileActions {
-    display: block;
-  }
-
-  .profileActions > a {
-    width: 100%;
-  } */
-
-  /* .dashboardWelcomeLabel, .dashboard-heading {
-    text-align: center;
-    margin-left: 0px;
-  }
-
-  .table-item-sm {
-    max-width: 33.33%;
-    flex: 0 0 33%;
-    text-align: center;
-  }
-
-  #tableCellDeleteContainer, .deleteDashboardContent {
-    width: 100%;
-  } 
-
-  .btnDeleteAccount {
-    width: 94%;
-    margin-left: 12px;
-  }
-
-  .delete-account-hr {
-    display: block;
-    width: 98%;
-    margin-top: 45px;
-  } */
 
   .edit-profile--social-icon-wrapper {
     width: calc(5vw + 25px);
@@ -349,14 +322,7 @@ hr {
     font-size: .875rem;
   }
 
-  /* #delete-button-icon {
-    display: none;
-  } */
-
   .dashboard-content-container {
-    /* border: 2px solid blue; */
-    /* border: 1px solid rgba(0,0,0,.125); */
-    
     border-radius: 5px;
     margin-bottom: 10vh;
   }
@@ -366,29 +332,14 @@ hr {
     margin-left: 0px;
   }
 
-  
-
-  /* #tableCellDeleteContainer, .deleteDashboardContent {
-    width: 100%;
-  } */
-
   .btnDeleteAccount {
     width: 94%;
     margin-left: 12px;
   }
 
-  /* .delete-account-hr {
-    display: block;
-    width: 98%;
-    margin-top: 45px;
-  } */
-
-
-
   #tableCellDeleteContainer {
     padding: 0px;
     margin-top: 15px;
-    /* margin-left: 8px; */
     margin-left: 0;
 
     max-width: 10%;
@@ -457,7 +408,7 @@ hr {
     font-size: 0.65rem;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     font-size: 9px;
     padding: 2px 2px 0 4px;
   }
@@ -489,7 +440,7 @@ hr {
     font-size: 0.7rem;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     font-size: 9px;
     padding: 5px 2px 0 5px;
   }
@@ -523,7 +474,7 @@ hr {
     width: 66%;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     font-size: 9px;
     padding: 2px 2px 5px 4px;
   }
@@ -549,7 +500,7 @@ hr {
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   #main-navbar {
-    font-size: .9rem;
+    font-size: .85rem;
   }
 
   #dashboard-nav-link {
@@ -575,7 +526,17 @@ hr {
 }
 
 @media only screen and (min-width: 768px) {
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+  .md-container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
+    max-width: 720px;
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     font-size: 12px;
   }
 
@@ -590,16 +551,11 @@ hr {
     text-align: center;
   }
 
-  /* .table {
-    margin-left: 1.5vw;
-  } */
-
   .dashboard-content-heading {
     padding: 19px 0 0 2vw;
   }
 
   .dashboard-content-container {
-    /* border: 2px solid blue; */
     border-radius: 5px;
     margin-bottom: 10vh;
   }
@@ -615,16 +571,10 @@ hr {
     max-width: 31%;
   }
 
-  /* #dashboard-content-table {
-    width: 97%;
-    margin: 0px 1.5%;
-  } */
-
   #table-header-filler-item {
     width: 7%;
     max-width: 7%;
     flex: 0 0 7%;
-    /* max-width: 75px; */
   }
 }
 
@@ -648,63 +598,17 @@ hr {
   .profile-short-details-text {
     font-size: 13px;
   }
-
-  
-
-  /* #table-header-filter-item{
-    max-width: 75px;
-    flex: 0 0 6%;
-    background: aqua;
-  } */
-
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
-  /* #tableCellDeleteContainer {
-    padding: 10px 25px;
-    width: 10%;
-    max-width: 75px;
-
-  } */
-
-  /* .table {
-    margin-left: 1.5vw;
-  } */
-
-  /* .dashboard-content-heading {
-    padding: 19px 0 0 2vw;
-  } */
-
-  /* .dashboard-content-container {
-    border: 2px solid blue;
-    border-radius: 5px;
-    margin-bottom: 10vh;
-  } */
-
-  /* .deleteDashboardContent {
-    border-radius: 40px;
-    margin-bottom: 0px;
-  } */
-
-  /* .table-item-md {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 30%;
-    flex: 0 0 30%;
-    max-width: 30%;
-  } */
-
-  /* #dashboard-content-table {
-    width: 96.5%;
-  } */
-
-  /* #table-header-filler-item {
-    width: 10%;
-    max-width: 75px;
-  } */
 }
 
 
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .md-container {
+    max-width: 960px;
+  }
+
   .post-feed--comments-link-button__width {
     width: 100%;
   }
@@ -719,6 +623,10 @@ hr {
 }
 
 @media only screen and (min-width: 1200px) {
+  .md-container {
+    max-width: 1140px;
+  }
+
   .post-feed--comments-link-button__width {
     width: 100%;
   }

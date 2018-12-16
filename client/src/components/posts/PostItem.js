@@ -30,7 +30,6 @@ class PostItem extends Component {
   render() {
     const { post, i, auth, showActions } = this.props;
     return (
-      // <div className="card card-body mb-3 comment-feed--individual-comment-container__padding">
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <span className="col-12">
@@ -45,7 +44,7 @@ class PostItem extends Component {
               </button>
             ) : null}
             <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deletePostModal-${i+1}`} id={post._id} modalTitle='Delete Post and its Comments' modalBody='Are you sure you want to delete this Post? This cannot be undone.' />
-            <img src={post.avatar} alt="" className="rounded-circle profilePhoto col-2" />
+            <img src={post.avatar} alt="Profile No Longer Exists" className="rounded-circle profilePhoto alt-img-font col-2" />
             <div id="profile-short-details-text">
               <p id="posters-profile-name">{post.name}</p>
               <span>

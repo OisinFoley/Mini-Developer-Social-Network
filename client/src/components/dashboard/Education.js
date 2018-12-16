@@ -30,7 +30,6 @@ class Education extends Component {
             className="btn-danger deleteDashboardContent"
           >
             <i id="delete-button-icon" class="fas fa-times"></i>
-            {/* <span id="delete-button-text">Delete</span> */}
           </button>
           <ConfirmDeleteModal onDelete={this.onDeleteEducation} modalId={`deleteEducationModal-${i+1}`} id={edu._id} modalTitle='Delete Education' modalBody='Are you sure you want to delete this Education? This cannot be undone.' />
         </td>
