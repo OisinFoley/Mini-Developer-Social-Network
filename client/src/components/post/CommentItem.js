@@ -12,20 +12,9 @@ class CommentItem extends Component {
     const { comment, i, postId, auth } = this.props;
 
     return (
-      <div className="card card-body mb-3 comment-feed--individual-comment-container__padding">
+      <div className="card card-body mb-3 bg-light comment-feed--individual-comment-container__padding">
         <div className="row">
-          <div className="col-3 col-md-3 col-lg-2">
-            <a href="profile.html">
-              <img
-                className="rounded-circle d-block"
-                src={comment.avatar}
-                alt=""
-              />
-            </a>
-            <br />
-            <p className="text-center" id='users-profile-name'>{comment.name}</p>
-          </div>
-          <div className="col-md-9 col-lg-10 col-9" id='post-content-body'>
+          <span className="col-12">
             {comment.user === auth.user.id ? (
               <button
                 type="button"
@@ -36,9 +25,13 @@ class CommentItem extends Component {
                 <i className="fas fa-times" />
               </button>
             ) : null}
-          <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deleteCommentModal-${i+1}`} id={postId} nestedId={comment._id} modalTitle='Delete Comment' modalBody='Are you sure you want to delete this Comment? This cannot be undone.' />
-          <p className="lead post-feed--post-text-__width">{comment.text}</p>
-          </div>
+            <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deleteCommentModal-${i+1}`} id={postId} nestedId={comment._id} modalTitle='Delete Comment' modalBody='Are you sure you want to delete this Comment? This cannot be undone.' />
+            <img src={comment.avatar} alt="Profile No Longer Exists" className="rounded-circle profilePhoto alt-img-font col-2" />
+            <div id="profile-short-details-text">
+              <p id="posters-profile-name">{comment.name}</p>
+            </div>
+            <p className="lead post-feed--post-text-__width">{comment.text}</p>
+          </span>
         </div>
       </div>
     );

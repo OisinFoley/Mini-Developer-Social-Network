@@ -30,7 +30,6 @@ class Experience extends Component {
             className="btn-danger deleteDashboardContent"
           >
             <i id="delete-button-icon" class="fas fa-times"></i>
-            {/* <span id="delete-button-text">Delete</span> */}
           </button>
           <ConfirmDeleteModal onDelete={this.onDeleteExperience} modalId={`deleteExperienceModal-${i+1}`} id={exp._id} modalTitle='Delete Experience' modalBody='Are you sure you want to delete this Experience? This cannot be undone.' />
         </td>

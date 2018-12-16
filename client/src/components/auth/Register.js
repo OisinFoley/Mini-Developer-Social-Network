@@ -61,50 +61,51 @@ class Register extends Component {
         {user ? user.name : 'no user'}
         <div className="container">
           <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Sign Up</h1>
+            <div className="col-md-12">
+              <h1 className="text-center">Sign Up</h1>
               <p className="lead text-center">
                 Create your DevConnector account
               </p>
-              <form noValidate onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="Name"
-                  name="name"
-                  value={this.state.name}
-                  onChange={this.onChange}
-                  error={errors.name}
-                />
+              <div className="bg-light profile-form-container">
+                <form noValidate onSubmit={this.onSubmit}>
+                  <TextFieldGroup
+                    placeholder="Name"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.onChange}
+                    error={errors.name}
+                  />
 
-                <TextFieldGroup
-                  placeholder="Email Address"
-                  name="email"
-                  type="email"
-                  value={this.state.email}
-                  onChange={this.onChange}
-                  error={errors.email}
-                  info="Site uses Gravatar, use a Gravatar email if you'd like a profile picture."
-                />
+                  <TextFieldGroup
+                    placeholder="Email Address"
+                    name="email"
+                    type="email"
+                    value={this.state.email}
+                    onChange={this.onChange}
+                    error={errors.email}
+                  />
 
-                <TextFieldGroup
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.onChange}
-                  error={errors.password}
-                />
+                  <TextFieldGroup
+                    placeholder="Password"
+                    name="password"
+                    type="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                    error={errors.password}
+                  />
 
-                <TextFieldGroup
-                  placeholder="Verify password"
-                  name="password2"
-                  type="password"
-                  value={this.state.password2}
-                  onChange={this.onChange}
-                  error={errors.password2}
-                />
+                  <TextFieldGroup
+                    placeholder="Verify password"
+                    name="password2"
+                    type="password"
+                    value={this.state.password2}
+                    onChange={this.onChange}
+                    error={errors.password2}
+                  />
 
-                <input type="submit" className="btn btn-info btn-block mt-4" />
-              </form>
+                  <input type="submit" className="btn btn-info btn-block mt-4" />
+                </form>
+              </div>
             </div>
           </div>
         </div>
