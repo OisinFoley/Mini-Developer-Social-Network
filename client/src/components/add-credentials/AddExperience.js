@@ -64,84 +64,86 @@ class AddExperience extends Component {
 
     return (
       <div className="add-experience">
-        <div className="container">
+        <div className="md-container">
           <div className="row">
-            <div className="col-md-8 m-auto">
+            <div className="col-md-12">
               <BackButton route='dashboard' />
-              <h1 className="display-4 text-center"> Add Experience </h1>
+              <h1 className="text-center"> Add Experience </h1>
               <p className="lead text-center">
                 Add a job or position you currently work at or have in the past
               </p>
               <small className="d-block pb-3">* Required fields </small>
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="* Company"
-                  name="company"
-                  value={this.state.company}
-                  onChange={this.onChange}
-                  error={errors.company}
-                />
-                <TextFieldGroup
-                  placeholder="* Job Title"
-                  name="title"
-                  value={this.state.title}
-                  onChange={this.onChange}
-                  error={errors.title}
-                />
-                <TextFieldGroup
-                  placeholder="Location"
-                  name="location"
-                  value={this.state.location}
-                  onChange={this.onChange}
-                  error={errors.location}
-                />
-                <h6> Start Date </h6>
-                <TextFieldGroup
-                  placeholder="mm/dd/yyy"
-                  type="date"
-                  name="from"
-                  value={this.state.from}
-                  onChange={this.onChange}
-                  error={errors.from}
-                />
-                <h6> End Date </h6>
-                <TextFieldGroup
-                  placeholder="mm/dd/yyy"
-                  type="date"
-                  name="to"
-                  value={this.state.to}
-                  onChange={this.onChange}
-                  error={errors.to}
-                  disabled={this.state.disabled ? 'disabled' : ''}
-                />
-                <div className="form-check mb-4">
-                  <input
-                    type="checkbox"
-                    name="current"
-                    className="form-check-input"
-                    value={this.state.current}
-                    checked={this.state.current}
-                    onChange={this.onCheck}
-                    id="current"
+              <div className="bg-light profile-form-container">
+                <form onSubmit={this.onSubmit}>
+                  <TextFieldGroup
+                    placeholder="* Company"
+                    name="company"
+                    value={this.state.company}
+                    onChange={this.onChange}
+                    error={errors.company}
                   />
-                  <label htmlFor="current" className="form-check-label">
-                    Current Job
-                  </label>
-                </div>
-                <TextAreaFieldGroup
-                  placeholder="Job Description"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.onChange}
-                  error={errors.description}
-                  info="Tell us a little about the position"
-                />
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
-              </form>
+                  <TextFieldGroup
+                    placeholder="* Job Title"
+                    name="title"
+                    value={this.state.title}
+                    onChange={this.onChange}
+                    error={errors.title}
+                  />
+                  <TextFieldGroup
+                    placeholder="Location"
+                    name="location"
+                    value={this.state.location}
+                    onChange={this.onChange}
+                    error={errors.location}
+                  />
+                  <h6> Start Date </h6>
+                  <TextFieldGroup
+                    placeholder="mm/dd/yyy"
+                    type="date"
+                    name="from"
+                    value={this.state.from}
+                    onChange={this.onChange}
+                    error={errors.from}
+                  />
+                  <h6> End Date </h6>
+                  <TextFieldGroup
+                    placeholder="mm/dd/yyy"
+                    type="date"
+                    name="to"
+                    value={this.state.to}
+                    onChange={this.onChange}
+                    error={errors.to}
+                    disabled={this.state.disabled ? 'disabled' : ''}
+                  />
+                  <div className="form-check mb-4">
+                    <input
+                      type="checkbox"
+                      name="current"
+                      className="form-check-input"
+                      value={this.state.current}
+                      checked={this.state.current}
+                      onChange={this.onCheck}
+                      id="current"
+                    />
+                    <label htmlFor="current" className="form-check-label">
+                      Current Job
+                    </label>
+                  </div>
+                  <TextAreaFieldGroup
+                    placeholder="Job Description"
+                    name="description"
+                    value={this.state.description}
+                    onChange={this.onChange}
+                    error={errors.description}
+                    info="Tell us a little about the position"
+                  />
+                  <input
+                    type="submit"
+                    value="Submit"
+                    className="btn btn-info btn-block mt-4"
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>

@@ -13,9 +13,9 @@ class Education extends Component {
   render() {
     const education = this.props.education.map((edu, i) => (
       <tr className='row' key={edu._id}>
-        <td className='col-3 table-item-xs'> {edu.school} </td>
-        <td className='col-3 table-item-xs'> {edu.degree} </td>
-        <td className='col-3 table-item-xs'>
+        <td className='col-4 table-item-sm table-item-md'> {edu.school} </td>
+        <td className='col-4 table-item-sm table-item-md'> {edu.degree} </td>
+        <td className='col-3 table-item-sm table-item-md'>
           <Moment format="DD/MM/YYYY">{edu.from}</Moment> -&nbsp;
           {edu.to === null ? (
             'Now'
@@ -27,9 +27,9 @@ class Education extends Component {
           <button
             data-toggle="modal"
             data-target={`#deleteEducationModal-${i+1}`}
-            className="btn-sm btn-danger deleteDashboardContent"
+            className="btn-danger deleteDashboardContent"
           >
-            Delete
+            <i id="delete-button-icon" class="fas fa-times"></i>
           </button>
           <ConfirmDeleteModal onDelete={this.onDeleteEducation} modalId={`deleteEducationModal-${i+1}`} id={edu._id} modalTitle='Delete Education' modalBody='Are you sure you want to delete this Education? This cannot be undone.' />
         </td>
@@ -37,14 +37,15 @@ class Education extends Component {
     ));
 
     return (
-      <div>
-        <h4 className="mb-4">Education</h4>
-        <table className="table">
+      <div className="dashboard-content-container bg-light">
+        <h4 className="mb-4" className="dashboard-content-heading">Education</h4>
+        <table className="table" id="dashboard-content-table">
           <thead>
             <tr className='row'>
-              <th className="col-3 table-item-xs">School</th>
-              <th className="col-3 table-item-xs">Degree</th>
-              <th className="col-3 table-item-xs">Years</th>
+              <th className="col-4 table-item-sm table-item-md">School</th>
+              <th className="col-4 table-item-sm table-item-md">Degree</th>
+              <th className="col-3 table-item-sm table-item-md">Years</th>
+              <th id="table-header-filler-item"></th>
             </tr>
           </thead>
           <tbody>{education}</tbody>

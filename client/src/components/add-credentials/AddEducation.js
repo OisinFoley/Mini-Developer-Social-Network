@@ -64,84 +64,86 @@ class AddEducation extends Component {
 
     return (
       <div className="add-education">
-        <div className="container">
+        <div className="md-container">
           <div className="row">
-            <div className="col-md-8 m-auto">
+            <div className="col-md-12">
               <BackButton route='dashboard' />
-              <h1 className="display-4 text-center"> Add Education </h1>
+              <h1 className="text-center"> Add Education </h1>
               <p className="lead text-center">
                 Add academic education or coding training you've attended
               </p>
               <small className="d-block pb-3">* Required fields </small>
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="* School"
-                  name="school"
-                  value={this.state.school}
-                  onChange={this.onChange}
-                  error={errors.school}
-                />
-                <TextFieldGroup
-                  placeholder="* Degree or Learning Certification"
-                  name="degree"
-                  value={this.state.degree}
-                  onChange={this.onChange}
-                  error={errors.degree}
-                />
-                <TextFieldGroup
-                  placeholder="* Field of Study"
-                  name="fieldOfStudy"
-                  value={this.state.fieldOfStudy}
-                  onChange={this.onChange}
-                  error={errors.fieldOfStudy}
-                />
-                <h6> From Date </h6>
-                <TextFieldGroup
-                  placeholder="mm/dd/yyy"
-                  type="date"
-                  name="from"
-                  value={this.state.from}
-                  onChange={this.onChange}
-                  error={errors.from}
-                />
-                <h6> To Date </h6>
-                <TextFieldGroup
-                  placeholder="mm/dd/yyy"
-                  type="date"
-                  name="to"
-                  value={this.state.to}
-                  onChange={this.onChange}
-                  error={errors.to}
-                  disabled={this.state.disabled ? 'disabled' : ''}
-                />
-                <div className="form-check mb-4">
-                  <input
-                    type="checkbox"
-                    name="current"
-                    className="form-check-input"
-                    value={this.state.current}
-                    checked={this.state.current}
-                    onChange={this.onCheck}
-                    id="current"
+              <div className="bg-light profile-form-container">
+                <form onSubmit={this.onSubmit}>
+                  <TextFieldGroup
+                    placeholder="* School"
+                    name="school"
+                    value={this.state.school}
+                    onChange={this.onChange}
+                    error={errors.school}
                   />
-                  <label htmlFor="current" className="form-check-label">
-                    Ongoing Study
-                  </label>
-                </div>
-                <TextAreaFieldGroup
-                  placeholder="Program Description"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.onChange}
-                  error={errors.description}
-                  info="Tell us about the program you were in when studying"
-                />
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="btn btn-info btn-block mt-4"
-                />
-              </form>
+                  <TextFieldGroup
+                    placeholder="* Degree or Learning Certification"
+                    name="degree"
+                    value={this.state.degree}
+                    onChange={this.onChange}
+                    error={errors.degree}
+                  />
+                  <TextFieldGroup
+                    placeholder="* Field of Study"
+                    name="fieldOfStudy"
+                    value={this.state.fieldOfStudy}
+                    onChange={this.onChange}
+                    error={errors.fieldOfStudy}
+                  />
+                  <h6> From Date </h6>
+                  <TextFieldGroup
+                    placeholder="mm/dd/yyy"
+                    type="date"
+                    name="from"
+                    value={this.state.from}
+                    onChange={this.onChange}
+                    error={errors.from}
+                  />
+                  <h6> To Date </h6>
+                  <TextFieldGroup
+                    placeholder="mm/dd/yyy"
+                    type="date"
+                    name="to"
+                    value={this.state.to}
+                    onChange={this.onChange}
+                    error={errors.to}
+                    disabled={this.state.disabled ? 'disabled' : ''}
+                  />
+                  <div className="form-check mb-4">
+                    <input
+                      type="checkbox"
+                      name="current"
+                      className="form-check-input"
+                      value={this.state.current}
+                      checked={this.state.current}
+                      onChange={this.onCheck}
+                      id="current"
+                    />
+                    <label htmlFor="current" className="form-check-label">
+                      Ongoing Study
+                    </label>
+                  </div>
+                  <TextAreaFieldGroup
+                    placeholder="Program Description"
+                    name="description"
+                    value={this.state.description}
+                    onChange={this.onChange}
+                    error={errors.description}
+                    info="Tell us about the program you were in when studying"
+                  />
+                  <input
+                    type="submit"
+                    value="Submit"
+                    className="btn btn-info btn-block mt-4"
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>

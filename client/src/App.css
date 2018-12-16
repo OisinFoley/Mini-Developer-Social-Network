@@ -2,6 +2,10 @@ img {
   width: 100%;
 }
 
+#Landing-Title {
+  font-size: 3rem;
+}
+
 #post-content-body {
   padding-right: 0px;
 }
@@ -17,6 +21,10 @@ img {
 td {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.profilePhoto {
+  float: left;
 }
 
 .btn-sm {
@@ -48,7 +56,11 @@ td {
 }
 
 .btn-margin-spacing {
-  margin-top: 40px;
+  margin-top: 5vh;
+}
+
+hr {
+  width: 95%;
 }
 
 .dashboard-heading {
@@ -61,6 +73,12 @@ td {
 
 .deleteDashboardContent {
   cursor: pointer;
+}
+
+#table-header-filler-item {
+  max-width: 10%;
+  flex: 0 0 10%;
+  background: aqua;
 }
 
 .landing {
@@ -125,26 +143,18 @@ td {
 
 .post-feed--post-interaction-container__bottom {
   display: flex;
-  padding-left: 15px;
-  margin: 15px 0px;
+  margin: 25px auto;
+  width: 83%;
 }
 
 .post-feed--comments-link-button__width {
-  width: 76%;
-  margin-left: 20px;
-}
-
-.post-feed--post-like-button__width {
-  width: 6%;
-}
-
-.post-feed--post-unlike-button__width-margin {
-  margin-left: 15px;
-  width: 6%;
+  width: 100%;
 }
 
 .post-feed--post-text-__width {
-  width: 90%;
+  width: 75%;
+  margin: 0px 13px;
+  float: left;
 }
 
 .posts-comments-submit-button {
@@ -161,6 +171,41 @@ td {
 
 .fa-thumbs-up {
   margin-left: -6px;
+}
+
+.col-2, .col-8, .col-12 {
+  padding: 0;
+}
+
+#profile-short-details-text {
+  margin: 0px 0 0 13px;
+  float: left;
+  width: 70%
+}
+
+#users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+  margin: 2vw 0;
+}
+
+#posters-profile-name {
+  margin: 0;
+}
+
+#post-likes-wrapper {
+  margin: 20px 0 0 0px;
+}
+
+#dashboard-content-table {
+  width: 97%;
+  margin: 0px 1.5%;
+}
+
+.dashboard-content-container {
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+.profile-form-container {
+  padding: 1.25rem;
 }
 
 @media only screen and (max-width: 450px) {
@@ -186,58 +231,47 @@ td {
     max-height: 250px;
   }
 
+  #dashboard-content-table {
+    width: 98%;
+    margin: 0px 1%;
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 767px) {
+  #profile-short-details-text {
+    margin: 5px 0 0 7px;
+    font-size: 11px;
+  }
+
+  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+    margin: .25vw 0;
+  }
+
+  .lead {
+    font-size: 0.8rem;
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+    font-size: 10px;
+    padding: 5px 2px 0 8px;
+  }
 }
 
 @media only screen and (max-width: 500px) {
   #create-profile-button {
     width: 100%;
   }
-  
-  .profileActions {
-    display: block;
-  }
-
-  .profileActions > a {
-    width: 100%;
-  }
-
-  .dashboardWelcomeLabel, .dashboard-heading {
-    text-align: center;
-    margin-left: 0px;
-  }
-
-  .table-item-xs {
-    max-width: 33.33%;
-    flex: 0 0 33%;
-    text-align: center;
-  }
-
-  #tableCellDeleteContainer, .deleteDashboardContent {
-    width: 100%;
-  }
-
-  .btnDeleteAccount {
-    width: 94%;
-    margin-left: 12px;
-  }
-
-  .delete-account-hr {
-    display: block;
-    width: 98%;
-    margin-top: 45px;
-  }
 
   .edit-profile--social-icon-wrapper {
     width: calc(5vw + 25px);
   }
+
+  #profile-short-details-text {
+    width: 60%;
+  }
 }
 
 @media only screen and (max-width: 991px) {
-  .profilePhoto {
-    position: relative;
-    top: 35%;
-  }
-
   .profileImageContainer {
     display: -webkit-box;
     margin-bottom: 30px;
@@ -247,17 +281,10 @@ td {
     padding-top: 10px;
   }
 
-  .profileCurrentPosition {
-    margin-top: 15px;
-  }
-
-  .profileLocation {
-    margin-top: -5px;
-  }
-
   .headingSkillSet {
-    /* display: none; */
-    font-size: 3vw;
+    font-size: 3.5vw;
+    width: 100%;
+    margin-top: 20px;
   }
 }
 
@@ -268,21 +295,7 @@ td {
 
   .post-feed--post-interaction-container__bottom {
     display: flex;
-    padding-left: 7px;
-  }
-
-  .post-feed--post-like-button__width {
-    width: 11%;
-    height: 30px
-  }
-
-  .lead {
-    font-size: 0.8rem;
-    font-weight: 300;
-  }
-
-  #users-profile-name {
-    font-size: .8rem;
+    margin: 25px auto;
   }
 
   .fa-thumbs-general {
@@ -294,17 +307,10 @@ td {
   }
 
   .post-feed--comments-link-button__width {
-    width: 64.0%;
-    margin-left: 12px;
+    width: 100%;
     margin-top: 0px;
     height: 30px;
     text-align: center;
-  }
-
-  .post-feed--post-unlike-button__width-margin {
-    margin-left: 0px;
-    height: 30px;
-    width: 11%;
   }
 
   #post-like-counter {
@@ -315,17 +321,60 @@ td {
     padding: .25rem .5rem;
     font-size: .875rem;
   }
-}
 
-@media only screen and (max-width: 320px) {
-  .table-item-xs {  
-    font-size: 0.7em;
+  .dashboard-content-container {
+    border-radius: 5px;
+    margin-bottom: 10vh;
+  }
+
+  .dashboardWelcomeLabel, .dashboard-heading {
+    text-align: center;
+    margin-left: 0px;
+  }
+
+  .btnDeleteAccount {
+    width: 94%;
+    margin-left: 12px;
+  }
+
+  #tableCellDeleteContainer {
+    padding: 0px;
+    margin-top: 15px;
+    margin-left: 0;
+
+    max-width: 10%;
+    flex: 0 0 10%;
+    text-align: center;
+  }
+
+  .deleteDashboardContent {
+    border-radius: 40px;
+    margin-bottom: 0px;
+  }
+
+  .table-item-sm {
+    max-width: 30%;
+    flex: 0 0 30%;
+    text-align: center;
+  }
+
+  .dashboard-content-heading {
+    text-align: center;
+    padding: 15px 0px 5px 0;
+  }
+
+  .profileActions {
+    display: block;
+  }
+
+  .profileActions > a {
+    width: 100%;
   }
 }
 
-@media only screen and (min-width: 321px) and (max-width: 375px) {
-  .table-item-xs {
-    font-size: 0.8em;
+@media only screen and (max-width: 375px) {
+  .table-item-sm {
+    font-size: 0.7em;
   }
 
   #profile-item-skillset-padding {
@@ -335,33 +384,65 @@ td {
   .post-feed--comments-link-button__width {
     margin-left: 0;
   }
+
+  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+    margin: .07vw 0;
+  }
+
+  #profile-short-details-text {
+    font-size: 7px;
+    margin: 3px 0 0 7px;
+  }
+
+  .list-group-item {
+    font-size: .6em;
+    padding: .3rem .7rem;
+  }
+
+  .post-feed--post-text-__width {
+    width: 66%;
+    margin: 0px 7px;
+  }
+
+  .lead {
+    font-size: 0.65rem;
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+    font-size: 9px;
+    padding: 2px 2px 0 4px;
+  }
 }
 
 @media only screen and (min-width: 425px) and (max-width: 500px) {
+  #profile-item-skillset-padding {
+    padding-right: 7%;
+  }
+  
   .list-group-item {
     font-size: .6em;
   }
 
-  .profileCurrentPosition {
-    font-size: .55em;
+  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+    margin: .15vw 0;
   }
 
-  .profileLocation {
-    font-size: .55em;
+  #profile-short-details-text {
+    font-size: 9px;
+    margin: 5px 0 0 7px;
   }
-}
-
-@media only screen and (min-width: 501px) and (max-width: 768px) {
-  .list-group-item {
-    font-size: .8em;
-  }
-
-  .profileCurrentPosition {
-    font-size: .8em;
+  
+  .post-feed--post-text-__width {
+    width: 69.5%;
   }
 
-  .profileLocation {
-    font-size: .8em;
+  .lead {
+    font-size: 0.7rem;
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+    font-size: 9px;
+    padding: 5px 2px 0 5px;
   }
 }
 
@@ -371,43 +452,55 @@ td {
     padding-right: 7%;
   }
 
-  .post-feed--comments-link-button__width {
-    margin-right: 17px;
-    margin-left: 10px;
+  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+    margin: .1vw 0;
+  }
+
+  #profile-short-details-text {
+    font-size: 8px;
+    margin: 2px 0 0 7px;
   }
 
   .list-group-item {
-    font-size: .5em;
+    font-size: .6em;
+    padding: .3rem .7rem;
   }
 
-  .profileCurrentPosition {
-    font-size: .4em;
+  .lead {
+    font-size: .65rem;
   }
 
-  .profileLocation {
-    font-size: .4em;
+  .post-feed--post-text-__width {
+    width: 66%;
   }
 
-  #users-profile-name {
-    font-size: .5rem;
-  }
-}
-
-@media only screen and (min-width: 426px) and (max-width: 500px) {
-  #profile-item-skillset-padding {
-    padding-right: 7%;
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+    font-size: 9px;
+    padding: 2px 2px 5px 4px;
   }
 }
 
 @media only screen and (min-width: 376px) and (max-width: 575px) {
-  .table-item-xs {
+  .table-item-sm {
     font-size: 0.9em;
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  .post-feed--delete-comment-button__float {
+    padding: 1.5px 7px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .post-feed--delete-comment-button__float {
+    padding: 0px 5.5px;
   }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   #main-navbar {
-    font-size: .9rem;
+    font-size: .85rem;
   }
 
   #dashboard-nav-link {
@@ -426,34 +519,120 @@ td {
     vertical-align: bottom;
     margin-right: 15px;
   }
+
+  .post-feed--post-text-__width {
+    width: 73%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .md-container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
+    max-width: 720px;
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+    font-size: 12px;
+  }
+
+  #delete-button-text {
+    display: none;
+  }
+
+  #tableCellDeleteContainer {
+    width: 7%;
+    max-width: 7%;
+    flex: 0 0 7%;
+    text-align: center;
+  }
+
+  .dashboard-content-heading {
+    padding: 19px 0 0 2vw;
+  }
+
+  .dashboard-content-container {
+    border-radius: 5px;
+    margin-bottom: 10vh;
+  }
+
+  .deleteDashboardContent {
+    border-radius: 40px;
+    margin-bottom: 0px;
+  }
+
+  .table-item-md {
+    -webkit-box-flex: 0;
+    flex: 0 0 31%;
+    max-width: 31%;
+  }
+
+  #table-header-filler-item {
+    width: 7%;
+    max-width: 7%;
+    flex: 0 0 7%;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .post-feed--post-like-button__width {
-    width: 8%;
-  }
-  
-  .post-feed--post-unlike-button__width-margin {
-    margin-left: 25px;
-    width: 8%;
+  .post-feed--comments-link-button__width {
+    width: 100%;
   }
 
-  .post-feed--comments-link-button__width {
-    width: 67%;
-    margin-left: 25px;
+  #profile-short-details-text {
+    margin: -5px 0 0 13px;
+  }
+
+  #users-profile-name, .profileCurrentPosition, .profileLocation {
+    margin: 1vw 0;
+  }
+
+  #posters-profile-name {
+    margin-top: 1vw;
+  }
+
+  .profile-short-details-text {
+    font-size: 13px;
   }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .md-container {
+    max-width: 960px;
+  }
+
   .post-feed--comments-link-button__width {
-    width: 78%;
-    margin-left: 25px;
+    width: 100%;
+  }
+
+  #users-profile-name, .profileCurrentPosition, .profileLocation {
+    margin: 1.5vw 0;
+  }
+
+  #posters-profile-name {
+    margin-top: 1.5vw;
   }
 }
 
 @media only screen and (min-width: 1200px) {
+  .md-container {
+    max-width: 1140px;
+  }
+
   .post-feed--comments-link-button__width {
-    width: 79.5%;
-    margin-left: 25px;
+    width: 100%;
+  }
+
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+    margin-bottom: -8px;
+    margin-top: -5px;
   }
 }
