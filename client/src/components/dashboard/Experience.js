@@ -13,9 +13,9 @@ class Experience extends Component {
   render() {
     const experience = this.props.experience.map((exp, i) => (
       <tr className='row' key={exp._id}>
-        <td className='col-3 table-item-xs'> {exp.company} </td>
-        <td className='col-3 table-item-xs'> {exp.title} </td>
-        <td className='col-3 table-item-xs'>
+        <td className='col-4 table-item-sm table-item-md'> {exp.company} </td>
+        <td className='col-4 table-item-sm table-item-md'> {exp.title} </td>
+        <td className='col-3 table-item-sm table-item-md'>
           <Moment format="DD/MM/YYYY">{exp.from}</Moment> -&nbsp;
           {exp.to === null ? (
             'Now'
@@ -25,12 +25,11 @@ class Experience extends Component {
         </td>
         <td id='tableCellDeleteContainer'>
           <button
-            className="btn-sm btn-danger deleteDashboardContent"
             data-toggle="modal"
             data-target={`#deleteExperienceModal-${i+1}`}
-            className="btn-sm btn-danger deleteDashboardContent"
+            className="btn-danger deleteDashboardContent"
           >
-            Delete
+            <i id="delete-button-icon" class="fas fa-times"></i>
           </button>
           <ConfirmDeleteModal onDelete={this.onDeleteExperience} modalId={`deleteExperienceModal-${i+1}`} id={exp._id} modalTitle='Delete Experience' modalBody='Are you sure you want to delete this Experience? This cannot be undone.' />
         </td>
@@ -38,14 +37,15 @@ class Experience extends Component {
     ));
 
     return (
-      <div>
-        <h4 className="mb-4">Experience</h4>
-        <table className="table">
+      <div className="dashboard-content-container bg-light">
+        <h4 className="mb-4" className="dashboard-content-heading">Experience</h4>
+        <table className="table" id="dashboard-content-table">
           <thead>
             <tr className='row'>
-              <th className="col-3 table-item-xs">Company</th>
-              <th className="col-3 table-item-xs">Title</th>
-              <th className="col-3 table-item-xs">Years</th>
+              <th className="col-4 table-item-sm table-item-md">Company</th>
+              <th className="col-4 table-item-sm table-item-md">Title</th>
+              <th className="col-3 table-item-sm table-item-md">Years</th>
+              <th id="table-header-filler-item"></th>
             </tr>
           </thead>
           <tbody>{experience}</tbody>

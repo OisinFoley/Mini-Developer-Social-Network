@@ -29,7 +29,7 @@ class Post extends Component {
 
     return (
       <div className="post">
-        <div className="container">
+        <div className="md-container">
           <div className="row">
             <div className="col-md-12">
               <BackButton route='feed' additionalClasses='mb-3' />

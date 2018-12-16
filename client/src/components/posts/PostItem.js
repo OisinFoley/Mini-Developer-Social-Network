@@ -30,36 +30,24 @@ class PostItem extends Component {
   render() {
     const { post, i, auth, showActions } = this.props;
     return (
-      <div className="card card-body mb-3 comment-feed--individual-comment-container__padding">
+      <div className="card card-body bg-light mb-3">
         <div className="row">
-          <div className="col-3 col-md-3 col-lg-2">
-            <a href="profile.html">
-              <img
-                className="rounded-circle d-block"
-                src={post.avatar}
-                alt=""
-              />
-            </a>
-            <br />
-            <p className="text-center" id='users-profile-name'>{post.name}</p>
-          </div>
-          <div className="col-md-9 col-lg-10 col-9" id='post-content-body'>
+          <span className="col-12">
             {post.user === auth.user.id ? (
-                    <button
-                      type="button"
-                      className="btn btn-danger mr-1 post-feed--delete-comment-button__float"
-                      data-toggle="modal"
-                      data-target={`#deletePostModal-${i+1}`}
-                    >
-                      <i className="fas fa-times" />
-                    </button>
-                  ) : null}
+              <button
+                type="button"
+                className="btn btn-danger mr-1 post-feed--delete-comment-button__float"
+                data-toggle="modal"
+                data-target={`#deletePostModal-${i+1}`}
+              >
+                <i className="fas fa-times" />
+              </button>
+            ) : null}
             <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deletePostModal-${i+1}`} id={post._id} modalTitle='Delete Post and its Comments' modalBody='Are you sure you want to delete this Post? This cannot be undone.' />
-            <p className="lead post-feed--post-text-__width">{post.text}</p>
-          </div>
-        </div>
-        {showActions ? (
-              <span className='post-feed--post-interaction-container__bottom'>
+            <img src={post.avatar} alt="Profile No Longer Exists" className="rounded-circle profilePhoto alt-img-font col-2" />
+            <div id="profile-short-details-text">
+              <p id="posters-profile-name">{post.name}</p>
+              <span>
                 <button
                   onClick={this.onLikeClick.bind(this, post._id)}
                   type="button"
@@ -79,11 +67,24 @@ class PostItem extends Component {
                 >
                   <i className="text-secondary fas fa-thumbs-down fa-thumbs-general" />
                 </button>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1 post-feed--comments-link-button__width">
-                  Comments
-                </Link>
               </span>
-            ) : null}
+            </div>
+            <p className="lead post-feed--post-text-__width">{post.text}</p>
+          </span>
+          <div className="col-10 offset-1" id='post-content-body'>
+          </div>
+        </div>
+
+        {showActions ? (
+          <div id="post-likes-wrapper">
+            <span className='post-feed--post-interaction-container__bottom'>
+              <Link to={`/post/${post._id}`} className="btn btn-info post-feed--comments-link-button__width">
+                Comments
+              </Link>
+            </span>
+          </div>
+          ) : null}
+          
       </div>
     );
   }
