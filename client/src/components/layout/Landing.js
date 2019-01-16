@@ -18,15 +18,15 @@ class Landing extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
-                <h1 className="mb-4" id="Landing-Title">Developer Connector</h1>
-                <p className="lead">
-                  Create a developer profile, make posts about topics to facilitate discussions
+                <h1 className="mb-4" id="landing-title">Developer Connector</h1>
+                <p className="lead" id="landing-subtitle">
+                  Learn about fellow developers, discuss today's programming issues
                 </p>
                 <hr />
-                <Link to="/register" className="btn btn-lg btn-info mr-2" id="btnSignupLink">
+                <Link to="/register" className="btn btn-lg btn-info mr-2 landing__btn--animated" id="btnSignupLink">
                   Sign Up
                 </Link>
-                <Link to="/login" className="btn btn-lg btn-light" id="btnLoginLink">
+                <Link to="/login" className="btn btn-lg btn-light landing__btn--animated" id="btnLoginLink">
                   Login
                 </Link>
               </div>
