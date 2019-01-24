@@ -1,5 +1,5 @@
 html {
-  font-size: 62.5%;
+  font-size: 100%;
 }
 
 @keyframes moveInLeft {
@@ -75,10 +75,6 @@ img {
   box-shadow: 0 .5rem 1rem rgba(212, 201, 201, 0.2);
 }
 
-#post-content-body {
-  padding-right: 0px;
-}
-
 #hide-like-btn {
   visibility: hidden;
 }
@@ -98,7 +94,6 @@ td {
 
 .btn-sm {
   border-radius: .25rem;
-  /* margin-top: -4px; */
   margin-top: -.4rem;
 }
 
@@ -115,16 +110,11 @@ td {
 }
 
 .navbar-user-icon {
-  /* width: 25px; */
-  width: 2.5rem;
-
-  /* margin-right: 5px; */
-  margin-right: .5rem;
+  width: 25px;
+  margin-right: 1.5vw;
 }
 
 .spinner {
-  /* width: 200px; */
-  /* width: 20rem; */
   width: 15vw;
 
   margin: auto;
@@ -136,19 +126,19 @@ td {
 }
 
 hr {
-  width: 95vw;
+  width: 95%;
 }
 
 .dashboard-heading {
-  /* margin-left: -10px; */
+  margin-left: -10px;
+}
 
-  margin-left: -1rem;
+.table {
+  margin-bottom: 0rem;
 }
 
 .dashboard-content {
-  /* margin: 0px -7px; */
-
-  margin: 0 -.7rem;
+  margin: 0px -7px;
 }
 
 .deleteDashboardContent {
@@ -156,7 +146,6 @@ hr {
 }
 
 #table-header-filler-item {
-  /* max-width: 10%; */
   max-width: 10%;
 
   flex: 0 0 10%;
@@ -169,11 +158,8 @@ hr {
   background-size: cover;
   background-position: center;
   height: 100vh;
-  /* margin-top: -24px; */
-  margin-top: -2.4rem;
-
-  /* margin-bottom: -50px; */
-  margin-bottom: -5rem;
+  margin-top: -4vh;
+  margin-bottom: -7.5vh;
 }
 
 .landing-inner {
@@ -195,13 +181,14 @@ hr {
   opacity: 0.9;
 }
 
-.latest-profiles-img {
+/*  doesn't seem to be in use  */
+/* .latest-profiles-img { */
   /* width: 40px; */
-  width: 4rem;
+  /* width: 4rem; */
 
   /* height: 40px; */
-  height: 4rem;
-}
+  /* height: 4rem; */
+/* } */
 
 .form-control::placeholder {
   color: #bbb !important;
@@ -209,7 +196,7 @@ hr {
 
 .edit-profile--optional-label {
   /* margin: 0px 10px; */
-  margin: 0 1rem;
+  margin: 0 2.5vw;
 }
 
 .edit-profile--social-icon-wrapper {
@@ -235,7 +222,7 @@ hr {
 .post-feed--post-interaction-container__bottom {
   display: flex;
   /* margin: 25px auto; */
-  margin: 2.5rem auto;
+  margin: 4.5vh auto;
 
   width: 83%;
 }
@@ -247,7 +234,9 @@ hr {
 .post-feed--post-text-__width {
   width: 75%;
   /* margin: 0px 13px; */
-  margin: 0 1.3rem;
+  margin: 0px 7px;
+
+  /* margin: 0 1.3rem; */
 
   float: left;
 }
@@ -261,13 +250,13 @@ hr {
 }
 
 #post-like-counter {
-  /* margin-left: 1.5px; */
-  margin-left: .15rem;
+  margin-left: 1.5px;
+  /* margin-left: .15rem; */
 }
 
 .fa-thumbs-up {
-  /* margin-left: -6px; */
-  margin-left: -.6rem;
+  margin-left: -6px;
+  /* margin-left: -.6rem; */
 }
 
 .col-2, .col-8, .col-12 {
@@ -275,8 +264,8 @@ hr {
 }
 
 #profile-short-details-text {
-  /* margin: 0px 0 0 13px; */
-  margin: 0 0 0 1.3rem;
+  margin: 0 0 0 13px;
+  /* margin: 0 0 0 1.3rem; */
 
   float: left;
   width: 70%
@@ -291,13 +280,13 @@ hr {
 }
 
 #post-likes-wrapper {
-  /* margin: 20px 0 0 0px; */
-  margin: 2rem 0 0 0;
+  margin: 20px 0 0 0px;
+  /* margin: 2vh 0 0 0; */
 }
 
 #dashboard-content-table {
-  width: 97%;
-  margin: 0px 1.5%;
+  /* width: 97%;
+  margin: 0px 1.5%; */
 }
 
 .dashboard-content-container {
@@ -306,6 +295,10 @@ hr {
 
 .profile-form-container {
   padding: 1.25rem;
+}
+
+#github-info-container {
+  padding: 0 15px;
 }
 
 @media only screen and (max-width: 450px) {
@@ -340,11 +333,12 @@ hr {
 
 @media only screen and (min-width: 500px) and (max-width: 767px) {
   #profile-short-details-text {
-    /* margin: 5px 0 0 7px; */
-    margin: .5rem 0 0 .7rem;
+    margin: 5px 0 0 7px;
+    /* margin: .5rem 0 0 .7rem; */
 
     /* font-size: 11px; */
-    font-size: 1.1rem;
+    /* font-size: 1.1rem; */
+    font-size: .6875rem;
   }
 
   #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
@@ -356,11 +350,11 @@ hr {
   }
 
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
-    /* font-size: 10px; */
-    font-size: 1rem;
+    font-size: 10px;
+    /* font-size: 1rem; */
 
-    /* padding: 5px 2px 0 8px; */
-    padding: .5rem .2rem 0 .8rem;
+    padding: 3px 5px 0px 5px;
+    /* padding: .5rem .2rem 0 .8rem; */
   }
 }
 
@@ -400,18 +394,22 @@ hr {
 
 @media only screen and (max-width: 767px) {
   .form-text {
-    /* font-size: 80%; */
+    font-size: 80%;
 
     /* this brings the old default of 16 down to 12.8 - i.e. 80% */
-    font-size: 1.28rem;
+    /* font-size: 1.28rem; */
 
   }
 
   .post-feed--post-interaction-container__bottom {
     display: flex;
-    /* margin: 25px auto; */
+    margin: 25px auto;
 
-    margin: 2.5rem auto;
+    /* margin: 2.5rem auto; */
+
+    margin: 4.5vh auto;
+
+    /* margin: 5vh auto; */
   }
 
   .fa-thumbs-general {
@@ -419,9 +417,9 @@ hr {
   }
 
   .fa-thumbs-up {
-    /* margin-left: -3px; */
+    margin-left: -3px;
 
-    margin-left: -.3rem;
+    /* margin-left: -.3rem; */
   }
 
   .post-feed--comments-link-button__width {
@@ -429,7 +427,7 @@ hr {
     margin-top: 0px;
     /* height: 30px; */
 
-    height: 3rem;
+    height: 5vh;
 
     text-align: center;
   }
@@ -444,11 +442,12 @@ hr {
   }
 
   .dashboard-content-container {
-    /* border-radius: 5px; */
-
-    border-radius: .5rem;
+    border-radius: 5px;
 
     margin-bottom: 10vh;
+
+    /*  NEW  */
+    padding: 2vh 1.5vw;
   }
 
   .dashboardWelcomeLabel, .dashboard-heading {
@@ -458,16 +457,18 @@ hr {
 
   .btnDeleteAccount {
     width: 94%;
-    /* margin-left: 12px; */
+    margin-left: 12px;
 
-    margin-left: 1.2rem;
+    /* margin-left: 1.2rem; */
   }
 
   #tableCellDeleteContainer {
     padding: 0px;
     /* margin-top: 15px; */
 
-    margin-top: 1.5rem;
+    /* margin-top: 1.5rem; */
+
+    margin-top: 1.5vh;
 
     margin-left: 0;
 
@@ -477,8 +478,7 @@ hr {
   }
 
   .deleteDashboardContent {
-    /* border-radius: 40px; */
-    border-radius: 4rem;
+    border-radius: 40px;
 
     margin-bottom: 0px;
   }
@@ -493,7 +493,8 @@ hr {
     text-align: center;
     /* padding: 15px 0px 5px 0; */
 
-    padding: 1.5rem 0px .5rem 0;
+    /* padding: 1.5rem 0px .5rem 0; */
+    margin-top: .5rem;
   }
 
   .profileActions {
@@ -524,10 +525,11 @@ hr {
 
   #profile-short-details-text {
     /* font-size: 7px; */
-    font-size: .7rem;
+    /* font-size: .7rem; */
+    font-size: .4375rem;
 
     /* margin: 3px 0 0 7px; */
-    margin: .3rem 0 0 .7rem;
+    margin: .4vh 0 0 .7vw;
   }
 
   .list-group-item {
@@ -539,7 +541,7 @@ hr {
     width: 66%;
     /* margin: 0px 7px; */
 
-    margin: 0px .7rem;
+    margin: 0px .8vw;
   }
 
   .lead {
@@ -547,12 +549,17 @@ hr {
   }
 
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
-    /* font-size: 9px; */
-    font-size: .9rem;
+    font-size: 9px;
+    /* font-size: .9rem; */
 
     /* padding: 2px 2px 0 4px; */
 
     padding: .2rem .2rem 0 .4rem;
+  }
+
+  .post-feed--post-unlike-button__width-margin {
+    font-size: 9px;
+    padding: .2rem .4rem 0 .4rem;
   }
 }
 
@@ -571,10 +578,13 @@ hr {
 
   #profile-short-details-text {
     /* font-size: 9px; */
-    font-size: .9rem;
+    /* font-size: .9rem; */
+    font-size: .5625rem;
 
     /* margin: 5px 0 0 7px; */
-    margin: .5rem 0 0 .7rem;
+    /* margin: .5rem 0 0 .7rem; */
+
+    margin: .8vh 0 0 1.6vw;
   }
   
   .post-feed--post-text-__width {
@@ -587,10 +597,14 @@ hr {
 
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     /* font-size: 9px; */
-    font-size: .9rem;
+    /* font-size: .9rem; */
+
+    font-size: .5625rem;
 
     /* padding: 5px 2px 0 5px; */
-    padding: .5rem .2rem 0 .5rem;
+    /* padding: .5rem .2rem 0 .5rem; */
+
+    padding: 3px 5px 0px 5px;
   }
 }
 
@@ -608,8 +622,11 @@ hr {
     /* font-size: 8px; */
     /* margin: 2px 0 0 7px; */
 
-    font-size: .8rem;
-    margin: .2rem 0 0 .7rem;
+    /* font-size: .8rem; */
+    font-size: .5rem;
+    /* margin: .2rem 0 0 .7rem; */
+
+    margin: 0.5vh 0 0 1.5vw;
   }
 
   .list-group-item {
@@ -626,11 +643,11 @@ hr {
   }
 
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
-    /* font-size: 9px;
-    padding: 2px 2px 5px 4px; */
+    font-size: 9px;
+    padding: 4px 4px 2px 6px;
 
-    font-size: .9rem;
-    padding: .2rem .2rem .5rem .4rem;
+    /* font-size: .9rem; */
+    /* padding: .2rem .2rem .5rem .4rem; */
   }
 }
 
@@ -642,17 +659,17 @@ hr {
 
 @media only screen and (min-width: 576px) {
   .post-feed--delete-comment-button__float {
-    /* padding: 1.5px 7px; */
+    padding: 1.5px 7px;
 
-    padding: .15rem .7rem;
+    /* padding: .15rem .7rem; */
   }
 }
 
 @media only screen and (max-width: 575px) {
   .post-feed--delete-comment-button__float {
-    /* padding: 0px 5.5px; */
+    padding: 0px 5.5px;
 
-    padding: 0px .55rem;
+    /* padding: 0px .55rem; */
   }
 }
 
@@ -660,31 +677,38 @@ hr {
   #main-navbar {
     font-size: .85rem;
   }
-
-  #dashboard-nav-link {
+  
+  #developers-nav-link {
     /* margin-top: 5px; */
 
-    margin-top: .5rem;
+    /* margin-top: .5rem; */
 
+    margin-top: 1vh;
   }
 
   .posts-dashboard-link {
     /* margin-top: 7px; */
 
-    margin-top: .7rem;
+    /* margin-top: .7rem; */
+
+    margin-top: 1vh;
   }
 
   #navbar-logout-list-item {
     /* margin-top: 4px; */
 
-    margin-top: .4rem;
+    /* margin-top: .4rem; */
+
+    margin-top: .15vh;
   }
 
   .navbar-user-icon {
     vertical-align: bottom;
     /* margin-right: 15px; */
 
-    margin-right: 1.5rem;
+    /* margin-right: 1.5rem; */
+
+    margin-right: 1.5vw;
   }
 
   .post-feed--post-text-__width {
@@ -698,8 +722,11 @@ hr {
     /* padding-right: 15px;
     padding-left: 15px; */
 
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
+    /* padding-right: 1.5rem;
+    padding-left: 1.5rem; */
+
+    padding-right: 1.5vw;
+    padding-left: 1.5vw;
 
     margin-right: auto;
     margin-left: auto;
@@ -707,10 +734,20 @@ hr {
     max-width: 720px;
   }
 
+  .post-feed--post-text-__width {
+    margin: 0px 14px;
+  }
+
+  .navbar-collapse {
+    margin-top: 3px;
+  }
+
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     /* font-size: 12px; */
 
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
+
+    font-size: .75rem;
   }
 
   #delete-button-text {
@@ -727,21 +764,26 @@ hr {
   .dashboard-content-heading {
     /* padding: 19px 0 0 2vw; */
 
-    padding: 1.9rem 0 0 2vw;
+    /* padding: 1.9rem 0 0 2vw; */
+
+    margin-top: .5rem;
   }
 
   .dashboard-content-container {
-    /* border-radius: 5px; */
+    border-radius: 5px;
 
-    border-radius: .5rem;
+    /* border-radius: .5rem; */
 
     margin-bottom: 10vh;
+
+    /* NEW declaration */
+    padding: 2vh 1.5vw;
   }
 
   .deleteDashboardContent {
-    /* border-radius: 40px; */
+    border-radius: 40px;
 
-    border-radius: 4rem;
+    /* border-radius: 4rem; */
 
     margin-bottom: 0px;
   }
@@ -767,7 +809,9 @@ hr {
   #profile-short-details-text {
     /* margin: -5px 0 0 13px; */
 
-    margin: -.5rem 0 0 1.3rem;
+    /* margin: -.5rem 0 0 1.3rem; */
+
+    margin: -.3125rem 0 0 .8125rem;
   }
 
   #users-profile-name, .profileCurrentPosition, .profileLocation {
@@ -781,13 +825,11 @@ hr {
   .profile-short-details-text {
     /* font-size: 13px; */
 
-    font-size: 1.3rem;
+    /* font-size: 1.3rem; */
+
+    font-size: .8125rem;
   }
 }
-
-@media only screen and (min-width: 768px) and (max-width: 1200px) {
-}
-
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .md-container {
@@ -807,6 +849,19 @@ hr {
   }
 }
 
+/* 
+
+  update all current rem measurments to be a decimal percentage
+  of 16px,
+  many of the initial px to rem conversions were erronously calculated
+  with the thought that the rem value was 10px
+
+  once updated, when everything is neatly rendering,
+  then we can convert the rem value to 10 and convert the decimals
+  again
+
+*/
+
 @media only screen and (min-width: 1200px) {
   .md-container {
     max-width: 1140px;
@@ -820,7 +875,10 @@ hr {
     /* margin-bottom: -8px;
     margin-top: -5px; */
 
-    margin-bottom: -.8rem;
-    margin-top: -.5rem;
+    /* margin-bottom: -.8rem;
+    margin-top: -.5rem; */
+
+    margin-bottom: -.5rem;
+    margin-top: -.3125rem;
   }
 }

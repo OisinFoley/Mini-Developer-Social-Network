@@ -71,8 +71,6 @@ class PostItem extends Component {
             </div>
             <p className="lead post-feed--post-text-__width">{post.text}</p>
           </span>
-          <div className="col-10 offset-1" id='post-content-body'>
-          </div>
         </div>
 
         {showActions ? (
