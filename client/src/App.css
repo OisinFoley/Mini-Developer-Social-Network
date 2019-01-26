@@ -58,7 +58,19 @@ img {
 
 #landing-subtitle {
   animation: moveInRight 1s ease-out;
+  font-size: 1.25rem;
 }
+
+#btnSignupLink {
+  margin-left: 15%;
+  float: left;
+}
+
+#btnLoginLink {
+  margin-right: 15%;
+  float: right;
+}
+
 
 .landing__btn--animated {
   animation: moveInBottom .5s ease-out .75s;
@@ -163,8 +175,6 @@ hr {
 }
 
 .landing-inner {
-  /* padding-top: 80px; */
-
   padding-top: 8rem;
 }
 
@@ -181,21 +191,11 @@ hr {
   opacity: 0.9;
 }
 
-/*  doesn't seem to be in use  */
-/* .latest-profiles-img { */
-  /* width: 40px; */
-  /* width: 4rem; */
-
-  /* height: 40px; */
-  /* height: 4rem; */
-/* } */
-
 .form-control::placeholder {
   color: #bbb !important;
 }
 
 .edit-profile--optional-label {
-  /* margin: 0px 10px; */
   margin: 0 2.5vw;
 }
 
@@ -221,9 +221,7 @@ hr {
 
 .post-feed--post-interaction-container__bottom {
   display: flex;
-  /* margin: 25px auto; */
   margin: 4.5vh auto;
-
   width: 83%;
 }
 
@@ -233,11 +231,7 @@ hr {
 
 .post-feed--post-text-__width {
   width: 75%;
-  /* margin: 0px 13px; */
   margin: 0px 7px;
-
-  /* margin: 0 1.3rem; */
-
   float: left;
 }
 
@@ -251,12 +245,10 @@ hr {
 
 #post-like-counter {
   margin-left: 1.5px;
-  /* margin-left: .15rem; */
 }
 
 .fa-thumbs-up {
   margin-left: -6px;
-  /* margin-left: -.6rem; */
 }
 
 .col-2, .col-8, .col-12 {
@@ -265,8 +257,6 @@ hr {
 
 #profile-short-details-text {
   margin: 0 0 0 13px;
-  /* margin: 0 0 0 1.3rem; */
-
   float: left;
   width: 70%
 }
@@ -281,12 +271,7 @@ hr {
 
 #post-likes-wrapper {
   margin: 20px 0 0 0px;
-  /* margin: 2vh 0 0 0; */
-}
-
-#dashboard-content-table {
-  /* width: 97%;
-  margin: 0px 1.5%; */
+  
 }
 
 .dashboard-content-container {
@@ -306,6 +291,16 @@ hr {
     font-size: 3.5em;
   }
 
+  #landing-title {
+    font-size: 2rem;
+    letter-spacing: 2.5vw;
+  }
+
+  #landing-subtitle {
+    font-size: .6rem;
+    letter-spacing: 0.15vw;
+  }
+
   #btnSignupLink, #btnLoginLink {
     padding: .375rem .75rem;
     font-size: 1em;
@@ -321,7 +316,6 @@ hr {
 
   #profile--skillset {
     overflow-y: scroll;
-    /* max-height: 250px; */
     max-height: 32vh;
   }
 
@@ -334,10 +328,6 @@ hr {
 @media only screen and (min-width: 500px) and (max-width: 767px) {
   #profile-short-details-text {
     margin: 5px 0 0 7px;
-    /* margin: .5rem 0 0 .7rem; */
-
-    /* font-size: 11px; */
-    /* font-size: 1.1rem; */
     font-size: .6875rem;
   }
 
@@ -351,10 +341,7 @@ hr {
 
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     font-size: 10px;
-    /* font-size: 1rem; */
-
     padding: 3px 5px 0px 5px;
-    /* padding: .5rem .2rem 0 .8rem; */
   }
 }
 
@@ -364,9 +351,6 @@ hr {
   }
 
   .edit-profile--social-icon-wrapper {
-    /* width: calc(5vw + 25px); */
-    
-    /* should you be VW instead of px**** */
     width: calc(5vw + 2.5rem);
   }
 
@@ -393,23 +377,28 @@ hr {
 }
 
 @media only screen and (max-width: 767px) {
+  #landing-title {
+    width: 90%;
+    margin: 0 5%;
+    letter-spacing: 3vw;
+  }
+
+  #landing-subtitle {
+    font-size: .8rem;
+    letter-spacing: 0.65vw;
+    width: 80%;
+    margin: 0 10%;
+  }
+
   .form-text {
     font-size: 80%;
-
-    /* this brings the old default of 16 down to 12.8 - i.e. 80% */
-    /* font-size: 1.28rem; */
-
   }
 
   .post-feed--post-interaction-container__bottom {
     display: flex;
     margin: 25px auto;
 
-    /* margin: 2.5rem auto; */
-
     margin: 4.5vh auto;
-
-    /* margin: 5vh auto; */
   }
 
   .fa-thumbs-general {
@@ -418,17 +407,12 @@ hr {
 
   .fa-thumbs-up {
     margin-left: -3px;
-
-    /* margin-left: -.3rem; */
   }
 
   .post-feed--comments-link-button__width {
     width: 100%;
     margin-top: 0px;
-    /* height: 30px; */
-
     height: 5vh;
-
     text-align: center;
   }
 
@@ -443,10 +427,7 @@ hr {
 
   .dashboard-content-container {
     border-radius: 5px;
-
     margin-bottom: 10vh;
-
-    /*  NEW  */
     padding: 2vh 1.5vw;
   }
 
@@ -458,16 +439,10 @@ hr {
   .btnDeleteAccount {
     width: 94%;
     margin-left: 12px;
-
-    /* margin-left: 1.2rem; */
   }
 
   #tableCellDeleteContainer {
     padding: 0px;
-    /* margin-top: 15px; */
-
-    /* margin-top: 1.5rem; */
-
     margin-top: 1.5vh;
 
     margin-left: 0;
@@ -479,7 +454,6 @@ hr {
 
   .deleteDashboardContent {
     border-radius: 40px;
-
     margin-bottom: 0px;
   }
 
@@ -491,9 +465,6 @@ hr {
 
   .dashboard-content-heading {
     text-align: center;
-    /* padding: 15px 0px 5px 0; */
-
-    /* padding: 1.5rem 0px .5rem 0; */
     margin-top: .5rem;
   }
 
@@ -524,11 +495,7 @@ hr {
   }
 
   #profile-short-details-text {
-    /* font-size: 7px; */
-    /* font-size: .7rem; */
     font-size: .4375rem;
-
-    /* margin: 3px 0 0 7px; */
     margin: .4vh 0 0 .7vw;
   }
 
@@ -539,8 +506,6 @@ hr {
 
   .post-feed--post-text-__width {
     width: 66%;
-    /* margin: 0px 7px; */
-
     margin: 0px .8vw;
   }
 
@@ -550,10 +515,6 @@ hr {
 
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     font-size: 9px;
-    /* font-size: .9rem; */
-
-    /* padding: 2px 2px 0 4px; */
-
     padding: .2rem .2rem 0 .4rem;
   }
 
@@ -577,13 +538,7 @@ hr {
   }
 
   #profile-short-details-text {
-    /* font-size: 9px; */
-    /* font-size: .9rem; */
     font-size: .5625rem;
-
-    /* margin: 5px 0 0 7px; */
-    /* margin: .5rem 0 0 .7rem; */
-
     margin: .8vh 0 0 1.6vw;
   }
   
@@ -596,14 +551,7 @@ hr {
   }
 
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
-    /* font-size: 9px; */
-    /* font-size: .9rem; */
-
     font-size: .5625rem;
-
-    /* padding: 5px 2px 0 5px; */
-    /* padding: .5rem .2rem 0 .5rem; */
-
     padding: 3px 5px 0px 5px;
   }
 }
@@ -619,13 +567,7 @@ hr {
   }
 
   #profile-short-details-text {
-    /* font-size: 8px; */
-    /* margin: 2px 0 0 7px; */
-
-    /* font-size: .8rem; */
     font-size: .5rem;
-    /* margin: .2rem 0 0 .7rem; */
-
     margin: 0.5vh 0 0 1.5vw;
   }
 
@@ -645,9 +587,6 @@ hr {
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
     font-size: 9px;
     padding: 4px 4px 2px 6px;
-
-    /* font-size: .9rem; */
-    /* padding: .2rem .2rem .5rem .4rem; */
   }
 }
 
@@ -660,16 +599,12 @@ hr {
 @media only screen and (min-width: 576px) {
   .post-feed--delete-comment-button__float {
     padding: 1.5px 7px;
-
-    /* padding: .15rem .7rem; */
   }
 }
 
 @media only screen and (max-width: 575px) {
   .post-feed--delete-comment-button__float {
     padding: 0px 5.5px;
-
-    /* padding: 0px .55rem; */
   }
 }
 
@@ -679,35 +614,19 @@ hr {
   }
   
   #developers-nav-link {
-    /* margin-top: 5px; */
-
-    /* margin-top: .5rem; */
-
     margin-top: 1vh;
   }
 
   .posts-dashboard-link {
-    /* margin-top: 7px; */
-
-    /* margin-top: .7rem; */
-
     margin-top: 1vh;
   }
 
   #navbar-logout-list-item {
-    /* margin-top: 4px; */
-
-    /* margin-top: .4rem; */
-
     margin-top: .15vh;
   }
 
   .navbar-user-icon {
     vertical-align: bottom;
-    /* margin-right: 15px; */
-
-    /* margin-right: 1.5rem; */
-
     margin-right: 1.5vw;
   }
 
@@ -719,12 +638,6 @@ hr {
 @media only screen and (min-width: 768px) {
   .md-container {
     width: 100%;
-    /* padding-right: 15px;
-    padding-left: 15px; */
-
-    /* padding-right: 1.5rem;
-    padding-left: 1.5rem; */
-
     padding-right: 1.5vw;
     padding-left: 1.5vw;
 
@@ -739,14 +652,10 @@ hr {
   }
 
   .navbar-collapse {
-    margin-top: 3px;
+    margin-top: 6px;
   }
 
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
-    /* font-size: 12px; */
-
-    /* font-size: 1.2rem; */
-
     font-size: .75rem;
   }
 
@@ -762,29 +671,17 @@ hr {
   }
 
   .dashboard-content-heading {
-    /* padding: 19px 0 0 2vw; */
-
-    /* padding: 1.9rem 0 0 2vw; */
-
     margin-top: .5rem;
   }
 
   .dashboard-content-container {
     border-radius: 5px;
-
-    /* border-radius: .5rem; */
-
     margin-bottom: 10vh;
-
-    /* NEW declaration */
     padding: 2vh 1.5vw;
   }
 
   .deleteDashboardContent {
     border-radius: 40px;
-
-    /* border-radius: 4rem; */
-
     margin-bottom: 0px;
   }
 
@@ -807,10 +704,6 @@ hr {
   }
 
   #profile-short-details-text {
-    /* margin: -5px 0 0 13px; */
-
-    /* margin: -.5rem 0 0 1.3rem; */
-
     margin: -.3125rem 0 0 .8125rem;
   }
 
@@ -823,10 +716,6 @@ hr {
   }
 
   .profile-short-details-text {
-    /* font-size: 13px; */
-
-    /* font-size: 1.3rem; */
-
     font-size: .8125rem;
   }
 }
@@ -849,19 +738,6 @@ hr {
   }
 }
 
-/* 
-
-  update all current rem measurments to be a decimal percentage
-  of 16px,
-  many of the initial px to rem conversions were erronously calculated
-  with the thought that the rem value was 10px
-
-  once updated, when everything is neatly rendering,
-  then we can convert the rem value to 10 and convert the decimals
-  again
-
-*/
-
 @media only screen and (min-width: 1200px) {
   .md-container {
     max-width: 1140px;
@@ -872,12 +748,6 @@ hr {
   }
 
   .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
-    /* margin-bottom: -8px;
-    margin-top: -5px; */
-
-    /* margin-bottom: -.8rem;
-    margin-top: -.5rem; */
-
     margin-bottom: -.5rem;
     margin-top: -.3125rem;
   }
