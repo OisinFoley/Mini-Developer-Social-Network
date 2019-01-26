@@ -17,9 +17,9 @@ class Landing extends Component {
         <div className="dark-overlay landing-inner text-light">
           <div className="container">
             <div className="row">
-              <div className="col-md-12 text-center">
+              <div className="offset-xl-2 col-xl-8 col-md-12 offset-lg-1 col-lg-10 text-center">
                 <h1 className="mb-4" id="landing-title">Developer Connector</h1>
-                <p className="lead" id="landing-subtitle">
+                <p id="landing-subtitle">
                   Learn about fellow developers, discuss today's programming issues
                 </p>
                 <hr />
