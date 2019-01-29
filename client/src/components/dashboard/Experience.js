@@ -23,7 +23,7 @@ class Experience extends Component {
             <Moment format="DD/MM/YYYY">{exp.to}</Moment>
           )}
         </td>
-        <td id='tableCellDeleteContainer'>
+        <td id='dashboard__delete-button'>
           <button
             data-toggle="modal"
             data-target={`#deleteExperienceModal-${i+1}`}

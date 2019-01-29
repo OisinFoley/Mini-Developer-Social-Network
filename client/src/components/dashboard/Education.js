@@ -23,7 +23,7 @@ class Education extends Component {
             <Moment format="DD/MM/YYYY">{edu.to}</Moment>
           )}
         </td>
-        <td id='tableCellDeleteContainer'>
+        <td id='dashboard__delete-button'>
           <button
             data-toggle="modal"
             data-target={`#deleteEducationModal-${i+1}`}
@@ -50,7 +50,7 @@ class Education extends Component {
           </thead>
           <tbody>{education}</tbody>
         </table>
-        <hr className='delete-account-hr' />
+        <hr className='delete-account__hr' />
       </div>
     );
   }
