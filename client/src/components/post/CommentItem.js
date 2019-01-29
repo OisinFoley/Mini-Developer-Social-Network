@@ -26,7 +26,7 @@ class CommentItem extends Component {
               </button>
             ) : null}
             <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deleteCommentModal-${i+1}`} id={postId} nestedId={comment._id} modalTitle='Delete Comment' modalBody='Are you sure you want to delete this Comment? This cannot be undone.' />
-            <img src={comment.avatar} alt="Profile No Longer Exists" className="rounded-circle profilePhoto alt-img-font col-2" />
+            <img src={comment.avatar} alt="Profile No Longer Exists" className="img rounded-circle img--alt-font col-2" />
             <div id="profile-short-details-text">
               <p id="posters-profile-name">{comment.name}</p>
             </div>

@@ -38,7 +38,7 @@ class Dashboard extends Component {
             <Education education={profile.education} />
             <hr/>
             <button
-              className="btn btn-danger btn-margin-spacing btnDeleteAccount"
+              className="btn btn-danger btn--margin btnDeleteAccount"
               data-toggle="modal"
               data-target={`#deleteProfileModal`}
             >

@@ -11,7 +11,7 @@ class ProfileItem extends Component {
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <span className="col-12">
-            <img src={profile.user.avatar} alt="" className="rounded-circle profilePhoto col-2 alt-img-font" />
+            <img src={profile.user.avatar} alt="" className="img rounded-circle col-2 img--alt-font" />
             <div id="profile-short-details-text">
               <p id="users-profile-name">{profile.user.name}</p>
               <p className='profileCurrentPosition'>
@@ -29,7 +29,7 @@ class ProfileItem extends Component {
           </span>
           
           <h4 className='headingSkillSet text-center' style={{width: 100 + "%"}}>Skill set</h4>
-          <div className="col-10 offset-1" id="profile-item-skillset-padding" style={{padding: 0, maxHeight: 150 + "px", overflowY: "scroll"}}>
+          <div className="col-10 offset-1" id="profile-item-skillset">
             <ul className="list-group">
               {profile.skills.slice(0, 6).map((skill, index) => (
                 <li key={index} className="list-group-item">

@@ -72,27 +72,25 @@ img {
 }
 
 
-.landing__btn--animated {
+.landing__btn {
   animation: moveInBottom .5s ease-out .75s;
   animation-fill-mode: backwards;
 }
 
-.landing__btn--animated:hover {
+.landing__btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 1rem 2rem rgba(212, 201, 201, 0.2);
 }
 
-.landing__btn--animated:active {
+.landing__btn:active {
   transform: translateY(-1px);
   box-shadow: 0 .5rem 1rem rgba(212, 201, 201, 0.2);
 }
 
-#hide-like-btn {
-  visibility: hidden;
-}
-
-#profile-item-skillset-padding {
-  padding-right: 2.5em;
+#profile-item-skillset {
+  padding: 0;
+  max-height: 150px;
+  overflow-y: scroll;
 }
 
 td {
@@ -100,7 +98,7 @@ td {
   text-overflow: ellipsis;
 }
 
-.profilePhoto {
+.img {  
   float: left;
 }
 
@@ -109,11 +107,11 @@ td {
   margin-top: -.4rem;
 }
 
-.delete-account-hr {
+.delete-account__hr {
   display: none;
 }
 
-#tableCellDeleteContainer {
+#dashboard__delete-button {
   border: 0px;
 }
 
@@ -133,7 +131,7 @@ td {
   display: block;
 }
 
-.btn-margin-spacing {
+.btn--margin {
   margin-top: 5vh;
 }
 
@@ -339,7 +337,7 @@ hr {
     font-size: 0.8rem;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
     font-size: 10px;
     padding: 3px 5px 0px 5px;
   }
@@ -441,7 +439,7 @@ hr {
     margin-left: 12px;
   }
 
-  #tableCellDeleteContainer {
+  #dashboard__delete-button {
     padding: 0px;
     margin-top: 1.5vh;
 
@@ -482,10 +480,6 @@ hr {
     font-size: 0.7em;
   }
 
-  #profile-item-skillset-padding {
-    padding-right: 0;
-  }
-
   .post-feed--comments-link-button__width {
     margin-left: 0;
   }
@@ -513,7 +507,7 @@ hr {
     font-size: 0.65rem;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
     font-size: 9px;
     padding: .2rem .2rem 0 .4rem;
   }
@@ -525,10 +519,6 @@ hr {
 }
 
 @media only screen and (min-width: 425px) and (max-width: 500px) {
-  #profile-item-skillset-padding {
-    padding-right: 7%;
-  }
-  
   .list-group-item {
     font-size: .6em;
   }
@@ -550,7 +540,7 @@ hr {
     font-size: 0.7rem;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
     font-size: .5625rem;
     padding: 3px 5px 0px 5px;
   }
@@ -558,10 +548,6 @@ hr {
 
 
 @media only screen and (min-width: 375px) and (max-width: 425px) {
-  #profile-item-skillset-padding {
-    padding-right: 7%;
-  }
-
   #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
     margin: .1vw 0;
   }
@@ -584,7 +570,7 @@ hr {
     width: 66%;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
     font-size: 9px;
     padding: 4px 4px 2px 6px;
   }
@@ -655,7 +641,7 @@ hr {
     margin-top: 6px;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .alt-img-font {
+  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
     font-size: .75rem;
   }
 
@@ -663,7 +649,7 @@ hr {
     display: none;
   }
 
-  #tableCellDeleteContainer {
+  #dashboard__delete-button {
     width: 7%;
     max-width: 7%;
     flex: 0 0 7%;

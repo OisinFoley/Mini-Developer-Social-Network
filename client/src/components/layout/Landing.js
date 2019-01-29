@@ -23,10 +23,10 @@ class Landing extends Component {
                   Learn about fellow developers, discuss today's programming issues
                 </p>
                 <hr />
-                <Link to="/register" className="btn btn-lg btn-info mr-2 landing__btn--animated" id="btnSignupLink">
+                <Link to="/register" className="btn btn-lg btn-info mr-2 landing__btn" id="btnSignupLink">
                   Sign Up
                 </Link>
-                <Link to="/login" className="btn btn-lg btn-light landing__btn--animated" id="btnLoginLink">
+                <Link to="/login" className="btn btn-lg btn-light landing__btn" id="btnLoginLink">
                   Login
                 </Link>
               </div>
