@@ -29,7 +29,7 @@ class Dashboard extends Component {
     } else {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
-          <div className="dashboard-content">
+          <div className="dashboard__container">
             <p className="lead text-muted dashboardWelcomeLabel">
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
