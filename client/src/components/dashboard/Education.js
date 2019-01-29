@@ -27,7 +27,7 @@ class Education extends Component {
           <button
             data-toggle="modal"
             data-target={`#deleteEducationModal-${i+1}`}
-            className="btn-danger deleteDashboardContent"
+            className="btn-danger dashboard__btn-delete"
           >
             <i id="delete-button-icon" class="fas fa-times"></i>
           </button>
@@ -37,9 +37,9 @@ class Education extends Component {
     ));
 
     return (
-      <div className="dashboard-content-container bg-light">
-        <h4 className="mb-4" className="dashboard-content-heading">Education</h4>
-        <table className="table" id="dashboard-content-table">
+      <div className="dashboard__content-container bg-light">
+        <h4 className="mb-4" className="dashboard__content-heading">Education</h4>
+        <table className="table" id="dashboard__content-table">
           <thead>
             <tr className='row'>
               <th className="col-4 table-item-sm table-item-md">School</th>

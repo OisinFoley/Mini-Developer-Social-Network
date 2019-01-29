@@ -147,11 +147,11 @@ hr {
   margin-bottom: 0rem;
 }
 
-.dashboard-content {
+.dashboard__container {
   margin: 0px -7px;
 }
 
-.deleteDashboardContent {
+.dashboard__btn-delete {
   cursor: pointer;
 }
 
@@ -272,7 +272,7 @@ hr {
   
 }
 
-.dashboard-content-container {
+.dashboard__content-container {
   border: 1px solid rgba(0,0,0,.125);
 }
 
@@ -317,7 +317,7 @@ hr {
     max-height: 32vh;
   }
 
-  #dashboard-content-table {
+  #dashboard__content-table {
     width: 98%;
     margin: 0px 1%;
   }
@@ -423,7 +423,7 @@ hr {
     font-size: .875rem;
   }
 
-  .dashboard-content-container {
+  .dashboard__content-container {
     border-radius: 5px;
     margin-bottom: 10vh;
     padding: 2vh 1.5vw;
@@ -450,7 +450,7 @@ hr {
     text-align: center;
   }
 
-  .deleteDashboardContent {
+  .dashboard__btn-delete {
     border-radius: 40px;
     margin-bottom: 0px;
   }
@@ -461,7 +461,7 @@ hr {
     text-align: center;
   }
 
-  .dashboard-content-heading {
+  .dashboard__content-heading {
     text-align: center;
     margin-top: .5rem;
   }
@@ -656,17 +656,17 @@ hr {
     text-align: center;
   }
 
-  .dashboard-content-heading {
+  .dashboard__content-heading {
     margin-top: .5rem;
   }
 
-  .dashboard-content-container {
+  .dashboard__content-container {
     border-radius: 5px;
     margin-bottom: 10vh;
     padding: 2vh 1.5vw;
   }
 
-  .deleteDashboardContent {
+  .dashboard__btn-delete {
     border-radius: 40px;
     margin-bottom: 0px;
   }
