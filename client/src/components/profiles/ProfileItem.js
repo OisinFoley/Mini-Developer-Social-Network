@@ -39,7 +39,7 @@ class ProfileItem extends Component {
             </ul>
           </div>
         </div>
-        <span className='post-feed--post-interaction-container__bottom'>
+        <span className='posts-profiles-feed__feed-item-link-span'>
           <Link to={`/profile/${profile.handle}`} className="btn btn-info post-feed--comments-link-button__width">
             View Full Profile
           </Link>

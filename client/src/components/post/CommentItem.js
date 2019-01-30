@@ -18,7 +18,7 @@ class CommentItem extends Component {
             {comment.user === auth.user.id ? (
               <button
                 type="button"
-                className="btn btn-danger mr-1 post-feed--delete-comment-button__float"
+                className="btn btn-danger mr-1 posts-comments-feed__delete-item-button"
                 data-toggle="modal"
                 data-target={`#deleteCommentModal-${i+1}`}
               >
