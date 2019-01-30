@@ -278,7 +278,7 @@ class EditProfile extends Component {
                     info="Tell us a little about yourself"
                   />
 
-                  <div className="mb-3 edit-profile--optional-label__centering-wrapper">
+                  <div className="mb-3 edit-profile__optional-btn">
                     <button
                       type="button"
                       onClick={() => {
@@ -290,7 +290,7 @@ class EditProfile extends Component {
                     >
                       Add Social Network Links
                     </button>
-                    <span className="text-muted edit-profile--optional-label">Optional</span>
+                    <span className="text-muted edit-profile__span--optional-label">Optional</span>
                   </div>
                   {socialInputs}
                   <input

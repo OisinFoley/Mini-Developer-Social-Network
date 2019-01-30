@@ -36,7 +36,7 @@ class PostItem extends Component {
             {post.user === auth.user.id ? (
               <button
                 type="button"
-                className="btn btn-danger mr-1 post-feed--delete-comment-button__float"
+                className="btn btn-danger mr-1 posts-comments-feed__delete-item-button"
                 data-toggle="modal"
                 data-target={`#deletePostModal-${i+1}`}
               >
@@ -75,7 +75,7 @@ class PostItem extends Component {
 
         {showActions ? (
           <div id="post-likes-wrapper">
-            <span className='post-feed--post-interaction-container__bottom'>
+            <span className='posts-profiles-feed__feed-item-link-span'>
               <Link to={`/post/${post._id}`} className="btn btn-info post-feed--comments-link-button__width">
                 Comments
               </Link>

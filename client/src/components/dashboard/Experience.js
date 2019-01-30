@@ -45,7 +45,7 @@ class Experience extends Component {
               <th className="col-4 table-item-sm table-item-md">Company</th>
               <th className="col-4 table-item-sm table-item-md">Title</th>
               <th className="col-3 table-item-sm table-item-md">Years</th>
-              <th id="table-header-filler-item"></th>
+              <th id="dashboard__table-filler-cell"></th>
             </tr>
           </thead>
           <tbody>{experience}</tbody>
