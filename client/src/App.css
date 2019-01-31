@@ -50,23 +50,23 @@ img {
   width: 100%;
 }
 
-#landing-title {
+#landing__title {
   font-size: 3rem;
   letter-spacing: .5rem;
   animation: moveInLeft 1s ease-out;
 }
 
-#landing-subtitle {
+#landing__subtitle {
   animation: moveInRight 1s ease-out;
   font-size: 1.25rem;
 }
 
-#btnSignupLink {
+#landing__btn-sign-up {
   margin-left: 15%;
   float: left;
 }
 
-#btnLoginLink {
+#landing__btn-login {
   margin-right: 15%;
   float: right;
 }
@@ -119,7 +119,7 @@ td {
   margin: 0px;
 }
 
-.navbar-user-icon {
+.navbar__user-icon {
   width: 25px;
   margin-right: 1.5vw;
 }
@@ -139,7 +139,7 @@ hr {
   width: 95%;
 }
 
-.dashboard-heading {
+.dashboard__heading {
   margin-left: -10px;
 }
 
@@ -215,17 +215,17 @@ hr {
   width: 83%;
 }
 
-.post-feed--comments-link-button__width {
+.posts-profiles-feed__feed-item-link {
   width: 100%;
 }
 
-.post-feed--post-text-__width {
+.posts-comments-feed__feed-item-content-text {
   width: 75%;
   margin: 0px 7px;
   float: left;
 }
 
-.posts-comments-submit-button {
+.posts-comments__submit-button {
   width: 100%;
 }
 
@@ -233,7 +233,7 @@ hr {
   margin: 0 auto;
 }
 
-#post-like-counter {
+#posts-feed__likes-count {
   margin-left: 1.5px;
 }
 
@@ -241,38 +241,45 @@ hr {
   margin-left: -6px;
 }
 
-.col-2, .col-8, .col-12 {
+.col-2,
+.col-8,
+.col-12 {
   padding: 0;
 }
 
-#profile-short-details-text {
+#feed-generic__users-basic-details {
   margin: 0 0 0 13px;
   float: left;
   width: 70%
 }
 
-#users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+#profiles-feed__users-profile-name,
+.profiles-feed__current-position,
+.profiles-feed__current-location {
   margin: 2vw 0;
 }
 
-#posters-profile-name {
+.profile-item__heading-skillset {
+  width: 100%;
+}
+
+#feed-generic__users-profile-name {
   margin: 0;
 }
 
-#post-likes-wrapper {
-  margin: 20px 0 0 0px;
-  
+#posts-feed__feed-item-link-wrapper {
+  margin: 20px 0 0 0;
 }
 
 .dashboard__content-container {
   border: 1px solid rgba(0,0,0,.125);
 }
 
-.profile-form-container {
+.form-generic__container {
   padding: 1.25rem;
 }
 
-#github-info-container {
+#profile-github__info-container {
   padding: 0 15px;
 }
 
@@ -281,30 +288,31 @@ hr {
     font-size: 3.5em;
   }
 
-  #landing-title {
+  #landing__title {
     font-size: 2rem;
     letter-spacing: 2.5vw;
   }
 
-  #landing-subtitle {
+  #landing__subtitle {
     font-size: .6rem;
     letter-spacing: 0.15vw;
   }
 
-  #btnSignupLink, #btnLoginLink {
+  #landing__btn-sign-up,
+  #landing__btn-login {
     padding: .375rem .75rem;
     font-size: 1em;
   }
 
-  #profile--container-wrapper {
+  #profile__container-wrapper {
     text-align: center;
   }
 
-  #profile-heading {
+  #profile-header__title {
     font-size: 2.5rem;
   }
 
-  #profile--skillset {
+  #profile-about__skillset {
     overflow-y: scroll;
     max-height: 32vh;
   }
@@ -316,12 +324,15 @@ hr {
 }
 
 @media only screen and (min-width: 500px) and (max-width: 767px) {
-  #profile-short-details-text {
+  #feed-generic__users-basic-details {
     margin: 5px 0 0 7px;
     font-size: .6875rem;
   }
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+  #profiles-feed__users-profile-name,
+  .profiles-feed__current-position,
+  .profiles-feed__current-location,
+  #feed-generic__users-profile-name {
     margin: .25vw 0;
   }
 
@@ -329,14 +340,16 @@ hr {
     font-size: 0.8rem;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
+  .posts-comments-feed__like-btn,
+  .posts-comments-feed__unlike-btn,
+  .img--alt-font {
     font-size: 10px;
     padding: 3px 5px 0px 5px;
   }
 }
 
 @media only screen and (max-width: 500px) {
-  #create-profile-button {
+  #dashboard__create-profile-btn {
     width: 100%;
   }
 
@@ -344,36 +357,26 @@ hr {
     width: calc(5vw + 2.5rem);
   }
 
-  #profile-short-details-text {
+  #feed-generic__users-basic-details {
     width: 60%;
   }
 }
 
 @media only screen and (max-width: 991px) {
-  .profileImageContainer {
-    display: -webkit-box;
-    margin-bottom: 30px;
-  }
-
-  .mainProfileInfoContainer {
-    padding-top: 10px;
-  }
-
-  .headingSkillSet {
+  .profile-item__heading-skillset {
     font-size: 3.5vw;
-    width: 100%;
     margin-top: 20px;
   }
 }
 
 @media only screen and (max-width: 767px) {
-  #landing-title {
+  #landing__title {
     width: 90%;
     margin: 0 5%;
     letter-spacing: 3vw;
   }
 
-  #landing-subtitle {
+  #landing__subtitle {
     font-size: .8rem;
     letter-spacing: 0.65vw;
     width: 80%;
@@ -398,18 +401,17 @@ hr {
     margin-left: -3px;
   }
 
-  .post-feed--comments-link-button__width {
+  .posts-profiles-feed__feed-item-link {
     width: 100%;
     margin-top: 0px;
-    height: 5vh;
     text-align: center;
   }
 
-  #post-like-counter {
+  #posts-feed__likes-count {
     vertical-align: top;
   }
 
-  .post-feed--comments-link-button__width {
+  .posts-profiles-feed__feed-item-link {
     padding: .25rem .5rem;
     font-size: .875rem;
   }
@@ -420,12 +422,13 @@ hr {
     padding: 2vh 1.5vw;
   }
 
-  .dashboardWelcomeLabel, .dashboard-heading {
+  .dashboard__welcome-label,
+  .dashboard__heading {
     text-align: center;
     margin-left: 0px;
   }
 
-  .btnDeleteAccount {
+  .dashboard__delete-account-btn {
     width: 94%;
     margin-left: 12px;
   }
@@ -446,7 +449,7 @@ hr {
     margin-bottom: 0px;
   }
 
-  .table-item-sm {
+  .table-item--sm {
     max-width: 30%;
     flex: 0 0 30%;
     text-align: center;
@@ -457,29 +460,32 @@ hr {
     margin-top: .5rem;
   }
 
-  .profileActions {
+  .dashboard__profile-actions {
     display: block;
   }
 
-  .profileActions > a {
+  .dashboard__profile-actions > a {
     width: 100%;
   }
 }
 
 @media only screen and (max-width: 375px) {
-  .table-item-sm {
+  .table-item--sm {
     font-size: 0.7em;
   }
 
-  .post-feed--comments-link-button__width {
+  .posts-profiles-feed__feed-item-link {
     margin-left: 0;
   }
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+  #profiles-feed__users-profile-name,
+  .profiles-feed__current-position,
+  .profiles-feed__current-location,
+  #feed-generic__users-profile-name {
     margin: .07vw 0;
   }
 
-  #profile-short-details-text {
+  #feed-generic__users-basic-details {
     font-size: .4375rem;
     margin: .4vh 0 0 .7vw;
   }
@@ -489,7 +495,7 @@ hr {
     padding: .3rem .7rem;
   }
 
-  .post-feed--post-text-__width {
+  .posts-comments-feed__feed-item-content-text {
     width: 66%;
     margin: 0px .8vw;
   }
@@ -498,12 +504,14 @@ hr {
     font-size: 0.65rem;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
+  .posts-comments-feed__like-btn,
+  .posts-comments-feed__unlike-btn,
+  .img--alt-font {
     font-size: 9px;
     padding: .2rem .2rem 0 .4rem;
   }
 
-  .post-feed--post-unlike-button__width-margin {
+  .posts-comments-feed__unlike-btn {
     font-size: 9px;
     padding: .2rem .4rem 0 .4rem;
   }
@@ -514,16 +522,19 @@ hr {
     font-size: .6em;
   }
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+  #profiles-feed__users-profile-name,
+  .profiles-feed__current-position,
+  .profiles-feed__current-location,
+  #feed-generic__users-profile-name {
     margin: .15vw 0;
   }
 
-  #profile-short-details-text {
+  #feed-generic__users-basic-details {
     font-size: .5625rem;
     margin: .8vh 0 0 1.6vw;
   }
   
-  .post-feed--post-text-__width {
+  .posts-comments-feed__feed-item-content-text {
     width: 69.5%;
   }
 
@@ -531,7 +542,9 @@ hr {
     font-size: 0.7rem;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
+  .posts-comments-feed__like-btn,
+  .posts-comments-feed__unlike-btn,
+  .img--alt-font {
     font-size: .5625rem;
     padding: 3px 5px 0px 5px;
   }
@@ -539,11 +552,14 @@ hr {
 
 
 @media only screen and (min-width: 375px) and (max-width: 425px) {
-  #users-profile-name, .profileCurrentPosition, .profileLocation, #posters-profile-name {
+  #profiles-feed__users-profile-name,
+  .profiles-feed__current-position,
+  .profiles-feed__current-location,
+  #feed-generic__users-profile-name {
     margin: .1vw 0;
   }
 
-  #profile-short-details-text {
+  #feed-generic__users-basic-details {
     font-size: .5rem;
     margin: 0.5vh 0 0 1.5vw;
   }
@@ -557,18 +573,20 @@ hr {
     font-size: .65rem;
   }
 
-  .post-feed--post-text-__width {
+  .posts-comments-feed__feed-item-content-text {
     width: 66%;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
+  .posts-comments-feed__like-btn,
+  .posts-comments-feed__unlike-btn,
+  .img--alt-font {
     font-size: 9px;
     padding: 4px 4px 2px 6px;
   }
 }
 
 @media only screen and (min-width: 376px) and (max-width: 575px) {
-  .table-item-sm {
+  .table-item--sm {
     font-size: 0.9em;
   }
 }
@@ -586,28 +604,24 @@ hr {
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
-  #main-navbar {
+  #navbar__main-nav {
     font-size: .85rem;
   }
   
-  #developers-nav-link {
+  #navbar__generic-link {
     margin-top: 1vh;
   }
 
-  .posts-dashboard-link {
-    margin-top: 1vh;
-  }
-
-  #navbar-logout-list-item {
+  #navbar__logout-li {
     margin-top: .15vh;
   }
 
-  .navbar-user-icon {
+  .navbar__user-icon {
     vertical-align: bottom;
     margin-right: 1.5vw;
   }
 
-  .post-feed--post-text-__width {
+  .posts-comments-feed__feed-item-content-text {
     width: 73%;
   }
 }
@@ -624,7 +638,7 @@ hr {
     max-width: 720px;
   }
 
-  .post-feed--post-text-__width {
+  .posts-comments-feed__feed-item-content-text {
     margin: 0px 14px;
   }
 
@@ -632,12 +646,10 @@ hr {
     margin-top: 6px;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin, .img--alt-font {
+  .posts-comments-feed__like-btn,
+  .posts-comments-feed__unlike-btn,
+  .img--alt-font {
     font-size: .75rem;
-  }
-
-  #delete-button-text {
-    display: none;
   }
 
   #dashboard__delete-button {
@@ -676,23 +688,25 @@ hr {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .post-feed--comments-link-button__width {
+  .posts-profiles-feed__feed-item-link {
     width: 100%;
   }
 
-  #profile-short-details-text {
+  #feed-generic__users-basic-details {
     margin: -.3125rem 0 0 .8125rem;
   }
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation {
+  #profiles-feed__users-profile-name,
+  .profiles-feed__current-position,
+  .profiles-feed__current-location {
     margin: 1vw 0;
   }
 
-  #posters-profile-name {
+  #feed-generic__users-profile-name {
     margin-top: 1vw;
   }
 
-  .profile-short-details-text {
+  .feed-generic__users-basic-details {
     font-size: .8125rem;
   }
 }
@@ -702,15 +716,17 @@ hr {
     max-width: 960px;
   }
 
-  .post-feed--comments-link-button__width {
+  .posts-profiles-feed__feed-item-link {
     width: 100%;
   }
 
-  #users-profile-name, .profileCurrentPosition, .profileLocation {
+  #profiles-feed__users-profile-name,
+  .profiles-feed__current-position,
+  .profiles-feed__current-location {
     margin: 1.5vw 0;
   }
 
-  #posters-profile-name {
+  #feed-generic__users-profile-name {
     margin-top: 1.5vw;
   }
 }
@@ -720,11 +736,11 @@ hr {
     max-width: 1140px;
   }
 
-  .post-feed--comments-link-button__width {
+  .posts-profiles-feed__feed-item-link {
     width: 100%;
   }
 
-  .post-feed--post-like-button__width, .post-feed--post-unlike-button__width-margin {
+  .posts-comments-feed__like-btn,.posts-comments-feed__unlike-btn {
     margin-bottom: -.5rem;
     margin-top: -.3125rem;
   }

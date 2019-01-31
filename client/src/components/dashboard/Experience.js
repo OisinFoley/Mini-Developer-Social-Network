@@ -13,9 +13,9 @@ class Experience extends Component {
   render() {
     const experience = this.props.experience.map((exp, i) => (
       <tr className='row' key={exp._id}>
-        <td className='col-4 table-item-sm table-item-md'> {exp.company} </td>
-        <td className='col-4 table-item-sm table-item-md'> {exp.title} </td>
-        <td className='col-3 table-item-sm table-item-md'>
+        <td className='col-4 table-item--sm table-item-md'> {exp.company} </td>
+        <td className='col-4 table-item--sm table-item-md'> {exp.title} </td>
+        <td className='col-3 table-item--sm table-item-md'>
           <Moment format="DD/MM/YYYY">{exp.from}</Moment> -&nbsp;
           {exp.to === null ? (
             'Now'
@@ -42,9 +42,9 @@ class Experience extends Component {
         <table className="table" id="dashboard__content-table">
           <thead>
             <tr className='row'>
-              <th className="col-4 table-item-sm table-item-md">Company</th>
-              <th className="col-4 table-item-sm table-item-md">Title</th>
-              <th className="col-3 table-item-sm table-item-md">Years</th>
+              <th className="col-4 table-item--sm table-item-md">Company</th>
+              <th className="col-4 table-item--sm table-item-md">Title</th>
+              <th className="col-3 table-item--sm table-item-md">Years</th>
               <th id="dashboard__table-filler-cell"></th>
             </tr>
           </thead>
