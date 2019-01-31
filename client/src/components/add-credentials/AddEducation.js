@@ -73,7 +73,7 @@ class AddEducation extends Component {
                 Add academic education or coding training you've attended
               </p>
               <small className="d-block pb-3">* Required fields </small>
-              <div className="bg-light profile-form-container">
+              <div className="bg-light form-generic__container">
                 <form onSubmit={this.onSubmit}>
                   <TextFieldGroup
                     placeholder="* School"

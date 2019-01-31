@@ -73,7 +73,7 @@ class AddExperience extends Component {
                 Add a job or position you currently work at or have in the past
               </p>
               <small className="d-block pb-3">* Required fields </small>
-              <div className="bg-light profile-form-container">
+              <div className="bg-light form-generic__container">
                 <form onSubmit={this.onSubmit}>
                   <TextFieldGroup
                     placeholder="* Company"

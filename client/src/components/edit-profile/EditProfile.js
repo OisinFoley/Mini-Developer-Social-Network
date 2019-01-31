@@ -209,7 +209,7 @@ class EditProfile extends Component {
               <BackButton route='dashboard' />
               <h1 className="text-center">Edit Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
-              <div className="bg-light profile-form-container">
+              <div className="bg-light form-generic__container">
                 <form onSubmit={this.onSubmit}>
                   <TextFieldGroup
                     placeholder="* Profile Handle"

@@ -32,7 +32,7 @@ class ProfileAbout extends Component {
             <hr />
             <h3 className="text-center text-info">Skill Set</h3>
             <div className="row">
-              <div className="d-flex flex-wrap justify-content-center align-items-center" id="profile--skillset">
+              <div className="d-flex flex-wrap justify-content-center align-items-center" id="profile-about__skillset">
                 {skills}
               </div>
             </div>

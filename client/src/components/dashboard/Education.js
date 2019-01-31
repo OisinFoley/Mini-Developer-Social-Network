@@ -13,9 +13,9 @@ class Education extends Component {
   render() {
     const education = this.props.education.map((edu, i) => (
       <tr className='row' key={edu._id}>
-        <td className='col-4 table-item-sm table-item-md'> {edu.school} </td>
-        <td className='col-4 table-item-sm table-item-md'> {edu.degree} </td>
-        <td className='col-3 table-item-sm table-item-md'>
+        <td className='col-4 table-item--sm table-item-md'> {edu.school} </td>
+        <td className='col-4 table-item--sm table-item-md'> {edu.degree} </td>
+        <td className='col-3 table-item--sm table-item-md'>
           <Moment format="DD/MM/YYYY">{edu.from}</Moment> -&nbsp;
           {edu.to === null ? (
             'Now'
@@ -42,9 +42,9 @@ class Education extends Component {
         <table className="table" id="dashboard__content-table">
           <thead>
             <tr className='row'>
-              <th className="col-4 table-item-sm table-item-md">School</th>
-              <th className="col-4 table-item-sm table-item-md">Degree</th>
-              <th className="col-3 table-item-sm table-item-md">Years</th>
+              <th className="col-4 table-item--sm table-item-md">School</th>
+              <th className="col-4 table-item--sm table-item-md">Degree</th>
+              <th className="col-3 table-item--sm table-item-md">Years</th>
               <th id="dashboard__table-filler-cell"></th>
             </tr>
           </thead>
