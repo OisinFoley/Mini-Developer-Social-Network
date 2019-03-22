@@ -36,7 +36,7 @@ class PostItem extends Component {
             {post.user === auth.user.id ? (
               <button
                 type="button"
-                className="btn btn-danger mr-1 post-feed--delete-comment-button__float"
+                className="btn btn-danger mr-1 posts-comments-feed__delete-item-button"
                 data-toggle="modal"
                 data-target={`#deletePostModal-${i+1}`}
               >
@@ -44,41 +44,39 @@ class PostItem extends Component {
               </button>
             ) : null}
             <ConfirmDeleteModal onDelete={this.onDeleteClick} modalId={`deletePostModal-${i+1}`} id={post._id} modalTitle='Delete Post and its Comments' modalBody='Are you sure you want to delete this Post? This cannot be undone.' />
-            <img src={post.avatar} alt="Profile No Longer Exists" className="rounded-circle profilePhoto alt-img-font col-2" />
-            <div id="profile-short-details-text">
-              <p id="posters-profile-name">{post.name}</p>
+            <img src={post.avatar} alt="Profile No Longer Exists" className="img rounded-circle img--alt-font col-2" />
+            <div id="feed-generic__users-basic-details">
+              <p id="feed-generic__users-profile-name">{post.name}</p>
               <span>
                 <button
                   onClick={this.onLikeClick.bind(this, post._id)}
                   type="button"
-                  className="btn btn-light mr-1 post-feed--post-like-button__width"
+                  className="btn btn-light mr-1 posts-comments-feed__like-btn"
                 >
                   <i
                     className={classnames('fas fa-thumbs-up fa-thumbs-general', {
                       'text-info': this.findUserLikes(post.likes)
                     })}
                   />
-                  <span className="badge badge-light" id='post-like-counter'>{post.likes.length}</span>
+                  <span className="badge badge-light" id='posts-feed__likes-count'>{post.likes.length}</span>
                 </button>
                 <button
                   onClick={this.onUnlikeClick.bind(this, post._id)}
                   type="button"
-                  className="btn btn-light mr-1 post-feed--post-unlike-button__width-margin"
+                  className="btn btn-light mr-1 posts-comments-feed__unlike-btn"
                 >
                   <i className="text-secondary fas fa-thumbs-down fa-thumbs-general" />
                 </button>
               </span>
             </div>
-            <p className="lead post-feed--post-text-__width">{post.text}</p>
+            <p className="lead posts-comments-feed__feed-item-content-text">{post.text}</p>
           </span>
-          <div className="col-10 offset-1" id='post-content-body'>
-          </div>
         </div>
 
         {showActions ? (
-          <div id="post-likes-wrapper">
-            <span className='post-feed--post-interaction-container__bottom'>
-              <Link to={`/post/${post._id}`} className="btn btn-info post-feed--comments-link-button__width">
+          <div id="posts-feed__feed-item-link-wrapper">
+            <span className='posts-profiles-feed__feed-item-link-span'>
+              <Link to={`/post/${post._id}`} className="btn btn-info posts-profiles-feed__feed-item-link">
                 Comments
               </Link>
             </span>

@@ -62,7 +62,7 @@ class Login extends Component {
                 Sign in to your DevConnector account
                 <br />
               </p>
-              <div className="bg-light profile-form-container">
+              <div className="bg-light form-generic__container">
                 <form onSubmit={this.onSubmit}>
                   <TextFieldGroup
                     placeholder="Email Address"

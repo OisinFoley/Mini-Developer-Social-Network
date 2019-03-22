@@ -29,8 +29,8 @@ class Dashboard extends Component {
     } else {
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
-          <div className="dashboard-content">
-            <p className="lead text-muted dashboardWelcomeLabel">
+          <div className="dashboard__container">
+            <p className="lead text-muted dashboard__welcome-label">
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
             </p>
             <ProfileActions />
@@ -38,7 +38,7 @@ class Dashboard extends Component {
             <Education education={profile.education} />
             <hr/>
             <button
-              className="btn btn-danger btn-margin-spacing btnDeleteAccount"
+              className="btn btn-danger btn--margin dashboard__delete-account-btn"
               data-toggle="modal"
               data-target={`#deleteProfileModal`}
             >
@@ -51,9 +51,9 @@ class Dashboard extends Component {
         // logged in but no profile
         dashboardContent = (
           <div>
-            <p className="lead text-muted dashboardWelcomeLabel"> Welcome {user.name} </p>
+            <p className="lead text-muted dashboard__welcome-label"> Welcome {user.name} </p>
             <p>No profiles have been setup yet, add some info.</p>
-            <Link to="/create-profile" className="btn btn-info" id='create-profile-button'>
+            <Link to="/create-profile" className="btn btn-info" id='dashboard__create-profile-btn'>
               Create Profile
             </Link>
           </div>
@@ -65,7 +65,7 @@ class Dashboard extends Component {
       <div className="dashboard .md-container">
           <div className="row">
             <div className="offset-md-1 col-md-10">
-              <h1 className="dashboard-heading">Dashboard</h1>
+              <h1 className="dashboard__heading">Dashboard</h1>
               {dashboardContent}
             </div>
           </div>

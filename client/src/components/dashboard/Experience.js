@@ -13,9 +13,9 @@ class Experience extends Component {
   render() {
     const experience = this.props.experience.map((exp, i) => (
       <tr className='row' key={exp._id}>
-        <td className='col-4 table-item-sm table-item-md'> {exp.company} </td>
-        <td className='col-4 table-item-sm table-item-md'> {exp.title} </td>
-        <td className='col-3 table-item-sm table-item-md'>
+        <td className='col-4 table-item--sm table-item-md'> {exp.company} </td>
+        <td className='col-4 table-item--sm table-item-md'> {exp.title} </td>
+        <td className='col-3 table-item--sm table-item-md'>
           <Moment format="DD/MM/YYYY">{exp.from}</Moment> -&nbsp;
           {exp.to === null ? (
             'Now'
@@ -23,11 +23,11 @@ class Experience extends Component {
             <Moment format="DD/MM/YYYY">{exp.to}</Moment>
           )}
         </td>
-        <td id='tableCellDeleteContainer'>
+        <td id='dashboard__delete-button'>
           <button
             data-toggle="modal"
             data-target={`#deleteExperienceModal-${i+1}`}
-            className="btn-danger deleteDashboardContent"
+            className="btn-danger dashboard__btn-delete"
           >
             <i id="delete-button-icon" class="fas fa-times"></i>
           </button>
@@ -37,15 +37,15 @@ class Experience extends Component {
     ));
 
     return (
-      <div className="dashboard-content-container bg-light">
-        <h4 className="mb-4" className="dashboard-content-heading">Experience</h4>
-        <table className="table" id="dashboard-content-table">
+      <div className="dashboard__content-container bg-light">
+        <h4 className="mb-4" className="dashboard__content-heading">Experience</h4>
+        <table className="table" id="dashboard__content-table">
           <thead>
             <tr className='row'>
-              <th className="col-4 table-item-sm table-item-md">Company</th>
-              <th className="col-4 table-item-sm table-item-md">Title</th>
-              <th className="col-3 table-item-sm table-item-md">Years</th>
-              <th id="table-header-filler-item"></th>
+              <th className="col-4 table-item--sm table-item-md">Company</th>
+              <th className="col-4 table-item--sm table-item-md">Title</th>
+              <th className="col-3 table-item--sm table-item-md">Years</th>
+              <th id="dashboard__table-filler-cell"></th>
             </tr>
           </thead>
           <tbody>{experience}</tbody>

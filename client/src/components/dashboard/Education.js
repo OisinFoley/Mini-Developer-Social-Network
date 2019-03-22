@@ -13,9 +13,9 @@ class Education extends Component {
   render() {
     const education = this.props.education.map((edu, i) => (
       <tr className='row' key={edu._id}>
-        <td className='col-4 table-item-sm table-item-md'> {edu.school} </td>
-        <td className='col-4 table-item-sm table-item-md'> {edu.degree} </td>
-        <td className='col-3 table-item-sm table-item-md'>
+        <td className='col-4 table-item--sm table-item-md'> {edu.school} </td>
+        <td className='col-4 table-item--sm table-item-md'> {edu.degree} </td>
+        <td className='col-3 table-item--sm table-item-md'>
           <Moment format="DD/MM/YYYY">{edu.from}</Moment> -&nbsp;
           {edu.to === null ? (
             'Now'
@@ -23,11 +23,11 @@ class Education extends Component {
             <Moment format="DD/MM/YYYY">{edu.to}</Moment>
           )}
         </td>
-        <td id='tableCellDeleteContainer'>
+        <td id='dashboard__delete-button'>
           <button
             data-toggle="modal"
             data-target={`#deleteEducationModal-${i+1}`}
-            className="btn-danger deleteDashboardContent"
+            className="btn-danger dashboard__btn-delete"
           >
             <i id="delete-button-icon" class="fas fa-times"></i>
           </button>
@@ -37,20 +37,20 @@ class Education extends Component {
     ));
 
     return (
-      <div className="dashboard-content-container bg-light">
-        <h4 className="mb-4" className="dashboard-content-heading">Education</h4>
-        <table className="table" id="dashboard-content-table">
+      <div className="dashboard__content-container bg-light">
+        <h4 className="mb-4" className="dashboard__content-heading">Education</h4>
+        <table className="table" id="dashboard__content-table">
           <thead>
             <tr className='row'>
-              <th className="col-4 table-item-sm table-item-md">School</th>
-              <th className="col-4 table-item-sm table-item-md">Degree</th>
-              <th className="col-3 table-item-sm table-item-md">Years</th>
-              <th id="table-header-filler-item"></th>
+              <th className="col-4 table-item--sm table-item-md">School</th>
+              <th className="col-4 table-item--sm table-item-md">Degree</th>
+              <th className="col-3 table-item--sm table-item-md">Years</th>
+              <th id="dashboard__table-filler-cell"></th>
             </tr>
           </thead>
           <tbody>{education}</tbody>
         </table>
-        <hr className='delete-account-hr' />
+        <hr className='delete-account__hr' />
       </div>
     );
   }
