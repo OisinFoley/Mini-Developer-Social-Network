@@ -66,7 +66,7 @@ class Register extends Component {
               <p className="lead text-center">
                 Create your DevConnector account
               </p>
-              <div className="bg-light profile-form-container">
+              <div className="bg-light form-generic__container">
                 <form noValidate onSubmit={this.onSubmit}>
                   <TextFieldGroup
                     placeholder="Name"

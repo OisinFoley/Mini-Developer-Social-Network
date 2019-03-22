@@ -61,7 +61,7 @@ class CommentForm extends Component {
                   error={errors.text}
                 />
               </div>
-              <button type="submit" className="btn btn-dark posts-comments-submit-button">
+              <button type="submit" className="btn btn-dark posts-comments__submit-button">
                 Submit
               </button>
             </form>

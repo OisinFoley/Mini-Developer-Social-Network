@@ -11,16 +11,16 @@ class ProfileItem extends Component {
       <div className="card card-body bg-light mb-3">
         <div className="row">
           <span className="col-12">
-            <img src={profile.user.avatar} alt="" className="rounded-circle profilePhoto col-2" />
-            <div id="profile-short-details-text">
-              <p id="users-profile-name">{profile.user.name}</p>
-              <p className='profileCurrentPosition'>
+            <img src={profile.user.avatar} alt="" className="img rounded-circle col-2 img--alt-font" />
+            <div id="feed-generic__users-basic-details">
+              <p id="profiles-feed__users-profile-name">{profile.user.name}</p>
+              <p className='profiles-feed__current-position'>
                   {profile.status}{' '}
                   {isEmpty(profile.company) ? null : (
                     <span> at {profile.company} </span>
                   )}
               </p>
-              <p className='profileLocation'>
+              <p className='profiles-feed__current-location'>
                 {isEmpty(profile.location) ? null : (
                   <span>{profile.location}</span>
                 )}
@@ -28,8 +28,8 @@ class ProfileItem extends Component {
             </div>
           </span>
           
-          <h4 className='headingSkillSet text-center' style={{width: 100 + "%"}}>Skill set</h4>
-          <div className="col-10 offset-1" id="profile-item-skillset-padding" style={{padding: 0, maxHeight: 150 + "px", overflowY: "scroll"}}>
+          <h4 className='profile-item__heading-skillset text-center'>Skill set</h4>
+          <div className="col-10 offset-1" id="profile-item-skillset">
             <ul className="list-group">
               {profile.skills.slice(0, 6).map((skill, index) => (
                 <li key={index} className="list-group-item">
@@ -39,8 +39,8 @@ class ProfileItem extends Component {
             </ul>
           </div>
         </div>
-        <span className='post-feed--post-interaction-container__bottom'>
-          <Link to={`/profile/${profile.handle}`} className="btn btn-info post-feed--comments-link-button__width">
+        <span className='posts-profiles-feed__feed-item-link-span'>
+          <Link to={`/profile/${profile.handle}`} className="btn btn-info posts-profiles-feed__feed-item-link">
             View Full Profile
           </Link>
         </span>

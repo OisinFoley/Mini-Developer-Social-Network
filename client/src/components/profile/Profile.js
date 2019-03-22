@@ -34,7 +34,7 @@ class Profile extends Component {
     } else {
       profileContent = (
         // this id and its styling are to be temporary. texts should be styled more elegantly later
-        <div id="profile--container-wrapper">
+        <div id="profile__container-wrapper">
           <div className="row">
             <div className="col-md-6">
               <BackButton route='dashboard' additionalClasses='mb-3 float-left' />

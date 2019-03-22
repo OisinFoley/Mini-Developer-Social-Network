@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ProfileActions = () => {
   return (
-    <div className="btn-group mb-4 profileActions" role="group">
+    <div className="btn-group mb-4 dashboard__profile-actions" role="group">
       <Link to="/edit-profile" className="btn btn-light">
         <i className="fas fa-user-circle text-info mr-1" /> Edit Profile
       </Link>

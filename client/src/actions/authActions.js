@@ -4,8 +4,8 @@ import setTokenAsHeader from '../utils/setTokenAsHeader';
 import jwt_decode from 'jwt-decode';
 
 // reg user
-export const registerUser = (userData, history) => dispatch => {
-  axios
+export const registerUser = (userData, history) => async (dispatch) => {
+  await axios
     .post('/api/users/register', userData)
     .then(res => history.push('/login'))
     // if we made this axios call from within our component, we could use this.setState(etc...)
@@ -21,8 +21,8 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // login and grab token
-export const loginUser = userData => dispatch => {
-  axios
+export const loginUser = userData => async (dispatch) => {
+  await axios
     .post('/api/users/login', userData)
     .then(res => {
       // save to localStorage
