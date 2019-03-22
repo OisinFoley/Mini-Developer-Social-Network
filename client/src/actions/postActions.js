@@ -9,9 +9,9 @@ import {
   POST_LOADING
 } from './types';
 
-export const addPost = postData => dispatch => {
+export const addPost = postData => async (dispatch) => {
   dispatch(clearErrors());
-  axios
+  await axios
     .post('/api/posts', postData)
     .then(res =>
       dispatch({
@@ -27,9 +27,9 @@ export const addPost = postData => dispatch => {
     );
 };
 
-export const getPosts = () => dispatch => {
+export const getPosts = () => async (dispatch) => {
   dispatch(setPostLoading());
-  axios
+  await axios
     .get('/api/posts')
     .then(res =>
       dispatch({
@@ -45,8 +45,8 @@ export const getPosts = () => dispatch => {
     );
 };
 
-export const deletePost = id => dispatch => {
-  axios
+export const deletePost = id => async (dispatch) => {
+  await axios
     .delete(`/api/posts/${id}`)
     .then(res =>
       dispatch({
@@ -62,8 +62,8 @@ export const deletePost = id => dispatch => {
     );
 };
 
-export const addLike = id => dispatch => {
-  axios
+export const addLike = id => async (dispatch) => {
+  await axios
     .post(`/api/posts/like/${id}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
@@ -74,8 +74,8 @@ export const addLike = id => dispatch => {
     );
 };
 
-export const deleteLike = id => dispatch => {
-  axios
+export const deleteLike = id => async (dispatch) => {
+  await axios
     .post(`/api/posts/unlike/${id}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
@@ -86,9 +86,9 @@ export const deleteLike = id => dispatch => {
     );
 };
 
-export const getPost = id => dispatch => {
+export const getPost = id => async (dispatch) => {
   dispatch(setPostLoading());
-  axios
+  await axios
     .get(`/api/posts/${id}`)
     .then(res =>
       dispatch({
@@ -104,9 +104,9 @@ export const getPost = id => dispatch => {
     );
 };
 
-export const addComment = (postId, comment) => dispatch => {
+export const addComment = (postId, comment) => async (dispatch) => {
   dispatch(clearErrors());
-  axios
+  await axios
     .post(`/api/posts/comment/${postId}`, comment)
     .then(res =>
       dispatch({
@@ -122,8 +122,8 @@ export const addComment = (postId, comment) => dispatch => {
     );
 };
 
-export const deleteComment = (postId, commentId) => dispatch => {
-  axios
+export const deleteComment = (postId, commentId) => async (dispatch) => {
+  await axios
     .delete(`/api/posts/comment/${postId}/${commentId}`)
     .then(res =>
       dispatch({
