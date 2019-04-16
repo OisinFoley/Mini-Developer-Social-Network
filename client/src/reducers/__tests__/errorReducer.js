@@ -1,6 +1,10 @@
 import errorReducer from '../errorReducer';
 import { GET_ERRORS, CLEAR_ERRORS } from '../../actions/types';
 
+const testNullNotAllowedObj = {
+  nullNotAllowedError: 'id cannot be null'
+}
+
 describe('INITIAL_STATE', () => {
   test('is correct', () => {
     const action = { type: 'dummy_action' };
@@ -12,7 +16,7 @@ describe('INITIAL_STATE', () => {
 
 describe('GET_ERRORS', () => {
   test('returns the correct state', () => {
-    const action = { type: GET_ERRORS, payload: { nullNotAllowedError: 'id cannot be null' } };
+    const action = { type: GET_ERRORS, payload: testNullNotAllowedObj };
     const expectedState = { nullNotAllowedError: 'id cannot be null' };
 
     expect(errorReducer(undefined, action)).toEqual(expectedState);
