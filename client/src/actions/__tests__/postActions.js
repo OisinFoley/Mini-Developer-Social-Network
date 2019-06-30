@@ -82,7 +82,7 @@ it('fetches Posts from the PostsActions and renders them on mount', async () => 
   // // mockAxios.post.mockImplementationOnce(() =>
   //   Promise.resolve({
   //     data: {
-  //       result: ['somePosts']
+  //       result: mockPosts
   //     }
   //   })
   // );
@@ -136,23 +136,23 @@ describe("addPost", () => {
 
 
 // this is the last mock that is not working -> other delete action working because it was actually a POST tounlike endpoint
-// describe("deletePost", () => {
+describe("deletePost", () => {
 //   // the payload should be updated later to be a { success: true } object
-//   it("changes state to DELETE_POST and payload is the id of the deleted post", async () => {
-//     const store = mockStore();
+  it("changes state to DELETE_POST and payload is the id of the deleted post", async () => {
+    const store = mockStore();
 
-//     mockAxios.delete.mockImplementationOnce(() =>
-//       Promise.resolve({
-//         data: deletedPostId[0]
-//       })
-//     );
+    mockAxios.delete.mockImplementationOnce(() =>
+      Promise.resolve({
+        data: deletedPostId[0]
+      })
+    );
 
-//     await store.dispatch(deletePost('ghi789'));
-//     const actions = store.getActions();
-//     // expect(actions[0]).toEqual({type: types.DELETE_POST, payload: deletedPostId });
-//     expect(actions[0]).toEqual({type: types.DELETE_POST, payload: 'deletedPostId' });
-//   });
-// });
+    await store.dispatch(deletePost('deletedPostId'));
+    const actions = store.getActions();
+    // expect(actions[0]).toEqual({type: types.DELETE_POST, payload: deletedPostId });
+    expect(actions[0]).toEqual({type: types.DELETE_POST, payload: 'deletedPostId' });
+  });
+});
 
 describe("addLike", () => {
   it(`adds a 'like', 
@@ -207,13 +207,13 @@ describe("addComment", () => {
   });
 });
 
-// describe("deleteComment", () => {
-//   it(`deletes specified comment for given post, then changes state to GET_POST. 
-//     returned payload is updated post reflecting removed comment`, async () => {
-//     const store = mockStore();
+describe("deleteComment", () => {
+  it(`deletes specified comment for given post, then changes state to GET_POST. 
+    returned payload is updated post reflecting removed comment`, async () => {
+    const store = mockStore();
 
-//     await store.dispatch(deleteComment('def456', 'pqr789'));
-//     const actions = store.getActions();
-//     expect(actions[0]).toEqual({type: types.GET_POST, payload: mockPosts[0] });
-//   });
-// });
+    await store.dispatch(deleteComment('def456', 'pqr789'));
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({ type: types.GET_POST, payload: deletedPostId[0] });
+  });
+});

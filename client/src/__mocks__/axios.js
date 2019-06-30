@@ -27,7 +27,7 @@ export default {
         break;
     }
   }),
-  post: jest.fn((url, requestData) => {
+  post: jest.fn((url, requestData, history) => {
     switch (url) {
       case '/api/posts': // addPost()
         return Promise.resolve({ data: newPost } );
@@ -43,6 +43,11 @@ export default {
         break;
       case '/api/users/register': // registerUser()
         console.log(url);
+        console.log(`this is request data ${requestData}`);
+        // return (() => {
+        //   if ()
+        //   Promise.resolve({ data: 'fakeUser' } );
+        // }) 
         return Promise.resolve({ data: 'fakeUser' } );
         break;
       case '/api/users/login': // loginUser()

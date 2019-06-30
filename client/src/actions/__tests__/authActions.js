@@ -19,10 +19,55 @@ test("expect the value passed in to be the value returned (not putting result in
 });
 
 describe("registerUser", () => {
-  it(`registers user then pushes '/login' to history object`, async () => {
+  let mock;
+  beforeEach(() => {
+    mock = jest.spyOn(mockAxios, 'post');
+  });
+  afterEach(() => {
+    mock.mockRestore();
+  });
+
+  // it('should register the user and redirect to login', async () => {
+  //   const push = jest.fn();
+  //   const history = { push };
+  //   const dispatch = jest.fn();
+  //   // mock.mockResolvedValue();  // mock axios.post to resolve
+
+  //   await actions.registerUser('the user data', history)(dispatch);
+
+  //   expect(mock).toHaveBeenCalledWith('/api/users/register', 'the user data');  // Success!
+  //   expect(history.push).toHaveBeenCalledWith('/login');  // Success!
+  // });
+
+  // it('should not register the user and dispatch GET_ERRORS instead', async () => {
+  //   const push = jest.fn();
+  //   const history = { push };
+  //   const dispatch = jest.fn();
+  //   // mock.mockResolvedValue();  // mock axios.post to resolve
+
+  //   let result = await actions.registerUser(undefined, history)(dispatch);
+  //   console.log(`result is ${result}`);
+
+  //   // expect(actions[0]).toEqual({ type: types.GET_ERRORS });
+  //   // expect(mock).toHaveBeenCalledWith('/api/users/register', undefined, history);  // Success!
+  //   // expect(history.push).toHaveBeenCalledWith('/login');  // Success!
+  // });
+
+
+  // it(`registers user then pushes '/login' to history object`, async () => {
+  it('should not register the user and dispatch GET_ERRORS instead', async () => {
+
+
+    
     const store = mockStore();
     // const history = createMemoryHistory('/dashboard')
-    await store.dispatch(registerUser());
+    await store.dispatch(registerUser('userData', [{ name: 'todd' }] )
+      .catch(e => {
+        expect(e).toEqual({
+          type: GET_ERRORS,
+          payload: 'err.response.data'
+        })
+      }) );
     const actions = store.getActions();
 
     console.log('window.history');
@@ -30,8 +75,7 @@ describe("registerUser", () => {
 
     // grab history object
 
-    // expect(actions[0]).toEqual({type: types.POST_LOADING});
-    // expect(actions[1]).toEqual({type: types.GET_POSTS, payload: mockPosts });
+    expect(actions[0]).toEqual({ type: types.POST_LOADING });
   });
 });
 
