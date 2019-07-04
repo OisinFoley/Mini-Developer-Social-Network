@@ -17,6 +17,7 @@ import * as types from '../types';
 
 import { mockStore } from '../../test/utils/mockStore';
 import { mockPosts, newPost, deletedPostId } from '../../__mocks__/mockPosts';
+import { idCannotBeNullExceptionMessage } from '../../__mocks__/exceptionMessages';
 
 
 //  can this be put here and used repeatedly?? ---> const store = mockStore();
@@ -35,64 +36,6 @@ import { mockPosts, newPost, deletedPostId } from '../../__mocks__/mockPosts';
 // **** do we want to check status codes when we're finished??
 // **** we need to mock sending the data, and test unhappy cases / responses (i.e. - error callback)
     // for unhappy cases: wrong payload or missing ids
-
-test("expect the value passed in to be the value returned", () => {
-  const mock = jest.fn((abc) => abc);
-
-  let result = mock("foo");
-
-  expect(result).toBe("foo");
-});
-
-test("expect the value passed in to be the value returned (not putting result into var before checking 'toBe')", () => {
-  // const mock = jest.fn(() => "bar");
-
-  const mock = jest.fn((abc) => abc);
-
-  expect(mock("foo")).toBe("foo");
-
-  // expect(mock("foo")).toBe("bar");
-  // expect(mock).toHaveBeenCalledWith("foo");
-});
-
-it('fetches Posts from the PostsActions and renders them on mount', async () => {
-
-
-
-  // an explanation of what i've learned so far (took too long just to figure this out)
-  // in the axios mock, we're setting the response that'll be returned for any type of request that starts in
-    // axios.get() or axios.post()
-  // before coming to this eureka moment, we were wondering why am i getting a payload returned to me as 
-    // { data: { result: [] } }
-  // but now we know
-
-  // to clarify: GET_POSTS triggers an axios.get() type of request, and in our store below, we are dispatching getPosts(), 
-    // which is the container that wraps the await axios call in postActions
-
-  // additional note: below we can see we've used our injected mockAxios and called mockImplementationOnce(),
-    // this is a temporary override of what we defined as the substitute result in __mocks__/axios.js
-
-  // lastly, because a running test knows to look in __tests__ and __mocks__ for their respective functionality
-    // we actually don't even need to import mockAxios from '../../__mocks__/axios'; here until we want to 
-    // override the value of the get or post types of axios requests for a single function, and we can
-    // actually just do import mockAxios from 'axios';
-
-
-  // mockAxios.get.mockImplementationOnce(() =>
-  // // mockAxios.post.mockImplementationOnce(() =>
-  //   Promise.resolve({
-  //     data: {
-  //       result: mockPosts
-  //     }
-  //   })
-  // );
-
-  // this might retrun something other than [AsyncFunction] if we were to make a file called postActions in mocks, then inject it
-  // and call getPosts, (of course in the the postActions file under mocks, we would need to have a getPosts: jest.fn,
-  // like in the axios mocks file -> but we can test it later)
-  // const posts = await getPosts();
-  // console.log(posts);
-})
 
 describe('actions', () => {
   it('setPostLoading action object should be equal to expectedSetPostLoading object', () => {
@@ -164,18 +107,36 @@ describe("addLike", () => {
     expect(actions[0]).toEqual({type: types.POST_LOADING});
     expect(actions[1]).toEqual({type: types.GET_POSTS, payload: mockPosts });
   });
+
+  it(`fails, 
+    then dispatches GET_ERRORS  
+    payload includes null id exception`, async () => {
+    const store = mockStore();
+    await store.dispatch(deleteLike(null));
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({type: types.GET_ERRORS, payload: idCannotBeNullExceptionMessage });
+  });
 });
 
 describe("deleteLike", () => {
   it(`deletes a 'like', 
     then dispatches getPosts() (and the 2 state changes that come with it of POST_LOADING & GET_POSTS). 
-    finally, payload should include updated 'likes' list for the post that was acted upon`, async () => {
+    Payload should include updated 'likes' list for the post that was acted upon`, async () => {
       // update description if you dont strictly enforce having the updated like in your mocked response - see above test for more info
     const store = mockStore();
     await store.dispatch(deleteLike('def456'));
     const actions = store.getActions();
     expect(actions[0]).toEqual({type: types.POST_LOADING});
     expect(actions[1]).toEqual({type: types.GET_POSTS, payload: mockPosts });
+  });
+
+  it(`fails, 
+    then dispatches GET_ERRORS  
+    payload includes null id exception`, async () => {
+    const store = mockStore();
+    await store.dispatch(deleteLike(null));
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({type: types.GET_ERRORS, payload: idCannotBeNullExceptionMessage });
   });
 });
 
@@ -193,6 +154,16 @@ describe("getPost", () => {
     expect(actions[0]).toEqual({type: types.POST_LOADING});
     expect(actions[1]).toEqual({type: types.GET_POST, payload: mockPosts[0] });
   });
+
+  it(`fails, 
+    then dispatches GET_POSTS,
+    with empty payload`, async () => {
+    const store = mockStore();
+    await store.dispatch(getPost('nonExistentPostId'));
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({type: types.POST_LOADING });
+    expect(actions[1]).toEqual({type: types.GET_POSTS, payload: null });
+  });
 });
 
 describe("addComment", () => {
@@ -204,6 +175,16 @@ describe("addComment", () => {
     const actions = store.getActions();
     expect(actions[0]).toEqual({type: types.CLEAR_ERRORS});
     expect(actions[1]).toEqual({type: types.GET_POST, payload: mockPosts[0] });
+  });
+
+  it(`fails, 
+    then dispatches GET_POSTS,
+    with empty payload`, async () => {
+    const store = mockStore();
+    await store.dispatch(addComment('nonExistentPostId'));
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({type: types.CLEAR_ERRORS });
+    expect(actions[1]).toEqual({type: types.GET_ERRORS, payload: idCannotBeNullExceptionMessage });
   });
 });
 

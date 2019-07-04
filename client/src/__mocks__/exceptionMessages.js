@@ -1,0 +1,1 @@
+export const idCannotBeNullExceptionMessage = 'id cannot be null or undefined';

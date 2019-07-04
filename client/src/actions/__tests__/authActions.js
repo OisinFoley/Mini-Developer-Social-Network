@@ -27,74 +27,37 @@ describe("registerUser", () => {
     mock.mockRestore();
   });
 
-  // it('should register the user and redirect to login', async () => {
-  //   const push = jest.fn();
-  //   const history = { push };
-  //   const dispatch = jest.fn();
-  //   // mock.mockResolvedValue();  // mock axios.post to resolve
+  it('should register the user and redirect to login', async () => {
+    const push = jest.fn();
+    const history = { push };
+    const dispatch = jest.fn();
 
-  //   await actions.registerUser('the user data', history)(dispatch);
+    await actions.registerUser('the user data', history)(dispatch);
 
-  //   expect(mock).toHaveBeenCalledWith('/api/users/register', 'the user data');  // Success!
-  //   expect(history.push).toHaveBeenCalledWith('/login');  // Success!
-  // });
+    expect(mock).toHaveBeenCalledWith('/api/users/register', 'the user data');  // Success!
+    expect(history.push).toHaveBeenCalledWith('/login');  // Success!
+  });
 
   // it('should not register the user and dispatch GET_ERRORS instead', async () => {
-  //   const push = jest.fn();
-  //   const history = { push };
-  //   const dispatch = jest.fn();
-  //   // mock.mockResolvedValue();  // mock axios.post to resolve
-
-  //   let result = await actions.registerUser(undefined, history)(dispatch);
-  //   console.log(`result is ${result}`);
-
-  //   // expect(actions[0]).toEqual({ type: types.GET_ERRORS });
-  //   // expect(mock).toHaveBeenCalledWith('/api/users/register', undefined, history);  // Success!
-  //   // expect(history.push).toHaveBeenCalledWith('/login');  // Success!
-  // });
-
-
-  // it(`registers user then pushes '/login' to history object`, async () => {
-  it('should not register the user and dispatch GET_ERRORS instead', async () => {
 
 
     
-    const store = mockStore();
-    // const history = createMemoryHistory('/dashboard')
-    await store.dispatch(registerUser('userData', [{ name: 'todd' }] )
-      .catch(e => {
-        expect(e).toEqual({
-          type: GET_ERRORS,
-          payload: 'err.response.data'
-        })
-      }) );
-    const actions = store.getActions();
+  //   const store = mockStore();
+  //   // const history = createMemoryHistory('/dashboard')
+  //   await store.dispatch(registerUser('userData', [{ name: 'todd' }] )
+  //     .catch(e => {
+  //       expect(e).toEqual({
+  //         type: GET_ERRORS,
+  //         payload: 'err.response.data'
+  //       })
+  //     }) );
+  //   const actions = store.getActions();
 
-    console.log('window.history');
-    console.log(window.history);
+  //   console.log('window.history');
+  //   console.log(window.history);
 
-    // grab history object
+  //   // grab history object
 
-    expect(actions[0]).toEqual({ type: types.POST_LOADING });
-  });
+  //   expect(actions[0]).toEqual({ type: types.POST_LOADING });
+  // });
 });
-
-// describe("loginUser", () => {
-//   it(`logs user in then sets state to SET_CURRENT_USER, and payload contains info on logged in user`, async () => {
-//     const store = mockStore();
-//     // const history = createMemoryHistory('/dashboard')
-//     await store.dispatch(loginUser());
-//     const actions = store.getActions();
-//     expect(actions[0]).toEqual({ type: types.SET_CURRENT_USER , payload: fakeUser });
-//   });
-// });
-
-// describe("logoutUser", () => {
-//   it(`logs user out then sets state to SET_CURRENT_USER with an empty payload`, async () => {
-//     const store = mockStore();
-//     // const history = createMemoryHistory('/dashboard')
-//     await store.dispatch(logoutUser());
-//     const actions = store.getActions();
-//     expect(actions[0]).toEqual({ type: types.SET_CURRENT_USER , payload: {} });
-//   });
-// });
