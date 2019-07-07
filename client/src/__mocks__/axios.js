@@ -51,7 +51,6 @@ export default {
     }
   }),
   delete: jest.fn((url) => {
-    console.log(url);
     switch (url) {
       case '/api/posts/ghi789': // deletePost()
         return Promise.resolve({ data: deletedPostId[0] } );
