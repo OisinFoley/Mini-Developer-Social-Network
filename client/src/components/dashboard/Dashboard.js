@@ -44,7 +44,7 @@ class Dashboard extends Component {
             >
               Delete my Account
             </button>
-          <ConfirmDeleteModal onDelete={this.onDeleteProfileClick} modalId={`deleteProfileModal`} id={null} nestedId={null} modalTitle='Delete Profile' modalBody="Are you sure you want to delete your entire Profile? This cannot be undone. Your posts will remain after your profile is removed.." />
+          <ConfirmDeleteModal onDelete={this.onDeleteProfileClick} modalId={`deleteProfileModal`} id={'delete-profile-modal-confirm-btn'} nestedId={null} modalTitle='Delete Profile' modalBody="Are you sure you want to delete your entire Profile? This cannot be undone. Your posts will remain after your profile is removed.." />
           </div>
         );
       } else {

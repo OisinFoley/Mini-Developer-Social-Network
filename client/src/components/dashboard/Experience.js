@@ -29,7 +29,7 @@ class Experience extends Component {
             data-target={`#deleteExperienceModal-${i+1}`}
             className="btn-danger dashboard__btn-delete"
           >
-            <i id="delete-button-icon" class="fas fa-times"></i>
+            <i id="delete-button-icon" className="fas fa-times"></i>
           </button>
           <ConfirmDeleteModal onDelete={this.onDeleteExperience} modalId={`deleteExperienceModal-${i+1}`} id={exp._id} modalTitle='Delete Experience' modalBody='Are you sure you want to delete this Experience? This cannot be undone.' />
         </td>

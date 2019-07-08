@@ -29,7 +29,7 @@ class Education extends Component {
             data-target={`#deleteEducationModal-${i+1}`}
             className="btn-danger dashboard__btn-delete"
           >
-            <i id="delete-button-icon" class="fas fa-times"></i>
+            <i id="delete-button-icon" className="fas fa-times"></i>
           </button>
           <ConfirmDeleteModal onDelete={this.onDeleteEducation} modalId={`deleteEducationModal-${i+1}`} id={edu._id} modalTitle='Delete Education' modalBody='Are you sure you want to delete this Education? This cannot be undone.' />
         </td>
