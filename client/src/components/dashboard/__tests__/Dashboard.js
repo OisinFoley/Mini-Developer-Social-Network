@@ -17,6 +17,7 @@ let handle = 'test_user';
 let createProfileLink_ExpectedToValue = '/create-profile';
 let createProfileText = 'Create Profile';
 
+const onDeleteProfileClick = jest.fn();
 const deleteAccount = jest.fn();
 const getCurrentProfile = jest.fn();
 
@@ -61,6 +62,7 @@ const isLoadingState = {
 };
 
 const props = {
+  onDeleteProfileClick,
   deleteAccount,
   getCurrentProfile
 }
@@ -105,21 +107,20 @@ describe('<Dashboard />', () => {
     then deleteAccount function is called once`, () => {
 
     const wrapper = mount(
-      <Provider store={hasProfileStore} props={props}>
+      <Provider store={hasProfileStore} props={props} >      
         <Router >
           <Dashboard />
         </Router>
       </Provider>
     );
-    
-    wrapper.find('.dashboard__delete-account-btn').simulate('click');
-    let deleteProfileModal = wrapper.find('[modalTitle="Delete Profile"]');
 
-    console.log(deleteProfileModal.find('button#delete-profile-modal-confirm-btn').debug())
-    deleteProfileModal.find('button#delete-profile-modal-confirm-btn').simulate('click');
+    // it seems like we were trying to check if the mock we passe din was called,
+    // but perhaps we need to grab the func that was passed in, and grab it as a prop of the wrapper
+    // i have tried grabbing the prop, in order to check its mock prop in order to see if it was called (so we can assert on the prop, rather than the prop we defined here)
+    // console.log(wrapper.props) -> this verifies that the prop exists in the wrapper
+    // so far, nothing i have tried returns the actual onDeleteProfileClick prop.
 
-    // this click is not registering a call to mocked function -> maybe we need to pass a mock to the nested component
-    expect(deleteAccount.mock.calls.length).toBe(1);
+    expect(onDeleteProfileClick.mock.calls.length).toBe(1);
   })
 
 });
