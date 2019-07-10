@@ -12,17 +12,13 @@ class ConfirmDeleteModal extends Component {
 
   handleClick() {
     console.log('handleclickcalled');
-    let clickedId = this.props.id;
-    let clickedNestedId = this.props.nestedId;
-    this.props.onDelete(clickedId, clickedNestedId);
+    let { id, nestedId } = this.props.id;
+    this.props.onDelete(id, nestedId);
   }
 
   render() {
 
-    let modalId = this.props.modalId;
-    let modalTitle = this.props.modalTitle;
-    let modalBody = this.props.modalBody;
-    let id = this.props.id;
+    let { id, modalId, modalTitle, modalBody } = this.props;
 
     return (
       <div className="modal fade" id={`${modalId}`} tabIndex="-1" role="dialog" aria-labelledby={`${modalId}-ModalLabel`} aria-hidden="true">

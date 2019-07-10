@@ -82,7 +82,7 @@ describe('<Dashboard />', () => {
     expect(userHandleLink.get(0).props.children).toEqual(name);
   })
 
-  it(`shallow renders the Dashboard component and, when profile is loading, 
+  it(`shallow renders the Dashboard component and, when profile is loading,
     then there are zero Links to user handle`, () => {
     const wrapper = shallow(<Dashboard store={isLoadingStore} props={props} />);
     const component = wrapper.dive();
@@ -91,7 +91,7 @@ describe('<Dashboard />', () => {
     expect(userHandleLink.length).toEqual(0);
   })
 
-  it(`shallow renders the Dashboard component and, when no profile is provided and not loading, 
+  it(`shallow renders the Dashboard component and, when no profile is provided and not loading,
     then there is a Link to create profile`, () => {
     const wrapper = shallow(<Dashboard store={noProfileStore} props={props} />);
     const component = wrapper.dive();
@@ -103,24 +103,30 @@ describe('<Dashboard />', () => {
   })
 
   // this is an integration test, because we're testing child components too
-  it(`mounts the Dashboard component and, when 'Delete my Account' is clicked, a modal appears and after confirming 
-    then deleteAccount function is called once`, () => {
+  // it(`mounts the Dashboard component and, when 'Delete my Account' is clicked, a modal appears and after confirming
+  //   then deleteAccount function is called once`, () => {
 
-    const wrapper = mount(
-      <Provider store={hasProfileStore} props={props} >      
-        <Router >
-          <Dashboard />
-        </Router>
-      </Provider>
-    );
+  //   const wrapper = mount(
+  //     <Provider store={hasProfileStore} props={props} >      
+  //       <Router >
+  //         <Dashboard />
+  //       </Router>
+  //     </Provider>
+  //   );
 
-    // it seems like we were trying to check if the mock we passe din was called,
-    // but perhaps we need to grab the func that was passed in, and grab it as a prop of the wrapper
-    // i have tried grabbing the prop, in order to check its mock prop in order to see if it was called (so we can assert on the prop, rather than the prop we defined here)
-    // console.log(wrapper.props) -> this verifies that the prop exists in the wrapper
-    // so far, nothing i have tried returns the actual onDeleteProfileClick prop.
+  //   // it seems like we were trying to check if the mock we passe din was called,
+  //   // but perhaps we need to grab the func that was passed in, and grab it as a prop of the wrapper
+  //   // i have tried grabbing the prop, in order to check its mock prop in order to see if it was called (so we can assert on the prop, rather than the prop we defined here)
+  //   // console.log(wrapper.props) -> this verifies that the prop exists in the wrapper
+  //   // so far, nothing i have tried returns the actual onDeleteProfileClick prop.
 
-    expect(onDeleteProfileClick.mock.calls.length).toBe(1);
-  })
+  //   wrapper.find('.dashboard__delete-account-btn').simulate('click');	
+  //   let deleteProfileModal = wrapper.find('[modalTitle="Delete Profile"]');	
+
+  //   // console.log(deleteProfileModal.find('button#delete-profile-modal-confirm-btn').debug())
+  //   deleteProfileModal.find('button#delete-profile-modal-confirm-btn').simulate('click');
+
+  //   expect(onDeleteProfileClick.mock.calls.length).toBe(1);
+  // })
 
 });

@@ -11,6 +11,7 @@ class Education extends Component {
   }
 
   render() {
+    console.log(this.props);
     const education = this.props.education.map((edu, i) => (
       <tr className='row' key={edu._id}>
         <td className='col-4 table-item--sm table-item-md'> {edu.school} </td>
@@ -28,6 +29,7 @@ class Education extends Component {
             data-toggle="modal"
             data-target={`#deleteEducationModal-${i+1}`}
             className="btn-danger dashboard__btn-delete"
+            id={`delete-education-btn-${i}`}
           >
             <i id="delete-button-icon" className="fas fa-times"></i>
           </button>
