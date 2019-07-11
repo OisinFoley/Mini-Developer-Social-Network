@@ -121,7 +121,10 @@ describe('<Dashboard />', () => {
   //   // so far, nothing i have tried returns the actual onDeleteProfileClick prop.
 
   //   wrapper.find('.dashboard__delete-account-btn').simulate('click');	
-  //   let deleteProfileModal = wrapper.find('[modalTitle="Delete Profile"]');	
+  //   let deleteProfileModal = wrapper.find('[modalTitle="Delete Profile"]');
+  
+  // this returns the props that were passed into the component, and they're also returning 0, whether for the action, or the class prop which is an arrow function
+  // console.log(wrapper.props().props.deleteAccount.mock.calls.length);
 
   //   // console.log(deleteProfileModal.find('button#delete-profile-modal-confirm-btn').debug())
   //   deleteProfileModal.find('button#delete-profile-modal-confirm-btn').simulate('click');
