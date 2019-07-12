@@ -5,17 +5,18 @@ import Moment from 'react-moment';
 import { deleteEducation } from '../../actions/profileActions';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
-class Education extends Component {
+export class Education extends Component {
   onDeleteEducation = id => {
     this.props.deleteEducation(id);
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props.education);
+    // console.log(this.props);
     const education = this.props.education.map((edu, i) => (
       <tr className='row' key={edu._id}>
-        <td className='col-4 table-item--sm table-item-md'> {edu.school} </td>
-        <td className='col-4 table-item--sm table-item-md'> {edu.degree} </td>
+        <td className='col-4 table-item--sm table-item-md'>{edu.school}</td>
+        <td className='col-4 table-item--sm table-item-md'>{edu.degree}</td>
         <td className='col-3 table-item--sm table-item-md'>
           <Moment format="DD/MM/YYYY">{edu.from}</Moment> -&nbsp;
           {edu.to === null ? (

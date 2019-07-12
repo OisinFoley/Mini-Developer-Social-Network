@@ -11,6 +11,7 @@ class Experience extends Component {
   }
 
   render() {
+    console.log(this.props);
     const experience = this.props.experience.map((exp, i) => (
       <tr className='row' key={exp._id}>
         <td className='col-4 table-item--sm table-item-md'> {exp.company} </td>

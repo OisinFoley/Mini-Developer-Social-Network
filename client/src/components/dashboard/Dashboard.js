@@ -9,7 +9,7 @@ import Experience from './Experience';
 import Education from './Education';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }

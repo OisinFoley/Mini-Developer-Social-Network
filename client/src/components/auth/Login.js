@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 
-class Login extends Component {
+export class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -39,7 +39,9 @@ class Login extends Component {
   }
 
   onSubmit(e) {
+    console.log('onsubmit called');
     e.preventDefault();
+    console.log('onsubmit called');
 
     const userData = {
       email: this.state.email,
@@ -63,7 +65,8 @@ class Login extends Component {
                 <br />
               </p>
               <div className="bg-light form-generic__container">
-                <form onSubmit={this.onSubmit}>
+                {/* <form onSubmit={this.onSubmit}> */}
+                <form onSubmit={(e) => this.onSubmit(e) }>
                   <TextFieldGroup
                     placeholder="Email Address"
                     name="email"

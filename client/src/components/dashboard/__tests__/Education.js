@@ -5,38 +5,64 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import configureStore from 'redux-mock-store';
-import Education from '../Education';
+import ConnectedApp, { Education } from '../Education';
 import thunk from "redux-thunk";
 
 const mockStore = configureStore([thunk]);
 
 import { mockEducation } from '../../../__mocks__/mockEducation.js';
 
-const props = {
-  deleteEducation: jest.fn()
-};
 
+const deleteEducation = jest.fn();
 // console.log(mockEducation);
 
 const eduState = {
   education: mockEducation
 }
 
-console.log(eduState);
+// const props = {
+//   education: mockEducation,
+//   deleteEducation
+// };
+
+const props = {
+  // education: mockEducation,
+  deleteEducation
+};
+
+// console.log(eduState);
 
 const educationStore = mockStore(eduState);
 
 describe('<Education />', () => {
   it("shallow renders the Education component and, when education info is provided, then education info is rendered", () => {
-    const wrapper = shallow(<Education store={educationStore} props={props} />);
-    const component = wrapper.dive();
+    const wrapper = shallow(<Education deleteEducation={deleteEducation} education={mockEducation} props={props} />);
+    const component = wrapper;
+    let tbody = wrapper.find('tbody');
+    let tdList = tbody.find('tr').find('td');
 
-    console.log(component.debug());
+    // console.log(tdList.get(0).props.children);
+    // console.log(tdList.get(1).props.children);
+    // console.log(tdList.get(2).props.children);
+    
+
+    expect(tdList.get(0).props.children).toEqual('IT Sligo');
+    expect(tdList.get(1).props.children).toEqual('Bsc. Software Development');
+    // expect(tdList.get(2).text().toEqual('2012-09-12T00:00:00.000Z - 2016-05-25T00:00:00.000Z'));
   })
-
-  // it("shallow renders the Education component and, when delete button is pressed and confirmed, then deleteEducation() is called", () => {
-  //   const wrapper = shallow(<Education store={educationStore} props={props} />);
-  //   const component = wrapper.dive();
+ 
+  // just need a bit of pateince with this one
+  // it("mounts the Education component and, when delete button is pressed and confirmed, then deleteEducation() is called", () => {
+  //   // const wrapper = mount(
+  //   //   <Provider store={educationStore} props={props} >
+  //   //     <Router>
+  //   //       <ConnectedApp />
+  //   //     </Router>
+  //   //   </Provider>
+  //   // );
+  //   const wrapper = mount(<ConnectedApp store={educationStore} props={props} />);
+  //   // const wrapper = shallow(<Education store={educationStore} deleteEducation={deleteEducation} education={mockEducation} props={props} />);
+  //   const component = wrapper;
 
   //   console.log(component.debug());
 
