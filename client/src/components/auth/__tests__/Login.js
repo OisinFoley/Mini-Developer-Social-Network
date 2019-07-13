@@ -48,10 +48,9 @@ const mockIsNotAuthStore = mockStore(mockIsNotAuthState);
 const mockIsAuthStore = mockStore(mockIsAuthState);
 
 describe('<Login />', () => {
-  it("shallow renders the Login component, when not authenticated, then login form is shown", () => {
+  it("shallow renders the Login component and, when not authenticated, then login form is shown", () => {
     const wrapper = shallow(<ConnectedLogin store={mockIsNotAuthStore} props={props} />);
     const component = wrapper.dive();
-    
     const mainHeaderText = component.find('h1');
     const subHeading = component.find('p');
 
@@ -61,12 +60,12 @@ describe('<Login />', () => {
 
   it("shallow renders the Login component, when IS authenticated, then '/dashboard' is pushed to history", () => {
     const wrapper = shallow(<ConnectedLogin store={mockIsAuthStore} history={history} />);
-    const component = wrapper.dive();
+    wrapper.dive();
 
     expect(history.push).toHaveBeenCalledWith('/dashboard');
   })
 
-  it("when updates email and password inputs are updated, then state is updated", () => {
+  it("email and password inputs are updated, then state is updated", () => {
     const wrapper = mount(<ConnectedLogin store={mockIsNotAuthStore} props={props} />);
     const component = wrapper;
 
@@ -81,8 +80,6 @@ describe('<Login />', () => {
   })
 
   it("shallows renders Login, and when onSubmit event is fired, then it calls loginUser action", () => {
-    const loginUser = jest.fn();
-
     const wrapper = shallow(<Login loginUser={loginUser} auth={propsUnconnected.auth} errors={propsUnconnected.errors} />);
     const form = wrapper.find('form');
 
