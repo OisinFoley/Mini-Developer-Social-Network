@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import { deleteExperience } from '../../actions/profileActions';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
-class Experience extends Component {
+export class Experience extends Component {
   onDeleteExperience = id => {
     this.props.deleteExperience(id);
   }

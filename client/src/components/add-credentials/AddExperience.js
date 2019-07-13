@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { addExperience } from '../../actions/profileActions';
 import BackButton from '../common/BackButton';
 
-class AddExperience extends Component {
+export class AddExperience extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,7 +68,7 @@ class AddExperience extends Component {
           <div className="row">
             <div className="col-md-12">
               <BackButton route='dashboard' />
-              <h1 className="text-center"> Add Experience </h1>
+              <h1 className="text-center">Add Experience</h1>
               <p className="lead text-center">
                 Add a job or position you currently work at or have in the past
               </p>
@@ -166,4 +166,5 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { addExperience }
-)(withRouter(AddExperience));
+)(AddExperience);
+// )(withRouter(AddExperience));

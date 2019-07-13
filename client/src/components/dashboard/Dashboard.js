@@ -41,7 +41,6 @@ export class Dashboard extends Component {
             <button
               className="btn btn-danger btn--margin dashboard__delete-account-btn"
               data-toggle="modal"
-              // data-target={`#deleteProfileModal`}
               data-target={`#delete-profile-modal-confirm-btn`}
             >
               Delete my Account
