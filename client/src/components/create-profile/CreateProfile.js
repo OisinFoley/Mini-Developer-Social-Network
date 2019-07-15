@@ -8,7 +8,7 @@ import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import { createProfile } from '../../actions/profileActions';
 
-class CreateProfile extends Component {
+export class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ class CreateProfile extends Component {
       location: '',
       status: '',
       skills: '',
-      githubusername: '',
+      githubUsername: '',
       bio: '',
       twitter: '',
       facebook: '',

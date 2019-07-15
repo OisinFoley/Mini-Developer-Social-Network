@@ -37,18 +37,11 @@ const educationStore = mockStore(eduState);
 describe('<Education />', () => {
   it("shallow renders the Education component and, when education info is provided, then education info is rendered", () => {
     const wrapper = shallow(<Education deleteEducation={deleteEducation} education={mockEducation} props={props} />);
-    const component = wrapper;
     let tbody = wrapper.find('tbody');
     let tdList = tbody.find('tr').find('td');
 
-    // console.log(tdList.get(0).props.children);
-    // console.log(tdList.get(1).props.children);
-    // console.log(tdList.get(2).props.children);
-    
-
     expect(tdList.get(0).props.children).toEqual('IT Sligo');
     expect(tdList.get(1).props.children).toEqual('Bsc. Software Development');
-    // expect(tdList.get(2).text().toEqual('2012-09-12T00:00:00.000Z - 2016-05-25T00:00:00.000Z'));
   })
  
   // just need a bit of pateince with this one
