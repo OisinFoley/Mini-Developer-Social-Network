@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
@@ -167,4 +166,3 @@ export default connect(
   mapStateToProps,
   { addExperience }
 )(AddExperience);
-// )(withRouter(AddExperience));

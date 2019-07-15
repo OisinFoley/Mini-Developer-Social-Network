@@ -1,35 +1,30 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import ConnectedAddEducation, { AddEducation } from '../AddEducation';
-import thunk from "redux-thunk";
+import ConnectedAddEducation from '../AddEducation';
 import event from '../../../__mocks__/event';
+import { mockStore } from '../../../__mocks__/mockStore';
 
-const mockStore = configureStore([thunk]);
-const addEducation = jest.fn();
 const errors = {};
 let mockState = {
   errors
 }
 const mockEducationStore = mockStore(mockState);
 
-describe('<AddEducation />', () => {
-  it("shallow renders the AddEducation component and, when not authenticated, then AddEducation form is shown", () => {
-    const wrapper = shallow(<AddEducation store={mockEducationStore}  />);
-    const component = wrapper;
+let wrapper;
+beforeEach(() => {
+  wrapper = mount(
+    <Provider store={mockEducationStore} >
+      <Router>
+        <ConnectedAddEducation />
+      </Router>
+    </Provider>
+  );
+});
 
-    const mainHeaderText = component.find('h1');
-    const subHeading = component.find('p');
-    const textAreaFieldGroupList = component.find('TextFieldGroup');
-
-    expect(mainHeaderText.text()).toEqual(`Add Education`);
-    expect(subHeading.text()).toEqual(`Add academic education or coding training you've attended`);
-    expect(textAreaFieldGroupList.length).toEqual(5);
-  })
-
-  it("mounts and, when all inputs are updated, then state is updated for each", () => {
+it(`mounts and, when all TextFieldGroup and TextAreaFieldGroup components are updated,
+    then state is updated based on input values`, () => {
     // this is something we can try in another component test
     // we got from SO, but wouldn't work because this component has a BackButton comp, which relies on router
     // const wrapper = mount(
@@ -37,14 +32,6 @@ describe('<AddEducation />', () => {
     //     context: { store: mockEducationStore }
     //   }
     // );
-
-    const wrapper = mount(
-      <Provider store={mockEducationStore} >
-        <Router>
-          <ConnectedAddEducation />
-        </Router>
-      </Provider>
-    );
 
     const component = wrapper.find('AddEducation');
 
@@ -64,16 +51,3 @@ describe('<AddEducation />', () => {
     expect(component.state().current).toEqual(true);
     expect(component.state().description).toEqual(`test_description`);
   })
-
-  it("shallows renders AddEducation, and when onSubmit event is fired, then it calls AddEducation action", () => {
-    const wrapper = shallow(<AddEducation addEducation={addEducation} />);
-    const form = wrapper.find('form');
-
-    form.simulate('submit', {
-      preventDefault: () => {
-      }
-    });
-
-    expect(addEducation.mock.calls.length).toEqual(1);
-  })
-});
