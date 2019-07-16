@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -39,9 +38,7 @@ export class Login extends Component {
   }
 
   onSubmit(e) {
-    console.log('onsubmit called');
     e.preventDefault();
-    console.log('onsubmit called');
 
     const userData = {
       email: this.state.email,
@@ -65,8 +62,7 @@ export class Login extends Component {
                 <br />
               </p>
               <div className="bg-light form-generic__container">
-                {/* <form onSubmit={this.onSubmit}> */}
-                <form onSubmit={(e) => this.onSubmit(e) }>
+                <form onSubmit={this.onSubmit}>
                   <TextFieldGroup
                     placeholder="Email Address"
                     name="email"
