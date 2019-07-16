@@ -1,9 +1,13 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ConnectedDashboard, { Dashboard } from '../Dashboard';
+import { mockProfiles } from '../../../__mocks__/mockProfiles';
+import { mockStore } from '../../../__mocks__/mockStore';
 
+const { user: { name } } = mockProfiles[0];
+const { handle } = mockProfiles[0];
 const auth = {
   user: {
     name
@@ -14,46 +18,44 @@ const profile = {
   profile: {
     profile: {
       handle,
-      experience: [{}],
-      education: [{}]
+      experience: [],
+      education: []
     },
-    loading: loadingFalse
+    loading: false
   }
 }
 
-// fix this next time you are active - see example in Login.js
-  // this one is a little trickier than the expect call to have been made that we see in Login,
-  // because here, we must mount in order to access the confirm delete btn in the modal, and mounting renders the connect() wrapper
+const dashboardState = {
+  profile,
+  auth,
+  getCurrentProfile: jest.fn(),
+  deleteAccount: jest.fn()
+};
 
-  // it(`mounts the Dashboard component and, when 'Delete my Account' is clicked, a modal appears and after confirming
-  //   then deleteAccount function is called once`, () => {
+const mockDashboardStore = mockStore(dashboardState);
 
-  //   // const wrapper = mount(
-  //   //   <Provider store={hasProfileStore} props={props} >      
-  //   //     <Router >
-  //   //       <Dashboard />
-  //   //     </Router>
-  //   //   </Provider>
-  //   // );
+// describe('<Dashboard />', () => {
+//   it(`mounts the Dashboard component and, when 'Delete my Account' is clicked and confirmed,
+//     then deleteAccount function is called once`, () => {
 
-  //   // fix this next time you are active - see example in Login.js
+//     // need to tidy this up before it'll pass
+//     // must you use store (i.e. - connected component, so that you can automatically pass props down to edu and exp
+    
+//     const wrapper = mount(
+//     <Provider store={mockDashboardStore} >
+//       <Router>
+//         <ConnectedDashboard />
+//       </Router>
+//     </Provider>
+//     );
 
-  //   const wrapper = mount(<Dashboard 
-  //       getCurrentProfile={getCurrentProfile}
-  //       deleteAccount={deleteAccount}
-  //       auth={auth}
-  //       profile={profile}
-  //      />);
-  //     //  store={hasProfileStore} props={props}
+//     wrapper.find('.dashboard__delete-account-btn').simulate('click');	
+//     let deleteProfileModal = wrapper.find('[modalTitle="Delete Profile"]');
+      
+//     // console.log(wrapper.props().props.deleteAccount.mock.calls.length);
+//     // console.log(deleteProfileModal.find('button#delete-profile-modal-confirm-btn').debug())
+//     deleteProfileModal.find('button#delete-profile-modal-confirm-btn').simulate('click');
 
-  //   wrapper.find('.dashboard__delete-account-btn').simulate('click');	
-  //   let deleteProfileModal = wrapper.find('[modalTitle="Delete Profile"]');
-  
-  //   // this returns the props that were passed into the component, and they're also returning 0, whether for the action, or the class prop which is an arrow function
-  //   console.log(wrapper.props().props.deleteAccount.mock.calls.length);
- 
-  //   // console.log(deleteProfileModal.find('button#delete-profile-modal-confirm-btn').debug())
-  //   deleteProfileModal.find('button#delete-profile-modal-confirm-btn').simulate('click');
-
-  //   expect(onDeleteProfileClick.mock.calls.length).toBe(1);
-  // })
+//     expect(onDeleteProfileClick.mock.calls.length).toBe(1);
+//   });
+// });

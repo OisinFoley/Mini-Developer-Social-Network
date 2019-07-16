@@ -1,5 +1,4 @@
 import mockAxios from 'axios';
-// import mockAxios from '../../__mocks__/axios';
 
 import {
   getPosts,

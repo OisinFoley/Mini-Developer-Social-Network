@@ -1,15 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import Navbar from '../Navbar';
-import { mockStore } from '../../../__mocks__/mockStore';
-import { mockIsNotAuthState } from '../../../__mocks__/mockAuth';
+import { Navbar } from '../Navbar';
 import { mockProfiles } from '../../../__mocks__/mockProfiles';
 
 const { user: { name, avatar } } = mockProfiles[0];
 const clearCurrentProfile = jest.fn();
 const logoutUser = jest.fn();
-const isAuthenticatedState = {
+const isAuthState = {
   auth: {
     isAuthenticated: true,
     user: {
@@ -18,62 +16,64 @@ const isAuthenticatedState = {
     }
   }
 };
-const props = {
-  clearCurrentProfile,
-  logoutUser
-}
-const notAuthenticatedStore = mockStore(mockIsNotAuthState);
-const isAuthenticatedStore = mockStore(isAuthenticatedState);
+const isNotAuthState = {
+  auth: {
+    ...isAuthState.auth,
+    isAuthenticated: false
+  }
+};
 
-// a beforeach after fixing the test maybe ?
+let wrapper;
 
 describe('<Navbar />', () => {
-  it(`renders the Navbar component and,
-    when authenticated, then it shows user's avatar and correct number of list items`, () => {
-    const wrapper = shallow(<Navbar store={isAuthenticatedStore} props={props} />);
-    const component = wrapper.dive();
-    const img = component.find('img');
-    const listItems = component.find('li');
-    
-    expect(img.get(0).props.src).toEqual(avatar);
-    expect(img.get(0).props.alt).toEqual(name);
-    expect(listItems.length).toEqual(4);
 
+  describe('Is auth tests', () => {
+    beforeEach(() => {
+      wrapper = shallow(<Navbar 
+        {...isAuthState} 
+        logoutUser={logoutUser}
+        clearCurrentProfile={clearCurrentProfile} />
+      );    
+    });
+    it(`renders the Navbar component and,
+      when authenticated, then it shows user's avatar and correct number of list items`, () => {
+      const listItems = wrapper.find('li');
 
-    // need further testing here
+      expect(wrapper.find('img').get(0).props.src).toEqual(avatar);
+      expect(wrapper.find('img').get(0).props.alt).toEqual(name);
+      expect(listItems.length).toEqual(4);
+    });
 
-    // expect(component.find('Link').get(0).props.children).toEqual('Sign Up');
-    // expect(component.find('Link').get(1).props.to).toEqual('/login');
-    // expect(component.find('Link').get(1).props.children).toEqual('Login');
-    // expect(component.find('Link').length).toEqual(2);
-    
-    // console.log(component.find('Link').get(0).props.to);
-    // console.log(component.find('Link').get(0).props.children);
-    // console.log(component.find('Link').length);
+    it("renders the Navbar component and, when clicking logout, then clearCurrentProfile is called 1 time", () => {
+      wrapper.find('[id="navbar__logout-li"]').simulate('click', {
+        preventDefault: () => {
+        }
+      });
 
-    // expect(store.getActions()).toMatchSnapshot();
+      expect(clearCurrentProfile.mock.calls.length).toBe(1);
+    });
   });
 
-  // it("renders the Navbar component and, when clicking logout, then clearCurrentProfile is called 1 time", () => {
-  //   const wrapper = shallow(<Navbar store={isAuthenticatedStore} props={props} />);
-  //   const component = wrapper.dive();
-  //   console.log(component.find('[id="navbar__logout-li"]').debug());
-  //   component.find('[id="navbar__logout-li"]').simulate('click', {
-  //     preventDefault: () => {
-  //     }
-  //   });
-  //   // need to mock localStorage (in auth actions) for this to be passable
-  //   // expect(clearCurrentProfile.mock.calls.length).toBe(1);
-  // });
+  describe('Not auth tests', () => {
+    beforeEach(() => {
+      wrapper = shallow(<Navbar 
+        {...isNotAuthState} logoutUser={logoutUser} />
+      );
+    });
+    it(`renders the Navbar component and,
+      when not authenticated, then it shows guest links`, () => {
+      expect(wrapper.find('Link').get(2).props.children).toEqual('Sign Up');
+      expect(wrapper.find('Link').get(2).props.to).toEqual('/register');
+      expect(wrapper.find('Link').get(3).props.children).toEqual('Login');
+      expect(wrapper.find('Link').get(3).props.to).toEqual('/login');
+      expect(wrapper.find('Link').length).toEqual(4);
+      // expect(store.getActions()).toMatchSnapshot();
+    });
 
-  
+    it("renders the Navbar component and, when not authenticated, it shows correct number of list items", () => {
+      const listItems = wrapper.find('li');
 
-  // for some reason, this is looking for avatar, even though it's not needed - maybe need to do a beforeEach and afterEach
-  // it("renders the Navbar component and, when not authenticated, it shows correct number of list items", () => {
-  //   const wrapper = shallow(<Navbar store={notAuthenticatedStore} props={props} />);
-  //   const component = wrapper.dive();
-  //   const listItems = component.find('li');
-    
-  //   expect(listItems.length).toEqual(3);
-  // });
+      expect(listItems.length).toEqual(3);
+    });
+  });
 });
