@@ -12,14 +12,14 @@ export const mockAuth = {
   }
 }
 
-export var mockIsNotAuthState = {
+export const mockIsNotAuthState = {
   auth: {
     isAuthenticated: false
   },
   errors: {}
 }
 
-export var mockIsAuthState = {
+export const mockIsAuthState = {
   ...mockIsNotAuthState,
   auth: {
     isAuthenticated: true

@@ -1,24 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import configureStore from 'redux-mock-store';
 import Navbar from '../Navbar';
-import thunk from "redux-thunk";
+import { mockStore } from '../../../__mocks__/mockStore';
+import { mockIsNotAuthState } from '../../../__mocks__/mockAuth';
+import { mockProfiles } from '../../../__mocks__/mockProfiles';
 
-const mockStore = configureStore([thunk]);
-
-const notAuthenticatedState = {
-  auth: {
-    isAuthenticated: false
-  }
-};
-
+const { user: { name, avatar } } = mockProfiles[0];
 const clearCurrentProfile = jest.fn();
 const logoutUser = jest.fn();
-
-let avatar = 'http://test_avatar';
-let name = 'test name';
-
 const isAuthenticatedState = {
   auth: {
     isAuthenticated: true,
@@ -32,12 +22,14 @@ const props = {
   clearCurrentProfile,
   logoutUser
 }
-const notAuthenticatedStore = mockStore(notAuthenticatedState);
+const notAuthenticatedStore = mockStore(mockIsNotAuthState);
 const isAuthenticatedStore = mockStore(isAuthenticatedState);
 
+// a beforeach after fixing the test maybe ?
 
 describe('<Navbar />', () => {
-  it("renders the Navbar component and, when authenticated, it shows user's avatar and correct number of list items", () => {
+  it(`renders the Navbar component and,
+    when authenticated, then it shows user's avatar and correct number of list items`, () => {
     const wrapper = shallow(<Navbar store={isAuthenticatedStore} props={props} />);
     const component = wrapper.dive();
     const img = component.find('img');
@@ -84,5 +76,4 @@ describe('<Navbar />', () => {
     
   //   expect(listItems.length).toEqual(3);
   // });
-
 });

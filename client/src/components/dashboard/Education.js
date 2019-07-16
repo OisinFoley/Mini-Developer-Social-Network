@@ -11,8 +11,6 @@ export class Education extends Component {
   }
 
   render() {
-    // console.log(this.props.education);
-    // console.log(this.props);
     const education = this.props.education.map((edu, i) => (
       <tr className='row' key={edu._id}>
         <td className='col-4 table-item--sm table-item-md'>{edu.school}</td>

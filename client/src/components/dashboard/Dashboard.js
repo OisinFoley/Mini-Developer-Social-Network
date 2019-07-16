@@ -15,7 +15,6 @@ export class Dashboard extends Component {
   }
 
   onDeleteProfileClick = () => {
-    console.log('ondeleteprofilecliockcalled');
     this.props.deleteAccount();
   }
 
