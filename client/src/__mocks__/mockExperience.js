@@ -20,3 +20,16 @@ export const mockExperience = [
     "description":"Created Javascript and Visual Basic scripts to run network analyses and then output the results using graphics provided by D3js."
   }
 ]
+
+export const mockExpNoCompanyOrLocation = [
+  {
+    "current":false,
+    "_id":"5be8416cbce4001d09371bdi",
+    "title":"Intern",
+    "company":'',
+    "location":'',
+    "from":"2015-03-30T00:00:00.000Z",
+    "to":"2015-08-28T00:00:00.000Z",
+    "description":"Created Javascript and Visual Basic scripts to run network analyses and then output the results using graphics provided by D3js."
+  }
+]

@@ -15,7 +15,7 @@ export class Dashboard extends Component {
   }
 
   onDeleteProfileClick = () => {
-    console.log('ondleteprofile clicked');
+    // console.log('ondleteprofile clicked');
     
     this.props.deleteAccount();
   }
@@ -24,7 +24,7 @@ export class Dashboard extends Component {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
 
-    console.log(profile);
+    // console.log(profile);
     
 
     let dashboardContent;

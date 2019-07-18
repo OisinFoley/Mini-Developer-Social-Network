@@ -11,7 +11,6 @@ class ConfirmDeleteModal extends Component {
  }
 
   handleClick() {
-    console.log('handleclickcalled');
     let { id, nestedId } = this.props.id;
     this.props.onDelete(id, nestedId);
   }
