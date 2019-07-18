@@ -1,22 +1,13 @@
-import { 
-  GET_PROFILE,
-  GET_PROFILES,
-  PROFILE_LOADING,
-  CLEAR_CURRENT_PROFILE } from '../../actions/types';
+import * as actions from '../../actions/types';
 import profileReducer from '../profileReducer';
+import { testUser } from '../__mocks__/user';
+import { initialProfileState } from '../__mocks__/initialProfileState';
 
-const testUser = {
-  user: 'testUser1'
-}
 
 describe('INITIAL_STATE', () => {
   test('is correct', () => {
     const action = { type: 'dummy_action' };
-    const initialState = { 
-      profile: null,
-      profiles: null,
-      loading: false
-    };
+    const initialState = initialProfileState
 
     expect(profileReducer(undefined, action)).toEqual(initialState);
   });
@@ -24,10 +15,9 @@ describe('INITIAL_STATE', () => {
 
 describe('PROFILE_LOADING', () => {
   test('returns the correct state', () => {
-    const action = { type: PROFILE_LOADING, payload: null };
+    const action = { type: actions.PROFILE_LOADING, payload: null };
     const expectedState = {
-      profile: null,
-      profiles: null,
+      ...initialProfileState,
       loading: true
      };
 
@@ -37,11 +27,10 @@ describe('PROFILE_LOADING', () => {
 
 describe('GET_PROFILE', () => {
   test('returns the correct state', () => {
-    const action = { type: GET_PROFILE, payload: [testUser] };
+    const action = { type: actions.GET_PROFILE, payload: [testUser] };
     const expectedState = {
-      profile: [testUser],
-      profiles: null,
-      loading: false
+      ...initialProfileState,
+      profile: [testUser]
      };
 
     expect(profileReducer(undefined, action)).toEqual(expectedState);
@@ -50,11 +39,10 @@ describe('GET_PROFILE', () => {
 
 describe('GET_PROFILES', () => {
   test('returns the correct state', () => {
-    const action = { type: GET_PROFILES, payload: [testUser] };
+    const action = { type: actions.GET_PROFILES, payload: [testUser] };
     const expectedState = {
-      profile: null,
-      profiles: [testUser],
-      loading: false
+      ...initialProfileState,
+      profiles: [testUser]
      };
 
     expect(profileReducer(undefined, action)).toEqual(expectedState);
@@ -63,12 +51,8 @@ describe('GET_PROFILES', () => {
 
 describe('CLEAR_CURRENT_PROFILE', () => {
   test('returns the correct state', () => {
-    const action = { type: CLEAR_CURRENT_PROFILE, payload: null };
-    const expectedState = {
-      profile: null,
-      profiles: null,
-      loading: false
-     };
+    const action = { type: actions.CLEAR_CURRENT_PROFILE, payload: null };
+    const expectedState = initialProfileState;
 
     expect(profileReducer(undefined, action)).toEqual(expectedState);
   });

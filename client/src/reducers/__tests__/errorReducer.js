@@ -1,23 +1,23 @@
 import errorReducer from '../errorReducer';
-import { GET_ERRORS, CLEAR_ERRORS } from '../../actions/types';
+import * as actions from '../../actions/types';
+import { initialMockState, initialMockAction } from '../__mocks__/initialAuthData';
 
 const testNullNotAllowedObj = {
-  nullNotAllowedError: 'id cannot be null'
+  nullNotAllowedError: 'id_cannot_be_null'
 }
 
 describe('INITIAL_STATE', () => {
   test('is correct', () => {
     const action = { type: 'dummy_action' };
-    const initialState = { isAuthenticated: false, user: {} };
 
-    expect(errorReducer(undefined, action)).toEqual(initialState);
+    expect(errorReducer(undefined, action)).toEqual(initialMockState);
   });
 });
 
 describe('GET_ERRORS', () => {
   test('returns the correct state', () => {
-    const action = { type: GET_ERRORS, payload: testNullNotAllowedObj };
-    const expectedState = { nullNotAllowedError: 'id cannot be null' };
+    const action = { type: actions.GET_ERRORS, payload: testNullNotAllowedObj };
+    const expectedState = testNullNotAllowedObj;
 
     expect(errorReducer(undefined, action)).toEqual(expectedState);
   });
@@ -25,7 +25,7 @@ describe('GET_ERRORS', () => {
 
 describe('CLEAR_ERRORS', () => {
   test('returns the correct state', () => {
-    const action = { type: CLEAR_ERRORS, payload: {} };
+    const action = { type: actions.CLEAR_ERRORS, payload: {} };
     const expectedState = {};
 
     expect(errorReducer(undefined, action)).toEqual(expectedState);
