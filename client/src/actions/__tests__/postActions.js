@@ -1,7 +1,7 @@
 import mockAxios from 'axios';
 import * as actions from '../postActions'
 import * as types from '../types';
-import { mockStore } from '../../test/utils/mockStore';
+import { mockStore } from '../../__mocks__/mockStore';
 import { mockPosts, newPost, deletedPostId } from '../../__mocks__/mockPosts';
 import { idCannotBeNullExceptionMessage } from '../../__mocks__/exceptionMessages';
 

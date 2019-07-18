@@ -17,9 +17,6 @@ export default {
         return Promise.resolve({ data: ['profile1, profile2, profile3'] } );
       case '/api/profile/handle/user123': // getProfileByHandle()
         return Promise.resolve({ data: 'fakeProfile' } );
-        
-        
-        
       default:
         break;
     }
@@ -64,15 +61,4 @@ export default {
         return Promise.resolve({ data: {} } );
     }
   })
-
-  // we want to use the above implementation once we update our action, reducer and component in the main code base
-  //    need to ensure that the change to returning { success: true }  won't break the logic in the state that allows the view
-  //    to know that it should remove the specific post from the local state's list once the deleteion is complete
-
-  // delete: jest.fn((requestData) => Promise.resolve({ data: { id: deletedPostId[0] } }))
-  // delete: jest.fn(() => {
-  //   console.log(`hello ${deletedPostId[0]}`); Promise.resolve({ data: { id: deletedPostId[0] } })
-  //   // console.log(`hello ${deletedPostId[0]}`); Promise.resolve({ data: deletedPostId[0] })
-  // })
-  // delete: jest.fn(() => Promise.resolve({ data: deletedPostId[0] }))
 };

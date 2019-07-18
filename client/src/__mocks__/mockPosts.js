@@ -10,7 +10,6 @@ export const newPost = {
 };
 
 export const deletedPostId = ['5c96bf2a0bc6cd1e4127481e'];
-// export const { deletedPostId } = '5c96bf2a0bc6cd1e4127481e';
 
 export const mockPosts = [
   {
