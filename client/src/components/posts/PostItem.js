@@ -29,7 +29,7 @@ export class PostItem extends Component {
   }
 
   render() {
-    const { post, i, auth, showActions } = this.props;
+    const { post, i, auth, showActions } = this.props;        
     return (
       <div className="card card-body bg-light mb-3">
         <div className="row">

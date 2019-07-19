@@ -23,7 +23,7 @@ beforeEach(() => {
       </Router>
     </Provider>
   );
-}); 
+});
 
 describe('<PostForm />', () => {
   it(`mounts and, when TextAreaFieldGroup components is updated,
