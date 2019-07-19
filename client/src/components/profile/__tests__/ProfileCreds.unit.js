@@ -57,7 +57,7 @@ const mockCredsWithoutEducationState = {
   // }
 }
 
-describe('<ProfileCreds /> Experiencde testing', () => {
+describe('<ProfileCreds /> Experience testing', () => {
   it(`shallow renders ProfileCreds, and when experience is provided and ongoing,
     then it populates 'company', 'from', 'to', 'location', 'description' fields, and 'to' displays: ' Now'`, () => {
     const wrapper = shallow(<ProfileCreds {...expStateOngoingJob} />);

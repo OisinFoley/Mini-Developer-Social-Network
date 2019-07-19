@@ -23,7 +23,7 @@ class ProfileHeader extends Component {
               <p className="lead text-center">
                 {profile.status}
                 {isEmpty(profile.company) ? null : (
-                  <span> at {profile.company} </span>
+                  <span> at {profile.company}</span>
                 )}
               </p>
               {isEmpty(profile.location) ? null : <p>{profile.location}</p>}
@@ -65,7 +65,7 @@ class ProfileHeader extends Component {
                 ) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.instagram}
+                    href={profile.social[0].instagram}
                     target="_blank"
                   >
                     <i className="fab fa-instagram fa-2x" />
@@ -77,7 +77,7 @@ class ProfileHeader extends Component {
                 ) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.facebook}
+                    href={profile.social[0].facebook}
                     target="_blank"
                   >
                     <i className="fab fa-facebook fa-2x" />
@@ -87,7 +87,7 @@ class ProfileHeader extends Component {
                 {isEmpty(profile.social && profile.social[0].youtube) ? null : (
                   <a
                     className="text-white p-2"
-                    href={profile.social.youtube}
+                    href={profile.social[0].youtube}
                     target="_blank"
                   >
                     <i className="fab fa-youtube fa-2x" />
