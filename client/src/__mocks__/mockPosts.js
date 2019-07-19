@@ -20,6 +20,13 @@ export const mockPosts = [
     "user": "5be772318a0efa11e7a68014",
     "avatar": "https://fakeAvatar.com",
     "likes": [],
-    "comments": []
+    "comments": [{
+      "date":"2019-05-13T20:10:25.251Z",
+      "_id":"5cd9da2ca5aa791b72152af4",
+      "text":"I am a test comment",
+      "name":"Oisín Foley",
+      "avatar":"https://test_avatar.com",
+      "user":"5be772318a0efa11e7a68014"
+    }]
   }
 ];

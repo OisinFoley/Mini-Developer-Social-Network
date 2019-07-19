@@ -23,7 +23,8 @@ beforeEach(() => {
   );
 });
 
-it(`mounts and, when all TextFieldGroup and TextAreaFieldGroup components are updated,
+describe('<AddEducation />', () => {
+  it(`mounts and, when all TextFieldGroup and TextAreaFieldGroup components are updated,
     then state is updated based on input values`, () => {
     // this is something we can try in another component test
     // we got from SO, but wouldn't work because this component has a BackButton comp, which relies on router
@@ -50,4 +51,5 @@ it(`mounts and, when all TextFieldGroup and TextAreaFieldGroup components are up
     expect(component.state().to).toEqual(`01/01/2010`);
     expect(component.state().current).toEqual(true);
     expect(component.state().description).toEqual(`test_description`);
-  })
+  });
+});
