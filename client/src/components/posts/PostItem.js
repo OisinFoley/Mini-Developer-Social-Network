@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { deletePost, addLike, deleteLike } from '../../actions/postActions';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
-class PostItem extends Component {
+export class PostItem extends Component {
   onDeleteClick = id => {
     this.props.deletePost(id);
   }
@@ -20,7 +20,8 @@ class PostItem extends Component {
   }
 
   findUserLikes(likes) {
-    const { auth } = this.props;
+    const { auth } = this.props;    
+        
     if (likes.filter(like => like.user === auth.user.id).length > 0) {
       return true;
     }

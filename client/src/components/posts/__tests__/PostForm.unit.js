@@ -1,9 +1,21 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PostForm } from '../PostForm';
-// import { mockProfiles } from '../../../__mocks__/mockProfiles';
+import { mockAuth } from '../../../__mocks__/mockAuth';
 
 const addPost = jest.fn();
+const { auth } = mockAuth;
+const errors = {};
+const props = {
+  addPost,
+  auth,
+  errors
+};
+
+let wrapper;
+beforeEach(() => {
+  wrapper = shallow(<PostForm {...props} />);
+});
 
 describe('<PostForm />', () => {
   it(`shallows renders PostForm,

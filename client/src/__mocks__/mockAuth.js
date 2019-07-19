@@ -7,7 +7,9 @@ export const mockAuth = {
   auth: {
     isAuthenticated: true,
     user: {
-      name: 'test_user'
+      id: 'test_id',
+      name: 'test_user',
+      avatar: 'test_avatar'
     }
   }
 }

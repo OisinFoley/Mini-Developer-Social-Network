@@ -17,9 +17,12 @@ export const mockPosts = [
     "_id": "5c17f746d586af43b4e2cae6",
     "text": "sample test text",
     "name": "Oisín Foley",
-    "user": "5be772318a0efa11e7a68014",
+    "user": "test_id",
     "avatar": "https://fakeAvatar.com",
-    "likes": [],
+    "likes": [{
+      "_id":"5d1c3c97a5aa791b72152b17","user":"test_id2",
+      "_id":"12345c97a5aa791b72112345","user":"test_id"
+    }],
     "comments": [{
       "date":"2019-05-13T20:10:25.251Z",
       "_id":"5cd9da2ca5aa791b72152af4",
@@ -30,3 +33,8 @@ export const mockPosts = [
     }]
   }
 ];
+
+export const likesListToTriggerFalsy = [{
+  "_id":"5d1c3c97a5aa791b72152b17",
+  "user":"test_id_12345",
+}];
