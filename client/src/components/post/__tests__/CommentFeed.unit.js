@@ -15,10 +15,10 @@ beforeEach(() => {
 
 describe('<CommentFeed />', () => {
   it(`shallows renders CommentFeed,
-    and when a comment is passed to comments state,
-    then it renders a CommentItem component`, () => {
+    and when array with 2 comments is passed to comments state,
+    then it renders 2 CommentItem components`, () => {
     const commentItem = wrapper.find('Connect(CommentItem)');
     
-    expect(commentItem.length).toEqual(1);
-  })
+    expect(commentItem.length).toEqual(2);
+  });
 });

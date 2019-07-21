@@ -25,11 +25,18 @@ export const mockPosts = [
     }],
     "comments": [{
       "date":"2019-05-13T20:10:25.251Z",
-      "_id":"5cd9da2ca5aa791b72152af4",
+      "_id":"456bcd",
       "text":"I am a test comment",
       "name":"Oisín Foley",
       "avatar":"https://test_avatar.com",
-      "user":"5be772318a0efa11e7a68014"
+      "user":"test_id"
+    }, {
+      "date":"2019-05-13T20:10:25.251Z",
+      "_id":"123abc",
+      "text":"I am a test comment",
+      "name":"Oisín Foley",
+      "avatar":"https://test_avatar.com",
+      "user":"test_non_matching_id"
     }]
   }
 ];
