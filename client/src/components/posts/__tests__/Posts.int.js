@@ -9,21 +9,25 @@ import { mockPosts } from '../../../__mocks__/mockPosts';
 
 const getPosts = jest.fn();
 const { auth } = mockAuth;
+const postsAndLoadingIsTrue = {
+  posts: mockPosts,
+  loading: true
+}
+const postsAndLoadingIsFalse = {
+  ...postsAndLoadingIsTrue,
+  loading: false
+}
 const mockIsLoadingState = {
-  posts: {
-    posts: mockPosts,
-    loading: true
-  },
+  posts: postsAndLoadingIsTrue,
+  post: postsAndLoadingIsTrue,
   getPosts,
   auth,
   errors: {}
 };
 const mockIsNotLoadingState = {
-  ...mockIsLoadingState,
-  posts: {
-    ...mockIsLoadingState.posts,
-    loading: false
-  }
+  posts: postsAndLoadingIsFalse,
+  post: postsAndLoadingIsFalse,
+  ...mockIsLoadingState
 };
 const mockIsLoadingPostsStore = mockStore(mockIsLoadingState);
 const mockIsNotLoadingPostsStore = mockStore(mockIsNotLoadingState);
@@ -31,7 +35,7 @@ const mockIsNotLoadingPostsStore = mockStore(mockIsNotLoadingState);
 describe('<Posts />', () => {
   it(`mounts Post, and when posts are loading, then it displays Spinner and not PostFeed`, () => {
     const wrapper = mount(
-      <Provider store={mockIsLoadingPostsStore} posts={mockPosts} >
+      <Provider store={mockIsLoadingPostsStore} post={mockPosts} >
         <Router>
           <ConnectedPosts />
         </Router>
@@ -47,7 +51,7 @@ describe('<Posts />', () => {
 
   it(`mounts Posts, and when posts are not loading and not empty, then it displays PostFeed`, () => {
     const wrapper = mount(
-      <Provider store={mockIsNotLoadingPostsStore} posts={mockPosts} >
+      <Provider store={mockIsNotLoadingPostsStore} posts={mockPosts} post={mockPosts} >
         <Router>
           <ConnectedPosts />
         </Router>

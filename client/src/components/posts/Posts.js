@@ -42,7 +42,7 @@ Posts.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  posts: state.post
 });
 
 export default connect(

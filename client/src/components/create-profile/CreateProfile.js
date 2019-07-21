@@ -141,107 +141,109 @@ export class CreateProfile extends Component {
       <div className="create-profile">
         <div className="container">
           <div className="row">
-            <div className="col-md-8 auto">
+            <div className="col-md-12">
               <h1 className="text-center">Create Your Profile</h1>
               <p className="lead text-center">
                 Provide some info to make your profile stand out!
               </p>
               <small className="d-block pb-3"> * = required fields </small>
-              <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="* Profile handle"
-                  name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
-                  info="Unique handle to form part of your profile URL. Think full name, company name or any nicknames you have."
-                />
+              <div className="bg-light form-generic__container">
+                <form onSubmit={this.onSubmit}>
+                  <TextFieldGroup
+                    placeholder="* Profile handle"
+                    name="handle"
+                    value={this.state.handle}
+                    onChange={this.onChange}
+                    error={errors.handle}
+                    info="Unique handle to form part of your profile URL. Think full name, company name or any nicknames you have."
+                  />
 
-                <SelectListGroup
-                  placeholder="Status"
-                  name="status"
-                  value={this.state.status}
-                  onChange={this.onChange}
-                  options={options}
-                  error={errors.status}
-                  info="Give an indication of current employment or academic status."
-                />
+                  <SelectListGroup
+                    placeholder="Status"
+                    name="status"
+                    value={this.state.status}
+                    onChange={this.onChange}
+                    options={options}
+                    error={errors.status}
+                    info="Give an indication of current employment or academic status."
+                  />
 
-                <TextFieldGroup
-                  placeholder="* Company"
-                  name="company"
-                  value={this.state.company}
-                  onChange={this.onChange}
-                  error={errors.company}
-                  info="Could be your own company or your employer"
-                />
+                  <TextFieldGroup
+                    placeholder="* Company"
+                    name="company"
+                    value={this.state.company}
+                    onChange={this.onChange}
+                    error={errors.company}
+                    info="Could be your own company or your employer"
+                  />
 
-                <TextFieldGroup
-                  placeholder="Website"
-                  name="website"
-                  value={this.state.website}
-                  onChange={this.onChange}
-                  error={errors.website}
-                  info="Your personal website"
-                />
+                  <TextFieldGroup
+                    placeholder="Website"
+                    name="website"
+                    value={this.state.website}
+                    onChange={this.onChange}
+                    error={errors.website}
+                    info="Your personal website"
+                  />
 
-                <TextFieldGroup
-                  placeholder="Location"
-                  name="location"
-                  value={this.state.location}
-                  onChange={this.onChange}
-                  error={errors.location}
-                  info="Where you currently work or reside"
-                />
+                  <TextFieldGroup
+                    placeholder="Location"
+                    name="location"
+                    value={this.state.location}
+                    onChange={this.onChange}
+                    error={errors.location}
+                    info="Where you currently work or reside"
+                  />
 
-                <TextFieldGroup
-                  placeholder="* Skills"
-                  name="skills"
-                  value={this.state.skills}
-                  onChange={this.onChange}
-                  error={errors.skills}
-                  info="Your technologic skill set - separate values with a comma (Javascript, C#, CSS)"
-                />
+                  <TextFieldGroup
+                    placeholder="* Skills"
+                    name="skills"
+                    value={this.state.skills}
+                    onChange={this.onChange}
+                    error={errors.skills}
+                    info="Your technologic skill set - separate values with a comma (Javascript, C#, CSS)"
+                  />
 
-                <TextFieldGroup
-                  placeholder="Github Username"
-                  name="githubUsername"
-                  value={this.state.githubUsername}
-                  onChange={this.onChange}
-                  error={errors.githubUsername}
-                  info="To have latest repos displayed, include your Github username"
-                />
+                  <TextFieldGroup
+                    placeholder="Github Username"
+                    name="githubUsername"
+                    value={this.state.githubUsername}
+                    onChange={this.onChange}
+                    error={errors.githubUsername}
+                    info="To have latest repos displayed, include your Github username"
+                  />
 
-                <TextAreaFieldGroup
-                  placeholder="Short bio"
-                  name="bio"
-                  value={this.state.bio}
-                  onChange={this.onChange}
-                  error={errors.bio}
-                  info="Tell a little about yourself"
-                />
+                  <TextAreaFieldGroup
+                    placeholder="Short bio"
+                    name="bio"
+                    value={this.state.bio}
+                    onChange={this.onChange}
+                    error={errors.bio}
+                    info="Tell a little about yourself"
+                  />
 
-                <div className="mb-3">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      this.setState(prevState => ({
-                        displaySocialInputs: !prevState.displaySocialInputs
-                      }));
-                    }}
-                    className="btn btn-light"
-                  >
-                    Add Social Network Links
-                  </button>
-                  <span className="text-muted">Optional</span>
-                </div>
-                {socialInputs}
-                <input
-                  type="submit"
-                  value="submit"
-                  className="btn btn-info btn-block mt-4"
-                />
-              </form>
+                  <div className="mb-3 edit-profile__optional-btn">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        this.setState(prevState => ({
+                          displaySocialInputs: !prevState.displaySocialInputs
+                        }));
+                      }}
+                      className="btn btn-light"
+                    >
+                      Add Social Network Links
+                    </button>
+                    <span className="text-muted">Optional</span>
+                  </div>
+                  {socialInputs}
+                  <input
+                    type="submit"
+                    value="submit"
+                    className="btn btn-info btn-block mt-4"
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>

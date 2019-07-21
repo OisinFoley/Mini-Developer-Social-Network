@@ -39,7 +39,7 @@ export class Education extends Component {
 
     return (
       <div className="dashboard__content-container bg-light">
-        <h4 className="mb-4" className="dashboard__content-heading">Education</h4>
+        <h4 className="mb-4 dashboard__content-heading">Education</h4>
         <table className="table" id="dashboard__content-table">
           <thead>
             <tr className='row'>
