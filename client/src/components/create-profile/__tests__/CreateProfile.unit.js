@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { CreateProfile } from '../CreateProfile';
-import event from '../../../__mocks__/event';
 
 const createProfile = jest.fn();
 const profile = {};
