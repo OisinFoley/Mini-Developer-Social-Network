@@ -4,8 +4,6 @@ import { Profile } from '../Profile';
 import { mockProfiles } from '../../../__mocks__/mockProfiles';
 
 const getProfileByHandle = jest.fn();
-const push = jest.fn();
-const history = { push };
 const profile = {
   ...mockProfiles[0]
 };
@@ -38,7 +36,6 @@ let profileNoGithubUsername = {
   getProfileByHandle
 };
 profileNoGithubUsername.profile.profile.githubUsername = null;
-// console.log(profileNoGithubUsername);
 
 const nullProfile = {
   profile: {
