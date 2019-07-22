@@ -20,7 +20,7 @@ describe('<AddEducation />', () => {
     expect(subHeading.text()).toEqual(`Add academic education or coding training you've attended`);
     expect(textAreaFieldGroupList.length).toEqual(5);
     expect(form.length).toEqual(1);
-  })
+  });
 
   it(`shallows renders AddEducation,
     and when onSubmit event is fired,
