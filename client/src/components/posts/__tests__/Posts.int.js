@@ -25,9 +25,9 @@ const mockIsLoadingState = {
   errors: {}
 };
 const mockIsNotLoadingState = {
+  ...mockIsLoadingState,
   posts: postsAndLoadingIsFalse,
-  post: postsAndLoadingIsFalse,
-  ...mockIsLoadingState
+  post: postsAndLoadingIsFalse
 };
 const mockIsLoadingPostsStore = mockStore(mockIsLoadingState);
 const mockIsNotLoadingPostsStore = mockStore(mockIsNotLoadingState);

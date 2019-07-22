@@ -32,11 +32,17 @@ import Post from './components/post/Post';
 
 import './App.css';
 
+console.log(setTokenAsHeader);
+console.log(jwt_decode);
+console.log(store);
+
+
+
 // check if token exists
 // then set user and isAuthenticated state
 // updates the initial state of our auth reducer, as well as state status in redux tools
 if (localStorage.jwtToken) {
-  // call our util which tells axios to attach token as Authorization header
+  // call our util which tells axios to attach token as Authorization header  
   setTokenAsHeader(localStorage.jwtToken);
 
   // decode token info

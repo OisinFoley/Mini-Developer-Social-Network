@@ -58,7 +58,7 @@ describe('<Dashboard />', () => {
 
     expect(userHandleLink.get(0).props.to).toEqual(`/profile/${handle}`);
     expect(userHandleLink.get(0).props.children).toEqual(name);
-  })
+  });
 
   it(`shallow renders the Dashboard component and, when profile is loading,
     then there are zero Links to user handle`, () => {
@@ -67,7 +67,7 @@ describe('<Dashboard />', () => {
     const userHandleLink = component.find('Link');  
   
     expect(userHandleLink.length).toEqual(0);
-  })
+  });
 
   it(`shallow renders the Dashboard component and, when no profile is provided and not loading,
     then there is a Link to create profile`, () => {
@@ -78,6 +78,15 @@ describe('<Dashboard />', () => {
     expect(createProfileLink.get(0).props.to).toEqual(createProfileLink_ExpectedToValue);
     expect(createProfileLink.get(0).props.children).toEqual(createProfileText);
     expect(createProfileLink.length).toEqual(1);
-  })
+  });
 
+  // it(`shallow renders the Dashboard component and, when no profile is provided and not loading,
+  //   then there is a Link to create profile`, () => {
+  //     const wrapper = shallow(<ConnectedDashboard store={noProfileStore} props={props} />);
+  //     // console.log(wrapper.dive().debug());
+  //     const dashboardComponent = wrapper.dive();
+      
+  //     dashboardComponent.instance().onDeleteProfileClick();
+  //     expect(deleteAccount.mock.calls.length).toEqual(2);
+  // });
 });
