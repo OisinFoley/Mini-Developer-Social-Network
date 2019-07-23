@@ -42,30 +42,30 @@ jest.mock('jwt_decode');
 const store = mockStore(state);
 
 describe('<App />', () => {
-  // test("when path is '/profiles', then should direct to non-private Profiles component", () => {
+  test("when path is '/profiles', then should direct to non-private Profiles component", () => {
     
-  //       const wrapper = mount(
-  //         <MemoryRouter initialEntries={[ '/Profiles' ]}>
-  //           <App />
-  //         </MemoryRouter>
-  //       );
+        const wrapper = mount(
+          <MemoryRouter initialEntries={[ '/Profiles' ]}>
+            <App />
+          </MemoryRouter>
+        );
         
-  //       console.log(wrapper.find(Profiles).length);
-  //       expect(wrapper.find(Profiles)).toHaveLength(1);
-  // });
+        console.log(wrapper.find(Profiles).length);
+        expect(wrapper.find(Profiles)).toHaveLength(1);
+  });
 
-  // test(`when path is '/dashboard' and mocked jwt is expired, then should redirect to Login,
-  //       instead of private Dashboard component `, () => {
+  test(`when path is '/dashboard' and mocked jwt is expired, then should redirect to Login,
+        instead of private Dashboard component `, () => {
     
-  //       const wrapper = mount(
-  //         <MemoryRouter initialEntries={[ '/Dashboard' ]}>
-  //           <App />
-  //         </MemoryRouter>
-  //       );
+        const wrapper = mount(
+          <MemoryRouter initialEntries={[ '/Dashboard' ]}>
+            <App />
+          </MemoryRouter>
+        );
         
-  //       console.log(wrapper.find(Dashboard).length);
-  //       expect(wrapper.find(Dashboard)).toHaveLength(1);
-  // });
+        console.log(wrapper.find(Login).length);
+        expect(wrapper.find(Login)).toHaveLength(1);
+  });
 
   
   // rename this test -> what are we even testing??
