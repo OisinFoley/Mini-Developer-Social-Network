@@ -3,6 +3,9 @@ import { fakeUser } from './mockAuth';
 import { idCannotBeNullExceptionMessage } from './exceptionMessages';
 
 export default {
+  defaults: { 
+    headers: { common: {} }
+  },
   get: jest.fn((url, id) => {
     switch (url) {
       case '/api/posts': // getPosts()

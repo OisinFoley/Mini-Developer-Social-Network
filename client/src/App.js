@@ -4,18 +4,14 @@ import jwt_decode from 'jwt-decode';
 import setTokenAsHeader from './utils/setTokenAsHeader';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import { clearCurrentProfile } from './actions/profileActions';
-
 import { Provider } from 'react-redux';
 import store from './store';
 import PrivateRoute from './components/common/PrivateRoute';
-
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
-
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/create-profile/CreateProfile';
 import EditProfile from './components/edit-profile/EditProfile';
@@ -23,28 +19,20 @@ import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
-
 import NotFound from './components/not-found/NotFound';
-
 import Posts from './components/posts/Posts';
-
 import Post from './components/post/Post';
-
 import './App.css';
 
 // check if token exists
 // then set user and isAuthenticated state
-// updates the initial state of our auth reducer, as well as state status in redux tools
 if (localStorage.jwtToken) {
-  // call our util which tells axios to attach token as Authorization header
+  // call our util which tells axios to attach token as Authorization header  
   setTokenAsHeader(localStorage.jwtToken);
-
   // decode token info
   const decoded = jwt_decode(localStorage.jwtToken);
-
   // set user info and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
-
+  store.dispatch(setCurrentUser(decoded));  
   // check for expired token
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
@@ -106,7 +94,6 @@ class App extends Component {
               <Switch>
                 <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
-
               <Route exact path="/not-found" component={NotFound} />
             </div>
             <Footer />
