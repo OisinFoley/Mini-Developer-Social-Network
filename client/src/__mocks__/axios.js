@@ -41,7 +41,7 @@ export default {
       case '/api/users/register': // registerUser()
         return Promise.resolve({ data: 'fakeUser' } );
       case '/api/users/login': // loginUser()
-        return Promise.resolve({ data: fakeUser } );
+        return Promise.resolve({ data: { token: 'fakeToken' } } );
       case '/api/profile': // createProfile()
         return Promise.resolve({ data: fakeUser } );
       case '/api/profile/education': // addEducation()
