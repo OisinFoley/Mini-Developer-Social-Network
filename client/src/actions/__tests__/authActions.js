@@ -1,5 +1,6 @@
 import mockAxios from 'axios';
 import * as actions from '../authActions';
+import * as types from '../types';
 import { mockStore } from '../../__mocks__/mockStore';
 
 jest.mock('jwt-decode', () => jest.fn().mockReturnValue({
@@ -19,9 +20,8 @@ describe("registerUser", () => {
   it('should register the user and redirect to login', async () => {
     const push = jest.fn();
     const history = { push };
-    const dispatch = jest.fn();
 
-    await actions.registerUser('the user data', history)(dispatch);
+    await store.dispatch(actions.registerUser('the user data', history));
 
     expect(mock).toHaveBeenCalledWith('/api/users/register', 'the user data');
     expect(history.push).toHaveBeenCalledWith('/login');
@@ -29,25 +29,21 @@ describe("registerUser", () => {
 });
 
 describe("loginUser", () => {
-  it('should login the user, call localStorage.setItem then dispatch setCurrentUser', async () => {
-    const dispatch = jest.fn(); // is this needed?
-    await actions.loginUser('the user data')(dispatch);
+  it('should login the user, call localStorage.setItem, then dispatch setCurrentUser', async () => {
+    await store.dispatch(actions.loginUser('the user data'));
 
     expect(mock).toHaveBeenCalledWith('/api/users/login', 'the user data');
     expect(localStorage.setItem.mock.calls.length).toBe(1);
-
-    // need to verify the disatch to store
+    expect(storeActions[0]).toEqual({ type: types.SET_CURRENT_USER, payload: { exp: 12345 } });
   });
 });
 
 describe("logoutUser", () => {
   it(`should log user out, call localStorage.removeItem then dispatche user 
       then dispatch setCurrentUser with empty payload`, async () => {
-      const dispatch = jest.fn(); // is this needed
-      await actions.logoutUser()(dispatch);
-
+      await store.dispatch(actions.logoutUser());
+      
       expect(localStorage.removeItem.mock.calls.length).toBe(1);
-
-      // need to verify the disatch to store
+      expect(storeActions[0]).toEqual({ type: types.SET_CURRENT_USER, payload: {} });
   });
 });

@@ -32,7 +32,7 @@ describe("getPosts", () => {
   it(`dispatches POST_LOADING and when it resolves and returns POSTS payload, 
     then it dispatches GET_POSTS`, async () => {
     await store.dispatch(actions.getPosts());
-    expect(storeActions[0]).toEqual({ type: types.POST_LOADING});
+    expect(storeActions[0]).toEqual({ type: types.POST_LOADING });
     expect(storeActions[1]).toEqual({ type: types.GET_POSTS, payload: mockPosts });
   });
 });

@@ -7,11 +7,7 @@ import jwt_decode from 'jwt-decode';
 export const registerUser = (userData, history) => async (dispatch) => {
   await axios
     .post('/api/users/register', userData)
-    .then(res => history.push('/login'))
-    // if we made this axios call from within our component, we could use this.setState(etc...)
-    // but because we're inside of an action, we use dispatch on this async operation
-    // dispatch just allows you to format the response before finally sending it back to the reducer
-    // which then sends it to the component state
+    .then(() => history.push('/login'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
