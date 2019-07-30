@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ConnectedPosts from '../Posts';
 import { mockStore } from '../../../__mocks__/mockStore';
@@ -36,9 +36,9 @@ describe('<Posts />', () => {
   it(`mounts Post, and when posts are loading, then it displays Spinner and not PostFeed`, () => {
     const wrapper = mount(
       <Provider store={mockIsLoadingPostsStore} post={mockPosts} >
-        <Router>
+        <MemoryRouter>
           <ConnectedPosts />
-        </Router>
+        </MemoryRouter>
       </Provider>
     );
     const spinner = wrapper.find('img.spinner');
@@ -52,9 +52,9 @@ describe('<Posts />', () => {
   it(`mounts Posts, and when posts are not loading and not empty, then it displays PostFeed`, () => {
     const wrapper = mount(
       <Provider store={mockIsNotLoadingPostsStore} posts={mockPosts} post={mockPosts} >
-        <Router>
+        <MemoryRouter>
           <ConnectedPosts />
-        </Router>
+        </MemoryRouter>
       </Provider>
     );
     const postFeed = wrapper.find('PostFeed');

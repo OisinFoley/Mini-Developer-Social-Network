@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ConnectedAddEducation from '../AddEducation';
 import event from '../../../__mocks__/event';
@@ -16,9 +16,9 @@ let wrapper;
 beforeEach(() => {
   wrapper = mount(
     <Provider store={mockEducationStore} >
-      <Router>
+      <MemoryRouter>
         <ConnectedAddEducation />
-      </Router>
+      </MemoryRouter>
     </Provider>
   );
 });
@@ -26,14 +26,6 @@ beforeEach(() => {
 describe('<AddEducation />', () => {
   it(`mounts and, when all TextFieldGroup and TextAreaFieldGroup components are updated,
     then state is updated based on input values`, () => {
-    // this is something we can try in another component test
-    // we got from SO, but wouldn't work because this component has a BackButton comp, which relies on router
-    // const wrapper = mount(
-    //   <ConnectedAddEducation />, {
-    //     context: { store: mockEducationStore }
-    //   }
-    // );
-
     const component = wrapper.find('AddEducation');
 
     component.find('input[name="school"]').simulate('change', { target: event('school', 'test_school') })

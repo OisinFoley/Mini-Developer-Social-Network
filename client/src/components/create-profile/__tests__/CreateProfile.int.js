@@ -1,12 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ConnectedCreateProfile from '../CreateProfile';
 import event from '../../../__mocks__/event';
 import { mockStore } from '../../../__mocks__/mockStore';
 
-const createProfile = jest.fn();
 const profile = {};
 const errors = {};
 let mockState = {
@@ -18,9 +17,9 @@ const mockCreateProfileStore = mockStore(mockState);
 it("mounts and, when all inputs are updated, then state is updated for each", () => {
   const wrapper = mount(
     <Provider store={mockCreateProfileStore} displaySocialInputs={false} >
-      <Router>
+      <MemoryRouter>
         <ConnectedCreateProfile />
-      </Router>
+      </MemoryRouter>
     </Provider>
   );
 

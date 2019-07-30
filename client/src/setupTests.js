@@ -1,9 +1,5 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-// import axios from 'axios';
-
-// axios.defaults.headers.common['my-default-header'] = 'my-default-value';
-
 configure({ adapter: new Adapter() });
 
 const localStorageMock = {

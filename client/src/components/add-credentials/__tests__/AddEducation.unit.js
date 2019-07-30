@@ -33,5 +33,5 @@ describe('<AddEducation />', () => {
     });
 
     expect(addEducation.mock.calls.length).toEqual(1);
-  })
+  });
 });
