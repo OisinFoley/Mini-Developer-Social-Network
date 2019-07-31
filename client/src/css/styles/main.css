@@ -40,10 +40,10 @@ html {
   font-family: sans-serif;
   font-size: 100%; }
 
-.edit-profile__social-icon-wrapper {
+.set-profile__social-icon-wrapper {
   width: 10%; }
 
-.edit-profile__social-icon-span {
+.set-profile__social-icon-span {
   width: 100%; }
 
 .navbar__user-icon {
@@ -254,7 +254,7 @@ html {
 @media only screen and (max-width: 500px) {
   #dashboard__create-profile-btn {
     width: 100%; }
-  .edit-profile__social-icon-wrapper {
+  .set-profile__social-icon-wrapper {
     width: calc(5vw + 2.5rem); }
   #feed-generic__users-basic-details {
     width: 60%; } }
@@ -416,10 +416,10 @@ html {
 .delete-account__hr {
   width: 95%; }
 
-.edit-profile__span--optional-label {
+.set-profile__span--optional-label {
   margin: 0 2.5vw; }
 
-.edit-profile__optional-btn {
+.set-profile__optional-btn {
   text-align: center; }
 
 #landing__title {

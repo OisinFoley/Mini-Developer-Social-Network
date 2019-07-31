@@ -206,7 +206,7 @@ export class SetProfile extends Component {
       options.unshift({ label: '- Select Professional Status -', value: 0 });
 
     return (
-      <div className="create-profile">
+      <div className="set-profile">
         <div className="md-container">
           <div className="row">
             <div className="col-md-12">
@@ -293,7 +293,7 @@ export class SetProfile extends Component {
                     info="Tell us a little about yourself"
                   />
 
-                  <div className="mb-3 edit-profile__optional-btn">
+                  <div className="mb-3 set-profile__optional-btn">
                     <button
                       type="button"
                       onClick={() => {
@@ -305,7 +305,7 @@ export class SetProfile extends Component {
                     >
                       Add Social Network Links
                     </button>
-                    <span className="text-muted edit-profile__span--optional-label">Optional</span>
+                    <span className="text-muted set-profile__span--optional-label">Optional</span>
                   </div>
                   {socialInputs}
                   <input
