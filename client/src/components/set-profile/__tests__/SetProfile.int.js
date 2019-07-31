@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import ConnectedCreateProfile from '../CreateProfile';
+import ConnectedSetProfile from '../SetProfile';
 import event from '../../../__mocks__/event';
 import { mockStore } from '../../../__mocks__/mockStore';
 
@@ -12,18 +12,18 @@ let mockState = {
   profile,
   errors
 }
-const mockCreateProfileStore = mockStore(mockState);
+const mockSetProfileStore = mockStore(mockState);
 
 it("mounts and, when all inputs are updated, then state is updated for each", () => {
   const wrapper = mount(
-    <Provider store={mockCreateProfileStore} displaySocialInputs={false} >
+    <Provider store={mockSetProfileStore} displaySocialInputs={false} >
       <MemoryRouter>
-        <ConnectedCreateProfile />
+        <ConnectedSetProfile />
       </MemoryRouter>
     </Provider>
   );
 
-  const component = wrapper.find('CreateProfile');
+  const component = wrapper.find('SetProfile');
 
   component.find('input[name="handle"]').simulate('change', { target: event('handle', 'test_handle') });
   component.find('select[name="status"]').simulate('change', { target: event('status', 'Developer') });

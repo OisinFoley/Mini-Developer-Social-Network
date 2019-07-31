@@ -13,8 +13,7 @@ import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
-import CreateProfile from './components/create-profile/CreateProfile';
-import EditProfile from './components/edit-profile/EditProfile';
+import SetProfile from './components/set-profile/SetProfile';
 import AddExperience from './components/add-credentials/AddExperience';
 import AddEducation from './components/add-credentials/AddEducation';
 import Profiles from './components/profiles/Profiles';
@@ -64,14 +63,14 @@ class App extends Component {
                 <PrivateRoute
                   exact
                   path="/create-profile"
-                  component={CreateProfile}
+                  component={SetProfile}
                 />
               </Switch>
               <Switch>
                 <PrivateRoute
                   exact
                   path="/edit-profile"
-                  component={EditProfile}
+                  component={SetProfile}
                 />
               </Switch>
               <Switch>
