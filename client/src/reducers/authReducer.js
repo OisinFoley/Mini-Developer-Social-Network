@@ -11,8 +11,6 @@ export default function(state = initialState, action) {
     case SET_CURRENT_USER:
       return {
         ...state,
-        // action.payload for SET_CURRENT_USER should have decoded token info
-        // so we're only authenticated if this prop isn't empty
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };

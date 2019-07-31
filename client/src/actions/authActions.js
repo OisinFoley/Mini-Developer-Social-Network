@@ -7,11 +7,7 @@ import jwt_decode from 'jwt-decode';
 export const registerUser = (userData, history) => async (dispatch) => {
   await axios
     .post('/api/users/register', userData)
-    .then(res => history.push('/login'))
-    // if we made this axios call from within our component, we could use this.setState(etc...)
-    // but because we're inside of an action, we use dispatch on this async operation
-    // dispatch just allows you to format the response before finally sending it back to the reducer
-    // which then sends it to the component state
+    .then(() => history.push('/login'))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -20,23 +16,19 @@ export const registerUser = (userData, history) => async (dispatch) => {
     );
 };
 
-// login and grab token
+// login and grab token, then attach to future headers
 export const loginUser = userData => async (dispatch) => {
   await axios
     .post('/api/users/login', userData)
     .then(res => {
-      // save to localStorage
       let { token } = res.data;
 
       localStorage.setItem('jwtToken', token);
 
-      // set token as auth-header
       setTokenAsHeader(token);
 
-      // decode info from token
       const decoded = jwt_decode(token);
 
-      //set current user, note - we're sending to the reducer
       dispatch(setCurrentUser(decoded));
     })
     .catch(err =>
@@ -55,9 +47,9 @@ export const setCurrentUser = decoded => {
   };
 };
 
-//remove token from storage, and remove it from the header of future requests
-// update user currentUser state
-export const logoutUser = () => dispatch => {
+// remove token from storage, and from future request headers
+// update currentUser state
+export const logoutUser = () => dispatch => {  
   localStorage.removeItem('jwtToken');
 
   setTokenAsHeader(false);

@@ -9,18 +9,23 @@ import Experience from './Experience';
 import Education from './Education';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
   }
 
   onDeleteProfileClick = () => {
+    // console.log('ondleteprofile clicked');
+    
     this.props.deleteAccount();
   }
 
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
+
+    // console.log(profile);
+    
 
     let dashboardContent;
 
@@ -44,11 +49,18 @@ class Dashboard extends Component {
             >
               Delete my Account
             </button>
-          <ConfirmDeleteModal onDelete={this.onDeleteProfileClick} modalId={`deleteProfileModal`} id={null} nestedId={null} modalTitle='Delete Profile' modalBody="Are you sure you want to delete your entire Profile? This cannot be undone. Your posts will remain after your profile is removed.." />
+          <ConfirmDeleteModal
+            onDelete={this.onDeleteProfileClick}
+            modalId={`deleteProfileModal`}
+            id={'delete-profile-modal-confirm-btn'}
+            nestedId={null}
+            modalTitle='Delete Profile'
+            modalBody="Are you sure you want to delete your entire Profile? This cannot be undone. Your posts will remain after your profile is removed.." 
+          />
           </div>
         );
       } else {
-        // logged in but no profile
+        // logged in but no profile created
         dashboardContent = (
           <div>
             <p className="lead text-muted dashboard__welcome-label"> Welcome {user.name} </p>

@@ -11,16 +11,13 @@ class ConfirmDeleteModal extends Component {
  }
 
   handleClick() {
-    let clickedId = this.props.id;
-    let clickedNestedId = this.props.nestedId;
-    this.props.onDelete(clickedId, clickedNestedId);
+    let { id, nestedId } = this.props;
+    this.props.onDelete(id, nestedId);
   }
 
   render() {
 
-    let modalId = this.props.modalId;
-    let modalTitle = this.props.modalTitle;
-    let modalBody = this.props.modalBody;
+    let { id, modalId, modalTitle, modalBody } = this.props;
 
     return (
       <div className="modal fade" id={`${modalId}`} tabIndex="-1" role="dialog" aria-labelledby={`${modalId}-ModalLabel`} aria-hidden="true">
@@ -36,8 +33,8 @@ class ConfirmDeleteModal extends Component {
             {modalBody}
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" className="btn btn-danger" onClick={this.handleClick.bind(this, this.props.id, (this.props.nestedId !== null ? (this.props.nestedId) : null ))} data-dismiss="modal">Confirm Delete</button>
+              <button type="button" className="btn btn-secondary" id='modal-cancel' data-dismiss="modal">Cancel</button>
+              <button type="button" className="btn btn-danger" id={id} onClick={this.handleClick.bind(this, this.props.id, (this.props.nestedId !== null ? (this.props.nestedId) : null ))} data-dismiss="modal">Confirm Delete</button>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import isEmpty from '../../validation/is-empty';
 import PropTypes from 'prop-types';
 
-class ProfileItem extends Component {
+export class ProfileItem extends Component {
   render() {
     const { profile } = this.props;
 
@@ -17,7 +17,7 @@ class ProfileItem extends Component {
               <p className='profiles-feed__current-position'>
                   {profile.status}{' '}
                   {isEmpty(profile.company) ? null : (
-                    <span> at {profile.company} </span>
+                    <span>at {profile.company}</span>
                   )}
               </p>
               <p className='profiles-feed__current-location'>

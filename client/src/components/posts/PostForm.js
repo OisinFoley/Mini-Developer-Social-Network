@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { addPost } from '../../actions/postActions';
 
-class PostForm extends Component {
+export class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
