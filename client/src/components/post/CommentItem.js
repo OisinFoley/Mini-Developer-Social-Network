@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { deleteComment } from '../../actions/postActions';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
-class CommentItem extends Component {
+export class CommentItem extends Component {
   onDeleteClick = (postId, commentId) => {
     this.props.deleteComment(postId, commentId);
   }

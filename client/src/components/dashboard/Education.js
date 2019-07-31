@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import { deleteEducation } from '../../actions/profileActions';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
-class Education extends Component {
+export class Education extends Component {
   onDeleteEducation = id => {
     this.props.deleteEducation(id);
   }
@@ -13,8 +13,8 @@ class Education extends Component {
   render() {
     const education = this.props.education.map((edu, i) => (
       <tr className='row' key={edu._id}>
-        <td className='col-4 table-item--sm table-item-md'> {edu.school} </td>
-        <td className='col-4 table-item--sm table-item-md'> {edu.degree} </td>
+        <td className='col-4 table-item--sm table-item-md'>{edu.school}</td>
+        <td className='col-4 table-item--sm table-item-md'>{edu.degree}</td>
         <td className='col-3 table-item--sm table-item-md'>
           <Moment format="DD/MM/YYYY">{edu.from}</Moment> -&nbsp;
           {edu.to === null ? (
@@ -28,8 +28,9 @@ class Education extends Component {
             data-toggle="modal"
             data-target={`#deleteEducationModal-${i+1}`}
             className="btn-danger dashboard__btn-delete"
+            id={`delete-education-btn-${i}`}
           >
-            <i id="delete-button-icon" class="fas fa-times"></i>
+            <i id="delete-button-icon" className="fas fa-times"></i>
           </button>
           <ConfirmDeleteModal onDelete={this.onDeleteEducation} modalId={`deleteEducationModal-${i+1}`} id={edu._id} modalTitle='Delete Education' modalBody='Are you sure you want to delete this Education? This cannot be undone.' />
         </td>
@@ -38,7 +39,7 @@ class Education extends Component {
 
     return (
       <div className="dashboard__content-container bg-light">
-        <h4 className="mb-4" className="dashboard__content-heading">Education</h4>
+        <h4 className="mb-4 dashboard__content-heading">Education</h4>
         <table className="table" id="dashboard__content-table">
           <thead>
             <tr className='row'>

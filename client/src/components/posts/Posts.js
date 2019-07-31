@@ -6,7 +6,7 @@ import PostForm from './PostForm';
 import { getPosts } from '../../actions/postActions';
 import PostFeed from './PostFeed';
 
-class Posts extends Component {
+export class Posts extends Component {
   componentDidMount() {
     this.props.getPosts();
   }
