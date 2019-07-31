@@ -1,0 +1,42 @@
+.posts-comments-feed__delete-item-button {
+  float: right; }
+
+.posts-profiles-feed__feed-item-link-span {
+  display: flex;
+  margin: 4.5vh auto;
+  width: 83%; }
+
+.posts-profiles-feed__feed-item-link {
+  width: 100%; }
+
+.posts-comments-feed__feed-item-content-text {
+  width: 75%;
+  margin: 0px 7px;
+  float: left; }
+
+.posts-comments__submit-button {
+  width: 100%; }
+
+#posts-feed__likes-count {
+  margin-left: 1.5px; }
+
+.fa-thumbs-up {
+  margin-left: -6px; }
+
+#feed-generic__users-basic-details {
+  margin: 0 0 0 13px;
+  float: left;
+  width: 70%; }
+
+#profiles-feed__users-profile-name,
+.profiles-feed__current-position,
+.profiles-feed__current-location {
+  margin: 2vw 0; }
+
+#feed-generic__users-profile-name {
+  margin: 0; }
+
+#posts-feed__feed-item-link-wrapper {
+  margin: 20px 0 0 0; }
+
+/*# sourceMappingURL=content-feed-stylings.css.map */

@@ -20,22 +20,23 @@ class ProfileGithub extends Component {
     fetch(
       `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`
     )
-      .then(res => res.json())
-      .then(data => {
-        if (this.refs.myRef) {
-          this.setState({ repos: data });
-        }
-      })
-      .catch(err => this.setState({ repos: null }));
+    .then(res => res.json())
+    .then(data => {
+      if (this.refs.myRef) {
+        this.setState({ repos: data });
+      }
+    })
+    .catch(err => this.setState({ repos: null }));
   }
 
   render() {
     const { repos } = this.state;
     let repoItems;
+    
     if (repos.length === 0 || repos.message) {
       repoItems = (
         <div>
-          No repos to display for this username - check the username you've
+          No repos to display for this username - check username
           specified in <b>Edit Profile</b> or that your Github account is
           populated with repos.
         </div>

@@ -1,0 +1,10 @@
+@media only screen and (min-width: 1200px) {
+  .md-container {
+    max-width: 1140px; }
+  .posts-profiles-feed__feed-item-link {
+    width: 100%; }
+  .posts-comments-feed__like-btn, .posts-comments-feed__unlike-btn {
+    margin-bottom: -.5rem;
+    margin-top: -.3125rem; } }
+
+/*# sourceMappingURL=xl-screen.css.map */

@@ -1,5 +1,0 @@
-
-
-UpdateProfile.defaultProps = {
-  showBackButton: true
-};

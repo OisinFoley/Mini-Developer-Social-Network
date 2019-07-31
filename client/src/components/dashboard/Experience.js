@@ -5,7 +5,7 @@ import Moment from 'react-moment';
 import { deleteExperience } from '../../actions/profileActions';
 import ConfirmDeleteModal from '../common/ConfirmDeleteModal';
 
-class Experience extends Component {
+export class Experience extends Component {
   onDeleteExperience = id => {
     this.props.deleteExperience(id);
   }
@@ -29,7 +29,7 @@ class Experience extends Component {
             data-target={`#deleteExperienceModal-${i+1}`}
             className="btn-danger dashboard__btn-delete"
           >
-            <i id="delete-button-icon" class="fas fa-times"></i>
+            <i id="delete-button-icon" className="fas fa-times"></i>
           </button>
           <ConfirmDeleteModal onDelete={this.onDeleteExperience} modalId={`deleteExperienceModal-${i+1}`} id={exp._id} modalTitle='Delete Experience' modalBody='Are you sure you want to delete this Experience? This cannot be undone.' />
         </td>
@@ -38,7 +38,7 @@ class Experience extends Component {
 
     return (
       <div className="dashboard__content-container bg-light">
-        <h4 className="mb-4" className="dashboard__content-heading">Experience</h4>
+        <h4 className="mb-4 dashboard__content-heading">Experience</h4>
         <table className="table" id="dashboard__content-table">
           <thead>
             <tr className='row'>

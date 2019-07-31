@@ -1,0 +1,13 @@
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .md-container {
+    max-width: 960px; }
+  .posts-profiles-feed__feed-item-link {
+    width: 100%; }
+  #profiles-feed__users-profile-name,
+  .profiles-feed__current-position,
+  .profiles-feed__current-location {
+    margin: 1.5vw 0; }
+  #feed-generic__users-profile-name {
+    margin-top: 1.5vw; } }
+
+/*# sourceMappingURL=lg-screen.css.map */

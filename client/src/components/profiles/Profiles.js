@@ -5,7 +5,7 @@ import Spinner from '../common/Spinner';
 import { getProfiles } from '../../actions/profileActions';
 import ProfileItem from './ProfileItem';
 
-class Profiles extends Component {
+export class Profiles extends Component {
   componentDidMount() {
     this.props.getProfiles();
   }
@@ -46,7 +46,7 @@ class Profiles extends Component {
 
 Profiles.propTypes = {
   getProfiles: PropTypes.func.isRequired,
-  profiles: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

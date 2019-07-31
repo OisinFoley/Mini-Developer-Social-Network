@@ -8,7 +8,7 @@ import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
 import BackButton from '../common/BackButton';
 
-class Post extends Component {
+export class Post extends Component {
   componentDidMount() {
     this.props.getPost(this.props.match.params.id);
   }

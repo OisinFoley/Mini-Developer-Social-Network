@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "edit-profile.css",
+	"sources": [
+		"../../../styles/pages/edit-profile.scss"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,mCAAmC,CAAC;EAClC,MAAM,EAAE,OAAO,GAChB;;AAED,AAAA,2BAA2B,CAAC;EAC1B,UAAU,EAAE,MAAM,GACnB"
+}
