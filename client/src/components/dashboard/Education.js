@@ -51,7 +51,6 @@ export class Education extends Component {
           </thead>
           <tbody>{education}</tbody>
         </table>
-        <hr className='delete-account__hr' />
       </div>
     );
   }

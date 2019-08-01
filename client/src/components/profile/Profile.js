@@ -30,8 +30,7 @@ export class Profile extends Component {
       profileContent = <Spinner />;
     } else {
       profileContent = (
-        // this id and its styling are to be temporary. texts should be styled more elegantly later
-        <div id="profile__container-wrapper">
+        <div className="profile__container-wrapper">
           <div className="row">
             <div className="col-md-6">
               <BackButton route='dashboard' additionalClasses='mb-3 float-left' />

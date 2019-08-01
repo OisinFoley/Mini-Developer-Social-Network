@@ -29,7 +29,7 @@ export class ProfileItem extends Component {
           </span>
           
           <h4 className='profile-item__heading-skillset text-center'>Skill set</h4>
-          <div className="col-10 offset-1" id="profile-item-skillset">
+          <div className="col-10 offset-1 profile-item__skillset">
             <ul className="list-group">
               {profile.skills.slice(0, 6).map((skill, index) => (
                 <li key={index} className="list-group-item">

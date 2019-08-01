@@ -41,7 +41,7 @@ export class Dashboard extends Component {
             <ProfileActions />
             <Experience experience={profile.experience} />
             <Education education={profile.education} />
-            <hr/>
+            <hr className="delete-account__hr"/>
             <button
               className="btn btn-danger btn--margin dashboard__delete-account-btn"
               data-toggle="modal"

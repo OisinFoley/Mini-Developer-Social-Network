@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "sm-screen.css",
-	"sources": [
-		"../../../../styles/layout/media-queries/sm-screen.scss"
-	],
-	"names": [],
-	"mappings": "AAAA,MAAM,MAAM,MAAM,MAAM,SAAS,EAAE,KAAK,OAAO,SAAS,EAAE,KAAK;EAC7D,AAAA,iBAAiB,CAAC;IAChB,SAAS,EAAE,MAAM,GAClB;EAED,AAAA,qBAAqB,CAAC;IACpB,UAAU,EAAE,GAAG,GAChB;EAED,AAAA,kBAAkB,CAAC;IACjB,UAAU,EAAE,KAAK,GAClB;EAED,AAAA,kBAAkB,CAAC;IACjB,cAAc,EAAE,MAAM;IACtB,YAAY,EAAE,KAAK,GACpB;EAED,AAAA,4CAA4C,CAAC;IAC3C,KAAK,EAAE,GAAG,GACX"
-}

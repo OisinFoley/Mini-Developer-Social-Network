@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "lg-screen.css",
-	"sources": [
-		"../../../../styles/layout/media-queries/lg-screen.scss"
-	],
-	"names": [],
-	"mappings": "AAAA,MAAM,MAAM,MAAM,MAAM,SAAS,EAAE,KAAK,OAAO,SAAS,EAAE,MAAM;EAC9D,AAAA,aAAa,CAAC;IACZ,SAAS,EAAE,KAAK,GACjB;EAED,AAAA,oCAAoC,CAAC;IACnC,KAAK,EAAE,IAAI,GACZ;EAED,AAAA,kCAAkC;EAClC,gCAAgC;EAChC,gCAAgC,CAAC;IAC/B,MAAM,EAAE,OAAO,GAChB;EAED,AAAA,iCAAiC,CAAC;IAChC,UAAU,EAAE,KAAK,GAClB"
-}

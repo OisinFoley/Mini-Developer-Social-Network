@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "md-screen.css",
-	"sources": [
-		"../../../../styles/layout/media-queries/md-screen.scss"
-	],
-	"names": [],
-	"mappings": "AAAA,MAAM,MAAM,MAAM,MAAM,SAAS,EAAE,KAAK,OAAO,SAAS,EAAE,KAAK;EAC7D,AAAA,oCAAoC,CAAC;IACnC,KAAK,EAAE,IAAI,GACZ;EAED,AAAA,kCAAkC,CAAC;IACjC,MAAM,EAAE,sBAAsB,GAC/B;EAED,AAAA,kCAAkC;EAClC,gCAAgC;EAChC,gCAAgC,CAAC;IAC/B,MAAM,EAAE,KAAK,GACd;EAED,AAAA,iCAAiC,CAAC;IAChC,UAAU,EAAE,GAAG,GAChB;EAED,AAAA,kCAAkC,CAAC;IACjC,SAAS,EAAE,QAAQ,GACpB"
-}
