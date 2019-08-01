@@ -18,7 +18,7 @@ Features:
 - Front and backend validation of forms and endpoints
 - Originally built using [CreateReactApp](https://github.com/facebook/create-react-app)
 
-Installation Requirements
+Installation Requirements:
 
 - Node: tested on 8.4.0 
 
