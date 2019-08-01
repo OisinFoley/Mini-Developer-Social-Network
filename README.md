@@ -18,10 +18,19 @@ Features:
 - Front and backend validation of forms and endpoints
 - Originally built using [CreateReactApp](https://github.com/facebook/create-react-app)
 
-Installation Requirements:
+Requirements:
 
 - Node: tested on 8.4.0 
 
 - NPM: tested on 6.2.0
 
 - [Mongo](https://www.mongodb.com/download-center/community): tested on 4.0.0
+
+- A connection string - in ```config/keys_dev.js``` - in the following format
+
+```
+  module.exports = {
+    mongoURI: 'mongodb://something:something@something',
+    secret: 'someValue'
+  };
+```
