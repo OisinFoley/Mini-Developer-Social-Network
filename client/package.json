@@ -38,8 +38,8 @@
     ]
   },
   "scripts": {
-    "build-css": "node-sass -x ./src/styles/scss/App.scss ./src/App.css",
-    "watch-css": "npm run build-css && node-sass -x ./src/styles/scss/App.scss ./src/App.css --watch --recursive",
+    "build-css": "node-sass --output-style compressed -x ./src/styles/scss/App.scss ./src/App.css",
+    "watch-css": "npm run build-css && node-sass --output-style compressed -x ./src/styles/scss/App.scss ./src/App.css --watch --recursive",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "start-js": "react-scripts start",
