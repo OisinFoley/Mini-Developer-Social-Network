@@ -5,10 +5,9 @@ class ConfirmDeleteModal extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {};
    this.handleClick = this.handleClick.bind(this);
- }
+  }
 
   handleClick() {
     let { id, nestedId } = this.props;
@@ -16,7 +15,6 @@ class ConfirmDeleteModal extends Component {
   }
 
   render() {
-
     let { id, modalId, modalTitle, modalBody } = this.props;
 
     return (

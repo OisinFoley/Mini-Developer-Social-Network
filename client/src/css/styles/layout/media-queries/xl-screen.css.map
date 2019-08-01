@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "xl-screen.css",
-	"sources": [
-		"../../../../styles/layout/media-queries/xl-screen.scss"
-	],
-	"names": [],
-	"mappings": "AAAA,MAAM,MAAM,MAAM,MAAM,SAAS,EAAE,MAAM;EACvC,AAAA,aAAa,CAAC;IACZ,SAAS,EAAE,MAAM,GAClB;EAED,AAAA,oCAAoC,CAAC;IACnC,KAAK,EAAE,IAAI,GACZ;EAED,AAAA,8BAA8B,EAAC,gCAAgC,CAAC;IAC9D,aAAa,EAAE,MAAM;IACrB,UAAU,EAAE,SAAS,GACtB"
-}

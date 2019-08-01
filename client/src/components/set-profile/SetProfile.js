@@ -218,7 +218,7 @@ export class SetProfile extends Component {
               </div>
               : 
               <div>
-                <h1 className="text-center">Create Your Profile</h1> 
+                <h1 className="text-center">Create Profile</h1> 
               </div>
             }
               <p className="lead text-center">

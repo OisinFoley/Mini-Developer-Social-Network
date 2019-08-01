@@ -1,4 +1,24 @@
-body {
-  margin: 0;
-  padding: 0;
-}
+.form-generic__container {
+  padding: 1.25rem; }
+
+.form-control::placeholder {
+  color: #bbb !important; }
+
+img {
+  width: 100%; }
+
+.img {
+  float: left; }
+
+.table {
+  margin-bottom: 0rem; }
+
+td {
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.btn--margin {
+  margin-top: 5vh; }
+
+.fab {
+  margin: 0 auto; }

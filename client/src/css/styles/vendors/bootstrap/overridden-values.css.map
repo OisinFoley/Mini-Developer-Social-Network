@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "overridden-values.css",
-	"sources": [
-		"../../../../styles/vendors/bootstrap/overridden-values.scss"
-	],
-	"names": [],
-	"mappings": "AAAA,AAAA,MAAM;AACN,MAAM;AACN,OAAO,CAAC;EACN,OAAO,EAAE,CAAC,GACX;;AAED,AAAA,IAAI,CAAC;EACH,MAAM,EAAE,GAAG,GACZ;;AAED,AAAA,OAAO,CAAC;EACN,aAAa,EAAE,MAAM;EACrB,UAAU,EAAE,MAAM,GACnB"
-}

@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "profile-github.css",
-	"sources": [
-		"../../../scss/components/profile-github.scss"
-	],
-	"names": [],
-	"mappings": "AAAA,AAAA,+BAA+B,AAAC,CAC9B,OAAO,CAAE,MAAM,CAChB"
-}

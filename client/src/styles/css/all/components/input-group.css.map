@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "input-group.css",
-	"sources": [
-		"../../../scss/components/input-group.scss"
-	],
-	"names": [],
-	"mappings": "AAAA,AAAA,kCAAkC,AAAC,CACjC,KAAK,CAAE,GAAG,CACX,AAED,AAAA,+BAA+B,AAAC,CAC9B,KAAK,CAAE,IAAI,CACZ"
-}
