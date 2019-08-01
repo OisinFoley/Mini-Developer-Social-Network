@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "profile-item.css",
-	"sources": [
-		"../../../scss/layout/profile-item.scss"
-	],
-	"names": [],
-	"mappings": "AAAA,AAAA,uBAAuB,AAAC,CACtB,OAAO,CAAE,CAAC,CACV,UAAU,CAAE,KAAK,CACjB,UAAU,CAAE,MAAM,CACnB,AAED,AAAA,+BAA+B,AAAC,CAC9B,KAAK,CAAE,IAAI,CACZ"
-}

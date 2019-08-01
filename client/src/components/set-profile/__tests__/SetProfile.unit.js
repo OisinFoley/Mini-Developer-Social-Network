@@ -25,7 +25,7 @@ describe('<SetProfile />', () => {
     const textFieldGroupList = wrapper.find('TextFieldGroup');
     const textAreaFieldGroupList = wrapper.find('TextAreaFieldGroup');
     
-    expect(mainHeaderText.text()).toEqual(`Create Your Profile`);
+    expect(mainHeaderText.text()).toEqual(`Create Profile`);
     expect(subHeading.text()).toEqual(`Provide info to make your profile stand out`);
     expect(textFieldGroupList.length).toEqual(6);
     expect(textAreaFieldGroupList.length).toEqual(1);
