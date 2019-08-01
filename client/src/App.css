@@ -372,11 +372,11 @@ html {
   #landing__btn-login {
     padding: .375rem .75rem;
     font-size: 1em; }
-  #profile__container-wrapper {
+  .profile__container-wrapper {
     text-align: center; }
-  #profile-header__title {
+  .profile-header__title {
     font-size: 2.5rem; }
-  #profile-about__skillset {
+  .profile-about__skillset {
     overflow-y: scroll;
     max-height: 32vh; }
   #dashboard__content-table {
