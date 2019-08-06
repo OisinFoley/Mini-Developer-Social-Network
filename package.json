@@ -8,7 +8,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "BROWSER=none npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "nyc --reporter=text mocha"
   },
   "author": "Oisín Foley",
   "license": "MIT",
@@ -27,6 +28,11 @@
     "validator": "^10.5.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.3"
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5",
+    "nodemon": "^1.18.3",
+    "nyc": "^14.1.1",
+    "sinon": "^7.4.1"
   }
 }
