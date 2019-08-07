@@ -90,7 +90,7 @@ postNewPost = (req, res) => {
   const { errors, isValid } = validatePostInput(req.body);
 
   if (!isValid) {
-    return res.status(404).json(errors);
+    return res.status(400).json(errors);
   }
 
   // temp solution until we mock passport properly
@@ -203,7 +203,7 @@ addCommentToPost = (req, res) => {
   const { errors, isValid } = validatePostInput(req.body);
 
   if (!isValid) {
-    return res.status(404).json(errors);
+    return res.status(400).json(errors);
   }
 
   Post.findById(req.params.id)
@@ -245,7 +245,7 @@ deleteCommentFromPost = (req, res) => {
         ).length === 0
       ) {
         return res
-          .status(404)
+          .status(400)
           .json({ notFound: 'Comment not found, cannot delete.' });
       }
       const removeIndex = post.comments
