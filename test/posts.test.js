@@ -14,7 +14,7 @@ const passport = require('passport');
 chai.use(chaiHttp);
 chai.should();
 
-describe("Posts", () => {
+describe("/api/posts/", () => {
   let db;
 
   before(done => {

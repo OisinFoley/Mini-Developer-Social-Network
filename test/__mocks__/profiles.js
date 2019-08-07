@@ -24,12 +24,14 @@ const profiles = [{
       "title": "FakeTitle",
       "company": "FakeExperience",
       "location": "FakeTown, British Columbia",
-      "from": {
-        "date": "2017-12-31T00:00:00.000Z"
-      },
-      "to": {
-        "date": "2018-10-31T00:00:00.000Z"
-      },
+      "from": "2017-12-31T00:00:00.000Z",
+      "to": "2018-10-31T00:00:00.000Z",
+      // "from": {
+      //   "date": "2017-12-31T00:00:00.000Z"
+      // },
+      // "to": {
+      //   "date": "2018-10-31T00:00:00.000Z"
+      // },
       "description": "Doing fake stuff for testing purposes."
     }
   ],
@@ -40,12 +42,14 @@ const profiles = [{
       "school": "Testing Institute",
       "degree": "Msc. in Testing",
       "fieldOfStudy": "Hypothesising",
-      "from": {
-        "date": "2015-10-29T00:00:00.000Z"
-      },
-      "to": {
-        "date": "2016-10-30T00:00:00.000Z"
-      },
+      "from": "2015-10-29T00:00:00.000Z",
+      "to": "2016-10-30T00:00:00.000Z",
+      // "from": {
+      //   "date": "2015-10-29T00:00:00.000Z"
+      // },
+      // "to": {
+      //   "date": "2016-10-30T00:00:00.000Z"
+      // },
       "description": "Here I learned how to test."
     }
   ],
