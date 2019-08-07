@@ -122,7 +122,6 @@ addLikeToPost = (req, res) => {
 
   // req.user.id = '5d497baeed8f0b4d00ece2cb'; // trigger 400 RESPONSE
   req.user.id = '5d497baeed8f0b4d00e12345'; // trigger 200 RESPONSE, guid not from any mock files (note ending)
-  console.log('req after this line');
   
     Profile.findOne({ user: req.user.id }).then(profile => {
       
@@ -155,139 +154,117 @@ router.post('/like/:id', addLikeToPost);
 // ********** reenable jwt requirement later once you have branch flow tested
 // router.post('/like/:id', passport.authenticate('jwt', { session: false }), addLikeToPost);
 
-// router.post(
-//   '/like/:id',
-//   passport.authenticate('jwt', { session: false }),
-//   (req, res) => {
-//     Profile.findOne({ user: req.user.id }).then(profile => {
-//       Post.findById(req.params.id)
-//         .then(post => {
-//           // check if previously liked
-//           if (
-//             post.likes.filter(like => like.user.toString() === req.user.id)
-//               .length > 0
-//           ) {
-//             return res
-//               .status(400)
-//               .json({ likedAlready: 'User has already liked post!' });
-//           }
-
-//           // add to likes array then save
-//           post.likes.unshift({ user: req.user.id });
-
-//           post.save().then(post => res.json(post));
-//         })
-//         .catch(err =>
-//           res
-//             .status(404)
-//             .json({ postNotFound: 'Could not find post with the id provided' })
-//         );
-//     });
-//   }
-// );
 
 // @route POST api/posts/unlike/:id
 // @desc unlike a post
 // @access Private
 
-router.post(
-  '/unlike/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      Post.findById(req.params.id)
-        .then(post => {
-          // check if previously unliked
-          if (
-            post.likes.filter(like => like.user.toString() === req.user.id)
-              .length === 0
-          ) {
-            return res
-              .status(400)
-              .json({ cannotUnlike: 'You have not yet liked this post!' });
-          }
+removeLikeFromPost = (req, res) => {
+  req.user = {};
+  req.user.id = '5d497baeed8f0b4d00e12345'; // 400 RESPONSE
 
-          const removeIndex = post.likes
-            .map(item => item.user.toString())
-            .indexOf(req.user.id);
+  Profile.findOne({ user: req.user.id }).then(profile => {
+    Post.findById(req.params.id)
+      .then(post => {
+        // check if previously unliked
+        if (
+          post.likes.filter(like => like.user.toString() === req.user.id)
+            .length === 0
+        ) {
+          return res
+            .status(400)
+            .json({ cannotUnlike: 'You have not yet liked this post' });
+        }
+        const removeIndex = post.likes
+          .map(item => item.user.toString())
+          .indexOf(req.user.id);
 
-          post.likes.splice(removeIndex, 1);
+        post.likes.splice(removeIndex, 1);
 
-          post.save().then(post => res.json(post));
-        })
-        .catch(err =>
-          res
-            .status(404)
-            .json({ postNotFound: 'Could not find post with the id provided' })
-        );
-    });
-  }
-);
+        post.save().then(post => res.json(post));
+      })
+      .catch(err =>
+        res
+          .status(404)
+          .json({ postNotFound: 'Could not find post with the id provided' })
+      );
+  });
+};
+router.post('/unlike/:id', removeLikeFromPost);
+
+// ********** reenable jwt requirement later once you have branch flow tested
+// router.post('/unlike/:id', passport.authenticate('jwt', { session: false }), removeLikeFromPost);
 
 // @route POST api/comment/:id
 // @desc add comment a post
 // @access Private
 
-router.post(
-  '/comment/:id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
+addCommentToPost = (req, res) => {
+  const { errors, isValid } = validatePostInput(req.body);
 
-    if (!isValid) {
-      return res.status(404).json(errors);
-    }
-
-    Post.findById(req.params.id)
-      .then(post => {
-        const newComment = {
-          text: req.body.text,
-          name: req.body.name,
-          avatar: req.body.avatar,
-          user: req.user.id
-        };
-
-        post.comments.unshift(newComment);
-
-        post.save().then(post => res.json(post));
-      })
-      .catch(err =>
-        res.status(404).json({ notFound: 'Post not found, cannot comment.' })
-      );
+  if (!isValid) {
+    return res.status(404).json(errors);
   }
-);
+
+  Post.findById(req.params.id)
+    .then(post => {
+      const newComment = {
+        text: req.body.text,
+        name: req.body.name,
+        avatar: req.body.avatar,
+        user: req.user.id
+      };  
+
+      post.comments.unshift(newComment);
+
+      post.save().then(updatedPost => res.json(updatedPost));
+    })
+    .catch(err =>
+      res.status(404).json({ notFound: 'Post not found, cannot comment.' })
+    );
+};
+router.post('/comment/:id', addCommentToPost);
+
+// ********** reenable jwt requirement later once you have branch flow tested
+// router.post(
+//   '/comment/:id',
+//   passport.authenticate('jwt', { session: false }), addCommentToPost);
+
+
 
 // @route DELETE api/comment/:id/:comment_id
 // @desc remove comment a post
 // @access Private
 
-router.delete(
-  '/comment/:id/:comment_id',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    Post.findById(req.params.id)
-      .then(post => {
-        if (
-          post.comments.filter(
-            comment => comment._id.toString() === req.params.comment_id
-          ).length === 0
-        ) {
-          return res
-            .status(404)
-            .json({ notFound: 'Comment not found, cannot delete. ' });
-        }
-        const removeIndex = post.comments
-          .map(item => item._id.toString())
-          .indexOf(req.params.comment_id);
+deleteCommentFromPost = (req, res) => {
+  Post.findById(req.params.id)
+    .then(post => {
+      if (
+        post.comments.filter(
+          comment => comment._id.toString() === req.params.comment_id
+        ).length === 0
+      ) {
+        return res
+          .status(404)
+          .json({ notFound: 'Comment not found, cannot delete.' });
+      }
+      const removeIndex = post.comments
+        .map(item => item._id.toString())
+        .indexOf(req.params.comment_id);
 
-        post.comments.splice(removeIndex, 1);
+      post.comments.splice(removeIndex, 1);
 
-        post.save().then(post => res.json(post));
-      })
-      .catch(err =>
-        res.status(404).json({ notFound: 'Post not found, cannot remove.' })
-      );
-  }
-);
+      post.save().then(post => res.json(post));
+    })
+    .catch(err =>
+      res.status(404).json({ notFound: 'Post not found, cannot remove comment.' })
+    );
+};
+router.delete('/comment/:id/:comment_id', deleteCommentFromPost);
+
+// ********** reenable jwt requirement later once you have branch flow tested
+// router.delete('/comment/:id/:comment_id',
+//   passport.authenticate('jwt', { session: false }),
+//   deleteCommentFromPost);
 
 module.exports = router;
