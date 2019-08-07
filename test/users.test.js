@@ -4,9 +4,6 @@ const app = require('../app');
 const mongoose = require("mongoose");
 
 const User = require('../models/User');
-// const Profile = require('../models/Profile');
-// const mockPosts = require('./__mocks__/posts');
-// const mockProfiles = require('./__mocks__/profiles');
 const mockUsers = require('./__mocks__/users');
 const mockSeedUser = require('./__mocks__/seed-user');
 const sinon = require('sinon');
@@ -16,7 +13,7 @@ const passport = require('passport');
 chai.use(chaiHttp);
 chai.should();
 
-describe("Profiles", () => {
+describe("/api/users/", () => {
   let db;
 
   before(done => {
@@ -320,13 +317,6 @@ describe("Profiles", () => {
             done();
           });
         });
-
-        
-
-        
-
-
-
 
   });
 });

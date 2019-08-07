@@ -25,30 +25,40 @@ router.get('/test', (req, res) =>
 // @route GET api/profile/
 // @desc gets current user's profile
 // @access Private
-router.get(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    let errors = {};
+getCurrentUsersProfile = (req, res) => {
+  let errors = {};
 
-    Profile.findOne({ user: req.user.id })
-      .populate('user', ['name', 'avatar'])
-      .then(profile => {
-        if (!profile) {
-          errors.noProfile = 'Profile not found!';
-          return res.status(404).json(errors);
-        }
-        res.json(profile);
-      })
-      .catch(err => res.status(404).json(err));
-  }
-);
+  //  tmp solution
+  req.user = {};
+  req.user.id = '5d497baeed8f0b4d00ece2cb'; // 200 RESPONSE
+  req.user.name = 'test_name';
+  req.user.avatar = 'test_avatar';
+
+  req.user.id = '5d497baeed8f0b4d00e12345'; // 404 RESPONSE
+
+  Profile.findOne({ user: req.user.id })
+    .populate('user', ['name', 'avatar'])
+    .then(profile => {
+      if (!profile) {
+        errors.noProfile = 'Profile not found';
+        return res.status(404).json(errors);
+      }
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+};
+// tmp solution
+router.get('/', getCurrentUsersProfile);
+
+// router.get(
+//   '/',
+//   passport.authenticate('jwt', { session: false }), getCurrentUsersProfile);
 
 // @route GET api/profile/all
 // @desc get all profiles
 // @access public
 
-router.get('/all', (req, res) => {
+getAllProfiles = (req, res) => {
   const errors = {};
 
   Profile.find()
@@ -61,7 +71,8 @@ router.get('/all', (req, res) => {
       res.json(profiles);
     })
     .catch(err => res.status(404).json({ profile: 'There are no profiles.' }));
-});
+};
+router.get('/all', getAllProfiles);
 
 // @route GET api/profile/handle/:handle
 // @desc get profile by their handle
