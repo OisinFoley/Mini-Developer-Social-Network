@@ -47,24 +47,6 @@ describe("Posts", () => {
           });
           newPost.save();
         })
-        // mockProfiles.forEach(function(profile) {
-        //   const newProfile = new Profile({
-        //     _id: profile._id,
-        //     skills: profile.skills,
-        //     date: profile.date,
-        //     user: profile.user,
-        //     handle: profile.handle,
-        //     company: profile.company,
-        //     website: profile.website,
-        //     location: profile.location,
-        //     status: profile.status,
-        //     social: profile.social,
-        //     // experience: profile.experience[0],
-        //     // education: profile.education[0],
-        //     bio: profile.bio
-        //   });
-        //   newProfile.save();
-        // })
     )
     .then(() => done());
   });
@@ -134,7 +116,7 @@ describe("Posts", () => {
         });
     });
 
-    it(`should return 401 when user tries to DELETE Post record but didn't not create the post`, (done) => {  
+    it(`should return 401 when user tries to DELETE Post record but didn't create the post`, (done) => {  
       const id = mockPosts[0]._id;
       chai.request(app)
         .delete(`/api/posts/${id}`)
@@ -162,7 +144,7 @@ describe("Posts", () => {
         });
     });
 
-    it(`should return 404 and 'Text field is required' json when trying to post new post, but post text is empty`, (done) => {  
+    it(`should return 400 and 'Text field is required' json when trying to post new post, but post text is empty`, (done) => {  
       chai.request(app)
         .post(`/api/posts`)
         .send({})
@@ -172,12 +154,12 @@ describe("Posts", () => {
           const actualBody = res.body;
 
           expectedBody.toString().should.equal(actualBody.toString());
-          res.should.have.status(404);
+          res.should.have.status(400);
           done();
         });
     });
 
-    it(`should return 404 and 'Post must be between 6 and 300 characters long.' json 
+    it(`should return 400 and 'Post must be between 6 and 300 characters long.' json 
         when user tries to post new post, but post text is < 6 chars`, (done) => {  
         chai.request(app)
           .post(`/api/posts`)
@@ -188,7 +170,7 @@ describe("Posts", () => {
             const actualBody = res.body;
 
             expectedBody.toString().should.equal(actualBody.toString());
-            res.should.have.status(404);
+            res.should.have.status(400);
             done();
           });
     });
@@ -310,7 +292,7 @@ describe("Posts", () => {
 
     // comments on posts
 
-    it(`should return 404 and 'Text field is required' json
+    it(`should return 400 and 'Text field is required' json
         when trying to add comment to post,
         but comment text is empty`, (done) => {  
         const id = mockPosts[0]._id;
@@ -324,12 +306,12 @@ describe("Posts", () => {
 
             // this should NOT PASS *******
             expectedBody.toString().should.equal(actualBody.toString());
-            res.should.have.status(404);
+            res.should.have.status(400);
             done();
           });
     });
 
-    it(`should return 404 and 'Post must be between 6 and 300 characters long.' json 
+    it(`should return 400 and 'Post must be between 6 and 300 characters long.' json 
         when user tries to add comment to post, but comment text is < 6 chars`, (done) => {  
         const id = mockPosts[0]._id;
         chai.request(app)
@@ -341,7 +323,7 @@ describe("Posts", () => {
             const actualBody = res.body;
 
             expectedBody.toString().should.equal(actualBody.toString());
-            res.should.have.status(404);
+            res.should.have.status(400);
             done();
           });
     });

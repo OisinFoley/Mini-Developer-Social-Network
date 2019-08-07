@@ -27,7 +27,7 @@ router.get('/test', (req, res) =>
 // @desc Registers user
 // @access Public
 
-router.post('/register', (req, res) => {
+registerUser = (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
@@ -36,7 +36,7 @@ router.post('/register', (req, res) => {
 
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      errors.email = 'Email already taken!';
+      errors.email = 'Email already taken';
       res.status(400).json(errors);
     } else {
       let { body } = req;
@@ -69,13 +69,14 @@ router.post('/register', (req, res) => {
       });
     }
   });
-});
+};
+router.post('/register', registerUser);
 
 // @route POST api/users/login
 // @desc Login user, returns JWT
 // @access Public
 
-router.post('/login', (req, res) => {
+loginUser = (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
   if (!isValid) {
@@ -90,7 +91,7 @@ router.post('/login', (req, res) => {
     if (!user) {
       errors.email = 'User does not exist';
       return res.status(404).json(errors);
-    }
+    }    
 
     // check password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -106,12 +107,13 @@ router.post('/login', (req, res) => {
           });
         });
       } else {
-        errors.password = 'Password does not match!';
+        errors.password = 'Password does not match';
         return res.status(400).json(errors);
       }
     });
   });
-});
+};
+router.post('/login', loginUser);
 
 // @route GET api/users/current
 // @desc Return current user
