@@ -118,10 +118,15 @@ router.post('/', postNewPost);
 // @access Private
 
 addLikeToPost = (req, res) => {
-  req.user = {};
+  // req.user = {};
+
+  console.log('****IN THE ADD LIKE TO POST ENDPOINT , PAST AUTH');
+  console.log(req);
+  
+  
 
   // req.user.id = '5d497baeed8f0b4d00ece2cb'; // trigger 400 RESPONSE
-  req.user.id = '5d497baeed8f0b4d00e12345'; // trigger 200 RESPONSE, guid not from any mock files (note ending)
+  // req.user.id = '5d497baeed8f0b4d00e12345'; // trigger 200 RESPONSE, guid not from any mock files (note ending)
   
     Profile.findOne({ user: req.user.id }).then(profile => {
       
@@ -149,11 +154,12 @@ addLikeToPost = (req, res) => {
         );
     });
   };
-router.post('/like/:id', addLikeToPost);
+// router.post('/like/:id', addLikeToPost);
+
+console.log(passport);
 
 // ********** reenable jwt requirement later once you have branch flow tested
-// router.post('/like/:id', passport.authenticate('jwt', { session: false }), addLikeToPost);
-
+router.post('/like/:id', passport.authenticate('jwt', { session: false }), addLikeToPost);
 
 // @route POST api/posts/unlike/:id
 // @desc unlike a post
