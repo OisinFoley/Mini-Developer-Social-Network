@@ -7,6 +7,8 @@ const Profile = require('../../models/Profile');
 
 const validatePostInput = require('../../validation/post');
 
+const passportManager = require('../../config/passport-manager');
+
 // @route GET api/posts/test
 // @desc tests posts route
 // @access Public
@@ -46,9 +48,7 @@ getSinglePost = (req, res) => {
 };
 router.get('/:id', getSinglePost);
 
-deletePost = (req, res) => {
-    // console.log('in the delete endpoint');
-
+deleteSinglePost = (req, res) => {
     // stub this as a return value when mocking passport later
     req.user = {};
     // happy case (SUCCESS expected)
@@ -74,19 +74,19 @@ deletePost = (req, res) => {
   };
 
 // ********** reenable jwt requirement later once you have branch flow tested
-router.delete('/:id', deletePost);
+router.delete('/:id', deleteSinglePost);
 
 
 // router.delete(
 //   '/:id',
-//   passport.authenticate('jwt', { session: false }), deletePost);
+//   passport.authenticate('jwt', { session: false }), deleteSinglePost);
 
 
 // @route POST api/posts/
 // @desc add a post
 // @access Private
 
-postNewPost = (req, res) => {
+addNewPost = (req, res) => {
   const { errors, isValid } = validatePostInput(req.body);
 
   if (!isValid) {
@@ -107,24 +107,18 @@ postNewPost = (req, res) => {
 };
 
 // ********** reenable jwt requirement later once you have branch flow tested
-router.post('/', postNewPost);
+router.post('/', addNewPost);
 
 // router.post(
 //   '/',
-//   passport.authenticate('jwt', { session: false }), postNewPost);
+//   passport.authenticate('jwt', { session: false }), addNewPost);
 
 // @route POST api/posts/likes/:id
 // @desc add a like to a post
 // @access Private
 
 addLikeToPost = (req, res) => {
-  // req.user = {};
-
-  console.log('****IN THE ADD LIKE TO POST ENDPOINT , PAST AUTH');
-  console.log(req);
-  
-  
-
+  // req.user = {}; 
   // req.user.id = '5d497baeed8f0b4d00ece2cb'; // trigger 400 RESPONSE
   // req.user.id = '5d497baeed8f0b4d00e12345'; // trigger 200 RESPONSE, guid not from any mock files (note ending)
   
@@ -154,12 +148,14 @@ addLikeToPost = (req, res) => {
         );
     });
   };
-// router.post('/like/:id', addLikeToPost);
+router.post('/like/:id', addLikeToPost);
 
-console.log(passport);
+
 
 // ********** reenable jwt requirement later once you have branch flow tested
-router.post('/like/:id', passport.authenticate('jwt', { session: false }), addLikeToPost);
+// router.post('/like/:id', passport.authenticate('jwt', { session: false }), addLikeToPost);
+// router.post('/like/:id', passportManager.authenticate, addLikeToPost);
+// router.post('/like/:id', passportManager.authenticate, addLikeToPost);
 
 // @route POST api/posts/unlike/:id
 // @desc unlike a post
@@ -201,7 +197,7 @@ router.post('/unlike/:id', removeLikeFromPost);
 // ********** reenable jwt requirement later once you have branch flow tested
 // router.post('/unlike/:id', passport.authenticate('jwt', { session: false }), removeLikeFromPost);
 
-// @route POST api/comment/:id
+// @route POST api/posts/comment/:id
 // @desc add comment a post
 // @access Private
 

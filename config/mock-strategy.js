@@ -13,6 +13,7 @@ const user = {
 
 
 function Strategy(name, strategyCallback) {
+  console.log('strategy CTOR called ////');
   if (!name || name.length === 0) { throw new TypeError('DevStrategy requires a Strategy name') ; }
   passport.Strategy.call(this);
   this.name = name;
@@ -22,6 +23,7 @@ function Strategy(name, strategyCallback) {
 }
 util.inherits(Strategy, passport.Strategy);
 Strategy.prototype.authenticate = function() {
+
   this._cb(this._user, (error, user) => {
     this.success(user);
   });

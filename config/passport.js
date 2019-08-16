@@ -32,6 +32,8 @@ function strategyCallback(jwt_payload, done) {
 // plus, it's not good to have this logic for testing embedded in actual production code
 // so, we should go back to trying to stub
 
+
+// so we need to mock the function that's called from the constructor, and the callback that is provided to the ctor
 strategyForEnvironment = () => {
   let strategy;
 
@@ -54,22 +56,22 @@ strategyForEnvironment = () => {
   return strategy;
 };
 
-module.exports = passport => {
-  passport.use(strategyForEnvironment());
-};
-
 // module.exports = passport => {
-//   passport.use(
-//     new JwtStrategy(opts, (jwt_payload, done) => {
-//     User.findById(jwt_payload.id)
-//       .then(user => {
-//         if (user) {          
-//           return done(null, user);
-//         }
-//         return done(null, false);
-//       })
-//       .catch(err => {
-//         console.log(err);
-//       });
-//   })
-// )};
+//   passport.use(strategyForEnvironment());
+// };
+
+module.exports = passport => {
+  passport.use(
+    new JwtStrategy(opts, (jwt_payload, done) => {
+    User.findById(jwt_payload.id)
+      .then(user => {
+        if (user) {          
+          return done(null, user);
+        }
+        return done(null, false);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  })
+)};
