@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const passport = require('passport');
-
 const validateProfileInput = require('../../validation/profile');
 const validateExperienceInput = require('../../validation/experience');
 const validateEducationInput = require('../../validation/education');
+const errorMessages = require('../../error-handling/strings');
 
 // load profile model
 const Profile = require('../../models/Profile');
@@ -40,7 +38,7 @@ getCurrentUsersProfile = (req, res) => {
     .populate('user', ['name', 'avatar'])
     .then(profile => {
       if (!profile) {
-        errors.noProfile = 'Profile not found';
+        errors.noProfile = errorMessages.profile_not_found_for_current_user;
         return res.status(404).json(errors);
       }
       res.json(profile);
@@ -65,12 +63,12 @@ getAllProfiles = (req, res) => {
     .populate('user', ['name', 'avatar'])
     .then(profiles => {
       if (!profiles) {
-        errors.noProfiles = 'No profiles were found';
+        errors.noProfiles = errorMessages.profiles_not_found;
         return res.status(404).json(errors);
       }
       res.json(profiles);
     })
-    .catch(err => res.status(404).json({ profile: 'There are no profiles.' }));
+    .catch(err => res.status(404).json({ profile: errorMessages.profiles_not_found }));
 };
 router.get('/all', getAllProfiles);
 
@@ -85,7 +83,7 @@ getProfileByHandle = (req, res) => {
     .populate('user', ['name', 'avatar'])
     .then(profile => {
       if (!profile) {
-        errors.noProfile = 'There is no profile for the given handle.';
+        errors.noProfile = errorMessages.profile_not_found_for_handle;
         return res.status(404).json(errors);
       }
       res.json(profile);
@@ -105,13 +103,13 @@ getProfileByUserId = (req, res) => {
     .populate('user', ['name', 'avatar'])
     .then(profile => {
       if (!profile) {
-        errors.noProfile = 'No profile for this user id.';
+        errors.noProfile = errorMessages.profile_not_found_for_user_id;
         return res.status(404).json(errors);
       }
       res.json(profile);
     })
     .catch(err =>
-      res.status(404).json({ profile: 'No profile for this user id.' })
+      res.status(404).json({ profile: errorMessages.profile_not_found_for_user_id })
     );
 };
 router.get('/user/:user_id', getProfileByUserId);
@@ -175,7 +173,7 @@ setUserProfile = (req, res) => {
       // see if handle exists
       Profile.findOne({ handle: profileFields.handle }).then(profile => {
         if (profile) {
-          errors.handle = 'This handle already exists';
+          errors.handle = errorMessages.handle_already_exists;
           res.status(400).json(errors);
         }
 

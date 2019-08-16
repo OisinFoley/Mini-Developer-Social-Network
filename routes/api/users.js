@@ -9,6 +9,7 @@ const passport = require('passport');
 // load input validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const errorMessages = require('../../error-handling/strings');
 
 // load User model
 const User = require('../../models/User');
@@ -36,7 +37,7 @@ registerUser = (req, res) => {
 
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      errors.email = 'Email already taken';
+      errors.email = errorMessages.email_already_taken;
       res.status(400).json(errors);
     } else {
       let { body } = req;
@@ -89,7 +90,7 @@ loginUser = (req, res) => {
   // find user by email
   User.findOne({ email }).then(user => {
     if (!user) {
-      errors.email = 'User does not exist';
+      errors.email = errorMessages.no_user_for_email;
       return res.status(404).json(errors);
     }    
 
@@ -107,7 +108,7 @@ loginUser = (req, res) => {
           });
         });
       } else {
-        errors.password = 'Password does not match';
+        errors.password = errorMessages.password_not_match;
         return res.status(400).json(errors);
       }
     });

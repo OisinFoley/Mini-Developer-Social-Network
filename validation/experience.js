@@ -1,5 +1,6 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
+const errorMessages = require('../error-handling/strings');
 
 module.exports = function validateExperienceInput(data) {
   let errors = {};
@@ -9,15 +10,15 @@ module.exports = function validateExperienceInput(data) {
   data.from = !isEmpty(data.from) ? data.from : '';
 
   if (Validator.isEmpty(data.title)) {
-    errors.title = 'Title field is required';
+    errors.title = errorMessages.title_field_required;
   }
 
   if (Validator.isEmpty(data.company)) {
-    errors.company = 'Company field is required';
+    errors.company = errorMessages.company_field_required;
   }
 
   if (Validator.isEmpty(data.from)) {
-    errors.from = 'From date field is required';
+    errors.from = errorMessages.from_date_field_required;
   }
 
   return {

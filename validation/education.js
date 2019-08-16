@@ -1,5 +1,6 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
+const errorMessages = require('../error-handling/strings');
 
 module.exports = function validateEducationInput(data) {
   let errors = {};
@@ -10,19 +11,19 @@ module.exports = function validateEducationInput(data) {
   data.from = !isEmpty(data.from) ? data.from : '';
 
   if (Validator.isEmpty(data.school)) {
-    errors.school = 'School field is required';
+    errors.school = errorMessages.school_field_required;
   }
 
   if (Validator.isEmpty(data.degree)) {
-    errors.degree = 'Degree field is required';
+    errors.degree = errorMessages.degree_field_required;
   }
 
   if (Validator.isEmpty(data.fieldOfStudy)) {
-    errors.fieldOfStudy = 'Field Of Study field is required';
+    errors.fieldOfStudy = errorMessages.fieldOfStudy_field_required;
   }
 
   if (Validator.isEmpty(data.from)) {
-    errors.from = 'From date field is required';
+    errors.from = errorMessages.from_date_field_required;
   }
 
   return {

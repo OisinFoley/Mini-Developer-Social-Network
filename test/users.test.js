@@ -9,6 +9,8 @@ const mockSeedUser = require('./__mocks__/seed-user');
 const sinon = require('sinon');
 const passport = require('passport');
 
+const errorMessages = require('../error-handling/strings');
+
 // Configure chai
 chai.use(chaiHttp);
 chai.should();
@@ -47,10 +49,10 @@ describe("/api/users/", () => {
           .post('/api/users/register')
           .send(registerData)
           .end((err, res) => {
-            const expectedBody = { name: 'Name must be between 2 and 30 characters long' };
+            const expectedBody = { name: errorMessages.name_invalid_length };
             const actualBody = res.body;
 
-            expectedBody.toString().should.equal(actualBody.toString());
+            JSON.stringify(expectedBody).should.equal(JSON.stringify(actualBody));
             res.should.have.status(400);
             done();
           });
@@ -65,10 +67,10 @@ describe("/api/users/", () => {
         .post('/api/users/register')
         .send(registerData)
         .end((err, res) => {
-          const expectedBodyName = 'Name field is required';
+          const expectedBodyName = errorMessages.name_field_required;
           const actualBodyName = res.body.name;
 
-          expectedBodyName.toString().should.equal(actualBodyName.toString());
+          JSON.stringify(expectedBodyName).should.equal(JSON.stringify(actualBodyName));
           res.should.have.status(400);
           done();
         });
@@ -82,10 +84,7 @@ describe("/api/users/", () => {
           .post('/api/users/register')
           .send(registerData)
           .end((err, res) => {
-            const expectedBodyEmail = 'Email is invalid';
-
-            // WE NEED TO GO BACK OVER ALL TESTS AND STRINGIFY THE RESPONSE
-            // OTHERWISE WE'RE JUST COMPARING OBJECT OBJECT TO EACH OTHER
+            const expectedBodyEmail = errorMessages.invalid_email;
 
             res.body.hasOwnProperty('email').should.equal(true);
             expectedBodyEmail.should.equal(res.body.email);
@@ -102,7 +101,7 @@ describe("/api/users/", () => {
         .post('/api/users/register')
         .send(registerData)
         .end((err, res) => {
-          const expectedBodyPassword = 'Password must be between 6 and 30 characters long';
+          const expectedBodyPassword = errorMessages.password_invalid_length;
 
           res.body.hasOwnProperty('password').should.equal(true);
           expectedBodyPassword.should.equal(res.body.password);
@@ -121,8 +120,8 @@ describe("/api/users/", () => {
         .post('/api/users/register')
         .send(registerData)
         .end((err, res) => {
-          const expectedBodyPassword = 'Password field is required';
-          const expectedBodyPassword2 = 'Confirm Password field is required';            
+          const expectedBodyPassword = errorMessages.password_field_required;
+          const expectedBodyPassword2 = errorMessages.confirm_password_field_required;            
 
           res.body.hasOwnProperty('password').should.equal(true);
           res.body.hasOwnProperty('password2').should.equal(true);
@@ -143,7 +142,7 @@ describe("/api/users/", () => {
         .post('/api/users/register')
         .send(registerData)
         .end((err, res) => {
-          const expectedBodyPassword2 = 'Passwords must be a match';
+          const expectedBodyPassword2 = errorMessages.passwords_must_match;
 
           res.body.hasOwnProperty('password2').should.equal(true);
           expectedBodyPassword2.should.equal(res.body.password2);
@@ -160,7 +159,7 @@ describe("/api/users/", () => {
         .post('/api/users/register')
         .send(registerData)
         .end((err, res) => {
-          const expectedBodyEmail = 'Email already taken';
+          const expectedBodyEmail = errorMessages.email_already_taken;
 
           res.body.hasOwnProperty('email').should.equal(true);
           expectedBodyEmail.should.equal(res.body.email);
@@ -199,7 +198,7 @@ describe("/api/users/", () => {
           .post('/api/users/login')
           .send(loginData)
           .end((err, res) => {
-            const expectedBodyEmail = 'Email is invalid';
+            const expectedBodyEmail = errorMessages.invalid_email;
             
             res.body.hasOwnProperty('email').should.equal(true);
             expectedBodyEmail.should.equal(res.body.email);
@@ -216,7 +215,7 @@ describe("/api/users/", () => {
           .post('/api/users/login')
           .send(loginData)
           .end((err, res) => {
-            const expectedBodyEmail = 'Email field is required';
+            const expectedBodyEmail = errorMessages.email_field_required;
             
             res.body.hasOwnProperty('email').should.equal(true);
             expectedBodyEmail.should.equal(res.body.email);
@@ -233,7 +232,7 @@ describe("/api/users/", () => {
           .post('/api/users/login')
           .send(loginData)
           .end((err, res) => {
-            const expectedBodyPassword = 'Password field is required';
+            const expectedBodyPassword = errorMessages.password_field_required;
 
             res.body.hasOwnProperty('password').should.equal(true);
             expectedBodyPassword.should.equal(res.body.password);
@@ -250,7 +249,7 @@ describe("/api/users/", () => {
           .post('/api/users/login')
           .send(loginData)
           .end((err, res) => {
-            const expectedBodyPassword = 'Password does not match';
+            const expectedBodyPassword = errorMessages.password_not_match;
 
             res.body.hasOwnProperty('password').should.equal(true);
             expectedBodyPassword.should.equal(res.body.password);
@@ -267,7 +266,7 @@ describe("/api/users/", () => {
           .post('/api/users/login')
           .send(loginData)
           .end((err, res) => {
-            const expectedBodyEmail = 'User does not exist';
+            const expectedBodyEmail = errorMessages.no_user_for_email;
             
             res.body.hasOwnProperty('email').should.equal(true);
             expectedBodyEmail.should.equal(res.body.email);

@@ -1,5 +1,6 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
+const errorMessages = require('../error-handling/strings');
 
 module.exports = function validateRegisterInput(data) {
   let errors = {};
@@ -10,31 +11,31 @@ module.exports = function validateRegisterInput(data) {
   data.password2 = !isEmpty(data.password2) ? data.password2 : '';
 
   if (!Validator.isLength(data.name, { min: 2, max: 30 })) {
-    errors.name = 'Name must be between 2 and 30 characters long';
+    errors.name = errorMessages.name_invalid_length;
   }
 
   if (Validator.isEmpty(data.name)) {
-    errors.name = 'Name field is required';
+    errors.name = errorMessages.name_field_required;
   }
 
   if (!Validator.isEmail(data.email)) {
-    errors.email = 'Email is invalid';
+    errors.email = errorMessages.invalid_email;
   }
 
   if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
-    errors.password = 'Password must be between 6 and 30 characters long';
+    errors.password = errorMessages.password_invalid_length;
   }
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = 'Password field is required';
+    errors.password = errorMessages.password_field_required;
   }
 
   if (Validator.isEmpty(data.password2)) {
-    errors.password2 = 'Confirm Password field is required';
+    errors.password2 = errorMessages.confirm_password_field_required;
   }
 
   if (!Validator.equals(data.password, data.password2)) {
-    errors.password2 = 'Passwords must be a match';
+    errors.password2 = errorMessages.passwords_must_match;
   }
 
   return {

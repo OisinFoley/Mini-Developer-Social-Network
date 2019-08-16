@@ -11,6 +11,8 @@ const mockSeedProfiles = require('./__mocks__/seed-profiles');
 const sinon = require('sinon');
 const passport = require('passport');
 
+const errorMessages = require('../error-handling/strings');
+
 // Configure chai
 chai.use(chaiHttp);
 chai.should();
@@ -111,7 +113,7 @@ describe("/api/profile/", () => {
       //     chai.request(app)
       //       .get('/api/profile')
       //       .end((err, res) => {
-      //         const expectedBodyNoProfile = 'Profile not found';
+      //         const expectedBodyNoProfile = errorMessages.profile_not_found_for_user_id;
               
       //         res.body.hasOwnProperty('noProfile').should.equal(true);
       //         expectedBodyNoProfile.should.equal(res.body.noProfile);
@@ -126,7 +128,6 @@ describe("/api/profile/", () => {
         chai.request(app)
           .get('/api/profile/all')
           .end((err, res) => {
-            // console.log(res.body);
             
             res.body.should.be.a('array');
             res.body.length.should.equal(2);
@@ -144,7 +145,7 @@ describe("/api/profile/", () => {
 
   //         // removeAllProfiles()
   //         //   .then(() => {
-  //         //     const expectedBodyProfile = 'There are no profiles.';
+  //         //     const expectedBodyProfile = errorMessages.profiles_not_found;
           
   //         //     res.body.hasOwnProperty('profile').should.equal(true);
   //         //     expectedBodyProfile.should.equal(res.body.profile);
@@ -168,7 +169,7 @@ describe("/api/profile/", () => {
           chai.request(app)
             .get(`/api/profile/handle/${handle}`)
             .end((err, res) => {
-              const expectedBodyNoProfile = 'There is no profile for the given handle.';
+              const expectedBodyNoProfile = errorMessages.profile_not_found_for_handle;
               
               res.body.hasOwnProperty('noProfile').should.equal(true);
               expectedBodyNoProfile.should.equal(res.body.noProfile);
@@ -199,7 +200,7 @@ describe("/api/profile/", () => {
           chai.request(app)
             .get(`/api/profile/user/${user_id}`)
             .end((err, res) => {
-              const expectedBodyNoProfile = 'No profile for this user id.';
+              const expectedBodyNoProfile = errorMessages.profile_not_found_for_user_id;
 
               // we have noProfile as a prop in 1 404, and profile as the prop name in the other 404
               // look back on the course videos to see what the implementaion logic was
@@ -246,13 +247,10 @@ describe("/api/profile/", () => {
           .send(profileData)
           .end((err, res) => {
             const { handle, status, skills } = res.body;
-            const expectedBodyHandle = 'Profile handle is required';
-            const expectedBodyStatus = 'Profile status is required';
-            const expectedBodySkills = 'Profile skills is required';
 
-            handle.should.equal(expectedBodyHandle);
-            status.should.equal(expectedBodyStatus);
-            skills.should.equal(expectedBodySkills);
+            handle.should.equal(errorMessages.handle_required);
+            status.should.equal(errorMessages.status_required);
+            skills.should.equal(errorMessages.skills_required);
             res.should.have.status(400);
             done();
           });
@@ -276,7 +274,7 @@ describe("/api/profile/", () => {
             .send(profileData)
             .end((err, res) => {
               const { website, twitter, facebook, youtube, instagram, linkedin } = res.body;
-              const NotValidUrlString = 'Not a valid URL';
+              const NotValidUrlString = errorMessages.invalid_url;
 
               website.should.equal(NotValidUrlString);
               twitter.should.equal(NotValidUrlString);
@@ -301,7 +299,7 @@ describe("/api/profile/", () => {
             .send(profileData)
             .end((err, res) => {
               const { handle } = res.body;
-              const expectedBodyHandle = 'This handle already exists';
+              const expectedBodyHandle = errorMessages.handle_already_exists;
               
               res.body.hasOwnProperty('handle').should.equal(true);
               expectedBodyHandle.should.equal(res.body.handle);
@@ -399,13 +397,10 @@ describe("/api/profile/", () => {
           .send(experienceData)
           .end((err, res) => {
             const { title, company, from } = res.body;
-            const titleRequiredString = 'Title field is required';
-            const companyRequiredString = 'Company field is required';
-            const fromDateRequiredString = 'From date field is required';
 
-            title.should.equal(titleRequiredString);
-            company.should.equal(companyRequiredString);
-            from.should.equal(fromDateRequiredString);
+            title.should.equal(errorMessages.title_field_required);
+            company.should.equal(errorMessages.company_field_required);
+            from.should.equal(errorMessages.from_date_field_required);
             res.should.have.status(400);
             done();
           });
@@ -494,15 +489,11 @@ describe("/api/profile/", () => {
             .send(newEducationData)
             .end((err, res) => {
               const { school, degree, fieldOfStudy, from } = res.body;
-              const titleRequiredString = 'School field is required';
-              const companyRequiredString = 'Degree field is required';
-              const fieldOfStudyRequiredString = 'Field Of Study field is required';
-              const fromDateRequiredString = 'From date field is required';
 
-              school.should.equal(titleRequiredString);
-              degree.should.equal(companyRequiredString);
-              fieldOfStudy.should.equal(fieldOfStudyRequiredString);
-              from.should.equal(fromDateRequiredString);
+              school.should.equal(errorMessages.school_field_required);
+              degree.should.equal(errorMessages.degree_field_required);
+              fieldOfStudy.should.equal(errorMessages.fieldOfStudy_field_required);
+              from.should.equal(errorMessages.from_date_field_required);
               res.should.have.status(400);
               done();
             });
