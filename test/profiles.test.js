@@ -1,17 +1,17 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../app');
+const app = require('../src/app');
 const mongoose = require("mongoose");
 
 // const Post = require('../models/Post');
-const Profile = require('../models/Profile');
+const Profile = require('../src/models/Profile');
 // const mockPosts = require('./__mocks__/posts');
 const mockProfiles = require('./__mocks__/profiles');
 const mockSeedProfiles = require('./__mocks__/seed-profiles');
 const sinon = require('sinon');
 const passport = require('passport');
 
-const errorMessages = require('../error-handling/strings');
+const errorMessages = require('../src/error-handling/strings');
 
 // Configure chai
 chai.use(chaiHttp);
@@ -45,13 +45,6 @@ chai.should();
 
 describe("/api/profiles/", () => {
   let db;
-
-  /**
-   *  fix all mentionings of this api route in appjs and filenames
-   *  so that it is written as /profile*s*, instea dof singular
-   *  , then it'll match with the other entities and adheres to REST naming of endpoints
-   * 
-   */
    
     /**
      * For the 404 catch errors that are meant to occur when there's a problem in the db(separate from a 404 because

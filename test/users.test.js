@@ -1,15 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../app');
+const app = require('../src/app');
 const mongoose = require("mongoose");
-
-const User = require('../models/User');
+const User = require('../src/models/User');
 const mockUsers = require('./__mocks__/users');
 const mockSeedUser = require('./__mocks__/seed-user');
-const sinon = require('sinon');
-const passport = require('passport');
-
-const errorMessages = require('../error-handling/strings');
+const errorMessages = require('../src/error-handling/strings');
 
 // Configure chai
 chai.use(chaiHttp);

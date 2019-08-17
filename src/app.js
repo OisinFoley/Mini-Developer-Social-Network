@@ -24,7 +24,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/profiles', profileRoutes);
 app.use('/api/posts', postRoutes);
 
-// serve static assets if in production
+// serve static assets if production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
