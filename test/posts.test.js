@@ -20,8 +20,23 @@ describe("/api/posts/", () => {
   let postId1 = mockPosts[1]._id;
   let postIdNonExistant = mockPosts[0]._id.replace('9', '8');
 
+  const user = {
+    date: '2018-11-11T00:04:19.666Z',
+    id: '5be772318a0efa11e7a68014',
+    name: 'Oisín Foley',
+    email: 'oisinfoleysligo@gmail.com',
+    avatar: 'https://angel.co/cdn-cgi/image/width=200,height=200,format=auto,fit=cover/https://d1qb2nb5cznatu.cloudfront.net/users/2094932-original?1563725982',
+    password: '$2a$10$JaKVGehh7FK.sqUIlL5QWO.vL2Ux2dvXSHKnPzyDmh1HzFFxYPNpO'
+  };
+
   before(done => {
-    db = mongoose.connect("mongodb://localhost:27017/test", done);
+    db = mongoose.connect("mongodb://localhost:27017/test", () => {
+      let passportStub =  sinon.stub(passport,"authenticate").callsFake((strategy, options, callback) => {
+        callback(null, user, null);
+        return (req,res,next)=>{};
+      });
+      done();
+    });
   });
 
   after(done => {
@@ -176,8 +191,9 @@ describe("/api/posts/", () => {
       //       });
       // });
   
-        it(`calls endpoint and return 200 status code 
+        it.only(`calls endpoint and return 200 status code 
             after adding a like to the post`, (done) => {
+              
             chai.request(app)
               .post(`/api/posts/like/${postId0}`)
               .end((err, res) => {

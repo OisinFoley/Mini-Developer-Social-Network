@@ -7,6 +7,8 @@ const userRoutes = require('./routes/api/users');
 const profileRoutes = require('./routes/api/profiles');
 const postRoutes = require('./routes/api/posts');
 
+const passportManager = require('./config/passport-manager');
+
 let app = express();
 
 // body-parser middleware
@@ -14,10 +16,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // passport middleware
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 // passport config
-require('./config/passport')(passport);
+// require('./config/passport')(passport);
+require('./config/passport-manager').initialize(passport);
 
 // use routes
 app.use('/api/users', userRoutes);

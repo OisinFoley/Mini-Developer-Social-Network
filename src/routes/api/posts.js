@@ -5,6 +5,9 @@ const Profile = require('../../models/Profile');
 const validatePostInput = require('../../validation/post');
 const errorMessages = require('../../error-handling/strings');
 
+const passportManager = require('../../config/passport-manager');
+
+
 // @route GET api/posts/
 // @desc retrieve posts
 // @access Public
@@ -79,8 +82,8 @@ addNewPost = (req, res) => {
   }
 
   // temp solution until we mock passport properly
-  req.user = {};
-  req.user.id = '12345'
+  // req.user = {};
+  // req.user.id = '12345'
   const newPost = new Post({
     text: req.body.text,
     name: req.body.name,
@@ -98,12 +101,21 @@ router.post('/', addNewPost);
 //   '/',
 //   passport.authenticate('jwt', { session: false }), addNewPost);
 
+// router.post('/', passportManager.authenticate, addNewPost);
+  
+
+
 // @route POST api/posts/likes/:id
 // @desc add a like to a post
 // @access Private
 
 addLikeToPost = (req, res) => {
-  req.user = {}; 
+
+  console.log('i have made it to the promised land');
+  console.log(req.user);
+  
+  
+  // req.user = {}; 
   // req.user.id = '5d497baeed8f0b4d00ece2cb'; // trigger 400 RESPONSE
   // req.user.id = '5d497baeed8f0b4d00e12345'; // trigger 200 RESPONSE, guid not from any mock files (note ending)
   
@@ -133,7 +145,8 @@ addLikeToPost = (req, res) => {
         );
     });
   };
-router.post('/like/:id', addLikeToPost);
+// router.post('/like/:id', addLikeToPost);
+router.post('/like/:id', passportManager.authenticate, addLikeToPost);
 
 
 
