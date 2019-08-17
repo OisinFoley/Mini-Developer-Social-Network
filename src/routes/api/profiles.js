@@ -116,9 +116,9 @@ setUserProfile = (req, res) => {
 
   // tmp solution until we stub jwt
   req.user = {};
-  req.user.id = '5d497baeed8f0b4d00ece2cb'; // 400 STATUS
+  // req.user.id = '5d497baeed8f0b4d00ece2cb'; // 400 STATUS
 
-  req.user.id = '5d4c5ddd1bf0b3474c7af3b7'; // 200 STATUS and UPDATE
+  // req.user.id = '5d4c5ddd1bf0b3474c7af3b7'; // 200 STATUS and UPDATE
 
   req.user.id = '5d4c7a547ba777f8311c728d'; // 200 STATUS and NEW PROFILE
 

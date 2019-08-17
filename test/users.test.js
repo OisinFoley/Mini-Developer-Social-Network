@@ -4,8 +4,8 @@ const app = require('../src/app');
 const mongoose = require("mongoose");
 const User = require('../src/models/User');
 const mockUsers = require('./__mocks__/users');
-const mockSeedUser = require('./__mocks__/seed-user');
 const errorMessages = require('../src/error-handling/strings');
+const { addSeedUsersToDb } = require('./utils/TestDataSeeder');
 
 // Configure chai
 chai.use(chaiHttp);
@@ -16,15 +16,7 @@ describe("/api/users/", () => {
 
   before(done => {
     db = mongoose.connect("mongodb://localhost:27017/test")
-    .then(() =>  {    
-      let newUser = new User({
-        name: mockSeedUser.name,
-        email: mockSeedUser.email,
-        password: mockSeedUser.password,
-        avatar: mockSeedUser.avatar
-      });
-      newUser.save();
-    })
+    .then(() => addSeedUsersToDb())
     .then(() => done());
   })
   

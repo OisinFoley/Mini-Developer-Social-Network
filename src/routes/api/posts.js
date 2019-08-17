@@ -150,6 +150,12 @@ removeLikeFromPost = (req, res) => {
   req.user = {};
   req.user.id = '5d497baeed8f0b4d00e12345'; // 400 RESPONSE
 
+  // req.user.id = '5d497baeed8f0b4d00ece2cb'; // 200 RESPONSE
+
+  console.log(req.params.id);
+  
+  
+
   Profile.findOne({ user: req.user.id }).then(profile => {
     Post.findById(req.params.id)
       .then(post => {
@@ -224,9 +230,6 @@ router.post('/comment/:id', addCommentToPost);
 // @access Private
 
 deleteCommentFromPost = (req, res) => {
-  console.log(req.params.id);
-  
-  
   Post.findById(req.params.id)
     .then(post => {
       if (

@@ -2,46 +2,14 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../src/app');
 const mongoose = require("mongoose");
-
-// const Post = require('../models/Post');
 const Profile = require('../src/models/Profile');
-// const mockPosts = require('./__mocks__/posts');
 const mockProfiles = require('./__mocks__/profiles');
-const mockSeedProfiles = require('./__mocks__/seed-profiles');
-const sinon = require('sinon');
-const passport = require('passport');
-
 const errorMessages = require('../src/error-handling/strings');
+const { addSeedProfilesToDb } = require('./utils/TestDataSeeder');
 
 // Configure chai
 chai.use(chaiHttp);
 chai.should();
-
-// addSeedProfile = () => {
-//   mockProfiles.forEach(function(profile) {
-//     const newProfile = new Profile({
-//       _id: profile._id,
-//       skills: profile.skills,
-//       date: profile.date,
-//       user: profile.user,
-//       handle: profile.handle,
-//       company: profile.company,
-//       website: profile.website,
-//       location: profile.location,
-//       status: profile.status,
-//       social: profile.social,
-//       experience: profile.experience,
-//       education: profile.education,
-//       bio: profile.bio
-//     });
-//     newProfile.save();
-//   });
-// };
-
-// removeAllProfiles = () => {
-//   // maybe this should resolve a promise in order to ensure correct flow ??
-//   Profile.remove({});
-// };
 
 describe("/api/profiles/", () => {
   let db;
@@ -55,33 +23,10 @@ describe("/api/profiles/", () => {
 
   before(done => {
     db = mongoose.connect("mongodb://localhost:27017/test")
-      .then(() => 
-
-      // addSeedProfile()
-      mockSeedProfiles.forEach(function(profile) {
-          const newProfile = new Profile({
-            _id: profile._id,
-            skills: profile.skills,
-            date: profile.date,
-            user: profile.user,
-            handle: profile.handle,
-            company: profile.company,
-            website: profile.website,
-            location: profile.location,
-            status: profile.status,
-            social: profile.social,
-            experience: profile.experience,
-            education: profile.education,
-            bio: profile.bio
-          });
-          newProfile.save();
-        })
-    )
-    .then(() => done());
+    .then(() => addSeedProfilesToDb(done));
   });
 
   after(done => {
-    // removeAllProfiles()
     Profile
       .remove({})
       .then(() => mongoose.connection.close(done));
@@ -284,14 +229,13 @@ describe("/api/profiles/", () => {
           when user does not have a profile and chosen handle already exists`, (done) => {
           let profileData = {
             ...mockProfiles[0],
-            handle: mockSeedProfiles[1].handle
+            handle: mockProfiles[1].handle
           };
           
           chai.request(app)
             .post('/api/profiles')
             .send(profileData)
             .end((err, res) => {
-              const { handle } = res.body;
               const expectedBodyHandle = errorMessages.handle_already_exists;
               
               res.body.hasOwnProperty('handle').should.equal(true);
