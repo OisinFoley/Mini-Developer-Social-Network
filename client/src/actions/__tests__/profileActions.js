@@ -29,9 +29,9 @@ describe('profileActions: mocking history', () => {
   });
 
   describe('createProfile', () => {
-    it(`should create profile by calling '/api/profile', then push /dashboard to history`, async () => {
+    it(`should create profile by calling '/api/profiles', then push /dashboard to history`, async () => {
       await actions.createProfile('the profile data', history)(dispatch);
-      expect(mock).toHaveBeenCalledWith('/api/profile', 'the profile data');
+      expect(mock).toHaveBeenCalledWith('/api/profiles', 'the profile data');
       expect(history.push).toHaveBeenCalledWith('/dashboard');
     });
   });
@@ -39,7 +39,7 @@ describe('profileActions: mocking history', () => {
   describe('addEducation', () => {
     it('should create education then push /dashboard to history', async () => {
       await actions.addEducation('the education data', history)(dispatch);
-      expect(mock).toHaveBeenCalledWith('/api/profile/education', 'the education data');
+      expect(mock).toHaveBeenCalledWith('/api/profiles/education', 'the education data');
       expect(history.push).toHaveBeenCalledWith('/dashboard');
     });
   });
@@ -47,7 +47,7 @@ describe('profileActions: mocking history', () => {
   describe('addExperience', () => {
     it('should create education then push /dashboard to history', async () => {
       await actions.addExperience('the experience data', history)(dispatch);
-      expect(mock).toHaveBeenCalledWith('/api/profile/experience', 'the experience data');
+      expect(mock).toHaveBeenCalledWith('/api/profiles/experience', 'the experience data');
       expect(history.push).toHaveBeenCalledWith('/dashboard');
     });
   });

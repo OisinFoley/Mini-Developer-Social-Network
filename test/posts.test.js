@@ -11,8 +11,6 @@ const sinon = require('sinon');
 const passport = require('passport');
 
 const errorMessages = require('../error-handling/strings');
-// const { user_not_authorised, post_not_found } = require('../error-handling/strings');
-// const { post_not_found } = require('../error-handling/strings');
 
 // Configure chai
 chai.use(chaiHttp);

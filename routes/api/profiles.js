@@ -1,26 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const Profile = require('../../models/Profile');
+const User = require('../../models/User');
 const validateProfileInput = require('../../validation/profile');
 const validateExperienceInput = require('../../validation/experience');
 const validateEducationInput = require('../../validation/education');
 const errorMessages = require('../../error-handling/strings');
 
-// load profile model
-const Profile = require('../../models/Profile');
-
-// load user profile
-const User = require('../../models/User');
-
-// @route GET api/profile/test
-// @desc tests profile route
-// @access Public
-router.get('/test', (req, res) =>
-  res.json({
-    message: 'Profile works!'
-  })
-);
-
-// @route GET api/profile/
+// @route GET api/profiles/
 // @desc gets current user's profile
 // @access Private
 getCurrentUsersProfile = (req, res) => {
@@ -52,7 +39,7 @@ router.get('/', getCurrentUsersProfile);
 //   '/',
 //   passport.authenticate('jwt', { session: false }), getCurrentUsersProfile);
 
-// @route GET api/profile/all
+// @route GET api/profiles/all
 // @desc get all profiles
 // @access public
 
@@ -72,7 +59,7 @@ getAllProfiles = (req, res) => {
 };
 router.get('/all', getAllProfiles);
 
-// @route GET api/profile/handle/:handle
+// @route GET api/profiles/handle/:handle
 // @desc get profile by their handle
 // @access public
 
@@ -92,7 +79,7 @@ getProfileByHandle = (req, res) => {
 };
 router.get('/handle/:handle', getProfileByHandle);
 
-// @route GET api/profile/user/:user_id
+// @route GET api/profiles/user/:user_id
 // @desc get profile by user_id
 // @access public
 
@@ -115,7 +102,7 @@ getProfileByUserId = (req, res) => {
 router.get('/user/:user_id', getProfileByUserId);
 
 
-// @route POST api/profile/
+// @route POST api/profiles/
 // @desc creates or edit user's profile
 // @access Private
 
@@ -190,7 +177,7 @@ router.post('/', setUserProfile);
 //   '/',
 //   passport.authenticate('jwt', { session: false }), setUserProfile);
 
-// @route POST api/profile/experience
+// @route POST api/profiles/experience
 // @desc adds a user's experience to their profile
 // @access Private
 
@@ -227,7 +214,7 @@ router.post('/experience', addNewExperience);
 //   '/experience',
 //   passport.authenticate('jwt', { session: false }), addNewExperience);
 
-// @route DELETE api/profile/experience/:exp_id
+// @route DELETE api/profiles/experience/:exp_id
 // @desc delete a user's experience from their profile
 // @access Private
 
@@ -258,7 +245,7 @@ router.delete('/experience/:exp_id', deleteExperienceById);
 //   '/experience/:exp_id',
 //   passport.authenticate('jwt', { session: false }), deleteExperienceById);
 
-// @route POST api/profile/education
+// @route POST api/profiles/education
 // @desc adds a user's education to their profile
 // @access Private
 addEducation = (req, res) => {
@@ -296,7 +283,7 @@ router.post('/education', addEducation);
 //   '/education',
 //   passport.authenticate('jwt', { session: false }), addEducation);
 
-// @route DELETE api/profile/education/:edu_id
+// @route DELETE api/profiles/education/:edu_id
 // @desc delete a user's education from their profile
 // @access Private
 
@@ -329,7 +316,7 @@ router.delete('/education/:edu_id', deleteEducation);
 //   passport.authenticate('jwt', { session: false }), deleteEducation);
 
 
-// @route DELETE api/profile/
+// @route DELETE api/profiles/
 // @desc delete user and their profile
 // @access Private
 

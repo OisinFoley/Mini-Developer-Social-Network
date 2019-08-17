@@ -43,7 +43,7 @@ chai.should();
 //   Profile.remove({});
 // };
 
-describe("/api/profile/", () => {
+describe("/api/profiles/", () => {
   let db;
 
   /**
@@ -95,10 +95,10 @@ describe("/api/profile/", () => {
   });
 
   describe("Profiles /", () => {
-    describe("GET api/profile (getCurrentUsersProfile)", () => {
+    describe("GET api/profiles (getCurrentUsersProfile)", () => {
       // it(`calls endpoint and returns 200 status and returns profile`, (done) => {
       //   chai.request(app)
-      //     .get('/api/profile')
+      //     .get('/api/profiles')
       //     .end((err, res) => {
       //       // check that returned payload has user.name and user.avatar
       //       // .... once you get the jwt authenticate mocked
@@ -111,7 +111,7 @@ describe("/api/profile/", () => {
       // it(`calls endpoint and returns 404 status code and 'Profile not found' json error
       //     when no profile exists that matches req.user.id`, (done) => {
       //     chai.request(app)
-      //       .get('/api/profile')
+      //       .get('/api/profiles')
       //       .end((err, res) => {
       //         const expectedBodyNoProfile = errorMessages.profile_not_found_for_user_id;
               
@@ -123,10 +123,10 @@ describe("/api/profile/", () => {
       // });
     });
 
-    describe("GET api/profile/all (getAllProfiles)", () => {
+    describe("GET api/profiles/all (getAllProfiles)", () => {
       it(`calls endpoint and returns and 200 status code and profiles list`, (done) => {
         chai.request(app)
-          .get('/api/profile/all')
+          .get('/api/profiles/all')
           .end((err, res) => {
             
             res.body.should.be.a('array');
@@ -140,7 +140,7 @@ describe("/api/profile/", () => {
   // this one needs a bit of work -> need to gracefully empty the db at start, the re-populate it at end of test
   // it(`calls endpoint and returns 404 status code when no profiles are returned from db`, (done) => {
   //     chai.request(app)
-  //       .get('/api/profile/all')
+  //       .get('/api/profiles/all')
   //       .end((err, res) => {
 
   //         // removeAllProfiles()
@@ -162,12 +162,12 @@ describe("/api/profile/", () => {
   //     });
     });
 
-    describe("GET api/profile/handle/:handle (getProfileByHandle)", () => {
+    describe("GET api/profiles/handle/:handle (getProfileByHandle)", () => {
       it(`calls endpoint and returns 404 status code and 'noProfile' json error
           when no profile exists for the given handle`, (done) => {
           const handle = 'non_existant_handle';
           chai.request(app)
-            .get(`/api/profile/handle/${handle}`)
+            .get(`/api/profiles/handle/${handle}`)
             .end((err, res) => {
               const expectedBodyNoProfile = errorMessages.profile_not_found_for_handle;
               
@@ -181,7 +181,7 @@ describe("/api/profile/", () => {
       it(`calls endpoint and returns 200 status code and profile matching handle`, (done) => {
           const requestHandle = mockProfiles[0].handle;
           chai.request(app)
-            .get(`/api/profile/handle/${requestHandle}`)
+            .get(`/api/profiles/handle/${requestHandle}`)
             .end((err, res) => {
               // check that returned payload has user.name and user.avatar
               // .... once you get the jwt authenticate mocked
@@ -193,12 +193,12 @@ describe("/api/profile/", () => {
       });
     });
 
-    describe("GET api/profile/user/:user_id (getProfileByUserId)", () => {
+    describe("GET api/profiles/user/:user_id (getProfileByUserId)", () => {
       it(`calls endpoint and returns 404 status code and 'noProfile' json error
           when no profile exists for the given user_id`, (done) => {
           const user_id = 'non_existant_user_id';
           chai.request(app)
-            .get(`/api/profile/user/${user_id}`)
+            .get(`/api/profiles/user/${user_id}`)
             .end((err, res) => {
               const expectedBodyNoProfile = errorMessages.profile_not_found_for_user_id;
 
@@ -218,7 +218,7 @@ describe("/api/profile/", () => {
   // it(`calls endpoint and returns 200 status code and profile matching user_id`, (done) => {
   //     const requestUserIdValue = mockProfiles[0].user;
   //     chai.request(app)
-  //       .get(`/api/profile/user/${requestUserIdValue}`)
+  //       .get(`/api/profiles/user/${requestUserIdValue}`)
   //       .end((err, res) => {
   //         // check that returned payload has user.name and user.avatar
   //         // .... once you get the jwt authenticate mocked
@@ -233,7 +233,7 @@ describe("/api/profile/", () => {
   //     });
     });
 
-    describe("POST api/profile/ (setUserProfile)", () => {
+    describe("POST api/profiles/ (setUserProfile)", () => {
       it(`calls endpoint and returns 400 code and 'handle, status, skills required validation' json error
         when handle, status and skills are null in the request`, (done) => {
         let profileData = {
@@ -243,7 +243,7 @@ describe("/api/profile/", () => {
           skills: null
         };
         chai.request(app)
-          .post('/api/profile')
+          .post('/api/profiles')
           .send(profileData)
           .end((err, res) => {
             const { handle, status, skills } = res.body;
@@ -270,7 +270,7 @@ describe("/api/profile/", () => {
           };
           
           chai.request(app)
-            .post('/api/profile')
+            .post('/api/profiles')
             .send(profileData)
             .end((err, res) => {
               const { website, twitter, facebook, youtube, instagram, linkedin } = res.body;
@@ -295,7 +295,7 @@ describe("/api/profile/", () => {
           };
           
           chai.request(app)
-            .post('/api/profile')
+            .post('/api/profiles')
             .send(profileData)
             .end((err, res) => {
               const { handle } = res.body;
@@ -318,7 +318,7 @@ describe("/api/profile/", () => {
   //       company: updatedCompanyString
   //     };
   //     chai.request(app)
-  //       .post('/api/profile')
+  //       .post('/api/profiles')
   //       .send(profileData)
   //       .end((err, res) => {
   //         const { company } = res.body;
@@ -367,7 +367,7 @@ describe("/api/profile/", () => {
   //       handle: updatedHandleString
   //     };
   //     chai.request(app)
-  //       .post('/api/profile')
+  //       .post('/api/profiles')
   //       .send(profileData)
   //       .end((err, res) => {
   //         // const { company } = res.body;
@@ -383,7 +383,7 @@ describe("/api/profile/", () => {
     });
     
 
-    describe("POST api/profile/experience (addNewExperience)", () => {
+    describe("POST api/profiles/experience (addNewExperience)", () => {
       it(`calls endpoint and returns 400 code and 
         'title, company, from date required validation' json error
         when each of those values are null in the request`, (done) => {
@@ -393,7 +393,7 @@ describe("/api/profile/", () => {
           from: ''
         };
         chai.request(app)
-          .post('/api/profile/experience')
+          .post('/api/profiles/experience')
           .send(experienceData)
           .end((err, res) => {
             const { title, company, from } = res.body;
@@ -415,7 +415,7 @@ describe("/api/profile/", () => {
             from: '2018-05-29T00:00:00.000Z'
           };
           chai.request(app)
-            .post('/api/profile/experience')
+            .post('/api/profiles/experience')
             .send(newExperienceData)
             .end((err, res) => {
               const { title, company, from } = res.body;
@@ -429,13 +429,13 @@ describe("/api/profile/", () => {
       });
     });
 
-    describe("DELETE api/profile/experience/:exp_id (deleteExperienceById)", () => {
+    describe("DELETE api/profiles/experience/:exp_id (deleteExperienceById)", () => {
       it(`calls endpoint and returns 200 code 
         and updated profile json without old experience 
         when exp_id matches existing experience for given user.id`, (done) => {
         let expId = '5d4c5dec5b62789cbc86d014';
         chai.request(app)
-          .delete(`/api/profile/experience/${expId}`)
+          .delete(`/api/profiles/experience/${expId}`)
           .end((err, res) => {
             let { experience } = res.body;
 
@@ -451,7 +451,7 @@ describe("/api/profile/", () => {
       });
     });
 
-    describe("POST api/profile/education (addEducation)", () => {
+    describe("POST api/profiles/education (addEducation)", () => {
       it(`calls endpoint and returns 200 code 
         and updated profile json including new education 
         when data is valid and user.id matches an existing profile`, (done) => {
@@ -462,7 +462,7 @@ describe("/api/profile/", () => {
           from: '2018-05-29T00:00:00.000Z'
         };
         chai.request(app)
-          .post('/api/profile/education')
+          .post('/api/profiles/education')
           .send(newEducationData)
           .end((err, res) => {
             const { school, degree, fieldOfStudy, from } = res.body;
@@ -485,7 +485,7 @@ describe("/api/profile/", () => {
             from: ''
           };
           chai.request(app)
-            .post('/api/profile/education')
+            .post('/api/profiles/education')
             .send(newEducationData)
             .end((err, res) => {
               const { school, degree, fieldOfStudy, from } = res.body;
@@ -500,11 +500,11 @@ describe("/api/profile/", () => {
       });
     });
 
-    describe("DELETE api/profile/education/:edu_id (deleteEducation)", () => {
+    describe("DELETE api/profiles/education/:edu_id (deleteEducation)", () => {
       it(`calls endpoint and returns 200 code when profile matching user.id does exist`, (done) => {
         let eduId = '5d4c5df704347a3d899893d1';
         chai.request(app)
-          .delete(`/api/profile/education/${eduId}`)
+          .delete(`/api/profiles/education/${eduId}`)
           .end((err, res) => {   
             res.should.have.status(200);
             done();
@@ -512,10 +512,10 @@ describe("/api/profile/", () => {
       });
     });
 
-    describe("DELETE api/profile (deleteAccountForUser)", () => {
+    describe("DELETE api/profiles (deleteAccountForUser)", () => {
       it(`calls endpoint and returns 200 code and { success: true }`, (done) => {
         chai.request(app)
-          .delete(`/api/profile/`)
+          .delete(`/api/profiles/`)
           .end((err, res) => {
             res.should.have.status(200);
             done();
