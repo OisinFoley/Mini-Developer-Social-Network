@@ -21,15 +21,18 @@ describe("/api/posts/", () => {
   let postIdNonExistant = mockPosts[0]._id.replace('9', '8');
 
   before(done => {
-    db = mongoose.connect("mongodb://localhost:27017/test")
-      .then(() =>  addSeedPostsToDb(done));
-      // .then(() => done());
+    db = mongoose.connect("mongodb://localhost:27017/test", done);
   });
 
   after(done => {
-    Post
-      .remove({})
-      .then(() => mongoose.connection.close(done));
+    mongoose.connection.close(done);
+  });
+
+  beforeEach(done => {
+    addSeedPostsToDb(done);
+  });
+  afterEach(done => {
+    Post.remove({}, done);
   });
 
   describe("Posts /", () => {

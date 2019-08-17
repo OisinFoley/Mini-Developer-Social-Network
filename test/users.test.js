@@ -15,16 +15,17 @@ describe("/api/users/", () => {
   let db;
 
   before(done => {
-    db = mongoose.connect("mongodb://localhost:27017/test")
-    .then(() => addSeedUsersToDb())
-    .then(() => done());
+    db = mongoose.connect("mongodb://localhost:27017/test", done);
   })
-  
-
   after(done => {
-    User
-      .remove({})
-      .then(() => mongoose.connection.close(done));
+    mongoose.connection.close(done);
+  });
+
+  beforeEach(done => {
+    addSeedUsersToDb(done);
+  });
+  afterEach(done => {
+    User.remove({}, done);
   });
 
   describe("Users /", () => {

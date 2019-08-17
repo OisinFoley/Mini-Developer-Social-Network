@@ -22,14 +22,17 @@ describe("/api/profiles/", () => {
      */
 
   before(done => {
-    db = mongoose.connect("mongodb://localhost:27017/test")
-    .then(() => addSeedProfilesToDb(done));
+    db = mongoose.connect("mongodb://localhost:27017/test", done);
+  });
+  after(done => {
+    mongoose.connection.close(done);
   });
 
-  after(done => {
-    Profile
-      .remove({})
-      .then(() => mongoose.connection.close(done));
+  beforeEach(done => {
+    addSeedProfilesToDb(done);
+  });
+  afterEach(done => {
+    Profile.remove({}, done);
   });
 
   describe("Profiles /", () => {
