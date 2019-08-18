@@ -14,10 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // passport middleware
-app.use(passport.initialize());
-
-// passport config
-require('./config/passport')(passport);
+require('./config/passport-manager').initialize(passport);
 
 // use routes
 app.use('/api/users', userRoutes);
