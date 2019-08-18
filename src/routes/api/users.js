@@ -2,17 +2,15 @@ const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
-const passport = require('passport');
-
-// load input validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 const errorMessages = require('../../error-handling/strings');
 
-// load User model
-const User = require('../../models/User');
+
+const PassportManager = require('../../config/passport-manager');
 
 // @route GET api/users/test
 // @desc tests users route
@@ -92,7 +90,7 @@ loginUser = (req, res) => {
     if (!user) {
       errors.email = errorMessages.no_user_for_email;
       return res.status(404).json(errors);
-    }    
+    }
 
     // check password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -116,20 +114,18 @@ loginUser = (req, res) => {
 };
 router.post('/login', loginUser);
 
+
 // @route GET api/users/current
 // @desc Return current user
 // @access Private
 
-router.get(
-  '/current',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.json({
-      id: req.user.id,
-      name: req.user.name,
-      email: req.user.email
-    });
-  }
-);
+getCurrentUser = (req, res) => {
+  res.json({
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email
+  });
+};
+router.get('/current', PassportManager.authenticate, getCurrentUser);
 
 module.exports = router;

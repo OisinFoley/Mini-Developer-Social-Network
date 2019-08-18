@@ -6,20 +6,14 @@ const validateProfileInput = require('../../validation/profile');
 const validateExperienceInput = require('../../validation/experience');
 const validateEducationInput = require('../../validation/education');
 const errorMessages = require('../../error-handling/strings');
+const PassportManager = require('../../config/passport-manager');
+
 
 // @route GET api/profiles/
 // @desc gets current user's profile
 // @access Private
 getCurrentUsersProfile = (req, res) => {
   let errors = {};
-
-  //  tmp solution
-  req.user = {};
-  req.user.id = '5d497baeed8f0b4d00ece2cb'; // 200 RESPONSE
-  req.user.name = 'test_name';
-  req.user.avatar = 'test_avatar';
-
-  req.user.id = '5d497baeed8f0b4d00e12345'; // 404 RESPONSE
 
   Profile.findOne({ user: req.user.id })
     .populate('user', ['name', 'avatar'])
@@ -32,12 +26,8 @@ getCurrentUsersProfile = (req, res) => {
     })
     .catch(err => res.status(404).json(err));
 };
-// tmp solution
-router.get('/', getCurrentUsersProfile);
+router.get('/', PassportManager.authenticate, getCurrentUsersProfile);
 
-// router.get(
-//   '/',
-//   passport.authenticate('jwt', { session: false }), getCurrentUsersProfile);
 
 // @route GET api/profiles/all
 // @desc get all profiles
@@ -59,6 +49,7 @@ getAllProfiles = (req, res) => {
 };
 router.get('/all', getAllProfiles);
 
+
 // @route GET api/profiles/handle/:handle
 // @desc get profile by their handle
 // @access public
@@ -78,6 +69,7 @@ getProfileByHandle = (req, res) => {
     .catch(err => res.status(404).json(err));
 };
 router.get('/handle/:handle', getProfileByHandle);
+
 
 // @route GET api/profiles/user/:user_id
 // @desc get profile by user_id
@@ -113,14 +105,6 @@ setUserProfile = (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
-  // tmp solution until we stub jwt
-  req.user = {};
-  // req.user.id = '5d497baeed8f0b4d00ece2cb'; // 400 STATUS
-
-  // req.user.id = '5d4c5ddd1bf0b3474c7af3b7'; // 200 STATUS and UPDATE
-
-  req.user.id = '5d4c7a547ba777f8311c728d'; // 200 STATUS and NEW PROFILE
 
   // get fields
   const profileFields = {};
@@ -170,12 +154,8 @@ setUserProfile = (req, res) => {
     }
   });
 };
-// tmp until we stub jwt.authenticate
-router.post('/', setUserProfile);
+router.post('/', PassportManager.authenticate, setUserProfile);
 
-// router.post(
-//   '/',
-//   passport.authenticate('jwt', { session: false }), setUserProfile);
 
 // @route POST api/profiles/experience
 // @desc adds a user's experience to their profile
@@ -187,10 +167,6 @@ addNewExperience = (req, res) => {
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
-  // tmp solution until jwt authenticate stub is in place
-  req.user = {};
-  req.user.id = '5d4c5ddd1bf0b3474c7af3b7'; // 200 STATUS
 
   Profile.findOne({ user: req.user.id }).then(profile => {
     const newExp = {
@@ -208,22 +184,14 @@ addNewExperience = (req, res) => {
     profile.save().then(profile => res.json(profile));
   });
 };
-router.post('/experience', addNewExperience);
+router.post('/experience', PassportManager.authenticate, addNewExperience);
 
-// router.post(
-//   '/experience',
-//   passport.authenticate('jwt', { session: false }), addNewExperience);
 
 // @route DELETE api/profiles/experience/:exp_id
 // @desc delete a user's experience from their profile
 // @access Private
 
 deleteExperienceById = (req, res) => {
-
-  // tmp solution until jwt auth stub in place
-  req.user = {}
-  req.user.id = '5d4c5ddd1bf0b3474c7af3b7';
-
   Profile.findOne({ user: req.user.id })
     .then(profile => {
       // get remove index
@@ -239,11 +207,8 @@ deleteExperienceById = (req, res) => {
     })
     .catch(err => res.json(404).json(err));
 };
-router.delete('/experience/:exp_id', deleteExperienceById);
+router.delete('/experience/:exp_id', PassportManager.authenticate, deleteExperienceById);
 
-// router.delete(
-//   '/experience/:exp_id',
-//   passport.authenticate('jwt', { session: false }), deleteExperienceById);
 
 // @route POST api/profiles/education
 // @desc adds a user's education to their profile
@@ -255,13 +220,7 @@ addEducation = (req, res) => {
     return res.status(400).json(errors);
   }
 
-  // tmp solution until jwt authenticate stub is in place
-  req.user = {};
-  req.user.id = '5d4c5ddd1bf0b3474c7af3b7'; // 200 STATUS
-
   Profile.findOne({ user: req.user.id }).then(profile => {
-    
-    
     const newEdu = {
       school: req.body.school,
       degree: req.body.degree,
@@ -277,23 +236,14 @@ addEducation = (req, res) => {
     profile.save().then(profile => res.json(profile));
   });
 };
+router.post('/education', PassportManager.authenticate, addEducation);
 
-router.post('/education', addEducation);
-// router.post(
-//   '/education',
-//   passport.authenticate('jwt', { session: false }), addEducation);
 
 // @route DELETE api/profiles/education/:edu_id
 // @desc delete a user's education from their profile
 // @access Private
 
 deleteEducation = (req, res) => {
-  //  tmp solution
-  req.user = {};
-  req.user.id = '5d497baeed8f0b4d00ece2cb'; // 200 RESPONSE
-  
-  // req.user.id = '5d497baeed8f0b4d00e12345'; // 404 RESPONSE
-
   Profile.findOne({ user: req.user.id })
     .then(profile => {
       // get remove index
@@ -309,11 +259,7 @@ deleteEducation = (req, res) => {
     })
     .catch(err => res.json(404).json(err));
 };
-router.delete('/education/:edu_id', deleteEducation);
-
-// router.delete(
-//   '/education/:edu_id',
-//   passport.authenticate('jwt', { session: false }), deleteEducation);
+router.delete('/education/:edu_id', PassportManager.authenticate, deleteEducation);
 
 
 // @route DELETE api/profiles/
@@ -321,20 +267,12 @@ router.delete('/education/:edu_id', deleteEducation);
 // @access Private
 
 deleteAccountForUser = (req, res) => {
-  //  tmp solution
-  req.user = {};
-  req.user.id = '5d497baeed8f0b4d00ece2cb'; // 200 RESPONSE
-
   Profile.findOneAndRemove({ user: req.user.id }).then(() => {
     User.findOneAndRemove({ _id: req.user.id }).then(() => {
       res.json({ success: true });
     });
   });
 };
-router.delete('/', deleteAccountForUser);
-
-// router.delete(
-//   '/',
-//   passport.authenticate('jwt', { session: false }), deleteAccountForUser);
+router.delete('/', PassportManager.authenticate, deleteAccountForUser);
 
 module.exports = router;

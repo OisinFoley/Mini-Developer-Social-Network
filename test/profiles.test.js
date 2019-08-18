@@ -3,9 +3,12 @@ const chaiHttp = require('chai-http');
 const app = require('../src/app');
 const mongoose = require("mongoose");
 const Profile = require('../src/models/Profile');
+const sinon = require('sinon');
+const passport = require('passport');
 const mockProfiles = require('./__mocks__/profiles');
 const errorMessages = require('../src/error-handling/strings');
 const { addSeedProfilesToDb } = require('./utils/TestDataSeeder');
+const mockAuthenticatedUser = require('./__mocks__/authenticated-user');
 
 // Configure chai
 chai.use(chaiHttp);
@@ -13,6 +16,7 @@ chai.should();
 
 describe("/api/profiles/", () => {
   let db;
+  let passportStub;
    
     /**
      * For the 404 catch errors that are meant to occur when there's a problem in the db(separate from a 404 because
@@ -29,39 +33,51 @@ describe("/api/profiles/", () => {
   });
 
   beforeEach(done => {
+    passportStub =  sinon.stub(passport,"authenticate").callsFake((strategy, options, callback) => {
+      callback(null, mockAuthenticatedUser, null);
+      return (req,res,next)=>{};
+    });
+
     addSeedProfilesToDb(done);
   });
   afterEach(done => {
+    passportStub.restore();
     Profile.remove({}, done);
   });
 
   describe("Profiles /", () => {
     describe("GET api/profiles (getCurrentUsersProfile)", () => {
-      // it(`calls endpoint and returns 200 status and returns profile`, (done) => {
-      //   chai.request(app)
-      //     .get('/api/profiles')
-      //     .end((err, res) => {
-      //       // check that returned payload has user.name and user.avatar
-      //       // .... once you get the jwt authenticate mocked
+      it(`calls endpoint and returns 200 status and returns profile`, (done) => {
+        chai.request(app)
+          .get('/api/profiles')
+          .end((err, res) => {
+            // check that returned payload has user.name and user.avatar
+            // .... once you get the jwt authenticate mocked
             
-      //       res.should.have.status(200);
-      //       done();
-      //     });
-      // });
+            res.should.have.status(200);
+            done();
+          });
+      });
 
-      // it(`calls endpoint and returns 404 status code and 'Profile not found' json error
-      //     when no profile exists that matches req.user.id`, (done) => {
-      //     chai.request(app)
-      //       .get('/api/profiles')
-      //       .end((err, res) => {
-      //         const expectedBodyNoProfile = errorMessages.profile_not_found_for_user_id;
+      it(`calls endpoint and returns 404 status code and 'Profile not found' json error
+          when no profile exists that matches req.user.id`, (done) => {
+          let altUser = {...mockAuthenticatedUser, id: '5d497baeed8f0b4d00e12345' };
+          passport.authenticate.callsFake((strategy, options, callback) => {
+            callback(null, altUser, null);
+            return (req,res,next)=>{};
+          });
+
+          chai.request(app)
+            .get('/api/profiles')
+            .end((err, res) => {
+              const expectedBodyNoProfile = errorMessages.profile_not_found_for_current_user;
               
-      //         res.body.hasOwnProperty('noProfile').should.equal(true);
-      //         expectedBodyNoProfile.should.equal(res.body.noProfile);
-      //         res.should.have.status(404);
-      //         done();
-      //       });
-      // });
+              res.body.hasOwnProperty('noProfile').should.equal(true);
+              expectedBodyNoProfile.should.equal(res.body.noProfile);
+              res.should.have.status(404);
+              done();
+            });
+      });
     });
 
     describe("GET api/profiles/all (getAllProfiles)", () => {
@@ -79,28 +95,16 @@ describe("/api/profiles/", () => {
 
 
   // this one needs a bit of work -> need to gracefully empty the db at start, the re-populate it at end of test
-  // it(`calls endpoint and returns 404 status code when no profiles are returned from db`, (done) => {
-  //     chai.request(app)
-  //       .get('/api/profiles/all')
-  //       .end((err, res) => {
+      it(`calls endpoint and returns 404 status code when no profiles are returned from db`, (done) => {
+        chai.request(app)
+          .get('/api/profiles/all')
+          .end((err, res) => {
 
-  //         // removeAllProfiles()
-  //         //   .then(() => {
-  //         //     const expectedBodyProfile = errorMessages.profiles_not_found;
-          
-  //         //     res.body.hasOwnProperty('profile').should.equal(true);
-  //         //     expectedBodyProfile.should.equal(res.body.profile);
-  //         //     res.should.have.status(404);
-
-  //         //     addSeedProfile();
-  //         //   });
-  //         //   done();
-
-
-          
-  //         done();
-  //       });
-  //     });
+            // do we need to assert something here?
+            res.should.have.status(404);
+            done();
+          });
+      });
     });
 
     describe("GET api/profiles/handle/:handle (getProfileByHandle)", () => {
@@ -153,25 +157,20 @@ describe("/api/profiles/", () => {
             });
       });
 
-  // cannot pass test until we can mock jwt auth and check the value of user in res.body (which is populated)
-  // by the 'populate' call in the api that user the user part of the request body (which comes from jwt earlier
-  // in the request pipeline)
-  // it(`calls endpoint and returns 200 status code and profile matching user_id`, (done) => {
-  //     const requestUserIdValue = mockProfiles[0].user;
-  //     chai.request(app)
-  //       .get(`/api/profiles/user/${requestUserIdValue}`)
-  //       .end((err, res) => {
-  //         // check that returned payload has user.name and user.avatar
-  //         // .... once you get the jwt authenticate mocked
-
-  //         console.log(res.body);
-          
-
-  //         res.body.handle.should.equal(requestUserIdValue);
-  //         res.should.have.status(200);
-  //         done();
-  //       });
-  //     });
+      it(`calls endpoint and returns 200 status code and profile matching user_id`, (done) => {
+        const requestUserIdValue = mockProfiles[1].user;
+        chai.request(app)
+          .get(`/api/profiles/user/${requestUserIdValue}`)
+          .end((err, res) => {
+            // check that returned payload has user.name and user.avatar
+            // .... once you get the jwt authenticate mocked
+            // for this, you may need to also populate users collection in the before hook
+            
+            res.body.handle.should.equal(mockProfiles[1].handle);
+            res.should.have.status(200);
+            done();
+          });
+        });
     });
 
     describe("POST api/profiles/ (setUserProfile)", () => {
@@ -230,10 +229,20 @@ describe("/api/profiles/", () => {
 
       it(`calls endpoint and returns 400 status code and 'handle already exists' json error
           when user does not have a profile and chosen handle already exists`, (done) => {
+          let altUser = {...mockAuthenticatedUser, id: '5d497baeed8f0b4d00e12345' };
+          passport.authenticate.callsFake((strategy, options, callback) => {
+            callback(null, altUser, null);
+            return (req,res,next)=>{};
+          });
+
           let profileData = {
             ...mockProfiles[0],
             handle: mockProfiles[1].handle
           };
+
+          // try posting the profileData variable object
+          // then change the obj data slighly so the controller doesn't try to do an update
+          // otherwise, the logic of the controller function that handles the endpoint is flawed
           
           chai.request(app)
             .post('/api/profiles')
@@ -248,78 +257,46 @@ describe("/api/profiles/", () => {
             });
       });
 
-  // this passes and dpeends on user.id set in test (UNTIL WE CAN MOCK JWT.AUTHENTICATE)
-  // will fail unless ran as it.only because we haven't cleaned up the result of other running tests yet
-  // it.only(`calls endpoint and returns 200 code and updated profile
-  //     when data is valid and request user id matches user prop of existing profile`, (done) => {
-  //     const updatedCompanyString = 'test_company_for_updated_profile';
-  //     let profileData = {
-  //       ...mockProfiles[0],
-  //       company: updatedCompanyString
-  //     };
-  //     chai.request(app)
-  //       .post('/api/profiles')
-  //       .send(profileData)
-  //       .end((err, res) => {
-  //         const { company } = res.body;
-  //         // console.log(res.body.company);
-  //         // console.log(res);
-
-  //         // for (let key in res.body) {
-  //         for (let [key, value] of Object.entries(res.body)) {
-  //           // console.log(`${key} and ${value}`);
-
-  //           if (key === 'company') {
-  //             value.should.equal(updatedCompanyString);
-  //             continue;
-  //           }
-
-  //           // this is incomplete because we are sometimes comparing a non existant key in the mock data
-  //           // to a key that does exists in the res.body
-
-  //           // also, we're comparing a string of separate skills in the mockprofile
-  //           // to an array of skills in the res.body
-  //           // tidy and finalise later
-  //           console.log(mockProfiles[0][key]);
-  //           console.log(res.body[key]);
-
-  //           if (mockProfiles[0][key]) {
-  //             mockProfiles[0][key].should.equal(res.body[key]);   
-  //           }
-  //           // mockProfiles[0][key].should.equal(res.body[key]); 
-  //         }
-  //         // compare all keys, but if key is company, then company should equal updated value
-
-  //         res.body.hasOwnProperty('company').should.equal(true);
-  //         res.body.company.should.equal(updatedCompanyString);
-  //         res.should.have.status(200);
-  //         done();
-  //       });
-  //     });
+  
+      it(`calls endpoint and returns 200 code and updated profile
+        when data is valid and request user id matches user prop of existing profile`, (done) => {
+        const updatedCompanyString = 'test_company_for_updated_profile';
+        let profileData = {
+          ...mockProfiles[0],
+          company: updatedCompanyString
+        };
+        // TODO: Use for([key,value] of) to check that the values of the res.body props
+        // matches the payload sent in the request
+        chai.request(app)
+          .post('/api/profiles')
+          .send(profileData)
+          .end((err, res) => {
+            res.body.hasOwnProperty('company').should.equal(true);
+            res.body.company.should.equal(updatedCompanyString);
+            res.should.have.status(200);
+            done();
+          });
+      });
 
 
-  // it.only(`calls endpoint and returns 200 code and new profile
-  //     when data is valid and request user id does not match user
-  //     prop of an existing profile`, (done) => {
-  //     const updatedHandleString = 'test_handle_new_profile';
-  //     let profileData = {
-  //       ...mockProfiles[0],
-  //       handle: updatedHandleString
-  //     };
-  //     chai.request(app)
-  //       .post('/api/profiles')
-  //       .send(profileData)
-  //       .end((err, res) => {
-  //         // const { company } = res.body;
-          
-  //         // // compare all keys, but if key is company, then company should equal updated value
-
-  //         res.body.hasOwnProperty('handle').should.equal(true);
-  //         res.body.handle.should.equal(updatedHandleString);
-  //         res.should.have.status(200);
-  //         done();
-  //       });
-  //     });
+      it(`calls endpoint and returns 200 code and new profile
+          when data is valid and request user id does not match user
+          prop of an existing profile`, (done) => {
+          const updatedHandleString = 'test_handle_new_profile';
+          let profileData = {
+            ...mockProfiles[0],
+            handle: updatedHandleString
+          };
+          chai.request(app)
+            .post('/api/profiles')
+            .send(profileData)
+            .end((err, res) => {
+              res.body.hasOwnProperty('handle').should.equal(true);
+              res.body.handle.should.equal(updatedHandleString);
+              res.should.have.status(200);
+              done();
+            });
+      });
     });
     
 

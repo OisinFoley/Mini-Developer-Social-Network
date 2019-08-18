@@ -4,8 +4,11 @@ const app = require('../src/app');
 const mongoose = require("mongoose");
 const User = require('../src/models/User');
 const mockUsers = require('./__mocks__/users');
+const sinon = require('sinon');
+const passport = require('passport');
 const errorMessages = require('../src/error-handling/strings');
 const { addSeedUsersToDb } = require('./utils/TestDataSeeder');
+const mockAuthenticatedUser = require('./__mocks__/authenticated-user');
 
 // Configure chai
 chai.use(chaiHttp);
@@ -13,6 +16,7 @@ chai.should();
 
 describe("/api/users/", () => {
   let db;
+  let passportStub;
 
   before(done => {
     db = mongoose.connect("mongodb://localhost:27017/test", done);
@@ -22,9 +26,15 @@ describe("/api/users/", () => {
   });
 
   beforeEach(done => {
+    passportStub =  sinon.stub(passport,"authenticate").callsFake((strategy, options, callback) => {
+      callback(null, mockAuthenticatedUser, null);
+      return (req,res,next)=>{};
+    });
+
     addSeedUsersToDb(done);
   });
   afterEach(done => {
+    passportStub.restore();
     User.remove({}, done);
   });
 
@@ -38,10 +48,9 @@ describe("/api/users/", () => {
           .post('/api/users/register')
           .send(registerData)
           .end((err, res) => {
-            const expectedBody = { name: errorMessages.name_invalid_length };
-            const actualBody = res.body;
+            const expectedBodyNameError = errorMessages.name_invalid_length;
 
-            JSON.stringify(expectedBody).should.equal(JSON.stringify(actualBody));
+            JSON.stringify(expectedBodyNameError).should.equal(JSON.stringify(res.body.name));
             res.should.have.status(400);
             done();
           });
@@ -56,10 +65,9 @@ describe("/api/users/", () => {
         .post('/api/users/register')
         .send(registerData)
         .end((err, res) => {
-          const expectedBodyName = errorMessages.name_field_required;
-          const actualBodyName = res.body.name;
+          const expectedBodyNameError = errorMessages.name_field_required;
 
-          JSON.stringify(expectedBodyName).should.equal(JSON.stringify(actualBodyName));
+          JSON.stringify(expectedBodyNameError).should.equal(JSON.stringify(res.body.name));
           res.should.have.status(400);
           done();
         });

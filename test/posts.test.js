@@ -6,10 +6,10 @@ const Post = require('../src/models/Post');
 const mockPosts = require('./__mocks__/posts');
 const sinon = require('sinon');
 const passport = require('passport');
-const seedProfiles = require('./__mocks__/seed-profiles');
 const seedPosts = require('./__mocks__/posts');
 const errorMessages = require('../src/error-handling/strings');
 const { addSeedPostsToDb }  = require('./utils/TestDataSeeder');
+const mockAuthenticatedUser = require('./__mocks__/authenticated-user');
 
 // Configure chai
 chai.use(chaiHttp);
@@ -20,24 +20,11 @@ describe("/api/posts/", () => {
   let postId0 = mockPosts[0]._id;
   let postId1 = mockPosts[1]._id;
   let postIdNonExistant = mockPosts[0]._id.replace('9', '8');
-
-  const mockAuthenticatedUser = {
-    date: '2018-11-11T00:04:19.666Z',
-    id: seedProfiles[0].user,
-    name: 'test_name',
-    email: 'test_email@gmail.com',
-    avatar: 'https://angel.co/cdn-cgi/image/width=200,height=200,format=auto,fit=cover/https://d1qb2nb5cznatu.cloudfront.net/users/2094932-original?1563725982',
-    password: '$2a$10$JaKVGehh7FK.sqUIlL5QWO.vL2Ux2dvXSHKnPzyDmh1HzFFxYPNpO'
-  };
-
   let passportStub;
 
   before(done => {
-    db = mongoose.connect("mongodb://localhost:27017/test", () => {
-      done();
-    });
+    db = mongoose.connect("mongodb://localhost:27017/test", done);
   });
-
   after(done => {
     mongoose.connection.close(done);
   });
@@ -50,7 +37,6 @@ describe("/api/posts/", () => {
 
     addSeedPostsToDb(done);
   });
-
   afterEach(done => {
     passportStub.restore();
     Post.remove({}, done);
@@ -311,13 +297,25 @@ describe("/api/posts/", () => {
             });
       });
 
-      // NOT PASSING, THINKS POST DOESNT EXIST, DEV ENVIRONMENT NOT WORKING EITHER
-      // DEV ENV WORKS AGAIN WHEN YOU RE-ADD THE JWT AUTH REQUIREMENT, SO WE CANNOT PASS THIS TEST UNTIL 
-      // WE MOCK OUT THE JWT AUTH
+      // TODO: MAKE THIS PASS
       it(`calls endpoint and returns 200 status code and adds new comment to post
           when req.body.text is be between 6 and 300 chars`, (done) => {
+            // may have to do a getallPosts first to see what the state of the db is
+
+            // chai.request(app)
+            // .get(`/api/posts/${postId0}`)
+            // .end((err, res) => {
+            //   // check id matches id we specified in request
+            //   res.should.have.status(200);
+            //   res.body.should.be.a('object');
+            //   done();
+            // });
+
+            // 5d497b6ced8f0b4d00ece2c9
+            
           chai.request(app)
             .post(`/api/posts/comment/${postId0}`)
+            // .post(`/api/posts/comment/5d497b6ced8f0b4d00ece2c9`)
             .send({ text: '12345678910' })
             .end((err, res) => {
               console.log(res.body);
