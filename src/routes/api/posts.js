@@ -4,7 +4,7 @@ const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
 const validatePostInput = require('../../validation/post');
 const errorMessages = require('../../error-handling/strings');
-const passportManager = require('../../config/passport-manager');
+const PassportManager = require('../../config/passport-manager');
 
 
 // @route GET api/posts/
@@ -60,7 +60,7 @@ deleteSinglePost = (req, res) => {
       );
   });
 };
-router.delete('/:id',passportManager.authenticate, deleteSinglePost);
+router.delete('/:id',PassportManager.authenticate, deleteSinglePost);
 
 
 // @route POST api/posts/
@@ -82,7 +82,7 @@ addNewPost = (req, res) => {
 
   newPost.save().then(post => res.json(post));
 };
-router.post('/', passportManager.authenticate, addNewPost);
+router.post('/', PassportManager.authenticate, addNewPost);
   
 
 // @route POST api/posts/likes/:id
@@ -115,7 +115,7 @@ addLikeToPost = (req, res) => {
       );
   });
 };
-router.post('/like/:id', passportManager.authenticate, addLikeToPost);
+router.post('/like/:id', PassportManager.authenticate, addLikeToPost);
 
 
 // @route POST api/posts/unlike/:id
@@ -150,7 +150,7 @@ removeLikeFromPost = (req, res) => {
       );
   });
 };
-router.post('/unlike/:id', passportManager.authenticate, removeLikeFromPost);
+router.post('/unlike/:id', PassportManager.authenticate, removeLikeFromPost);
 
 
 // @route POST api/posts/comment/:id
@@ -180,7 +180,7 @@ addCommentToPost = (req, res) => {
       res.status(404).json({ notFound: errorMessages.post_not_found })
     );
 };
-router.post('/comment/:id', passportManager.authenticate, addCommentToPost);
+router.post('/comment/:id', PassportManager.authenticate, addCommentToPost);
 
 
 // @route DELETE api/posts/comment/:id/:comment_id
@@ -211,6 +211,6 @@ deleteCommentFromPost = (req, res) => {
       res.status(404).json({ notFound: errorMessages.post_not_found })
     );
 };
-router.delete('/comment/:id/:comment_id', passportManager.authenticate, deleteCommentFromPost);
+router.delete('/comment/:id/:comment_id', PassportManager.authenticate, deleteCommentFromPost);
 
 module.exports = router;

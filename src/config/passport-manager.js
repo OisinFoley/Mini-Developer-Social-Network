@@ -10,7 +10,7 @@ const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secret;
 
-class passportManager {
+class PassportManager {
   initialize() {
     passport.use(
       new JwtStrategy(opts, (jwt_payload, done) => {
@@ -42,4 +42,4 @@ class passportManager {
   };
 }
 
-module.exports = new passportManager();
+module.exports = new PassportManager();
