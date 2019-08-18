@@ -1,4 +1,5 @@
 const chai = require('chai');
+const { request } = chai;
 const chaiHttp = require('chai-http');
 const app = require('../src/app');
 const mongoose = require("mongoose");
@@ -48,7 +49,7 @@ describe("/api/profiles/", () => {
   describe("Profiles /", () => {
     describe("GET api/profiles (getCurrentUsersProfile)", () => {
       it(`calls endpoint and returns 200 status and returns profile`, (done) => {
-        chai.request(app)
+        request(app)
           .get('/api/profiles')
           .end((err, res) => {
             // check that returned payload has user.name and user.avatar
@@ -67,7 +68,7 @@ describe("/api/profiles/", () => {
             return (req,res,next)=>{};
           });
 
-          chai.request(app)
+          request(app)
             .get('/api/profiles')
             .end((err, res) => {
               const expectedBodyNoProfile = errorMessages.profile_not_found_for_current_user;
@@ -82,7 +83,7 @@ describe("/api/profiles/", () => {
 
     describe("GET api/profiles/all (getAllProfiles)", () => {
       it(`calls endpoint and returns and 200 status code and profiles list`, (done) => {
-        chai.request(app)
+        request(app)
           .get('/api/profiles/all')
           .end((err, res) => {
             
@@ -96,7 +97,7 @@ describe("/api/profiles/", () => {
 
   // this one needs a bit of work -> need to gracefully empty the db at start, the re-populate it at end of test
       it(`calls endpoint and returns 404 status code when no profiles are returned from db`, (done) => {
-        chai.request(app)
+        request(app)
           .get('/api/profiles/all')
           .end((err, res) => {
 
@@ -111,7 +112,7 @@ describe("/api/profiles/", () => {
       it(`calls endpoint and returns 404 status code and 'noProfile' json error
           when no profile exists for the given handle`, (done) => {
           const handle = 'non_existant_handle';
-          chai.request(app)
+          request(app)
             .get(`/api/profiles/handle/${handle}`)
             .end((err, res) => {
               const expectedBodyNoProfile = errorMessages.profile_not_found_for_handle;
@@ -125,7 +126,7 @@ describe("/api/profiles/", () => {
 
       it(`calls endpoint and returns 200 status code and profile matching handle`, (done) => {
           const requestHandle = mockProfiles[0].handle;
-          chai.request(app)
+          request(app)
             .get(`/api/profiles/handle/${requestHandle}`)
             .end((err, res) => {
               // check that returned payload has user.name and user.avatar
@@ -142,7 +143,7 @@ describe("/api/profiles/", () => {
       it(`calls endpoint and returns 404 status code and 'noProfile' json error
           when no profile exists for the given user_id`, (done) => {
           const user_id = 'non_existant_user_id';
-          chai.request(app)
+          request(app)
             .get(`/api/profiles/user/${user_id}`)
             .end((err, res) => {
               const expectedBodyNoProfile = errorMessages.profile_not_found_for_user_id;
@@ -159,7 +160,7 @@ describe("/api/profiles/", () => {
 
       it(`calls endpoint and returns 200 status code and profile matching user_id`, (done) => {
         const requestUserIdValue = mockProfiles[1].user;
-        chai.request(app)
+        request(app)
           .get(`/api/profiles/user/${requestUserIdValue}`)
           .end((err, res) => {
             // check that returned payload has user.name and user.avatar
@@ -182,7 +183,7 @@ describe("/api/profiles/", () => {
           status: null,
           skills: null
         };
-        chai.request(app)
+        request(app)
           .post('/api/profiles')
           .send(profileData)
           .end((err, res) => {
@@ -209,7 +210,7 @@ describe("/api/profiles/", () => {
             facebook: 'someInvalidUrl'
           };
           
-          chai.request(app)
+          request(app)
             .post('/api/profiles')
             .send(profileData)
             .end((err, res) => {
@@ -244,7 +245,7 @@ describe("/api/profiles/", () => {
           // then change the obj data slighly so the controller doesn't try to do an update
           // otherwise, the logic of the controller function that handles the endpoint is flawed
           
-          chai.request(app)
+          request(app)
             .post('/api/profiles')
             .send(profileData)
             .end((err, res) => {
@@ -267,7 +268,7 @@ describe("/api/profiles/", () => {
         };
         // TODO: Use for([key,value] of) to check that the values of the res.body props
         // matches the payload sent in the request
-        chai.request(app)
+        request(app)
           .post('/api/profiles')
           .send(profileData)
           .end((err, res) => {
@@ -287,7 +288,7 @@ describe("/api/profiles/", () => {
             ...mockProfiles[0],
             handle: updatedHandleString
           };
-          chai.request(app)
+          request(app)
             .post('/api/profiles')
             .send(profileData)
             .end((err, res) => {
@@ -309,7 +310,7 @@ describe("/api/profiles/", () => {
           company: '',
           from: ''
         };
-        chai.request(app)
+        request(app)
           .post('/api/profiles/experience')
           .send(experienceData)
           .end((err, res) => {
@@ -331,7 +332,7 @@ describe("/api/profiles/", () => {
             company: 'test_company_new_Experience',
             from: '2018-05-29T00:00:00.000Z'
           };
-          chai.request(app)
+          request(app)
             .post('/api/profiles/experience')
             .send(newExperienceData)
             .end((err, res) => {
@@ -351,7 +352,7 @@ describe("/api/profiles/", () => {
         and updated profile json without old experience 
         when exp_id matches existing experience for given user.id`, (done) => {
         let expId = '5d4c5dec5b62789cbc86d014';
-        chai.request(app)
+        request(app)
           .delete(`/api/profiles/experience/${expId}`)
           .end((err, res) => {
             let { experience } = res.body;
@@ -378,7 +379,7 @@ describe("/api/profiles/", () => {
           fieldOfStudy: 'test_fieldOfStudy_new_Education',
           from: '2018-05-29T00:00:00.000Z'
         };
-        chai.request(app)
+        request(app)
           .post('/api/profiles/education')
           .send(newEducationData)
           .end((err, res) => {
@@ -401,7 +402,7 @@ describe("/api/profiles/", () => {
             fieldOfStudy: '',
             from: ''
           };
-          chai.request(app)
+          request(app)
             .post('/api/profiles/education')
             .send(newEducationData)
             .end((err, res) => {
@@ -420,7 +421,7 @@ describe("/api/profiles/", () => {
     describe("DELETE api/profiles/education/:edu_id (deleteEducation)", () => {
       it(`calls endpoint and returns 200 code when profile matching user.id does exist`, (done) => {
         let eduId = '5d4c5df704347a3d899893d1';
-        chai.request(app)
+        request(app)
           .delete(`/api/profiles/education/${eduId}`)
           .end((err, res) => {   
             res.should.have.status(200);
@@ -431,7 +432,7 @@ describe("/api/profiles/", () => {
 
     describe("DELETE api/profiles (deleteAccountForUser)", () => {
       it(`calls endpoint and returns 200 code and { success: true }`, (done) => {
-        chai.request(app)
+        request(app)
           .delete(`/api/profiles/`)
           .end((err, res) => {
             res.should.have.status(200);
