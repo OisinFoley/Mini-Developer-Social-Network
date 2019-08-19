@@ -83,7 +83,7 @@ describe("/api/posts/", () => {
         done();
       });
 
-      context(`when deleting Post from db and Post matching id param exists in db`, function() {
+      context(`when deleting Post from db and Post matching id param exists in db`, () => {
         it(`calls endpoint and returns 200 status code and delete specific Post record for the given id`, (done) => {
           chai.request(app)
             .delete(`/api/posts/${postId1}`)
@@ -94,7 +94,7 @@ describe("/api/posts/", () => {
         });
       });
 
-      context(`when deleting Post from db and authenticated user didn't create the Post matching the id param in request`, function() {
+      context(`when deleting Post from db and authenticated user didn't create the Post matching the id param in request`, () => {
         it(`calls endpoint and returns 401 status code`, (done) => {
             chai.request(app)
               .delete(`/api/posts/${postId0}`)
@@ -108,7 +108,7 @@ describe("/api/posts/", () => {
         });
       });
   
-      context(`when deleting Post from db and Post matching id param does not exist in db`, function() {
+      context(`when deleting Post from db and Post matching id param does not exist in db`, () => {
         it(`calls endpoint and returns 404 status code`, (done) => {
             chai.request(app)
               .delete(`/api/posts/${postIdNonExistant}`)
@@ -125,7 +125,7 @@ describe("/api/posts/", () => {
 
     
     describe("POST api/posts/ (addNewPost)", () => {
-      context(`when trying to add new Post, but post text is empty`, function() {
+      context(`when trying to add new Post, but post text is empty`, () => {
         it(`calls endpoint and returns 400 status code and 'Text field is required' json error `, (done) => {  
             chai.request(app)
               .post(`/api/posts`)
@@ -140,7 +140,7 @@ describe("/api/posts/", () => {
         });
       });
 
-      context(`when trying to add new Post, but post text is < 6 chars`, function() {
+      context(`when trying to add new Post, but post text is < 6 chars`, () => {
         it(`calls endpoint and returns 400 status code and 
             'Post must be between 6 and 300 characters long.' json error`, (done) => {  
             chai.request(app)
@@ -156,7 +156,7 @@ describe("/api/posts/", () => {
         });
       });
 
-      context(`when trying to add new Post and req.body.text is be between 6 and 300 chars`, function() {
+      context(`when trying to add new Post and req.body.text is be between 6 and 300 chars`, () => {
         it(`calls endpoint and returns 200 status code after adding new Post record`, (done) => {
             const requestBody = { text: '12345678910' };
             chai.request(app)
@@ -175,7 +175,7 @@ describe("/api/posts/", () => {
 
 
     describe("POST api/posts/likes/:id (addLikeToPost)", () => {
-      context(`when user tries to like Post they've already liked`, function() {
+      context(`when user tries to like Post they've already liked`, () => {
         it(`calls endpoint and returns 400 status code and 'likedAlready' json error,
             `, (done) => {
             let altUser = {...mockAuthenticatedUser, id: seedPosts[0].likes[0].user };
@@ -196,7 +196,7 @@ describe("/api/posts/", () => {
         });
       });
   
-      context(`when user has not yet like a specified Post`, function() {
+      context(`when user has not yet like a specified Post`, () => {
         it(`calls endpoint and returns 200 status code 
             after adding a like to the post`, (done) => {
               
@@ -209,7 +209,7 @@ describe("/api/posts/", () => {
         });
       });
 
-      context(`when trying to add a like to a Post that does not exist in the db`, function() {
+      context(`when trying to add a like to a Post that does not exist in the db`, () => {
         it(`calls endpoint and returns 404 status code and postNotFound json error`, (done) => {
             chai.request(app)
               .post(`/api/posts/like/${postIdNonExistant}`)
@@ -225,7 +225,7 @@ describe("/api/posts/", () => {
     });
 
     describe("POST api/posts/unlike/:id (removeLikeFromPost)", () => {
-      context(`when user tries to unlike a Post they've previouly 'liked'`, function() {
+      context(`when user tries to unlike a Post they've previouly 'liked'`, () => {
         it(`calls endpoint while providing the id of the post they've liked, 
             and returns 200 status code after removing the user's like from the post`, (done) => {
             let altUser = {...mockAuthenticatedUser, id: seedPosts[0].likes[0].user };
@@ -243,7 +243,7 @@ describe("/api/posts/", () => {
         });
       });
 
-      context(`when user tries to delete like on a Post they haven't yet liked`, function() {
+      context(`when user tries to delete like on a Post they haven't yet liked`, () => {
         it(`calls endpoint and returns 400 status code and 'cannotUnlike' json error`, (done) => {
             chai.request(app)
               .post(`/api/posts/unlike/${postId0}`)
@@ -257,7 +257,7 @@ describe("/api/posts/", () => {
         });
       });
 
-      context(`when trying to delete like on a Post that does not exist in the db`, function() {
+      context(`when trying to delete like on a Post that does not exist in the db`, () => {
         it(`calls endpoint and returns 404 status code and postNotFound json error`, (done) => {
             chai.request(app)
               .post(`/api/posts/unlike/${postIdNonExistant}`)
@@ -273,7 +273,7 @@ describe("/api/posts/", () => {
     });
 
     describe("POST api/posts/comment/:id (addCommentToPost)", () => {
-      context(`when user tries to add comment to Post, but comment text is empty`, function() {
+      context(`when user tries to add comment to Post, but comment text is empty`, () => {
         it(`calls endpoint and returns 400 status code and 'Text field is required' json error`, (done) => {
             chai.request(app)
               .post(`/api/posts/comment/${postId0}`)
@@ -288,7 +288,7 @@ describe("/api/posts/", () => {
         });
       });
 
-      context(`when user tries to add comment to Post, but comment text is < 6 chars`, function() {
+      context(`when user tries to add comment to Post, but comment text is < 6 chars`, () => {
         it(`calls endpoint and returns 400 status code and 
             'Post must be between 6 and 300 characters long.' json error`, (done) => {
             chai.request(app)
@@ -304,7 +304,7 @@ describe("/api/posts/", () => {
         });
       });
 
-      context(`when user tries to add comment to Post that does not exist in the db`, function() {
+      context(`when user tries to add comment to Post that does not exist in the db`, () => {
         it(`calls endpoint and returns 404 status code and Post 'notFound' json error`, (done) => {
             chai.request(app)
             .post(`/api/posts/comment/${postIdNonExistant}`)
@@ -319,7 +319,7 @@ describe("/api/posts/", () => {
         });
       });
 
-      context(`when user tries to add comment to Post and req.body.text is be between 6 and 300 chars`, function() {
+      context(`when user tries to add comment to Post and req.body.text is be between 6 and 300 chars`, () => {
         it(`calls endpoint and returns 200 status code and adds new comment to post`, (done) => {
             const requestBody = { text: '12345678910', name: 'test_name' };
             chai.request(app)
@@ -339,7 +339,7 @@ describe("/api/posts/", () => {
     });
 
     describe("DELETE api/comment/:id/:comment_id (deleteCommentFromPost)", () => {
-      context(`when user tries to delete comment from Postthat does not exist in the db`, function() {
+      context(`when user tries to delete comment from Postthat does not exist in the db`, () => {
         it(`calls endpoint and returns 404 status code and 'post not found'  json error`, (done) => {
             chai.request(app)
               .delete(`/api/posts/comment/${postIdNonExistant}/12345`)
@@ -353,7 +353,7 @@ describe("/api/posts/", () => {
         });
       });
   
-      context(`when user tries to delete comment that does not exist from a given existing Post`, function() {
+      context(`when user tries to delete comment that does not exist from a given existing Post`, () => {
         it(`calls endpoint and returns 404 status code and 'comment not found'  json error`, (done) => {
             chai.request(app)
               .delete(`/api/posts/comment/${postId0}/12345`)
@@ -367,7 +367,7 @@ describe("/api/posts/", () => {
         });
       });
   
-      context(`when trying to delete comment from given Post`, function() {
+      context(`when trying to delete comment from given Post`, () => {
         it(`calls endpoint and returns status code 200 and json containing the updated Post
             without the deleted comment`, (done) => {
             const commentId = mockPosts[0].comments[0]._id;
