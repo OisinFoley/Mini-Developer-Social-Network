@@ -20,7 +20,7 @@ describe("/api/users/", () => {
   let passportStub;
 
   before(done => {
-    db = mongoose.connect("mongodb://localhost:27017/test", done);
+    db = mongoose.connect("mongodb://localhost:27017/test", { useNewUrlParser: true }, done);
   })
   after(done => {
     mongoose.connection.close(done);
@@ -36,7 +36,7 @@ describe("/api/users/", () => {
   });
   afterEach(done => {
     passportStub.restore();
-    User.remove({}, done);
+    User.deleteMany({}, done);
   });
 
   describe("Users /", () => {

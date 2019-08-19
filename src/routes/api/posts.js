@@ -183,12 +183,12 @@ addCommentToPost = (req, res) => {
 router.post('/comment/:id', PassportManager.authenticate, addCommentToPost);
 
 
-// @route DELETE api/posts/comment/:id/:comment_id
+// @route DELETE api/posts/comment/:post_id/:comment_id
 // @desc remove comment a post
 // @access Private
 
 deleteCommentFromPost = (req, res) => {
-  Post.findById(req.params.id)
+  Post.findById(req.params.post_id)
     .then(post => {
       if (
         post.comments.filter(
@@ -211,6 +211,6 @@ deleteCommentFromPost = (req, res) => {
       res.status(404).json({ notFound: errorMessages.post_not_found })
     );
 };
-router.delete('/comment/:id/:comment_id', PassportManager.authenticate, deleteCommentFromPost);
+router.delete('/comment/:post_id/:comment_id', PassportManager.authenticate, deleteCommentFromPost);
 
 module.exports = router;

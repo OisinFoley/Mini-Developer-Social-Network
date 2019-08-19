@@ -115,7 +115,6 @@ setUserProfile = (req, res) => {
   if (req.body.website) profileFields.website = req.body.website;
   if (req.body.location) profileFields.location = req.body.location;
   if (req.body.status) profileFields.status = req.body.status;
-  /* prettier-ignore */
   if (req.body.githubUsername) profileFields.githubUsername = req.body.githubUsername;
 
   //skills needs to be an array, based on schema

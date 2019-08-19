@@ -27,7 +27,10 @@ describe("/api/profiles/", () => {
      */
 
   before(done => {
-    db = mongoose.connect("mongodb://localhost:27017/test", done);
+    db = mongoose
+      .connect("mongodb://localhost:27017/test", {
+        useNewUrlParser: true, useFindAndModify: false
+      }, done);
   });
   after(done => {
     mongoose.connection.close(done);
@@ -43,7 +46,7 @@ describe("/api/profiles/", () => {
   });
   afterEach(done => {
     passportStub.restore();
-    Profile.remove({}, done);
+    Profile.deleteMany({}, done);
   });
 
   describe("Profiles /", () => {
@@ -62,7 +65,7 @@ describe("/api/profiles/", () => {
 
       it(`calls endpoint and returns 404 status code and 'Profile not found' json error
           when no profile exists that matches req.user.id`, (done) => {
-          let altUser = {...mockAuthenticatedUser, id: '5d497baeed8f0b4d00e12345' };
+          let altUser = {...mockAuthenticatedUser, id: mockProfiles[0].user.replace('2cb', '123') };
           passport.authenticate.callsFake((strategy, options, callback) => {
             callback(null, altUser, null);
             return (req,res,next)=>{};
@@ -90,19 +93,6 @@ describe("/api/profiles/", () => {
             res.body.should.be.a('array');
             res.body.length.should.equal(2);
             res.should.have.status(200);
-            done();
-          });
-      });
-
-
-  // this one needs a bit of work -> need to gracefully empty the db at start, the re-populate it at end of test
-      it(`calls endpoint and returns 404 status code when no profiles are returned from db`, (done) => {
-        request(app)
-          .get('/api/profiles/all')
-          .end((err, res) => {
-
-            // do we need to assert something here?
-            res.should.have.status(404);
             done();
           });
       });
@@ -230,7 +220,7 @@ describe("/api/profiles/", () => {
 
       it(`calls endpoint and returns 400 status code and 'handle already exists' json error
           when user does not have a profile and chosen handle already exists`, (done) => {
-          let altUser = {...mockAuthenticatedUser, id: '5d497baeed8f0b4d00e12345' };
+          let altUser = {...mockAuthenticatedUser, id: mockProfiles[0].user.replace('2cb', '123') };
           passport.authenticate.callsFake((strategy, options, callback) => {
             callback(null, altUser, null);
             return (req,res,next)=>{};
@@ -240,10 +230,6 @@ describe("/api/profiles/", () => {
             ...mockProfiles[0],
             handle: mockProfiles[1].handle
           };
-
-          // try posting the profileData variable object
-          // then change the obj data slighly so the controller doesn't try to do an update
-          // otherwise, the logic of the controller function that handles the endpoint is flawed
           
           request(app)
             .post('/api/profiles')
