@@ -6,7 +6,7 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
-    "server": "nodemon server.js",
+    "server": "nodemon --exec babel-node server.js",
     "client": "BROWSER=none npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "nyc --reporter=text mocha"
@@ -28,6 +28,11 @@
     "validator": "^10.5.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
     "mocha": "^2.4.5",

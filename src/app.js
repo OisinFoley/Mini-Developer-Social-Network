@@ -1,11 +1,20 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const passport = require('passport');
-const path = require('path');
+// const express = require('express');
+// const bodyParser = require('body-parser');
+// const passport = require('passport');
+// const path = require('path');
 
-const userRoutes = require('./routes/api/users');
-const profileRoutes = require('./routes/api/profiles');
-const postRoutes = require('./routes/api/posts');
+// const userRoutes = require('./routes/api/users');
+// const profileRoutes = require('./routes/api/profiles');
+// const postRoutes = require('./routes/api/posts');
+
+import express from 'express';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import path from 'path';
+
+import userRoutes from './routes/api/users';
+import profileRoutes from './routes/api/profiles';
+import postRoutes from './routes/api/posts';
 
 let app = express();
 
@@ -30,4 +39,5 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// export const 
 module.exports = app;
