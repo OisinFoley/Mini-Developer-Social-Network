@@ -1,15 +1,15 @@
-const chai = require('chai');
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../src/app';
+import mongoose from "mongoose";
+import Profile from '../src/models/Profile';
+import sinon from 'sinon';
+import passport from 'passport';
+import mockProfiles from './__mocks__/profiles';
+import errorMessages from '../src/error-handling/strings';
+import { addSeedProfilesToDb } from './utils/TestDataSeeder';
+import mockAuthenticatedUser from './__mocks__/authenticated-user';
 const { request } = chai;
-const chaiHttp = require('chai-http');
-const app = require('../src/app');
-const mongoose = require("mongoose");
-const Profile = require('../src/models/Profile');
-const sinon = require('sinon');
-const passport = require('passport');
-const mockProfiles = require('./__mocks__/profiles');
-const errorMessages = require('../src/error-handling/strings');
-const { addSeedProfilesToDb } = require('./utils/TestDataSeeder');
-const mockAuthenticatedUser = require('./__mocks__/authenticated-user');
 
 // Configure chai
 chai.use(chaiHttp);

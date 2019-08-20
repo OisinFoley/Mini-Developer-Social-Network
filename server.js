@@ -1,7 +1,3 @@
-// const app = require("./src/app");
-// const mongoose = require('mongoose');
-// const db = require('./src/config/keys').mongoURI;
-
 import app from './src/app';
 import mongoose from 'mongoose';
 import { mongoURI as db } from './src/config/keys';
