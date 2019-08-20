@@ -3,3 +3,4 @@ package-lock.json
 src/config/keys_dev.js
 src/coverage
 .nyc_output
+.vscode
