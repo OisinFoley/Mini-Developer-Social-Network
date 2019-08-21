@@ -5,4 +5,4 @@ const seedUser = {
   avatar: 'https://gravatar.com/test_avatar'
 };
 
-module.exports = seedUser;
+export default seedUser;

@@ -65,4 +65,4 @@ const profiles = [{
   "bio": "A second fake profile, for comparing expected with actual values"
 }];
 
-module.exports = profiles;
+export default profiles;
