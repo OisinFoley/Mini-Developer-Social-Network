@@ -41,4 +41,4 @@ const posts = [{
   "comments": []
 }];
 
-module.exports = posts;
+export default posts;

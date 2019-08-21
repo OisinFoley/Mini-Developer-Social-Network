@@ -1,5 +1,6 @@
 /node_modules
 package-lock.json
-/config/keys_dev.js
-/config/keys_test.js
-/.nyc_output
+src/config/keys_dev.js
+/coverage
+.nyc_output
+.vscode

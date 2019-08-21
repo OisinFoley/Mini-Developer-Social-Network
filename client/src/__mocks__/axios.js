@@ -14,11 +14,11 @@ export default {
         return Promise.resolve({ data: mockPosts[0] } );
       case '/api/posts/nonExistentPostId': // getPost()
         return Promise.reject({ data: null } );
-      case '/api/profile': // getCurrentProfile()
+      case '/api/profiles': // getCurrentProfile()
         return Promise.resolve({ data: {} } );
-      case '/api/profile/all': // getProfiles()
+      case '/api/profiles/all': // getProfiles()
         return Promise.resolve({ data: ['profile1, profile2, profile3'] } );
-      case '/api/profile/handle/user123': // getProfileByHandle()
+      case '/api/profiles/handle/user123': // getProfileByHandle()
         return Promise.resolve({ data: 'fakeProfile' } );
       default:
         break;
@@ -42,11 +42,11 @@ export default {
         return Promise.resolve({ data: 'fakeUser' } );
       case '/api/users/login': // loginUser()
         return Promise.resolve({ data: { token: 'fakeToken' } } );
-      case '/api/profile': // createProfile()
+      case '/api/profiles': // createProfile()
         return Promise.resolve({ data: fakeUser } );
-      case '/api/profile/education': // addEducation()
+      case '/api/profiles/education': // addEducation()
         return Promise.resolve();
-      case '/api/profile/experience': // addExperience()
+      case '/api/profiles/experience': // addExperience()
         return Promise.resolve();
     }
   }),
@@ -56,11 +56,11 @@ export default {
         return Promise.resolve({ data: deletedPostId[0] } );
       case '/api/posts/comment/def456/pqr789': // deleteComment()
         return Promise.resolve({ data: deletedPostId[0] } );
-      case '/api/profile/education/edu123': // deleteEducation()
+      case '/api/profiles/education/edu123': // deleteEducation()
         return Promise.resolve({ data: {} } );
-      case '/api/profile/experience/exp123': // deleteExperience()
+      case '/api/profiles/experience/exp123': // deleteExperience()
         return Promise.resolve({ data: {} } );
-      case '/api/profile': // deleteAccount()
+      case '/api/profiles': // deleteAccount()
         return Promise.resolve({ data: {} } );
     }
   })

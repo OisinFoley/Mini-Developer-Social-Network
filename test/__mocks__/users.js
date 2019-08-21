@@ -6,4 +6,4 @@ const users = [{
   avatar: 'https://gravatar.com/test_avatar'
 }];
 
-module.exports = users;
+export default users;
