@@ -12,7 +12,7 @@ import {
 export const getCurrentProfile = () => async (dispatch) => {
   dispatch(setProfileLoading());
   await axios
-    .get('/api/profile')
+    .get('/api/profiles')
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -29,7 +29,7 @@ export const getCurrentProfile = () => async (dispatch) => {
 
 export const createProfile = (profileData, history) => async (dispatch) => {
   await axios
-    .post('/api/profile', profileData)
+    .post('/api/profiles', profileData)
     .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({
@@ -41,7 +41,7 @@ export const createProfile = (profileData, history) => async (dispatch) => {
 
 export const addEducation = (eduData, history) => async (dispatch) => {
   await axios
-    .post('/api/profile/education', eduData)
+    .post('/api/profiles/education', eduData)
     .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({
@@ -53,7 +53,7 @@ export const addEducation = (eduData, history) => async (dispatch) => {
 
 export const deleteEducation = id => async (dispatch) => {
   await axios
-    .delete(`/api/profile/education/${id}`)
+    .delete(`/api/profiles/education/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -72,7 +72,7 @@ export const deleteEducation = id => async (dispatch) => {
 
 export const addExperience = (expData, history) => async (dispatch) => {
   await axios
-    .post('/api/profile/experience', expData)
+    .post('/api/profiles/experience', expData)
     .then(res => history.push('/dashboard'))
     .catch(err =>
       dispatch({
@@ -85,7 +85,7 @@ export const addExperience = (expData, history) => async (dispatch) => {
 export const getProfiles = () => async (dispatch) => {
   dispatch(setProfileLoading());
   await axios
-    .get('/api/profile/all')
+    .get('/api/profiles/all')
     .then(res =>
       dispatch({
         type: GET_PROFILES,
@@ -103,7 +103,7 @@ export const getProfiles = () => async (dispatch) => {
 export const getProfileByHandle = handle => async (dispatch) => {
   dispatch(setProfileLoading());
   await axios
-    .get(`/api/profile/handle/${handle}`)
+    .get(`/api/profiles/handle/${handle}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -120,7 +120,7 @@ export const getProfileByHandle = handle => async (dispatch) => {
 
 export const deleteExperience = id => async (dispatch) => {
   await axios
-    .delete(`/api/profile/experience/${id}`)
+    .delete(`/api/profiles/experience/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -139,7 +139,7 @@ export const deleteExperience = id => async (dispatch) => {
 
 export const deleteAccount = () => async (dispatch) => {
   await axios
-    .delete('/api/profile')
+    .delete('/api/profiles')
     .then(res =>
       dispatch({
         type: SET_CURRENT_USER,
