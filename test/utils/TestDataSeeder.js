@@ -1,8 +1,11 @@
-const mockPosts = require('../__mocks__/posts');
-const mockSeedProfiles = require('../__mocks__/seed-profiles');
-const mockSeedUser = require('../__mocks__/seed-user');
+import mockPosts from '../__mocks__/posts';
+import mockSeedProfiles from '../__mocks__/seed-profiles';
+import mockSeedUser from '../__mocks__/seed-user';
+import Post from '../../src/models/Post';
+import Profile from '../../src/models/Profile';
+import User from '../../src/models/User';
 
-addSeedPostsToDb = (resolve) => {
+export const addSeedPostsToDb = (resolve) => {
   mockPosts.forEach(post => {
     const newPost = new Post({
       _id: post._id,
@@ -19,7 +22,7 @@ addSeedPostsToDb = (resolve) => {
   resolve();
 };
 
-addSeedProfilesToDb = (resolve) => {
+export const addSeedProfilesToDb = (resolve) => {
   mockSeedProfiles.forEach(profile => {
     const newProfile = new Profile({
       _id: profile._id,
@@ -41,7 +44,7 @@ addSeedProfilesToDb = (resolve) => {
   resolve();
 };
 
-addSeedUsersToDb = (resolve) => {
+export const addSeedUsersToDb = (resolve) => {
   let newUser = new User({
     name: mockSeedUser.name,
     email: mockSeedUser.email,
@@ -49,10 +52,4 @@ addSeedUsersToDb = (resolve) => {
     avatar: mockSeedUser.avatar
   });
   newUser.save().then(() => resolve());
-};
-
-module.exports = {
-  addSeedPostsToDb,
-  addSeedProfilesToDb,
-  addSeedUsersToDb
 };

@@ -1,5 +1,5 @@
-const seedProfiles = require('./seed-profiles');
-module.exports  = {
+import seedProfiles from './seed-profiles';
+export default {
   date: '2018-11-11T00:04:19.666Z',
   id: seedProfiles[0].user,
   name: 'test_name',

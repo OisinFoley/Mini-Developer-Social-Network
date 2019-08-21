@@ -1,15 +1,15 @@
-const chai = require('chai');
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../src/app';
+import mongoose from "mongoose";
+import Profile from '../src/models/Profile';
+import sinon from 'sinon';
+import passport from 'passport';
+import mockProfiles from './__mocks__/profiles';
+import errorMessages from '../src/error-handling/strings';
+import { addSeedProfilesToDb } from './utils/TestDataSeeder';
+import mockAuthenticatedUser from './__mocks__/authenticated-user';
 const { request } = chai;
-const chaiHttp = require('chai-http');
-const app = require('../src/app');
-const mongoose = require("mongoose");
-const Profile = require('../src/models/Profile');
-const sinon = require('sinon');
-const passport = require('passport');
-const mockProfiles = require('./__mocks__/profiles');
-const errorMessages = require('../src/error-handling/strings');
-const { addSeedProfilesToDb } = require('./utils/TestDataSeeder');
-const mockAuthenticatedUser = require('./__mocks__/authenticated-user');
 
 // Configure chai
 chai.use(chaiHttp);
@@ -299,7 +299,7 @@ describe("/api/profiles/", () => {
     });
     
 
-    describe("POST api/profiles/experience (addNewExperience)", () => {
+    describe("POST api/profiles/experience (addExperienceToProfile)", () => {
       context(`when adding experience to Profile and title, company, and from date are null in the request`, () => {
         it(`calls endpoint and returns 400 code and 'title, company, from date required validation' json error`, (done) => {
           let experienceData = {
@@ -345,7 +345,7 @@ describe("/api/profiles/", () => {
       });
     });
 
-    describe("DELETE api/profiles/experience/:exp_id (deleteExperienceById)", () => {
+    describe("DELETE api/profiles/experience/:exp_id (deleteExperienceFromProfileById)", () => {
       context(`when deleting existing experience from Profile and Profile was created by the authenticated user`, () => {
         it(`calls endpoint and returns 200 code and updated profile json without old experience`, (done) => {
           let expId = '5d4c5dec5b62789cbc86d014';
@@ -367,7 +367,7 @@ describe("/api/profiles/", () => {
       });
     });
 
-    describe("POST api/profiles/education (addEducation)", () => {
+    describe("POST api/profiles/education (addEducationToProfile)", () => {
       context(`when adding education to Profile and data is valid and authenticated user id matches an existing profile`, () => {
         it(`calls endpoint and returns 200 code 
           and updated profile json including new education`, (done) => {
@@ -418,7 +418,7 @@ describe("/api/profiles/", () => {
       });
     });
 
-    describe("DELETE api/profiles/education/:edu_id (deleteEducation)", () => {
+    describe("DELETE api/profiles/education/:edu_id (deleteEducationFromProfileById)", () => {
       context(`when deleting existing education from Profile and Profile was created by the authenticated user`, () => {
         it(`calls endpoint and returns 200 code when profile matching user.id does exist`, (done) => {
           let eduId = '5d4c5df704347a3d899893d1';

@@ -6,14 +6,19 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",
-    "server": "nodemon server.js",
+    "server": "nodemon --exec babel-node server.js",
     "client": "BROWSER=none npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "nyc --reporter=text mocha"
+    "test": "nyc --reporter=text mocha --compilers js:@babel/register"
   },
   "author": "Oisín Foley",
   "license": "MIT",
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false
+  },
   "dependencies": {
+    "@babel/runtime": "^7.5.5",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
@@ -28,6 +33,13 @@
     "validator": "^10.5.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "babel-plugin-istanbul": "^5.2.0",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
     "mocha": "^2.4.5",
