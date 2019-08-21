@@ -1,6 +1,9 @@
 import mockPosts from '../__mocks__/posts';
 import mockSeedProfiles from '../__mocks__/seed-profiles';
 import mockSeedUser from '../__mocks__/seed-user';
+import Post from '../../src/models/Post';
+import Profile from '../../src/models/Profile';
+import User from '../../src/models/User';
 
 export const addSeedPostsToDb = (resolve) => {
   mockPosts.forEach(post => {
@@ -14,7 +17,7 @@ export const addSeedPostsToDb = (resolve) => {
       likes: post.likes,
       comments: post.comments
     });
-    await newPost.save();
+    newPost.save();
   });
   resolve();
 };
