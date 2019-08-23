@@ -305,12 +305,12 @@ describe("/api/posts/", () => {
       });
 
       context(`when user tries to add comment to Post that does not exist in the db`, () => {
-        it(`calls endpoint and returns 404 status code and Post 'notFound' json error`, (done) => {
+        it(`calls endpoint and returns 404 status code and postNotFound json error`, (done) => {
             chai.request(app)
             .post(`/api/posts/comment/${postIdNonExistant}`)
               .send({ text: '12345678910' })
               .end((err, res) => {
-                const expectedBody = { notFound: errorMessages.post_not_found };
+                const expectedBody = { postNotFound: errorMessages.post_not_found };
 
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(404);
@@ -338,13 +338,13 @@ describe("/api/posts/", () => {
       });
     });
 
-    describe("DELETE api/comment/:id/:comment_id (deleteCommentFromPost)", () => {
-      context(`when user tries to delete comment from Postthat does not exist in the db`, () => {
-        it(`calls endpoint and returns 404 status code and 'post not found'  json error`, (done) => {
+    describe.only("DELETE api/comment/:id/:comment_id (deleteCommentFromPost)", () => {
+      context(`when user tries to delete comment from Post that does not exist in the db`, () => {
+        it(`calls endpoint and returns 404 status code and postNotFound  json error`, (done) => {
             chai.request(app)
               .delete(`/api/posts/comment/${postIdNonExistant}/12345`)
               .end((err, res) => {
-                const expectedBody = { notFound: errorMessages.post_not_found };
+                const expectedBody = { postNotFound: errorMessages.post_not_found };
       
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(404);
@@ -354,11 +354,11 @@ describe("/api/posts/", () => {
       });
   
       context(`when user tries to delete comment that does not exist from a given existing Post`, () => {
-        it(`calls endpoint and returns 404 status code and 'comment not found'  json error`, (done) => {
+        it(`calls endpoint and returns 404 status code and commentNotFound  json error`, (done) => {
             chai.request(app)
               .delete(`/api/posts/comment/${postId0}/12345`)
               .end((err, res) => {
-                const expectedBody = { notFound: errorMessages.comment_not_found };
+                const expectedBody = { commentNotFound: errorMessages.comment_not_found };
       
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(400);
@@ -368,7 +368,7 @@ describe("/api/posts/", () => {
       });
   
       context(`when trying to delete comment from given Post`, () => {
-        it(`calls endpoint and returns status code 200 and json containing the updated Post
+        it.only(`calls endpoint and returns status code 200 and json containing the updated Post
             without the deleted comment`, (done) => {
             const commentId = mockPosts[0].comments[0]._id;
             chai.request(app)

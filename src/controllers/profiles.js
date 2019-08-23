@@ -26,13 +26,7 @@ class ProfilesController {
 
     Profile.find()
       .populate('user', ['name', 'avatar'])
-      .then(profiles => {
-        if (!profiles) {
-          errors.noProfiles = errorMessages.profiles_not_found;
-          return res.status(404).json(errors);
-        }
-        res.json(profiles);
-      })
+      .then(profiles => res.json(profiles))
       .catch(err => res.status(404).json({ profile: errorMessages.profiles_not_found }));
   };
 
@@ -71,7 +65,7 @@ class ProfilesController {
   async setUserProfile (req, res) {
     const { errors, isValid } = validateProfileInput(req.body);
   
-    // any validation erros are returned
+    // any validation errors are returned
     if (!isValid) {
       return res.status(400).json(errors);
     }

@@ -1,4 +1,5 @@
 import Post from '../models/Post';
+import PostsService from '../services/posts';
 import Profile from '../models/Profile';
 import validatePostInput from '../validation/post';
 import errorMessages from '../error-handling/strings';
@@ -7,9 +8,7 @@ class PostsController {
   async getAllPosts (req, res) {
     Post.find()
     .sort({ date: -1 })
-    .then(posts => {
-      res.json(posts);
-    })
+    .then(posts => res.json(posts))
     .catch(err => res.status(404).json({ noPosts: errorMessages.posts_not_found }));
   };
 
@@ -134,33 +133,46 @@ class PostsController {
         post.save().then(updatedPost => res.json(updatedPost));
       })
       .catch(err =>
-        res.status(404).json({ notFound: errorMessages.post_not_found })
+        res.status(404).json({ postNotFound: errorMessages.post_not_found })
       );
   };
 
   async deleteCommentFromPost (req, res) {
-    Post.findById(req.params.post_id)
+    // Post.findById(req.params.post_id)
+    let { post_id, comment_id } = req.params;
+    PostsService.deleteComment(post_id, comment_id, errorMessages)
     .then(post => {
-      if (
-        post.comments.filter(
-          comment => comment._id.toString() === req.params.comment_id
-        ).length === 0
-      ) {
-        return res
-          .status(400)
-          .json({ notFound: errorMessages.comment_not_found });
-      }
-      const removeIndex = post.comments
-        .map(item => item._id.toString())
-        .indexOf(req.params.comment_id);
 
-      post.comments.splice(removeIndex, 1);
+      res.json(post);
+      
 
-      post.save().then(post => res.json(post));
+      // if (
+      //   post.comments.filter(
+      //     comment => comment._id.toString() === req.params.comment_id
+      //   ).length === 0
+      // ) {
+      //   return res
+      //     .status(400)
+      //     .json({ notFound: errorMessages.comment_not_found });
+      // }
+      // const removeIndex = post.comments
+      //   .map(item => item._id.toString())
+      //   .indexOf(req.params.comment_id);
+
+      // post.comments.splice(removeIndex, 1);
+
+      // post.save().then(post => res.json(post));
     })
-    .catch(err =>
-      res.status(404).json({ notFound: errorMessages.post_not_found })
-    );
+    .catch(err => {
+      console.log(err);
+      
+      if (err.postNotFound || err.commentNotFound) {
+        res.status(404).json(err);
+      }
+      // check type of err returned from service
+      // res.status(404).json({ notFound: errorMessages.post_not_found })
+    });
   };
 };
+
 export default new PostsController();

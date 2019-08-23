@@ -8,21 +8,21 @@ const router = express.Router();
 // @desc retrieve posts
 // @access Public
 
-router.get('/', postsController.getAllPosts);
+router.get('/', PassportManager.authenticate, postsController.getAllPosts);
 
 
 // @route GET api/posts/
 // @desc retrieve posts
 // @access Public
 
-router.get('/:id', postsController.getSinglePost);
+router.get('/:id', PassportManager.authenticate, postsController.getSinglePost);
 
 
 // @route DELETE api/posts/:id
 // @desc delete a post
 // @access Private
 
-router.delete('/:id',PassportManager.authenticate, postsController.deleteSinglePost);
+router.delete('/:id', PassportManager.authenticate, postsController.deleteSinglePost);
 
 
 // @route POST api/posts/
