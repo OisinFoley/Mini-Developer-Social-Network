@@ -113,7 +113,7 @@ describe("/api/posts/", () => {
             chai.request(app)
               .delete(`/api/posts/${postIdNonExistant}`)
               .end((err, res) => {
-                const expectedBody = { noPost: errorMessages.post_not_found };
+                const expectedBody = { postNotFound: errorMessages.post_not_found };
       
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(404);
@@ -338,7 +338,7 @@ describe("/api/posts/", () => {
       });
     });
 
-    describe.only("DELETE api/comment/:id/:comment_id (deleteCommentFromPost)", () => {
+    describe("DELETE api/comment/:id/:comment_id (deleteCommentFromPost)", () => {
       context(`when user tries to delete comment from Post that does not exist in the db`, () => {
         it(`calls endpoint and returns 404 status code and postNotFound  json error`, (done) => {
             chai.request(app)
@@ -354,21 +354,21 @@ describe("/api/posts/", () => {
       });
   
       context(`when user tries to delete comment that does not exist from a given existing Post`, () => {
-        it(`calls endpoint and returns 404 status code and commentNotFound  json error`, (done) => {
+        it(`calls endpoint and returns 404 status code and commentNotFound json error`, (done) => {
             chai.request(app)
               .delete(`/api/posts/comment/${postId0}/12345`)
               .end((err, res) => {
                 const expectedBody = { commentNotFound: errorMessages.comment_not_found };
       
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
-                res.should.have.status(400);
+                res.should.have.status(404);
                 done();
               });
         });
       });
   
       context(`when trying to delete comment from given Post`, () => {
-        it.only(`calls endpoint and returns status code 200 and json containing the updated Post
+        it(`calls endpoint and returns status code 200 and json containing the updated Post
             without the deleted comment`, (done) => {
             const commentId = mockPosts[0].comments[0]._id;
             chai.request(app)
