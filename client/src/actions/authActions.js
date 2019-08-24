@@ -4,8 +4,8 @@ import setTokenAsHeader from '../utils/setTokenAsHeader';
 import jwt_decode from 'jwt-decode';
 
 // reg user
-export const registerUser = (userData, history) => async (dispatch) => {
-  await axios
+export const registerUser = (userData, history) => dispatch => {
+  return axios
     .post('/api/users/register', userData)
     .then(() => history.push('/login'))
     .catch(err =>
@@ -17,8 +17,8 @@ export const registerUser = (userData, history) => async (dispatch) => {
 };
 
 // login and grab token, then attach to future headers
-export const loginUser = userData => async (dispatch) => {
-  await axios
+export const loginUser = userData => dispatch => {
+  return axios
     .post('/api/users/login', userData)
     .then(res => {
       let { token } = res.data;
