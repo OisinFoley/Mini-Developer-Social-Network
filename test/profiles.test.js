@@ -8,6 +8,7 @@ import passport from 'passport';
 import mockProfiles from './__mocks__/profiles';
 import errorMessages from '../src/error-handling/strings';
 import { addSeedProfilesToDb } from './utils/TestDataSeeder';
+import seedProfiles from './__mocks__/seed-profiles';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
 const { request } = chai;
 
@@ -37,7 +38,7 @@ describe("/api/profiles/", () => {
   });
 
   beforeEach(done => {
-    passportStub =  sinon.stub(passport,"authenticate").callsFake((strategy, options, callback) => {
+    passportStub =  sinon.stub(passport, "authenticate").callsFake((strategy, options, callback) => {
       callback(null, mockAuthenticatedUser, null);
       return (req,res,next)=>{};
     });
@@ -144,12 +145,9 @@ describe("/api/profiles/", () => {
               .get(`/api/profiles/user/${user_id}`)
               .end((err, res) => {
                 const expectedBodyNoProfile = errorMessages.profile_not_found_for_user_id;
-
-                // we have noProfile as a prop in 1 404, and profile as the prop name in the other 404
-                // look back on the course videos to see what the implementaion logic was
                 
-                res.body.hasOwnProperty('profile').should.equal(true);
-                expectedBodyNoProfile.should.equal(res.body.profile);
+                res.body.hasOwnProperty('noProfile').should.equal(true);
+                expectedBodyNoProfile.should.equal(res.body.noProfile);
                 res.should.have.status(404);
                 done();
               });
@@ -201,6 +199,7 @@ describe("/api/profiles/", () => {
       context(`when setting user's Profile and website, youtube, twitter, linkedin, facebook, and instagram are null in the request`, () => {
         it(`calls endpoint and returns 400 status code and
             'not a valid URL for website, youtube, twitter, linkedin, facebook, instagram validation' json error`, (done) => {
+            // TODO: make util function to handle assignment of same value to many props
             let profileData = {
               ...mockProfiles[0],
               website: 'someInvalidUrl',
@@ -333,8 +332,6 @@ describe("/api/profiles/", () => {
               .post('/api/profiles/experience')
               .send(newExperienceData)
               .end((err, res) => {
-                const { title, company, from } = res.body;
-                
                 // assert that res.body has the keys of the mock profiles
                 // and assert that updated profile exp matches the 'newExperienceData' values
 
@@ -348,9 +345,9 @@ describe("/api/profiles/", () => {
     describe("DELETE api/profiles/experience/:exp_id (deleteExperienceFromProfileById)", () => {
       context(`when deleting existing experience from Profile and Profile was created by the authenticated user`, () => {
         it(`calls endpoint and returns 200 code and updated profile json without old experience`, (done) => {
-          let expId = '5d4c5dec5b62789cbc86d014';
+          let { _id } = seedProfiles[0].experience[0];
           request(app)
-            .delete(`/api/profiles/experience/${expId}`)
+            .delete(`/api/profiles/experience/${_id}`)
             .end((err, res) => {
               let { experience } = res.body;
 
@@ -382,7 +379,6 @@ describe("/api/profiles/", () => {
             .send(newEducationData)
             .end((err, res) => {
               const { school, degree, fieldOfStudy, from } = res.body;
-              
               // assert that res.body has the keys of the mock profiles
               // and assert that updated profile exp matches the 'newEducationData' values
 

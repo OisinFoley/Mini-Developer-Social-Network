@@ -3,12 +3,12 @@ import validatePostInput from '../validation/post';
 import errorMessages from '../error-handling/strings';
 
 class PostsController {
-  async getAllPosts (req, res) {
+  getAllPosts (req, res) {
     PostsService.getAll()
       .then(posts => res.json(posts));
   };
 
-  async getSinglePost (req, res) {
+  getSinglePost (req, res) {
     const { id } = req.params;
     PostsService.getPost(id, errorMessages)
       .then(post => res.json(post))
@@ -17,7 +17,7 @@ class PostsController {
       });
   };
 
-  async deleteSinglePost (req, res) {
+  deleteSinglePost (req, res) {
     const { id } = req.params;
     const userId = req.user.id;
 
@@ -29,7 +29,7 @@ class PostsController {
       });
   };
 
-  async addNewPost (req, res) {
+  addNewPost (req, res) {
     const { errors, isValid } = validatePostInput(req.body);
     const postData = {...req.body, user: req.user.id };
 
@@ -41,7 +41,7 @@ class PostsController {
       .then(post => res.json(post));
   };
 
-  async addLikeToPost (req, res) {
+  addLikeToPost (req, res) {
     const { id } = req.params;
     const userId = req.user.id;
 
@@ -53,7 +53,7 @@ class PostsController {
       });
   };
 
-  async removeLikeFromPost (req, res) {
+  removeLikeFromPost (req, res) {
     const { id } = req.params;
     const userId = req.user.id;
 
@@ -65,7 +65,7 @@ class PostsController {
       });
   };
 
-  async addCommentToPost (req, res) {
+  addCommentToPost (req, res) {
     const { errors, isValid } = validatePostInput(req.body);
     const commentData = {...req.body, user: req.user.id };
     const { id } = req.params;
@@ -81,7 +81,7 @@ class PostsController {
     });
   };
 
-  async deleteCommentFromPost (req, res) {
+  deleteCommentFromPost (req, res) {
     const { post_id, comment_id } = req.params;
     PostsService.deleteComment(post_id, comment_id, errorMessages)
       .then(post => res.json(post))

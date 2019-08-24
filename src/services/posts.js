@@ -27,6 +27,7 @@ class PostsService {
       Profile.findOne({ user: userId }).then(profile => {
         Post.findById(postId)
           .then(post => {
+            // did user create the post
             if (post.user.toString() !== userId) {
               reject({
                 unauthorised: errorMessages.user_not_authorised
@@ -43,8 +44,9 @@ class PostsService {
   
   addPost(postData) {
     return new Promise((resolve, reject) => {
-      const newPost = new Post(postData);
-      newPost.save().then(post => resolve(post));
+      new Post(postData)
+        .save()
+        .then(post => resolve(post));
     });
   };
 
