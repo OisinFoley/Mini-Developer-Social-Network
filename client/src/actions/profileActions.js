@@ -9,9 +9,9 @@ import {
   SET_CURRENT_USER
 } from './types';
 
-export const getCurrentProfile = () => async (dispatch) => {
+export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());
-  await axios
+  return axios
     .get('/api/profiles')
     .then(res =>
       dispatch({
@@ -27,8 +27,8 @@ export const getCurrentProfile = () => async (dispatch) => {
     );
 };
 
-export const createProfile = (profileData, history) => async (dispatch) => {
-  await axios
+export const createProfile = (profileData, history) => dispatch => {
+  return axios
     .post('/api/profiles', profileData)
     .then(res => history.push('/dashboard'))
     .catch(err =>
@@ -39,8 +39,8 @@ export const createProfile = (profileData, history) => async (dispatch) => {
     );
 };
 
-export const addEducation = (eduData, history) => async (dispatch) => {
-  await axios
+export const addEducation = (eduData, history) => dispatch => {
+  return axios
     .post('/api/profiles/education', eduData)
     .then(res => history.push('/dashboard'))
     .catch(err =>
@@ -51,14 +51,13 @@ export const addEducation = (eduData, history) => async (dispatch) => {
     );
 };
 
-export const deleteEducation = id => async (dispatch) => {
-  await axios
+export const deleteEducation = id => dispatch => {
+  return axios
     .delete(`/api/profiles/education/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
-        // remember server returns the updated profile minus the education that was deleted
-        // rather than pushing to our history, we will use the difference in returned object state to updated the view
+        // returns updated profile minus the education that was deleted
         payload: res.data
       })
     )
@@ -70,8 +69,8 @@ export const deleteEducation = id => async (dispatch) => {
     );
 };
 
-export const addExperience = (expData, history) => async (dispatch) => {
-  await axios
+export const addExperience = (expData, history) => dispatch => {
+  return axios
     .post('/api/profiles/experience', expData)
     .then(res => history.push('/dashboard'))
     .catch(err =>
@@ -82,9 +81,9 @@ export const addExperience = (expData, history) => async (dispatch) => {
     );
 };
 
-export const getProfiles = () => async (dispatch) => {
+export const getProfiles = () => dispatch => {
   dispatch(setProfileLoading());
-  await axios
+  return axios
     .get('/api/profiles/all')
     .then(res =>
       dispatch({
@@ -100,9 +99,9 @@ export const getProfiles = () => async (dispatch) => {
     );
 };
 
-export const getProfileByHandle = handle => async (dispatch) => {
+export const getProfileByHandle = handle => dispatch => {
   dispatch(setProfileLoading());
-  await axios
+  return axios
     .get(`/api/profiles/handle/${handle}`)
     .then(res =>
       dispatch({
@@ -118,14 +117,13 @@ export const getProfileByHandle = handle => async (dispatch) => {
     );
 };
 
-export const deleteExperience = id => async (dispatch) => {
-  await axios
+export const deleteExperience = id => dispatch => {
+  return axios
     .delete(`/api/profiles/experience/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
-        // remember server returns the updated profile minus the experience that was deleted
-        // rather than pushing to our history, we will use the difference in returned object state to updated the view
+        // returns updated profile minus the experience that was deleted
         payload: res.data
       })
     )
@@ -137,8 +135,8 @@ export const deleteExperience = id => async (dispatch) => {
     );
 };
 
-export const deleteAccount = () => async (dispatch) => {
-  await axios
+export const deleteAccount = () => dispatch => {
+  return axios
     .delete('/api/profiles')
     .then(res =>
       dispatch({
