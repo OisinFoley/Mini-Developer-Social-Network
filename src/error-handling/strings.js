@@ -11,6 +11,7 @@ module.exports = {
   profile_not_found_for_user_id: 'Profile not found for given user id',
   profile_not_found_for_handle: 'Profile not found for given handle',
   profiles_not_found: 'No profiles found',
+  profile_not_found_generic: 'No profile found',
   handle_already_exists: 'This handle already exists',
   email_already_taken: 'Email already taken',
   no_user_for_email: 'User does not exist',
