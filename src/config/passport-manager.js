@@ -1,10 +1,8 @@
-const JwtStrategy = require("passport-jwt").Strategy;
-const ExtractJwt = require("passport-jwt").ExtractJwt;
-const mongoose = require("mongoose");
-const User = mongoose.model("user");
-const keys = require("./keys");
-
-const passport = require('passport');
+import { Strategy as JwtStrategy } from "passport-jwt";
+import { ExtractJwt } from "passport-jwt";
+import User from '../models/User';
+import keys from "./keys";
+import passport from 'passport';
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -27,7 +25,7 @@ class PassportManager {
   };
 
   authenticate(req, res, next) {
-    passport.authenticate('jwt', { session: false}, (err, user, info) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
       if (err) { return next(err); }
       if (!user) {
           if (info.name === "TokenExpiredError") {

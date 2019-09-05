@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import path from 'path';
-
 import userRoutes from './routes/api/users';
 import profileRoutes from './routes/api/profiles';
 import postRoutes from './routes/api/posts';

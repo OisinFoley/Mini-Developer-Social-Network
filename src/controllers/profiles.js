@@ -106,7 +106,7 @@ class ProfilesController {
     ProfilesService.deleteExperience(id, exp_id, errorMessages)
       .then(profile => res.json(profile))
       .catch(err => {
-        // update response
+        // TODO: update response
         res.json(404).json(err)
       })
   };
@@ -131,7 +131,7 @@ class ProfilesController {
     ProfilesService.deleteEducation(id, edu_id, errorMessages)
       .then(profile => res.json(profile))
       .catch(err => {
-        // update response
+        // TODO: update response
         res.json(404).json(err);
       });
   };
