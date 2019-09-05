@@ -15,18 +15,13 @@ export class Dashboard extends Component {
   }
 
   onDeleteProfileClick = () => {
-    // console.log('ondleteprofile clicked');
-    
     this.props.deleteAccount();
   }
 
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
-
-    // console.log(profile);
     
-
     let dashboardContent;
 
     if (profile === null || loading) {

@@ -7,7 +7,7 @@ import mockUsers from './__mocks__/users';
 import sinon from 'sinon';
 import passport from 'passport';
 import errorMessages from '../src/error-handling/strings';
-import { addSeedUsersToDb } from './utils/TestDataSeeder';
+import { addSeedUsersToDb } from './utils/testDataSeeder';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
 const { request } = chai;
 
@@ -49,9 +49,7 @@ describe("/api/users/", () => {
             .post('/api/users/register')
             .send(registerData)
             .end((err, res) => {
-              const expectedBodyNameError = errorMessages.name_invalid_length;
-
-              JSON.stringify(expectedBodyNameError).should.equal(JSON.stringify(res.body.name));
+              res.body.name.should.equal(errorMessages.name_invalid_length);
               res.should.have.status(400);
               done();
             });
@@ -65,9 +63,7 @@ describe("/api/users/", () => {
             .post('/api/users/register')
             .send(registerData)
             .end((err, res) => {
-              const expectedBodyNameError = errorMessages.name_field_required;
-
-              JSON.stringify(expectedBodyNameError).should.equal(JSON.stringify(res.body.name));
+              res.body.name.should.equal(errorMessages.name_field_required);
               res.should.have.status(400);
               done();
             });
@@ -81,10 +77,8 @@ describe("/api/users/", () => {
               .post('/api/users/register')
               .send(registerData)
               .end((err, res) => {
-                const expectedBodyEmail = errorMessages.invalid_email;
-
                 res.body.hasOwnProperty('email').should.equal(true);
-                expectedBodyEmail.should.equal(res.body.email);
+                res.body.email.should.equal(errorMessages.invalid_email);
                 res.should.have.status(400);
                 done();
               });
@@ -98,10 +92,8 @@ describe("/api/users/", () => {
             .post('/api/users/register')
             .send(registerData)
             .end((err, res) => {
-              const expectedBodyPassword = errorMessages.password_invalid_length;
-
               res.body.hasOwnProperty('password').should.equal(true);
-              expectedBodyPassword.should.equal(res.body.password);
+              res.body.password.should.equal(errorMessages.password_invalid_length);
               res.should.have.status(400);
               done();
             });
@@ -116,13 +108,13 @@ describe("/api/users/", () => {
             .post('/api/users/register')
             .send(registerData)
             .end((err, res) => {
-              const expectedBodyPassword = errorMessages.password_field_required;
-              const expectedBodyPassword2 = errorMessages.confirm_password_field_required;            
+              const { password_field_required, confirm_password_field_required } = errorMessages;
+              const { password, password2 } = res.body;
 
               res.body.hasOwnProperty('password').should.equal(true);
               res.body.hasOwnProperty('password2').should.equal(true);
-              expectedBodyPassword.should.equal(res.body.password);
-              expectedBodyPassword2.should.equal(res.body.password2);
+              password.should.equal(password_field_required);
+              password2.should.equal(confirm_password_field_required);
               res.should.have.status(400);
               done();
             });
@@ -137,10 +129,8 @@ describe("/api/users/", () => {
             .post('/api/users/register')
             .send(registerData)
             .end((err, res) => {
-              const expectedBodyPassword2 = errorMessages.passwords_must_match;
-
               res.body.hasOwnProperty('password2').should.equal(true);
-              expectedBodyPassword2.should.equal(res.body.password2);
+              res.body.password2.should.equal(errorMessages.passwords_must_match);
               res.should.have.status(400);
               done();
             });
@@ -155,10 +145,8 @@ describe("/api/users/", () => {
             .post('/api/users/register')
             .send(registerData)
             .end((err, res) => {
-              const expectedBodyEmail = errorMessages.email_already_taken;
-
               res.body.hasOwnProperty('email').should.equal(true);
-              expectedBodyEmail.should.equal(res.body.email);
+              res.body.email.should.equal(errorMessages.email_already_taken);
               res.should.have.status(400);
               done();
             });
@@ -167,15 +155,12 @@ describe("/api/users/", () => {
 
       context(`when registering new User and all fields pass validation and User does not exits for the given email in the db`, () => {
         it(`calls endpoint and returns 200 status code and json containing new User`, (done) => {
-          let registerData = {...mockUsers[0]};
+          const registerData = {...mockUsers[0]};
           registerData.email = 'alternative_test_email@test.com';
           request(app)
             .post('/api/users/register')
             .send(registerData)
             .end((err, res) => {
-              // do call to db to verify user exists there
-              // later, do a foreach prop in obj, then loop over for so we adhere to DRY
-
               res.body.hasOwnProperty('name').should.equal(true);
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.hasOwnProperty('password').should.equal(true);
@@ -195,10 +180,8 @@ describe("/api/users/", () => {
             .post('/api/users/login')
             .send(loginData)
             .end((err, res) => {
-              const expectedBodyEmail = errorMessages.invalid_email;
-              
               res.body.hasOwnProperty('email').should.equal(true);
-              expectedBodyEmail.should.equal(res.body.email);
+              res.body.email.should.equal(errorMessages.invalid_email);
               res.should.have.status(400);
               done();
             });
@@ -212,10 +195,8 @@ describe("/api/users/", () => {
             .post('/api/users/login')
             .send(loginData)
             .end((err, res) => {
-              const expectedBodyEmail = errorMessages.email_field_required;
-              
               res.body.hasOwnProperty('email').should.equal(true);
-              expectedBodyEmail.should.equal(res.body.email);
+              res.body.email.should.equal(errorMessages.email_field_required);
               res.should.have.status(400);
               done();
             });
@@ -229,10 +210,8 @@ describe("/api/users/", () => {
             .post('/api/users/login')
             .send(loginData)
             .end((err, res) => {
-              const expectedBodyPassword = errorMessages.password_field_required;
-
               res.body.hasOwnProperty('password').should.equal(true);
-              expectedBodyPassword.should.equal(res.body.password);
+              res.body.password.should.equal(errorMessages.password_field_required);
               res.should.have.status(400);
               done();
             });
@@ -246,10 +225,8 @@ describe("/api/users/", () => {
             .post('/api/users/login')
             .send(loginData)
             .end((err, res) => {
-              const expectedBodyPassword = errorMessages.password_not_match;
-
               res.body.hasOwnProperty('password').should.equal(true);
-              expectedBodyPassword.should.equal(res.body.password);
+              res.body.password.should.equal(errorMessages.password_not_match);
               res.should.have.status(400);
               done();
             });
@@ -263,10 +240,8 @@ describe("/api/users/", () => {
             .post('/api/users/login')
             .send(loginData)
             .end((err, res) => {
-              const expectedBodyEmail = errorMessages.no_user_for_email;
-              
               res.body.hasOwnProperty('email').should.equal(true);
-              expectedBodyEmail.should.equal(res.body.email);
+              res.body.email.should.equal(errorMessages.no_user_for_email);
               res.should.have.status(404);
               done();
             });

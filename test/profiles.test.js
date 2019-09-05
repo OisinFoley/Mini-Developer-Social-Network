@@ -7,9 +7,11 @@ import sinon from 'sinon';
 import passport from 'passport';
 import mockProfiles from './__mocks__/profiles';
 import errorMessages from '../src/error-handling/strings';
-import { addSeedProfilesToDb } from './utils/TestDataSeeder';
+import { addSeedProfilesToDb } from './utils/testDataSeeder';
 import seedProfiles from './__mocks__/seed-profiles';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
+import { assignValueToManyObjectProps } from './utils/assignValueToMultipleProps';
+
 const { request } = chai;
 
 // Configure chai
@@ -30,7 +32,7 @@ describe("/api/profiles/", () => {
   before(done => {
     db = mongoose
       .connect("mongodb://localhost:27017/test", {
-        useNewUrlParser: true, useFindAndModify: false
+        useNewUrlParser: true
       }, done);
   });
   after(done => {
@@ -53,12 +55,15 @@ describe("/api/profiles/", () => {
   describe("Profiles /", () => {
     describe("GET api/profiles (getCurrentUsersProfile)", () => {
       context(`when fetching Profile for current user and Profile matching authenticated user exists in the db`, () => {
+        const profileProps = ['skills', 'date', '_id', 'handle', 'status' , 'social'];
         it(`calls endpoint and returns 200 status and returns a Profile`, (done) => {
           request(app)
             .get('/api/profiles')
             .end((err, res) => {
-              // check that returned payload has user.name and user.avatar
-
+              profileProps.forEach(prop => {
+                res.body.hasOwnProperty(`${prop}`).should.equal(true);  
+              });
+              
               res.should.have.status(200);
               done();
             });
@@ -76,10 +81,9 @@ describe("/api/profiles/", () => {
             request(app)
               .get('/api/profiles')
               .end((err, res) => {
-                const expectedBodyNoProfile = errorMessages.profile_not_found_for_current_user;
-                
                 res.body.hasOwnProperty('noProfile').should.equal(true);
-                expectedBodyNoProfile.should.equal(res.body.noProfile);
+                res.body.noProfile.should
+                  .equal(errorMessages.profile_not_found_for_current_user);
                 res.should.have.status(404);
                 done();
               });
@@ -93,9 +97,7 @@ describe("/api/profiles/", () => {
           request(app)
             .get('/api/profiles/all')
             .end((err, res) => {
-              
               res.body.should.be.a('array');
-              res.body.length.should.equal(2);
               res.should.have.status(200);
               done();
             });
@@ -110,10 +112,9 @@ describe("/api/profiles/", () => {
             request(app)
               .get(`/api/profiles/handle/${handle}`)
               .end((err, res) => {
-                const expectedBodyNoProfile = errorMessages.profile_not_found_for_handle;
-                
                 res.body.hasOwnProperty('noProfile').should.equal(true);
-                expectedBodyNoProfile.should.equal(res.body.noProfile);
+                res.body.noProfile.should
+                  .equal(errorMessages.profile_not_found_for_handle);
                 res.should.have.status(404);
                 done();
               });
@@ -126,9 +127,6 @@ describe("/api/profiles/", () => {
             request(app)
               .get(`/api/profiles/handle/${requestHandle}`)
               .end((err, res) => {
-                // check that returned payload has user.name and user.avatar
-                // .... once you get the jwt authenticate mocked
-
                 res.body.handle.should.equal(requestHandle);
                 res.should.have.status(200);
                 done();
@@ -144,26 +142,23 @@ describe("/api/profiles/", () => {
             request(app)
               .get(`/api/profiles/user/${user_id}`)
               .end((err, res) => {
-                const expectedBodyNoProfile = errorMessages.profile_not_found_for_user_id;
-                
                 res.body.hasOwnProperty('noProfile').should.equal(true);
-                expectedBodyNoProfile.should.equal(res.body.noProfile);
+                res.body.noProfile.should
+                  .equal(errorMessages.profile_not_found_for_user_id);
                 res.should.have.status(404);
                 done();
               });
         });
       });
 
+      // TODO: populate user prop so that we can verify that res.body.user matches value 
+      // of variable named requestUserIdValue
       context(`when fetching Profile and a Profile exists for the given user_id in the db`, () => {
         it(`calls endpoint and returns 200 status code and profile matching user_id`, (done) => {
           const requestUserIdValue = mockProfiles[1].user;
           request(app)
             .get(`/api/profiles/user/${requestUserIdValue}`)
             .end((err, res) => {
-              // check that returned payload has user.name and user.avatar
-              // .... once you get the jwt authenticate mocked
-              // for this, you may need to also populate users collection in the before hook
-              
               res.body.handle.should.equal(mockProfiles[1].handle);
               res.should.have.status(200);
               done();
@@ -199,16 +194,11 @@ describe("/api/profiles/", () => {
       context(`when setting user's Profile and website, youtube, twitter, linkedin, facebook, and instagram are null in the request`, () => {
         it(`calls endpoint and returns 400 status code and
             'not a valid URL for website, youtube, twitter, linkedin, facebook, instagram validation' json error`, (done) => {
-            // TODO: make util function to handle assignment of same value to many props
             let profileData = {
-              ...mockProfiles[0],
-              website: 'someInvalidUrl',
-              twitter: 'someInvalidUrl',
-              youtube: 'someInvalidUrl',
-              linkedin: 'someInvalidUrl',
-              instagram: 'someInvalidUrl',
-              facebook: 'someInvalidUrl'
+              ...mockProfiles[0]
             };
+            const propsArray = ['website', 'twitter', 'youtube', 'linkedin', 'instagram', 'facebook'];
+            assignValueToManyObjectProps(profileData, propsArray, 'someInvalidUrl');
             
             request(app)
               .post('/api/profiles')
@@ -246,25 +236,21 @@ describe("/api/profiles/", () => {
               .post('/api/profiles')
               .send(profileData)
               .end((err, res) => {
-                const expectedBodyHandle = errorMessages.handle_already_exists;
-                
                 res.body.hasOwnProperty('handle').should.equal(true);
-                expectedBodyHandle.should.equal(res.body.handle);
+                res.body.handle.should.equal(errorMessages.handle_already_exists);
                 res.should.have.status(400);
                 done();
               });
         });
       });
-  
+
       context(`when setting user's Profile and data is valid and authenticated user id matches user prop of an existing profile`, () => {
-        it(`calls endpoint and returns 200 code and updated profile as json`, (done) => {
-          const updatedCompanyString = 'test_company_for_updated_profile';
-          let profileData = {
+        it(`calls endpoint and returns 200 code and updated profile as json featuring new 'company' prop value`, (done) => {
+          const updatedCompanyString = 'test_company__updated_profile';
+          const profileData = {
             ...mockProfiles[0],
             company: updatedCompanyString
           };
-          // TODO: Use for([key,value] of) to check that the values of the res.body props
-          // matches the payload sent in the request
           request(app)
             .post('/api/profiles')
             .send(profileData)
@@ -277,9 +263,9 @@ describe("/api/profiles/", () => {
         });
       });
 
-      context(`when setting user's Profile and data is valid and authenticated user id does not match user prop of an existing profile`, () => {
-        it(`calls endpoint and returns 200 code and new profile as json`, (done) => {
-            const updatedHandleString = 'test_handle_new_profile';
+      context(`when setting user's Profile and data is valid but authenticated user id does not match user prop of an existing profile`, () => {
+        it(`calls endpoint and returns 200 code and a new profile as json`, (done) => {
+            const updatedHandleString = 'test_handle__new_profile';
             let profileData = {
               ...mockProfiles[0],
               handle: updatedHandleString
@@ -290,13 +276,13 @@ describe("/api/profiles/", () => {
               .end((err, res) => {
                 res.body.hasOwnProperty('handle').should.equal(true);
                 res.body.handle.should.equal(updatedHandleString);
+                res.body.__v.should.equal(0);
                 res.should.have.status(200);
                 done();
               });
         });
       });
     });
-    
 
     describe("POST api/profiles/experience (addExperienceToProfile)", () => {
       context(`when adding experience to Profile and title, company, and from date are null in the request`, () => {
@@ -324,17 +310,20 @@ describe("/api/profiles/", () => {
       context(`when adding experience to Profile and data is valid and authenticated user id matches an existing profile`, () => {
         it(`calls endpoint and returns return 200 code and updated profile json including new experience`, (done) => {
             let newExperienceData = {
-              title: 'test_title_new_Experience',
-              company: 'test_company_new_Experience',
+              title: 'test_title__new_Experience',
+              company: 'test_company__new_Experience',
               from: '2018-05-29T00:00:00.000Z'
             };
             request(app)
               .post('/api/profiles/experience')
               .send(newExperienceData)
               .end((err, res) => {
-                // assert that res.body has the keys of the mock profiles
-                // and assert that updated profile exp matches the 'newExperienceData' values
+                const { user, experience } = res.body;
 
+                user.should.equal(mockAuthenticatedUser.id);
+                experience[0].title.should.equal(newExperienceData.title);
+                experience[0].company.should.equal(newExperienceData.company);
+                experience[0].from.should.equal(newExperienceData.from);
                 res.should.have.status(200);
                 done();
               });
@@ -369,19 +358,22 @@ describe("/api/profiles/", () => {
         it(`calls endpoint and returns 200 code 
           and updated profile json including new education`, (done) => {
           let newEducationData = {
-            school: 'test_school_new_Education',
-            degree: 'test_degree_new_Education',
-            fieldOfStudy: 'test_fieldOfStudy_new_Education',
+            school: 'test_school__new_Education',
+            degree: 'test_degree__new_Education',
+            fieldOfStudy: 'test_fieldOfStudy__new_Education',
             from: '2018-05-29T00:00:00.000Z'
           };
           request(app)
             .post('/api/profiles/education')
             .send(newEducationData)
             .end((err, res) => {
-              const { school, degree, fieldOfStudy, from } = res.body;
-              // assert that res.body has the keys of the mock profiles
-              // and assert that updated profile exp matches the 'newEducationData' values
+              const { user, education } = res.body;
 
+              user.should.equal(mockAuthenticatedUser.id);
+              education[0].school.should.equal(newEducationData.school);
+              education[0].degree.should.equal(newEducationData.degree);
+              education[0].fieldOfStudy.should.equal(newEducationData.fieldOfStudy);
+              education[0].from.should.equal(newEducationData.from);
               res.should.have.status(200);
               done();
             });
@@ -420,7 +412,15 @@ describe("/api/profiles/", () => {
           let eduId = '5d4c5df704347a3d899893d1';
           request(app)
             .delete(`/api/profiles/education/${eduId}`)
-            .end((err, res) => {   
+            .end((err, res) => {
+              let { education } = res.body;
+
+              if (education) {
+                education.forEach(exp => {
+                  exp._id.should.not.equal(eduId);
+                });
+              }
+
               res.should.have.status(200);
               done();
             });
@@ -429,7 +429,7 @@ describe("/api/profiles/", () => {
     });
 
     describe("DELETE api/profiles (deleteAccountForUser)", () => {
-      context(`when deleting all Profiles from db`, () => {
+      context(`when deleting Profile for user from db`, () => {
         it(`calls endpoint and returns 200 code and { success: true }`, (done) => {
           request(app)
             .delete(`/api/profiles/`)

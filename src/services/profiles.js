@@ -93,7 +93,7 @@ class ProfilesService {
         // save the update
         profile.save().then(profile => resolve(profile));
       })
-      // update response err message
+      // TODO: update response err message
       .catch(err => reject(err));
     });
   };
