@@ -48,10 +48,10 @@ class UsersService {
         // check password
         bcrypt.compare(password, user.password).then(isMatch => {
           if (isMatch) {
+            const payload = { id: user.id, name: user.name, avatar: user.avatar };
     
             // assign JWT
-            jwt.sign(props, keys.secret, { expiresIn: 3600 }, (err, token) => {
-              // res.json({
+            jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
               resolve({
                 success: true,
                 token: `Bearer ${token}`
@@ -64,11 +64,6 @@ class UsersService {
       });
     });
   };
-
-  // getProfileByHandle(handle, errorMessages) {
-  //   return new Promise((resolve, reject) => {
-  //   });
-  // };
 };
 
 export default new UsersService();

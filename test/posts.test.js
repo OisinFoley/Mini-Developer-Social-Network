@@ -8,7 +8,7 @@ import sinon from 'sinon';
 import passport from 'passport';
 import seedPosts from './__mocks__/posts';
 import errorMessages from '../src/error-handling/strings';
-import { addSeedPostsToDb } from './utils/TestDataSeeder';
+import { addSeedPostsToDb } from './utils/testDataSeeder';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
 
 // Configure chai
@@ -30,7 +30,7 @@ describe("/api/posts/", () => {
   });
 
   beforeEach(done => {
-    passportStub =  sinon.stub(passport,"authenticate").callsFake((strategy, options, callback) => {
+    passportStub = sinon.stub(passport,"authenticate").callsFake((strategy, options, callback) => {
       callback(null, mockAuthenticatedUser, null);
       return (req,res,next)=>{};
     });
@@ -45,12 +45,11 @@ describe("/api/posts/", () => {
   describe("Posts /", () => {
     describe("GET api/posts/ (getAllPosts)", () => {
       context("when fetching Post records and Posts exist in the db", () => {
-        it(`calls endpoint and returns 200 status code and all Post records (2 in total)`, (done) => {
+        it(`calls endpoint and returns 200 status code and an array`, (done) => {
             chai.request(app)
               .get('/api/posts')
               .end((err, res) => {
                 res.should.have.status(200);
-                res.body.length.should.equal(2);
                 res.body.should.be.a('array');
                 done();
               });
@@ -84,7 +83,7 @@ describe("/api/posts/", () => {
       });
 
       context(`when deleting Post from db and Post matching id param exists in db`, () => {
-        it(`calls endpoint and returns 200 status code and delete specific Post record for the given id`, (done) => {
+        it(`calls endpoint and returns 200 status code and deletes specific Post record for the given id`, (done) => {
           chai.request(app)
             .delete(`/api/posts/${postId1}`)
             .end((err, res) => {
@@ -95,12 +94,11 @@ describe("/api/posts/", () => {
       });
 
       context(`when deleting Post from db and authenticated user didn't create the Post matching the id param in request`, () => {
-        it(`calls endpoint and returns 401 status code`, (done) => {
+        it(`calls endpoint and returns 401 status code and 'user not authorised' json error`, (done) => {
+            const expectedBody = { unauthorised: errorMessages.user_not_authorised };
             chai.request(app)
               .delete(`/api/posts/${postId0}`)
               .end((err, res) => {
-                const expectedBody = { unauthorised: errorMessages.user_not_authorised };
-      
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(401);
                 done();
@@ -109,12 +107,11 @@ describe("/api/posts/", () => {
       });
   
       context(`when deleting Post from db and Post matching id param does not exist in db`, () => {
-        it(`calls endpoint and returns 404 status code`, (done) => {
+        it(`calls endpoint and returns 404 status code and 'post not found' json error`, (done) => {
+            const expectedBody = { postNotFound: errorMessages.post_not_found };
             chai.request(app)
               .delete(`/api/posts/${postIdNonExistant}`)
               .end((err, res) => {
-                const expectedBody = { postNotFound: errorMessages.post_not_found };
-      
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(404);
                 done();
@@ -126,13 +123,12 @@ describe("/api/posts/", () => {
     
     describe("POST api/posts/ (addNewPost)", () => {
       context(`when trying to add new Post, but post text is empty`, () => {
-        it(`calls endpoint and returns 400 status code and 'Text field is required' json error `, (done) => {  
+        it(`calls endpoint and returns 400 status code and 'Text field is required' json error`, (done) => {  
+            const expectedBody = { text: errorMessages.text_field_required };
             chai.request(app)
               .post(`/api/posts`)
               .send({})
               .end((err, res) => {
-                const expectedBody = { text: errorMessages.text_field_required };
-
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(400);
                 done();
@@ -143,12 +139,11 @@ describe("/api/posts/", () => {
       context(`when trying to add new Post, but post text is < 6 chars`, () => {
         it(`calls endpoint and returns 400 status code and 
             'Post must be between 6 and 300 characters long.' json error`, (done) => {  
+            const expectedBody = { text: errorMessages.post_invalid_length };
             chai.request(app)
               .post(`/api/posts`)
               .send({ text: '12345' })
               .end((err, res) => {
-                const expectedBody = { text: errorMessages.post_invalid_length };
-
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(400);
                 done();
@@ -176,9 +171,9 @@ describe("/api/posts/", () => {
 
     describe("POST api/posts/likes/:id (addLikeToPost)", () => {
       context(`when user tries to like Post they've already liked`, () => {
-        it(`calls endpoint and returns 400 status code and 'likedAlready' json error,
-            `, (done) => {
-            let altUser = {...mockAuthenticatedUser, id: seedPosts[0].likes[0].user };
+        it(`calls endpoint and returns 400 status code and 'likedAlready' json error`, (done) => {
+            const altUser = {...mockAuthenticatedUser, id: seedPosts[0].likes[0].user };
+            const expectedBody = { likedAlready: errorMessages.post_already_liked };
             passport.authenticate.callsFake((strategy, options, callback) => {
               callback(null, altUser, null);
               return (req,res,next)=>{};
@@ -187,8 +182,6 @@ describe("/api/posts/", () => {
             chai.request(app)
               .post(`/api/posts/like/${postId0}`)
               .end((err, res) => {
-                const expectedBody = { likedAlready: errorMessages.post_already_liked };
-
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(400);
                 done();
@@ -203,6 +196,8 @@ describe("/api/posts/", () => {
             chai.request(app)
               .post(`/api/posts/like/${postId0}`)
               .end((err, res) => {
+                res.body.likes[0].user
+                  .should.equal(mockAuthenticatedUser.id);
                 res.should.have.status(200);
                 done();
               });
@@ -211,11 +206,10 @@ describe("/api/posts/", () => {
 
       context(`when trying to add a like to a Post that does not exist in the db`, () => {
         it(`calls endpoint and returns 404 status code and postNotFound json error`, (done) => {
+            const expectedBody = { postNotFound: errorMessages.post_not_found };
             chai.request(app)
               .post(`/api/posts/like/${postIdNonExistant}`)
               .end((err, res) => {
-                const expectedBody = { postNotFound: errorMessages.post_not_found };
-
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(404);
                 done();
@@ -228,6 +222,7 @@ describe("/api/posts/", () => {
       context(`when user tries to unlike a Post they've previouly 'liked'`, () => {
         it(`calls endpoint while providing the id of the post they've liked, 
             and returns 200 status code after removing the user's like from the post`, (done) => {
+
             let altUser = {...mockAuthenticatedUser, id: seedPosts[0].likes[0].user };
             passport.authenticate.callsFake((strategy, options, callback) => {
               callback(null, altUser, null);
@@ -236,7 +231,9 @@ describe("/api/posts/", () => {
             chai.request(app)
               .post(`/api/posts/unlike/${postId0}`)
               .end((err, res) => {
-                res.body.likes.length.should.equal(0);
+                res.body.likes.forEach(like => {
+                  like.user.should.not.equal(mockAuthenticatedUser.id);
+                });
                 res.should.have.status(200);
                 done();
               });
@@ -245,11 +242,10 @@ describe("/api/posts/", () => {
 
       context(`when user tries to delete like on a Post they haven't yet liked`, () => {
         it(`calls endpoint and returns 400 status code and 'cannotUnlike' json error`, (done) => {
+            const expectedBody = { cannotUnlike: errorMessages.post_not_yet_liked };
             chai.request(app)
               .post(`/api/posts/unlike/${postId0}`)
               .end((err, res) => {
-                const expectedBody = { cannotUnlike: errorMessages.post_not_yet_liked };
-
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(400);
                 done();
@@ -259,11 +255,10 @@ describe("/api/posts/", () => {
 
       context(`when trying to delete like on a Post that does not exist in the db`, () => {
         it(`calls endpoint and returns 404 status code and postNotFound json error`, (done) => {
+            const expectedBody = { postNotFound: errorMessages.post_not_found };
             chai.request(app)
               .post(`/api/posts/unlike/${postIdNonExistant}`)
               .end((err, res) => {
-                const expectedBody = { postNotFound: errorMessages.post_not_found };
-
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(404);
                 done();
@@ -275,12 +270,11 @@ describe("/api/posts/", () => {
     describe("POST api/posts/comment/:id (addCommentToPost)", () => {
       context(`when user tries to add comment to Post, but comment text is empty`, () => {
         it(`calls endpoint and returns 400 status code and 'Text field is required' json error`, (done) => {
+            const expectedBody = { text: errorMessages.text_field_required };
             chai.request(app)
               .post(`/api/posts/comment/${postId0}`)
               .send({})
               .end((err, res) => {
-                const expectedBody = { text: errorMessages.text_field_required };
-
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(400);
                 done();
@@ -291,12 +285,11 @@ describe("/api/posts/", () => {
       context(`when user tries to add comment to Post, but comment text is < 6 chars`, () => {
         it(`calls endpoint and returns 400 status code and 
             'Post must be between 6 and 300 characters long.' json error`, (done) => {
+            const expectedBody = { text: errorMessages.post_invalid_length };
             chai.request(app)
             .post(`/api/posts/comment/${postId0}`)
               .send({ text: '12345' })
               .end((err, res) => {
-                const expectedBody = { text: errorMessages.post_invalid_length };
-
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(400);
                 done();
@@ -306,12 +299,11 @@ describe("/api/posts/", () => {
 
       context(`when user tries to add comment to Post that does not exist in the db`, () => {
         it(`calls endpoint and returns 404 status code and postNotFound json error`, (done) => {
+            const expectedBody = { postNotFound: errorMessages.post_not_found };
             chai.request(app)
             .post(`/api/posts/comment/${postIdNonExistant}`)
               .send({ text: '12345678910' })
               .end((err, res) => {
-                const expectedBody = { postNotFound: errorMessages.post_not_found };
-
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(404);
                 done();
@@ -326,11 +318,11 @@ describe("/api/posts/", () => {
               .post(`/api/posts/comment/${postId0}`)
               .send(requestBody)
               .end((err, res) => {
-                const newCommentFromResponsePayload = res.body.comments[0];
+                const newCommentFromPayload = res.body.comments[0];
 
-                newCommentFromResponsePayload.text.should.equal(requestBody.text);
-                newCommentFromResponsePayload.name.should.equal(requestBody.name);
-                newCommentFromResponsePayload.user.should.equal(mockAuthenticatedUser.id);
+                newCommentFromPayload.text.should.equal(requestBody.text);
+                newCommentFromPayload.name.should.equal(requestBody.name);
+                newCommentFromPayload.user.should.equal(mockAuthenticatedUser.id);
                 res.should.have.status(200);
                 done();
               });
@@ -341,11 +333,10 @@ describe("/api/posts/", () => {
     describe("DELETE api/comment/:id/:comment_id (deleteCommentFromPost)", () => {
       context(`when user tries to delete comment from Post that does not exist in the db`, () => {
         it(`calls endpoint and returns 404 status code and postNotFound  json error`, (done) => {
+            const expectedBody = { postNotFound: errorMessages.post_not_found };
             chai.request(app)
               .delete(`/api/posts/comment/${postIdNonExistant}/12345`)
-              .end((err, res) => {
-                const expectedBody = { postNotFound: errorMessages.post_not_found };
-      
+              .end((err, res) => {      
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(404);
                 done();
@@ -355,11 +346,10 @@ describe("/api/posts/", () => {
   
       context(`when user tries to delete comment that does not exist from a given existing Post`, () => {
         it(`calls endpoint and returns 404 status code and commentNotFound json error`, (done) => {
+            const expectedBody = { commentNotFound: errorMessages.comment_not_found };
             chai.request(app)
               .delete(`/api/posts/comment/${postId0}/12345`)
-              .end((err, res) => {
-                const expectedBody = { commentNotFound: errorMessages.comment_not_found };
-      
+              .end((err, res) => {      
                 JSON.stringify(expectedBody).should.equal(JSON.stringify(res.body));
                 res.should.have.status(404);
                 done();
@@ -374,6 +364,9 @@ describe("/api/posts/", () => {
             chai.request(app)
               .delete(`/api/posts/comment/${postId0}/${commentId}`)
               .end((err, res) => {
+                res.body.comments.forEach(comment => {
+                  comment._id.should.not.equal(commentId);
+                });
                 res.should.have.status(200);
                 done();
               });
