@@ -430,11 +430,11 @@ describe("/api/profiles/", () => {
 
     describe("DELETE api/profiles (deleteAccountForUser)", () => {
       context(`when deleting Profile for user from db`, () => {
-        it(`calls endpoint and returns 200 code and { success: true }`, (done) => {
+        it(`calls endpoint and returns 204 code`, (done) => {
           request(app)
             .delete(`/api/profiles/`)
             .end((err, res) => {
-              res.should.have.status(200);
+              res.should.have.status(204);
               done();
             });
         });
