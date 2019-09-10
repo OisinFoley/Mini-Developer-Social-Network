@@ -35,5 +35,7 @@ module.exports = {
   handle_required: 'Profile handle is required',
   status_required: 'Profile status is required',
   skills_required: 'Profile skills is required',
-  invalid_url: 'Not a valid URL'
+  invalid_url: 'Not a valid URL',
+  experience_not_found: 'Experience not found',
+  education_not_found: 'Education not found',
 };

@@ -83,11 +83,11 @@ describe("/api/posts/", () => {
       });
 
       context(`when deleting Post from db and Post matching id param exists in db`, () => {
-        it(`calls endpoint and returns 200 status code and deletes specific Post record for the given id`, (done) => {
+        it(`calls endpoint and returns 204 status code and deletes specific Post record for the given id`, (done) => {
           chai.request(app)
             .delete(`/api/posts/${postId1}`)
             .end((err, res) => {
-              res.should.have.status(200);
+              res.should.have.status(204);
               done();
             });
         });

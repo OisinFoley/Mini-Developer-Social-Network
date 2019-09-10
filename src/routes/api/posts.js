@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/', PassportManager.authenticate, postsController.getAllPosts);
 
 
-// @route GET api/posts/
+// @route GET api/posts/:id
 // @desc retrieve posts
 // @access Private
 router.get('/:id', PassportManager.authenticate, postsController.getSinglePost);
