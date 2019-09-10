@@ -22,7 +22,7 @@ class PostsController {
     const userId = req.user.id;
 
     PostsService.deletePost(id, userId, errorMessages)
-      .then(() => res.json({ success: true }))
+      .then(() => res.status(204).json())
       .catch(err => {
         if (err.unauthorised) res.status(401).json(err);
         if (err.postNotFound) res.status(404).json(err);
@@ -75,10 +75,10 @@ class PostsController {
     }
   
     PostsService.addComment(id, commentData, errorMessages)
-    .then(post => res.json(post))
-    .catch(err => {
-      if (err.postNotFound) res.status(404).json(err);
-    });
+      .then(post => res.json(post))
+      .catch(err => {
+        if (err.postNotFound) res.status(404).json(err);
+      });
   };
 
   deleteCommentFromPost (req, res) {

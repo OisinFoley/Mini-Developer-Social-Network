@@ -97,7 +97,10 @@ class ProfilesController {
     }
   
     ProfilesService.addExperience(id, experienceData, errorMessages)
-      .then(profile => res.json(profile));
+      .then(profile => res.json(profile))
+      .catch(err => {
+        if (err.noProfile) res.status(404).json(err);
+      });
   };
 
   deleteExperienceFromProfileById(req, res) {
@@ -106,9 +109,9 @@ class ProfilesController {
     ProfilesService.deleteExperience(id, exp_id, errorMessages)
       .then(profile => res.json(profile))
       .catch(err => {
-        // TODO: update response
-        res.json(404).json(err)
-      })
+        if (err.noProfile || err.experience_not_found)
+          res.status(404).json(err)
+      });
   };
 
   addEducationToProfile(req, res) {
@@ -121,7 +124,10 @@ class ProfilesController {
     }
 
     ProfilesService.addEducation(id, educationData, errorMessages)
-      .then(profile => res.json(profile));
+      .then(profile => res.json(profile))
+      .catch(err => {
+        if (err.noProfile) res.status(404).json(err);
+      });
   };
 
   deleteEducationFromProfileById(req, res) {
@@ -131,15 +137,15 @@ class ProfilesController {
     ProfilesService.deleteEducation(id, edu_id, errorMessages)
       .then(profile => res.json(profile))
       .catch(err => {
-        // TODO: update response
-        res.json(404).json(err);
+        if (err.noProfile || err.experience_not_found)
+          res.status(404).json(err)
       });
   };
 
   deleteAccountForUser(req, res) {
     const { id } = req.user;
     ProfilesService.deleteProfileAndUser(id)
-      .then(() => res.json({ success: true }));
+      .then(() => res.status(204).json());
   };
 };
 export default new ProfilesController();
