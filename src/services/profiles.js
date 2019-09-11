@@ -58,7 +58,7 @@ class ProfilesService {
             // does handle exist
             Profile.findOne({ handle: profileFields.handle }).then(profile => {
               if (profile) {
-                reject({ handle: errorMessages.handle_already_exists });
+                return reject({ handle: errorMessages.handle_already_exists });
               }
       
               // do the save
@@ -77,7 +77,7 @@ class ProfilesService {
       Profile.findOne({ user: userId })
         .then(profile => {
           if (!profile)
-            reject({ noProfile: errorMessages.profile_not_found_generic });
+            return reject({ noProfile: errorMessages.profile_not_found_generic });
           
           profile.experience.unshift(experienceData);
           profile.save().then(profile => 
@@ -93,7 +93,7 @@ class ProfilesService {
       Profile.findOne({ user: userId })
         .then(profile => {
           if (!profile)
-            reject({ noProfile: errorMessages.profile_not_found_generic });
+            return reject({ noProfile: errorMessages.profile_not_found_generic });
           
           // get remove index
           const removeIndex = profile.experience
@@ -101,7 +101,7 @@ class ProfilesService {
             .indexOf(exp_id);
 
           if (removeIndex === -1)
-            reject({ experience_not_found: errorMessages.experience_not_found });
+            return reject({ experience_not_found: errorMessages.experience_not_found });
           
           // remove experience out of the array by its id, then save update
           profile.experience.splice(removeIndex, 1);
@@ -116,7 +116,7 @@ class ProfilesService {
       Profile.findOne({ user: userId })
         .then(profile => {
           if (!profile)
-            reject({ noProfile: errorMessages.profile_not_found_generic });
+            return reject({ noProfile: errorMessages.profile_not_found_generic });
           
           profile.education.unshift(educationData);
           profile.save().then(profile => resolve(profile));
@@ -130,7 +130,7 @@ class ProfilesService {
       Profile.findOne({ user: userId })
         .then(profile => {
           if (!profile)
-            reject({ noProfile: errorMessages.profile_not_found_generic });
+            return reject({ noProfile: errorMessages.profile_not_found_generic });
           
           // get remove index
           const removeIndex = profile.education
@@ -138,7 +138,7 @@ class ProfilesService {
             .indexOf(edu_id);
 
           if (removeIndex === -1)
-            reject({ experience_not_found: errorMessages.education_not_found });
+            return reject({ experience_not_found: errorMessages.education_not_found });
 
           // remove education out of the array by its id
           profile.education.splice(removeIndex, 1);
