@@ -28,27 +28,27 @@ router.delete('/:id', PassportManager.authenticate, postsController.deleteSingle
 router.post('/', PassportManager.authenticate, postsController.addNewPost);
   
 
-// @route POST api/posts/likes/:id
+// @route POST api/posts/:id/likes
 // @desc add a like to a post
 // @access Private
-router.post('/like/:id', PassportManager.authenticate, postsController.addLikeToPost);
+router.post('/:id/likes', PassportManager.authenticate, postsController.addLikeToPost);
 
 
-// @route POST api/posts/unlike/:id
+// @route DELETE api/posts/:id/likes
 // @desc unlike a post
 // @access Private
-router.post('/unlike/:id', PassportManager.authenticate, postsController.removeLikeFromPost);
+router.delete('/:id/likes', PassportManager.authenticate, postsController.removeLikeFromPost);
 
 
-// @route POST api/posts/comment/:id
+// @route POST api/posts/:id/comments
 // @desc add comment a post
 // @access Private
-router.post('/comment/:id', PassportManager.authenticate, postsController.addCommentToPost);
+router.post('/:id/comments', PassportManager.authenticate, postsController.addCommentToPost);
 
 
-// @route DELETE api/posts/comment/:post_id/:comment_id
+// @route DELETE api/posts/:post_id/comments/:comment_id
 // @desc remove comment a post
 // @access Private
-router.delete('/comment/:post_id/:comment_id', PassportManager.authenticate, postsController.deleteCommentFromPost);
+router.delete('/:post_id/comments/:comment_id', PassportManager.authenticate, postsController.deleteCommentFromPost);
 
 export default router;

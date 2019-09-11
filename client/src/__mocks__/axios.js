@@ -28,15 +28,11 @@ export default {
     switch (url) {
       case '/api/posts': // addPost()
         return Promise.resolve({ data: newPost } );
-      case '/api/posts/like/def456': // addLike()
+      case '/api/posts/def456/likes': // addLike()
         return Promise.resolve({ data: mockPosts } );
-      case '/api/posts/unlike/def456': // deleteLike() resolve
-        return Promise.resolve({ data: mockPosts } );
-      case '/api/posts/unlike/null': // deleteLike() reject
-        return Promise.reject({ response: { data: idCannotBeNullExceptionMessage } } );
-      case '/api/posts/comment/def456': // addComment()
+      case '/api/posts/def456/comments': // addComment()
         return Promise.resolve({ data: mockPosts[0] } );
-      case '/api/posts/comment/nonExistentPostId': // addComment()
+      case '/api/posts/nonExistentPostId/comments': // addComment()
         return Promise.reject({ response: { data: idCannotBeNullExceptionMessage } } );
       case '/api/users/register': // registerUser()
         return Promise.resolve({ data: 'fakeUser' } );
@@ -52,9 +48,13 @@ export default {
   }),
   delete: jest.fn((url) => {
     switch (url) {
+      case '/api/posts/def456/likes': // deleteLike() resolve
+        return Promise.resolve({ data: mockPosts } );
+      case '/api/posts/null/likes': // deleteLike() reject
+        return Promise.reject({ response: { data: idCannotBeNullExceptionMessage } } );
       case '/api/posts/ghi789': // deletePost()
         return Promise.resolve({ data: deletedPostId[0] } );
-      case '/api/posts/comment/def456/pqr789': // deleteComment()
+      case '/api/posts/def456/comments/pqr789': // deleteComment()
         return Promise.resolve({ data: deletedPostId[0] } );
       case '/api/profiles/education/edu123': // deleteEducation()
         return Promise.resolve({ data: {} } );
