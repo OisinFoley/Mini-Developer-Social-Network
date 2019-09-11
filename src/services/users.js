@@ -11,7 +11,7 @@ class UsersService {
       User.findOne({ email })
         .then(user => {
           if (user) 
-            reject({ email: errorMessages.email_already_taken });
+            return reject({ email: errorMessages.email_already_taken });
           
           const avatar = gravatar.url(email, {
             s: '200',
@@ -47,12 +47,12 @@ class UsersService {
       User.findOne({ email })
         .then(user => {
           if (!user)
-            reject({ email: errorMessages.no_user_for_email });
+            return reject({ email: errorMessages.no_user_for_email });
       
           // check password
           bcrypt.compare(password, user.password).then(isMatch => {
             if (!isMatch)
-              reject({ password: errorMessages.password_not_match });
+              return reject({ password: errorMessages.password_not_match });
 
             const payload = { id: user.id, name: user.name, avatar: user.avatar };
             // assign JWT

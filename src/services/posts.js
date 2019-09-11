@@ -27,11 +27,11 @@ class PostsService {
       Post.findById(postId)
         .then(post => {
           if (!post)
-            reject({ postNotFound: errorMessages.post_not_found })
+            return reject({ postNotFound: errorMessages.post_not_found })
 
           // did user create the post
           if (post.user.toString() !== userId) {
-            reject({
+            return reject({
               unauthorised: errorMessages.user_not_authorised
             });
           }
@@ -55,14 +55,14 @@ class PostsService {
       Post.findById(postId)
         .then(post => {
           if (!post)
-            reject({ postNotFound: errorMessages.post_not_found });
+            return reject({ postNotFound: errorMessages.post_not_found });
 
           // check if previously liked
           if (
             post.likes.filter(like => like.user.toString() === userId)
               .length > 0
           ) {
-            reject({ likedAlready: errorMessages.post_already_liked });
+            return reject({ likedAlready: errorMessages.post_already_liked });
           }
   
           // add to likes array then save
@@ -79,7 +79,7 @@ class PostsService {
       Post.findById(postId)
         .then(post => {
           if (!post)
-            reject({ postNotFound: errorMessages.post_not_found });
+            return reject({ postNotFound: errorMessages.post_not_found });
 
           // check if user has already liked
           const removeIndex = post.likes
@@ -87,7 +87,7 @@ class PostsService {
             .indexOf(userId);
           
           if (removeIndex === -1)
-            reject({ cannotUnlike: errorMessages.post_not_yet_liked });
+            return reject({ cannotUnlike: errorMessages.post_not_yet_liked });
   
           post.likes.splice(removeIndex, 1);
   
@@ -102,7 +102,7 @@ class PostsService {
       Post.findById(postId)
         .then(post => {
           if (!post)
-            reject({ postNotFound: errorMessages.post_not_found });
+            return reject({ postNotFound: errorMessages.post_not_found });
 
           post.comments.unshift(commentData);
           post.save().then(updatedPost =>
@@ -118,14 +118,14 @@ class PostsService {
       Post.findById(requestPostId)
         .then(post => {
           if (!post)
-            reject({ postNotFound: errorMessages.post_not_found });
+            return reject({ postNotFound: errorMessages.post_not_found });
 
           const removeIndex = post.comments
             .map(item => item.id)
             .indexOf(requestCommentId);
 
           if (removeIndex === -1)
-            reject({ commentNotFound: errorMessages.comment_not_found });
+            return reject({ commentNotFound: errorMessages.comment_not_found });
 
           post.comments.splice(removeIndex, 1);
           post.save().then(post => resolve(post));
