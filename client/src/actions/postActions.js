@@ -64,7 +64,7 @@ export const deletePost = id => dispatch => {
 
 export const addLike = id => dispatch => {
   return axios
-    .post(`/api/posts/like/${id}`)
+    .post(`/api/posts/${id}/likes`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
@@ -76,7 +76,7 @@ export const addLike = id => dispatch => {
 
 export const deleteLike = id => dispatch => {
   return axios
-    .post(`/api/posts/unlike/${id}`)
+    .delete(`/api/posts/${id}/likes`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
@@ -107,7 +107,7 @@ export const getPost = id => dispatch => {
 export const addComment = (postId, comment) => dispatch => {
   dispatch(clearErrors());
   return axios
-    .post(`/api/posts/comment/${postId}`, comment)
+    .post(`/api/posts/${postId}/comments`, comment)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -124,7 +124,7 @@ export const addComment = (postId, comment) => dispatch => {
 
 export const deleteComment = (postId, commentId) => dispatch => {
   return axios
-    .delete(`/api/posts/comment/${postId}/${commentId}`)
+    .delete(`/api/posts/${postId}/comments/${commentId}`)
     .then(res =>
       dispatch({
         type: GET_POST,
