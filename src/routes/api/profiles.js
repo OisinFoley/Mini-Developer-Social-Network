@@ -34,28 +34,28 @@ router.get('/user/:user_id', profilesController.getProfileByUserId);
 router.post('/', PassportManager.authenticate, profilesController.setUserProfile);
 
 
-// @route POST api/profiles/experience
+// @route POST api/profiles/experiences
 // @desc adds a user's experience to their profile
 // @access Private
-router.post('/experience', PassportManager.authenticate, profilesController.addExperienceToProfile);
+router.post('/experiences', PassportManager.authenticate, profilesController.addExperienceToProfile);
 
 
-// @route DELETE api/profiles/experience/:exp_id
+// @route DELETE api/profiles/experiences/:exp_id
 // @desc delete a user's experience from their profile
 // @access Private
-router.delete('/experience/:exp_id', PassportManager.authenticate, profilesController.deleteExperienceFromProfileById);
+router.delete('/experiences/:exp_id', PassportManager.authenticate, profilesController.deleteExperienceFromProfileById);
 
 
-// @route POST api/profiles/education
+// @route POST api/profiles/educations
 // @desc adds a user's education to their profile
 // @access Private
-router.post('/education', PassportManager.authenticate, profilesController.addEducationToProfile);
+router.post('/educations', PassportManager.authenticate, profilesController.addEducationToProfile);
 
 
-// @route DELETE api/profiles/education/:edu_id
+// @route DELETE api/profiles/educations/:edu_id
 // @desc delete a user's education from their profile
 // @access Private
-router.delete('/education/:edu_id', PassportManager.authenticate, profilesController.deleteEducationFromProfileById);
+router.delete('/educations/:edu_id', PassportManager.authenticate, profilesController.deleteEducationFromProfileById);
 
 
 // @route DELETE api/profiles/
