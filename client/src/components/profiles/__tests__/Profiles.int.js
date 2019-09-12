@@ -1,5 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import { Profiles } from '../Profiles';
 import { mockProfiles, loadingProfile } from '../../../__mocks__/mockProfiles';
 

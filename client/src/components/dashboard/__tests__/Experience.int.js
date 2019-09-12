@@ -1,5 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import { Experience } from '../Experience';
 import { mockExperience } from '../../../__mocks__/mockExperience.js';
 

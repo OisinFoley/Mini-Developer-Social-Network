@@ -1,9 +1,6 @@
-// import React from 'react';
-// import { mount } from 'enzyme';
 // import { BrowserRouter as Router } from 'react-router-dom';
 // import { Provider } from 'react-redux';
 // import ConnectedProfile from '../Profile';
-// import { mockStore } from '../../../__mocks__/mockStore';
 // // import { mockIsNotAuthState } from '../../../__mocks__/mockAuth';
 
 // const getProfileByHandle = jest.fn();

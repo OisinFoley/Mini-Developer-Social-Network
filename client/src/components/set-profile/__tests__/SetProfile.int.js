@@ -1,10 +1,7 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ConnectedSetProfile from '../SetProfile';
 import event from '../../../__mocks__/event';
-import { mockStore } from '../../../__mocks__/mockStore';
 
 const profile = {};
 const errors = {};

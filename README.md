@@ -24,6 +24,10 @@ Features:
 - Front and backend validation of forms and endpoints
 - Originally built using [CreateReactApp](https://github.com/facebook/create-react-app)
 
+Good to know:
+
+- The `/client/src/setupTests` file imports shallow, render, mount (from Enzyme) and React components globally for each test, meaning that we don't have to repeat those import statements in each individual test file.
+
 Requirements:
 
 - Node: tested on 8.4.0 
@@ -32,7 +36,7 @@ Requirements:
 
 - [Mongo](https://www.mongodb.com/download-center/community): tested on 4.0.0
 
-- A connection string - in ```src/config/keys_dev.js``` - in the following format
+- A config file under the directory `./src/config/keys_dev.js`, in the format shown below
 
 - [CreateReactApp](https://www.npmjs.com/package/create-react-app), if you wish to start the server and client concurrently without opening a new browser tab automatically (*See BROWSER=none in the scripts section of the package.json file*)
 

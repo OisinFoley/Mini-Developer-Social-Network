@@ -1,7 +1,4 @@
-import React from 'react';
-import { shallow } from 'enzyme';
 import ConnectedDashboard from '../Dashboard';
-import { mockStore } from '../../../__mocks__/mockStore';
 import { mockProfiles } from '../../../__mocks__/mockProfiles';
 
 const { user: { name } } = mockProfiles[0];

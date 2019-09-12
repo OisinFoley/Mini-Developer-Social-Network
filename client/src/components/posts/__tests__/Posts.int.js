@@ -1,9 +1,6 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ConnectedPosts from '../Posts';
-import { mockStore } from '../../../__mocks__/mockStore';
 import { mockAuth } from '../../../__mocks__/mockAuth';
 import { mockPosts } from '../../../__mocks__/mockPosts';
 
