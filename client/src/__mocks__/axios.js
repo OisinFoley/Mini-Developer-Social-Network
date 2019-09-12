@@ -40,9 +40,9 @@ export default {
         return Promise.resolve({ data: { token: 'fakeToken' } } );
       case '/api/profiles': // createProfile()
         return Promise.resolve({ data: fakeUser } );
-      case '/api/profiles/education': // addEducation()
+      case '/api/profiles/educations': // addEducation()
         return Promise.resolve();
-      case '/api/profiles/experience': // addExperience()
+      case '/api/profiles/experiences': // addExperience()
         return Promise.resolve();
     }
   }),
@@ -56,9 +56,9 @@ export default {
         return Promise.resolve({ data: deletedPostId[0] } );
       case '/api/posts/def456/comments/pqr789': // deleteComment()
         return Promise.resolve({ data: deletedPostId[0] } );
-      case '/api/profiles/education/edu123': // deleteEducation()
+      case '/api/profiles/educations/edu123': // deleteEducation()
         return Promise.resolve({ data: {} } );
-      case '/api/profiles/experience/exp123': // deleteExperience()
+      case '/api/profiles/experiences/exp123': // deleteExperience()
         return Promise.resolve({ data: {} } );
       case '/api/profiles': // deleteAccount()
         return Promise.resolve({ data: {} } );
