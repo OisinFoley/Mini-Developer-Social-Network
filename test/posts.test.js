@@ -152,7 +152,7 @@ describe("/api/posts/", () => {
       });
 
       context(`when trying to add new Post and req.body.text is be between 6 and 300 chars`, () => {
-        it(`calls endpoint and returns 200 status code after adding new Post record`, (done) => {
+        it(`calls endpoint and returns 201 status code after adding new Post record`, (done) => {
             const requestBody = { text: '12345678910' };
             chai.request(app)
               .post(`/api/posts`)
@@ -161,7 +161,7 @@ describe("/api/posts/", () => {
                 res.body.text.should.equal(requestBody.text);
                 res.body.user.should.equal(mockAuthenticatedUser.id);
                 res.body.__v.should.equal(0);
-                res.should.have.status(200);
+                res.should.have.status(201);
                 done();
               });
         });
@@ -190,7 +190,7 @@ describe("/api/posts/", () => {
       });
   
       context(`when user has not yet like a specified Post`, () => {
-        it(`calls endpoint and returns 200 status code 
+        it(`calls endpoint and returns 201 status code 
             after adding a like to the post`, (done) => {
               
             chai.request(app)
@@ -198,7 +198,7 @@ describe("/api/posts/", () => {
               .end((err, res) => {
                 res.body.likes[0].user
                   .should.equal(mockAuthenticatedUser.id);
-                res.should.have.status(200);
+                res.should.have.status(201);
                 done();
               });
         });
@@ -312,7 +312,7 @@ describe("/api/posts/", () => {
       });
 
       context(`when user tries to add comment to Post and req.body.text is be between 6 and 300 chars`, () => {
-        it(`calls endpoint and returns 200 status code and adds new comment to post`, (done) => {
+        it(`calls endpoint and returns 201 status code and adds new comment to post`, (done) => {
             const requestBody = { text: '12345678910', name: 'test_name' };
             chai.request(app)
               .post(`/api/posts/${postId0}/comments`)
@@ -323,7 +323,7 @@ describe("/api/posts/", () => {
                 newCommentFromPayload.text.should.equal(requestBody.text);
                 newCommentFromPayload.name.should.equal(requestBody.name);
                 newCommentFromPayload.user.should.equal(mockAuthenticatedUser.id);
-                res.should.have.status(200);
+                res.should.have.status(201);
                 done();
               });
         });

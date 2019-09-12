@@ -13,7 +13,7 @@ class UsersController {
     }
 
     UsersService.register(userData, errorMessages)
-      .then(user => res.json(user))
+      .then(user => res.status(201).json(user))
       .catch(err => res.status(400).json(err));
   };
 
