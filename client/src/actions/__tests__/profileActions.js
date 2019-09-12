@@ -42,7 +42,7 @@ describe('profileActions: mocking history', () => {
     it('should create education then push /dashboard to history', () => {
       actions.addEducation('the education data', history)(dispatch)
         .then(() => {
-          expect(mock).toHaveBeenCalledWith('/api/profiles/education', 'the education data');
+          expect(mock).toHaveBeenCalledWith('/api/profiles/educations', 'the education data');
           expect(history.push).toHaveBeenCalledWith('/dashboard');
         });
     });
@@ -52,7 +52,7 @@ describe('profileActions: mocking history', () => {
     it('should create education then push /dashboard to history', () => {
       actions.addExperience('the experience data', history)(dispatch)
         .then(() => {
-          expect(mock).toHaveBeenCalledWith('/api/profiles/experience', 'the experience data');
+          expect(mock).toHaveBeenCalledWith('/api/profiles/experiences', 'the experience data');
           expect(history.push).toHaveBeenCalledWith('/dashboard');
         });
     });
