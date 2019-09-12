@@ -284,7 +284,7 @@ describe("/api/profiles/", () => {
       });
     });
 
-    describe("POST api/profiles/experience (addExperienceToProfile)", () => {
+    describe("POST api/profiles/experiences (addExperienceToProfile)", () => {
       context(`when adding experience to Profile and title, company, and from date are null in the request`, () => {
         it(`calls endpoint and returns 400 code and 'title, company, from date required validation' json error`, (done) => {
           let experienceData = {
@@ -293,7 +293,7 @@ describe("/api/profiles/", () => {
             from: ''
           };
           request(app)
-            .post('/api/profiles/experience')
+            .post('/api/profiles/experiences')
             .send(experienceData)
             .end((err, res) => {
               const { title, company, from } = res.body;
@@ -315,7 +315,7 @@ describe("/api/profiles/", () => {
               from: '2018-05-29T00:00:00.000Z'
             };
             request(app)
-              .post('/api/profiles/experience')
+              .post('/api/profiles/experiences')
               .send(newExperienceData)
               .end((err, res) => {
                 const { user, experience } = res.body;
@@ -331,12 +331,12 @@ describe("/api/profiles/", () => {
       });
     });
 
-    describe("DELETE api/profiles/experience/:exp_id (deleteExperienceFromProfileById)", () => {
+    describe("DELETE api/profiles/experiences/:exp_id (deleteExperienceFromProfileById)", () => {
       context(`when deleting existing experience from Profile and Profile was created by the authenticated user`, () => {
         it(`calls endpoint and returns 200 code and updated profile json without old experience`, (done) => {
           let { _id } = seedProfiles[0].experience[0];
           request(app)
-            .delete(`/api/profiles/experience/${_id}`)
+            .delete(`/api/profiles/experiences/${_id}`)
             .end((err, res) => {
               let { experience } = res.body;
 
@@ -353,7 +353,7 @@ describe("/api/profiles/", () => {
       });
     });
 
-    describe("POST api/profiles/education (addEducationToProfile)", () => {
+    describe("POST api/profiles/educations (addEducationToProfile)", () => {
       context(`when adding education to Profile and data is valid and authenticated user id matches an existing profile`, () => {
         it(`calls endpoint and returns 200 code 
           and updated profile json including new education`, (done) => {
@@ -364,7 +364,7 @@ describe("/api/profiles/", () => {
             from: '2018-05-29T00:00:00.000Z'
           };
           request(app)
-            .post('/api/profiles/education')
+            .post('/api/profiles/educations')
             .send(newEducationData)
             .end((err, res) => {
               const { user, education } = res.body;
@@ -390,7 +390,7 @@ describe("/api/profiles/", () => {
               from: ''
             };
             request(app)
-              .post('/api/profiles/education')
+              .post('/api/profiles/educations')
               .send(newEducationData)
               .end((err, res) => {
                 const { school, degree, fieldOfStudy, from } = res.body;
@@ -406,12 +406,12 @@ describe("/api/profiles/", () => {
       });
     });
 
-    describe("DELETE api/profiles/education/:edu_id (deleteEducationFromProfileById)", () => {
+    describe("DELETE api/profiles/educations/:edu_id (deleteEducationFromProfileById)", () => {
       context(`when deleting existing education from Profile and Profile was created by the authenticated user`, () => {
         it(`calls endpoint and returns 200 code when profile matching user.id does exist`, (done) => {
           let eduId = '5d4c5df704347a3d899893d1';
           request(app)
-            .delete(`/api/profiles/education/${eduId}`)
+            .delete(`/api/profiles/educations/${eduId}`)
             .end((err, res) => {
               let { education } = res.body;
 
