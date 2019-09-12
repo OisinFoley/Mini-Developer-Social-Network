@@ -1,5 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import ProfileGithub from '../ProfileGithub';
 import { githubInfo } from '../../../__mocks__/mockGithubInfo';
 

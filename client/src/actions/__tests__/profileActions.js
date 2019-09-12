@@ -1,7 +1,6 @@
 import mockAxios from 'axios';
 import * as actions from '../profileActions'
 import * as types from '../types';
-import { mockStore } from '../../__mocks__/mockStore';
 
 let store;
 let storeActions;

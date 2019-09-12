@@ -1,5 +1,3 @@
-import React from 'react';
-import { shallow } from 'enzyme';
 import ProfileCreds from '../ProfileCreds';
 import { mockExperience, mockExpNoCompanyOrLocation } from '../../../__mocks__/mockExperience';
 import { mockEducation } from '../../../__mocks__/mockEducation';

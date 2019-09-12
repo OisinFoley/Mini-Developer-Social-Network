@@ -1,6 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import { Education } from '../Education';
 import { mockEducation } from '../../../__mocks__/mockEducation.js';
 

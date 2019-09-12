@@ -1,5 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import { PostItem } from '../PostItem';
 import { mockPosts } from '../../../__mocks__/mockPosts';
 import { mockAuth } from '../../../__mocks__/mockAuth';

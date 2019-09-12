@@ -1,10 +1,7 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router';
 import App from '../App';
 import Landing from '../components/layout/Landing';
 import Login from '../components/auth/Login';
-import { mockStore } from '../__mocks__/mockStore';
 // import jwt_decode from 'jwt-decode';
 import * as jwt_decode from 'jwt-decode';
 

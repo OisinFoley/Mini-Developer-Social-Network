@@ -1,5 +1,3 @@
-import React from 'react';
-import { shallow } from 'enzyme';
 import { AddEducation } from '../AddEducation';
 
 const addEducation = jest.fn();
