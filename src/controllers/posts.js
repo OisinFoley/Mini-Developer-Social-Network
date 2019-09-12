@@ -38,7 +38,7 @@ class PostsController {
     }
 
     PostsService.addPost(postData)
-      .then(post => res.json(post));
+      .then(post => res.status(201).json(post));
   };
 
   addLikeToPost (req, res) {
@@ -46,7 +46,7 @@ class PostsController {
     const userId = req.user.id;
 
     PostsService.addLike(id, userId, errorMessages)
-      .then(post => res.json(post))
+      .then(post => res.status(201).json(post))
       .catch(err => {
         if (err.likedAlready) res.status(400).json(err);
         if (err.postNotFound) res.status(404).json(err);
@@ -75,7 +75,7 @@ class PostsController {
     }
   
     PostsService.addComment(id, commentData, errorMessages)
-      .then(post => res.json(post))
+      .then(post => res.status(201).json(post))
       .catch(err => {
         if (err.postNotFound) res.status(404).json(err);
       });
