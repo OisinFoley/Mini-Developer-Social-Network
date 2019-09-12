@@ -1,7 +1,6 @@
 import mockAxios from 'axios';
 import * as actions from '../authActions';
 import * as types from '../types';
-import { mockStore } from '../../__mocks__/mockStore';
 
 jest.mock('jwt-decode', () => jest.fn().mockReturnValue({
   exp: 12345

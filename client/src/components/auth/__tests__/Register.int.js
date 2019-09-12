@@ -1,7 +1,4 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import ConnectedRegister from '../Register';
-import { mockStore } from '../../../__mocks__/mockStore';
 import { mockIsNotAuthState } from '../../../__mocks__/mockAuth';
 
 const isNotAuthState = {

@@ -1,7 +1,4 @@
-import React from 'react';
-import { shallow } from 'enzyme';
 import ConnectedLogin, { Login } from '../Login';
-import { mockStore } from '../../../__mocks__/mockStore';
 import { mockIsAuthState, mockIsNotAuthState } from '../../../__mocks__/mockAuth';
 
 const loginUser = jest.fn();

@@ -1,7 +1,4 @@
-import React from 'react';
-import { shallow } from 'enzyme';
 import Landing from '../Landing';
-import { mockStore } from '../../../__mocks__/mockStore';
 import { mockIsAuthState, mockIsNotAuthState } from '../../../__mocks__/mockAuth';
 
 const push = jest.fn();
