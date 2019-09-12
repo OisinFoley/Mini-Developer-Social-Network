@@ -1,5 +1,3 @@
-import React from 'react';
-import { shallow } from 'enzyme';
 import { CommentForm } from '../CommentForm';
 import { mockAuth } from '../../../__mocks__/mockAuth';
 import { mockPosts } from '../../../__mocks__/mockPosts';

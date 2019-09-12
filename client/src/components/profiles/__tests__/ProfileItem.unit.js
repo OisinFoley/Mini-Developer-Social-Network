@@ -1,5 +1,3 @@
-import React from 'react';
-import { shallow  } from 'enzyme';
 import { ProfileItem } from '../ProfileItem';
 import { mockProfiles } from '../../../__mocks__/mockProfiles';
 

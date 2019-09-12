@@ -1,10 +1,8 @@
-import React from 'react';
-import { mount } from 'enzyme';
+
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ConnectedDashboard, { Dashboard } from '../Dashboard';
 import { mockProfiles } from '../../../__mocks__/mockProfiles';
-import { mockStore } from '../../../__mocks__/mockStore';
 
 const deleteAccount = jest.fn();
 const { user: { name } } = mockProfiles[0];

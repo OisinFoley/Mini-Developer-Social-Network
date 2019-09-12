@@ -1,5 +1,3 @@
-import React from 'react';
-import { shallow } from 'enzyme';
 import { PostFeed } from '../PostFeed';
 import { mockPosts } from '../../../__mocks__/mockPosts';
 

@@ -1,10 +1,7 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ConnectedAddExperience from '../AddExperience';
 import event from '../../../__mocks__/event';
-import { mockStore } from '../../../__mocks__/mockStore';
 
 const errors = {};
 let mockState = {

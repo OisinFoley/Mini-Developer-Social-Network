@@ -1,10 +1,7 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ConnectedCommentForm from '../CommentForm';
 import event from '../../../__mocks__/event';
-import { mockStore } from '../../../__mocks__/mockStore';
 import { mockAuth } from '../../../__mocks__/mockAuth';
 import { mockPosts } from '../../../__mocks__/mockPosts';
 
