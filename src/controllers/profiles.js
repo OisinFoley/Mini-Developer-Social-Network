@@ -81,7 +81,12 @@ class ProfilesController {
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
 
     ProfilesService.setProfileForUser(id, profileFields, errorMessages)
-      .then(profile => res.json(profile))
+      .then(data => {
+        const { operation, profile } = data;
+        
+        if (operation === 'create') res.status(201).json(profile);
+        if (operation === 'edit') res.json(profile);
+      })
       .catch(err => {
         if (err.handle) res.status(400).json(err);
       });
@@ -97,7 +102,7 @@ class ProfilesController {
     }
   
     ProfilesService.addExperience(id, experienceData, errorMessages)
-      .then(profile => res.json(profile))
+      .then(profile => res.status(201).json(profile))
       .catch(err => {
         if (err.noProfile) res.status(404).json(err);
       });
@@ -124,7 +129,7 @@ class ProfilesController {
     }
 
     ProfilesService.addEducation(id, educationData, errorMessages)
-      .then(profile => res.json(profile))
+      .then(profile => res.status(201).json(profile))
       .catch(err => {
         if (err.noProfile) res.status(404).json(err);
       });

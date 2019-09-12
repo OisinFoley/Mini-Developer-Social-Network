@@ -154,7 +154,7 @@ describe("/api/users/", () => {
       });
 
       context(`when registering new User and all fields pass validation and User does not exits for the given email in the db`, () => {
-        it(`calls endpoint and returns 200 status code and json containing new User`, (done) => {
+        it(`calls endpoint and returns 201 status code and json containing new User`, (done) => {
           const registerData = {...mockUsers[0]};
           registerData.email = 'alternative_test_email@test.com';
           request(app)
@@ -165,7 +165,7 @@ describe("/api/users/", () => {
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.hasOwnProperty('password').should.equal(true);
               res.body.hasOwnProperty('avatar').should.equal(true);
-              res.should.have.status(200);
+              res.should.have.status(201);
               done();
             });
         });

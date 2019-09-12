@@ -49,8 +49,8 @@ class ProfilesService {
               { user: userId },
               { $set: profileFields },
               { new: true }
-            ).then(profile => 
-              resolve(profile)
+            ).then(profile =>
+              resolve({ operation: 'edit', profile: profile })
             );
           } else {
             //create
@@ -63,7 +63,7 @@ class ProfilesService {
       
               // do the save
               new Profile(profileFields).save().then(profile => 
-                resolve(profile)
+                resolve({ operation: 'create', profile: profile })
               );
             });
           }

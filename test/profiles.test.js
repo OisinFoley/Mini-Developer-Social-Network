@@ -264,7 +264,12 @@ describe("/api/profiles/", () => {
       });
 
       context(`when setting user's Profile and data is valid but authenticated user id does not match user prop of an existing profile`, () => {
-        it(`calls endpoint and returns 200 code and a new profile as json`, (done) => {
+        it(`calls endpoint and returns 201 code and a new profile as json`, (done) => {
+            let altUser = {...mockAuthenticatedUser, id: mockProfiles[0].user.replace('2cb', '123') };
+            passport.authenticate.callsFake((strategy, options, callback) => {
+              callback(null, altUser, null);
+              return (req,res,next)=>{};
+            });
             const updatedHandleString = 'test_handle__new_profile';
             let profileData = {
               ...mockProfiles[0],
@@ -277,7 +282,7 @@ describe("/api/profiles/", () => {
                 res.body.hasOwnProperty('handle').should.equal(true);
                 res.body.handle.should.equal(updatedHandleString);
                 res.body.__v.should.equal(0);
-                res.should.have.status(200);
+                res.should.have.status(201);
                 done();
               });
         });
@@ -308,7 +313,7 @@ describe("/api/profiles/", () => {
       });
 
       context(`when adding experience to Profile and data is valid and authenticated user id matches an existing profile`, () => {
-        it(`calls endpoint and returns return 200 code and updated profile json including new experience`, (done) => {
+        it(`calls endpoint and returns return 201 code and updated profile json including new experience`, (done) => {
             let newExperienceData = {
               title: 'test_title__new_Experience',
               company: 'test_company__new_Experience',
@@ -324,7 +329,7 @@ describe("/api/profiles/", () => {
                 experience[0].title.should.equal(newExperienceData.title);
                 experience[0].company.should.equal(newExperienceData.company);
                 experience[0].from.should.equal(newExperienceData.from);
-                res.should.have.status(200);
+                res.should.have.status(201);
                 done();
               });
         });
@@ -355,7 +360,7 @@ describe("/api/profiles/", () => {
 
     describe("POST api/profiles/educations (addEducationToProfile)", () => {
       context(`when adding education to Profile and data is valid and authenticated user id matches an existing profile`, () => {
-        it(`calls endpoint and returns 200 code 
+        it(`calls endpoint and returns 201 code 
           and updated profile json including new education`, (done) => {
           let newEducationData = {
             school: 'test_school__new_Education',
@@ -374,7 +379,7 @@ describe("/api/profiles/", () => {
               education[0].degree.should.equal(newEducationData.degree);
               education[0].fieldOfStudy.should.equal(newEducationData.fieldOfStudy);
               education[0].from.should.equal(newEducationData.from);
-              res.should.have.status(200);
+              res.should.have.status(201);
               done();
             });
         });
