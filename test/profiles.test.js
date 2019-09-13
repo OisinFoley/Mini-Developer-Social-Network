@@ -21,6 +21,7 @@ chai.should();
 describe("/api/profiles/", () => {
   let db;
   let passportStub;
+  let non_existant_user_id = '5d7b08333b75e22b68335162';
 
   before(done => {
     db = mongoose
@@ -50,11 +51,11 @@ describe("/api/profiles/", () => {
       context(`when fetching Profile for current user and Profile matching authenticated user exists in the db`, () => {
         const profileProps = ['skills', 'date', '_id', 'handle', 'status' , 'social'];
         it(`calls endpoint and returns 200 status and returns a Profile`, (done) => {
-          request(app)
+            request(app)
             .get('/api/profiles')
             .end((err, res) => {
               profileProps.forEach(prop => {
-                res.body.hasOwnProperty(`${prop}`).should.equal(true);  
+                res.body.hasOwnProperty(`${prop}`).should.equal(true);
               });
               
               res.should.have.status(200);
@@ -131,9 +132,8 @@ describe("/api/profiles/", () => {
     describe("GET api/profiles/user/:user_id (getProfileByUserId)", () => {
       context(`when fetching Profile and no Profile exists for the given user_id in the db`, () => {
         it(`calls endpoint and returns 404 status code and 'noProfile' json error`, (done) => {
-            const user_id = 'non_existant_user_id';
             request(app)
-              .get(`/api/profiles/user/${user_id}`)
+              .get(`/api/profiles/user/${non_existant_user_id}`)
               .end((err, res) => {
                 res.body.hasOwnProperty('noProfile').should.equal(true);
                 res.body.noProfile.should
