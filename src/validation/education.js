@@ -1,8 +1,7 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
-const errorMessages = require('../error-handling/strings');
 
-module.exports = function validateEducationInput(data) {
+module.exports = function validateEducationInput(data, errorMessages) {
   let errors = {};
 
   data.school = !isEmpty(data.school) ? data.school : '';

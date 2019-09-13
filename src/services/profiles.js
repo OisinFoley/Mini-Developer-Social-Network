@@ -101,7 +101,7 @@ class ProfilesService {
             .indexOf(exp_id);
 
           if (removeIndex === -1)
-            return reject({ experience_not_found: errorMessages.experience_not_found });
+            return reject({ experienceNotFound: errorMessages.experience_not_found });
           
           // remove experience out of the array by its id, then save update
           profile.experience.splice(removeIndex, 1);
@@ -138,7 +138,7 @@ class ProfilesService {
             .indexOf(edu_id);
 
           if (removeIndex === -1)
-            return reject({ experience_not_found: errorMessages.education_not_found });
+            return reject({ educationNotFound: errorMessages.education_not_found });
 
           // remove education out of the array by its id
           profile.education.splice(removeIndex, 1);

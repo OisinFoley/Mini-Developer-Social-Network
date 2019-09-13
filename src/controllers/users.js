@@ -1,36 +1,29 @@
 import UsersService from '../services/users';
 import validateRegisterInput from '../validation/register';
 import validateLoginInput from '../validation/login';
-import errorMessages from '../error-handling/strings';
+import errorMessages from '../utils/error-handling-strings';
 
 class UsersController {
-  registerUser(req, res) {
-    const { errors, isValid } = validateRegisterInput(req.body);
+  registerUser(req, res, next) {
+    const { errors, isValid } = validateRegisterInput(req.body, errorMessages);
     const userData = {...req.body};
-  
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    
+    if (!isValid) next(errors);
 
     UsersService.register(userData, errorMessages)
       .then(user => res.status(201).json(user))
-      .catch(err => res.status(400).json(err));
+      .catch(err => next(err));
   };
 
-  loginUser(req, res) {
-    const { errors, isValid } = validateLoginInput(req.body);
+  loginUser(req, res, next) {
+    const { errors, isValid } = validateLoginInput(req.body, errorMessages);
     const loginData = {...req.body};
-  
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    
+    if (!isValid) next(errors);
 
     UsersService.login(loginData, errorMessages)
       .then(token => res.json(token))
-      .catch(err => {
-        if (err.email) res.status(404).json(err);
-        if (err.password) res.status(400).json(err);
-      });
+      .catch(err => next(err));
   };
 };
 export default new UsersController();

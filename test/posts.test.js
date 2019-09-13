@@ -7,8 +7,8 @@ import mockPosts from './__mocks__/posts';
 import sinon from 'sinon';
 import passport from 'passport';
 import seedPosts from './__mocks__/posts';
-import errorMessages from '../src/error-handling/strings';
-import { addSeedPostsToDb } from './utils/testDataSeeder';
+import errorMessages from '../src/utils/error-handling-strings';
+import { addSeedPostsToDb } from '../test/data-initialiser/testDataSeeder';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
 
 // Configure chai

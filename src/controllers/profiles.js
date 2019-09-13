@@ -2,10 +2,10 @@ import ProfilesService from '../services/profiles';
 import validateProfileInput from '../validation/profile';
 import validateExperienceInput from '../validation/experience';
 import validateEducationInput from '../validation/education';
-import errorMessages from '../error-handling/strings';
+import errorMessages from '../utils/error-handling-strings';
 
 class ProfilesController {
-  getCurrentUsersProfile(req, res) {
+  getCurrentUsersProfile(req, res, next) {
     const { id } = req.user
   
     ProfilesService.getByUserId(id, errorMessages)
@@ -13,30 +13,26 @@ class ProfilesController {
       .catch(err => {
         if (err.noProfile) {
           err.noProfile = errorMessages.profile_not_found_for_current_user;
-          res.status(404).json(err);
         }
+        next(err);
       });
   };
 
-  getAllProfiles(req, res) {
+  getAllProfiles(req, res, next) {
     ProfilesService.getAll()
       .then(profiles => res.json(profiles))
-      .catch(err => {
-        if (err.noProfiles) res.status(404).json(err);
-      });
+      .catch(err => next(err));
   };
 
-  getProfileByHandle(req, res) {
+  getProfileByHandle(req, res, next) {
     const { handle } = req.params;
 
     ProfilesService.getProfileByHandle(handle, errorMessages)
       .then(profile => res.json(profile))
-      .catch(err => {
-        if (err.noProfile) res.status(404).json(err);
-      })
+      .catch(err => next(err))
   };
 
-  getProfileByUserId(req, res) {
+  getProfileByUserId(req, res, next) {
     const { user_id } = req.params;
 
     ProfilesService.getByUserId(user_id, errorMessages)
@@ -44,18 +40,16 @@ class ProfilesController {
       .catch(err => {
         if (err.noProfile) {
           err.noProfile = errorMessages.profile_not_found_for_user_id;
-          res.status(404).json(err);
         }
+        next(err);
       });
   };
 
-  setUserProfile(req, res) {
-    const { errors, isValid } = validateProfileInput(req.body);
+  setUserProfile(req, res, next) {
+    const { errors, isValid } = validateProfileInput(req.body, errorMessages);
     const { id } = req.user;
   
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    if (!isValid) next(errors);
   
     // get fields
     const profileFields = {};
@@ -87,67 +81,51 @@ class ProfilesController {
         if (operation === 'create') res.status(201).json(profile);
         if (operation === 'edit') res.json(profile);
       })
-      .catch(err => {
-        if (err.handle) res.status(400).json(err);
-      });
+      .catch(err => next(err));
   };
 
-  addExperienceToProfile(req, res) {
-    const { errors, isValid } = validateExperienceInput(req.body);
+  addExperienceToProfile(req, res, next) {
+    const { errors, isValid } = validateExperienceInput(req.body, errorMessages);
     const { id } = req.user;
     const experienceData = {...req.body};
 
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    if (!isValid) next(errors);
   
     ProfilesService.addExperience(id, experienceData, errorMessages)
       .then(profile => res.status(201).json(profile))
-      .catch(err => {
-        if (err.noProfile) res.status(404).json(err);
-      });
+      .catch(err => next(err));
   };
 
-  deleteExperienceFromProfileById(req, res) {
+  deleteExperienceFromProfileById(req, res, next) {
     const { exp_id } = req.params;
     const { id } = req.user;
     ProfilesService.deleteExperience(id, exp_id, errorMessages)
       .then(profile => res.json(profile))
-      .catch(err => {
-        if (err.noProfile || err.experience_not_found)
-          res.status(404).json(err)
-      });
+      .catch(err => next(err));
   };
 
-  addEducationToProfile(req, res) {
-    const { errors, isValid } = validateEducationInput(req.body);
+  addEducationToProfile(req, res, next) {
+    const { errors, isValid } = validateEducationInput(req.body, errorMessages);
     const educationData = {...req.body};
     const { id } = req.user;
 
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    if (!isValid) next(errors);
 
     ProfilesService.addEducation(id, educationData, errorMessages)
       .then(profile => res.status(201).json(profile))
-      .catch(err => {
-        if (err.noProfile) res.status(404).json(err);
-      });
+      .catch(err => next(err));
   };
 
-  deleteEducationFromProfileById(req, res) {
+  deleteEducationFromProfileById(req, res, next) {
     const { edu_id } = req.params;
     const { id } = req.user;
 
     ProfilesService.deleteEducation(id, edu_id, errorMessages)
       .then(profile => res.json(profile))
-      .catch(err => {
-        if (err.noProfile || err.experience_not_found)
-          res.status(404).json(err)
-      });
+      .catch(err => next(err));
   };
 
-  deleteAccountForUser(req, res) {
+  deleteAccountForUser(req, res, next) {
     const { id } = req.user;
     ProfilesService.deleteProfileAndUser(id)
       .then(() => res.status(204).json());

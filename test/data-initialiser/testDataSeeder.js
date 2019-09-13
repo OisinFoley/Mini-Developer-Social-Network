@@ -5,7 +5,7 @@ import Post from '../../src/models/Post';
 import Profile from '../../src/models/Profile';
 import User from '../../src/models/User';
 
-export const addSeedPostsToDb = (resolve) => {
+export const addSeedPostsToDb = (callback) => {
   mockPosts.forEach(post => {
     const newPost = new Post({
       _id: post._id,
@@ -19,10 +19,10 @@ export const addSeedPostsToDb = (resolve) => {
     });
     newPost.save();
   });
-  resolve();
+  callback();
 };
 
-export const addSeedProfilesToDb = (resolve) => {
+export const addSeedProfilesToDb = (callback) => {
   mockSeedProfiles.forEach(profile => {
     const newProfile = new Profile({
       _id: profile._id,
@@ -41,15 +41,15 @@ export const addSeedProfilesToDb = (resolve) => {
     });
     newProfile.save();
   });
-  resolve();
+  callback();
 };
 
-export const addSeedUsersToDb = (resolve) => {
+export const addSeedUsersToDb = (callback) => {
   let newUser = new User({
     name: mockSeedUser.name,
     email: mockSeedUser.email,
     password: mockSeedUser.password,
     avatar: mockSeedUser.avatar
   });
-  newUser.save().then(() => resolve());
+  newUser.save().then(() => callback());
 };
