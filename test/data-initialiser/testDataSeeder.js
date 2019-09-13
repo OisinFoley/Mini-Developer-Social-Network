@@ -6,42 +6,15 @@ import Profile from '../../src/models/Profile';
 import User from '../../src/models/User';
 
 export const addSeedPostsToDb = (callback) => {
-  mockPosts.forEach(post => {
-    const newPost = new Post({
-      _id: post._id,
-      text: post.text,
-      name: post.name,
-      user: post.user,
-      date: post.date,
-      avatar: post.avatar,
-      likes: post.likes,
-      comments: post.comments
-    });
-    newPost.save();
-  });
-  callback();
+  Post.insertMany(mockPosts)
+    .then(res => callback())
+    .catch(err => console.log(err));
 };
 
 export const addSeedProfilesToDb = (callback) => {
-  mockSeedProfiles.forEach(profile => {
-    const newProfile = new Profile({
-      _id: profile._id,
-      skills: profile.skills,
-      date: profile.date,
-      user: profile.user,
-      handle: profile.handle,
-      company: profile.company,
-      website: profile.website,
-      location: profile.location,
-      status: profile.status,
-      social: profile.social,
-      experience: profile.experience,
-      education: profile.education,
-      bio: profile.bio
-    });
-    newProfile.save();
-  });
-  callback();
+  Profile.insertMany(mockSeedProfiles)
+    .then(res => callback())
+    .catch(err => console.log(err));
 };
 
 export const addSeedUsersToDb = (callback) => {
