@@ -10,7 +10,7 @@ import errorMessages from '../src/utils/error-handling-strings';
 import { addSeedProfilesToDb } from '../test/data-initialiser/testDataSeeder';
 import seedProfiles from './__mocks__/seed-profiles';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
-import { assignValueToManyObjectProps } from '../src/utils/assignValueToMultipleProps';
+import { assignSingleValueToManyObjectProps } from '../src/utils/assignValuesToProps';
 
 const { request } = chai;
 
@@ -191,7 +191,7 @@ describe("/api/profiles/", () => {
               ...mockProfiles[0]
             };
             const propsArray = ['website', 'twitter', 'youtube', 'linkedin', 'instagram', 'facebook'];
-            assignValueToManyObjectProps(profileData, propsArray, 'someInvalidUrl');
+            assignSingleValueToManyObjectProps(profileData, propsArray, 'someInvalidUrl');
             
             request(app)
               .post('/api/profiles')
