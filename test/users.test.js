@@ -6,8 +6,8 @@ import User from '../src/models/User';
 import mockUsers from './__mocks__/users';
 import sinon from 'sinon';
 import passport from 'passport';
-import errorMessages from '../src/error-handling/strings';
-import { addSeedUsersToDb } from './utils/testDataSeeder';
+import errorMessages from '../src/utils/error-handling-strings';
+import { addSeedUsersToDb } from '../test/data-initialiser/testDataSeeder';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
 const { request } = chai;
 
@@ -240,8 +240,8 @@ describe("/api/users/", () => {
             .post('/api/users/login')
             .send(loginData)
             .end((err, res) => {
-              res.body.hasOwnProperty('email').should.equal(true);
-              res.body.email.should.equal(errorMessages.no_user_for_email);
+              res.body.hasOwnProperty('emailNotFound').should.equal(true);
+              res.body.emailNotFound.should.equal(errorMessages.no_user_for_email);
               res.should.have.status(404);
               done();
             });

@@ -14,7 +14,7 @@ module.exports = {
   profile_not_found_generic: 'No profile found',
   handle_already_exists: 'This handle already exists',
   email_already_taken: 'Email already taken',
-  no_user_for_email: 'User does not exist',
+  no_user_for_email: 'User does not exist for provided email',
   password_not_match: 'Password does not match',
   school_field_required: 'School field is required',
   degree_field_required: 'Degree field is required',

@@ -1,8 +1,7 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
-const errorMessages = require('../error-handling/strings');
 
-module.exports = function validateLoginInput(data) {
+module.exports = function validateLoginInput(data, errorMessages) {
   let errors = {};
 
   data.email = !isEmpty(data.email) ? data.email : '';

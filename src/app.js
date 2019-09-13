@@ -5,6 +5,7 @@ import path from 'path';
 import userRoutes from './routes/api/users';
 import profileRoutes from './routes/api/profiles';
 import postRoutes from './routes/api/posts';
+import { getStatusCodeFromError } from './utils/responseStatusCalculator';
 
 let app = express();
 
@@ -19,6 +20,15 @@ require('./config/passport-manager').initialize(passport);
 app.use('/api/users', userRoutes);
 app.use('/api/profiles', profileRoutes);
 app.use('/api/posts', postRoutes);
+
+// error handling
+app.use(function (err, req, res, next) {
+  console.log(`Error: on request to ${req.headers.origin}${req.url}`);
+  console.log(JSON.stringify(err));
+
+  const statusCode = getStatusCodeFromError(err);
+  res.status(statusCode).json(err);
+})
 
 // serve static assets if production
 if (process.env.NODE_ENV === 'production') {
