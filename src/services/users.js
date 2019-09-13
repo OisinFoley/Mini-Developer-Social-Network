@@ -47,7 +47,7 @@ class UsersService {
       User.findOne({ email })
         .then(user => {
           if (!user)
-            return reject({ email: errorMessages.no_user_for_email });
+            return reject({ emailNotFound: errorMessages.no_user_for_email });
       
           // check password
           bcrypt.compare(password, user.password).then(isMatch => {

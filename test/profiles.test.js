@@ -6,11 +6,11 @@ import Profile from '../src/models/Profile';
 import sinon from 'sinon';
 import passport from 'passport';
 import mockProfiles from './__mocks__/profiles';
-import errorMessages from '../src/error-handling/strings';
-import { addSeedProfilesToDb } from './utils/testDataSeeder';
+import errorMessages from '../src/utils/error-handling-strings';
+import { addSeedProfilesToDb } from '../test/data-initialiser/testDataSeeder';
 import seedProfiles from './__mocks__/seed-profiles';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
-import { assignValueToManyObjectProps } from './utils/assignValueToMultipleProps';
+import { assignValueToManyObjectProps } from '../src/utils/assignValueToMultipleProps';
 
 const { request } = chai;
 
@@ -21,13 +21,6 @@ chai.should();
 describe("/api/profiles/", () => {
   let db;
   let passportStub;
-   
-    /**
-     * For the 404 catch errors that are meant to occur when there's a problem in the db(separate from a 404 because
-     * the returned data was empty), just close the db connection before running the test, and this should trigger 
-     * that particular 404
-     * e.g. - .catch(err => res.status(404).json(err)); in getProfileByHandle()
-     */
 
   before(done => {
     db = mongoose

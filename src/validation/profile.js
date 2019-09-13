@@ -1,8 +1,7 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
-const errorMessages = require('../error-handling/strings');
 
-module.exports = function validateProfileInput(data) {
+module.exports = function validateProfileInput(data, errorMessages) {
   let errors = {};
 
   data.handle = !isEmpty(data.handle) ? data.handle : '';
