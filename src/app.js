@@ -22,13 +22,13 @@ app.use('/api/profiles', profileRoutes);
 app.use('/api/posts', postRoutes);
 
 // error handling
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) => {
   console.log(`Error: on request to ${req.headers.origin}${req.url}`);
   console.log(JSON.stringify(err));
 
   const statusCode = getStatusCodeFromError(err);
   res.status(statusCode).json(err);
-})
+});
 
 // serve static assets if production
 if (process.env.NODE_ENV === 'production') {

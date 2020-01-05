@@ -5,7 +5,8 @@
     ["istanbul", {
       "exclude": [
         "**/*.test.js",
-        "src/config/!(passport-manager).js"
+        "src/config/!(passport-manager).js",
+        "src/utils/*.js"
       ]
     }]
   ]
