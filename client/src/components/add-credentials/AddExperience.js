@@ -48,7 +48,7 @@ export class AddExperience extends Component {
     this.props.addExperience(expData, this.props.history);
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
   onCheck(e) {
