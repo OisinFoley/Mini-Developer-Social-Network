@@ -1,8 +1,12 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
-module.exports = function validateEducationInput(data, errorMessages) {
-  let errors = {};
+// TODO: should data be of type 'any'
+// add interface for errorMessages
+export default (data: any, errorMessages: any) => {
+  // TODO: add interface where the props are nullable
+  // so email?: string, password?: string etc
+  let errors: any = {};
 
   data.school = !isEmpty(data.school) ? data.school : '';
   data.degree = !isEmpty(data.degree) ? data.degree : '';

@@ -1,10 +1,12 @@
+import { Request, Response, NextFunction } from "express";
+
 import UsersService from '../services/users';
 import validateRegisterInput from '../validation/register';
 import validateLoginInput from '../validation/login';
 import errorMessages from '../utils/error-handling-strings';
 
 class UsersController {
-  registerUser(req, res, next) {
+  registerUser(req: Request, res: Response, next: NextFunction) {
     const { errors, isValid } = validateRegisterInput(req.body, errorMessages);
     const userData = {...req.body};
     
@@ -15,7 +17,7 @@ class UsersController {
       .catch(err => next(err));
   };
 
-  loginUser(req, res, next) {
+  loginUser(req: Request, res: Response, next: NextFunction) {
     const { errors, isValid } = validateLoginInput(req.body, errorMessages);
     const loginData = {...req.body};
     

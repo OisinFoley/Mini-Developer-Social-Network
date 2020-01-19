@@ -2,14 +2,19 @@ import User from '../models/User';
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import keys from '../config/keys';
+
+// TODO: fix erroneous import of key values
+// import keys from '../config/keys';
+var tempSecret = 'oisinsSecretKey';
 
 class UsersService {
-  register(userData, errorMessages) {
+  // TODO: interface type against these parameters
+  register(userData: any, errorMessages: any) {
     return new Promise((resolve, reject) => {
       const { email, password } = userData;
       User.findOne({ email })
-        .then(user => {
+      // TODO: interface for user model
+        .then((user: any) => {
           if (user) 
             return reject({ email: errorMessages.email_already_taken });
           
@@ -30,8 +35,9 @@ class UsersService {
               userData.password = hash;
               new User(userData)
                 .save()
-                .then(user => resolve(user))
-                .catch(err => {
+                // TODO: interface for this arg
+                .then((user: any) => resolve(user))
+                .catch((err: Error) => {
                   console.log(err);
                   reject(err);
                 });
@@ -41,11 +47,13 @@ class UsersService {
     });
   };
 
-  login(props, errorMessages) {
+  // TODO: interface type against these parameters
+  login(props: any, errorMessages: any) {
     return new Promise((resolve, reject) => {
       const { email, password } = props;
       User.findOne({ email })
-        .then(user => {
+      // TODO: interface type against these parameters
+        .then((user: any) => {
           if (!user)
             return reject({ emailNotFound: errorMessages.no_user_for_email });
       
@@ -56,7 +64,9 @@ class UsersService {
 
             const payload = { id: user.id, name: user.name, avatar: user.avatar };
             // assign JWT
-            jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
+            // jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
+            // TODO: remove tempSecret once config import issue is resolved
+            jwt.sign(payload, tempSecret, { expiresIn: 3600 }, (err, token) => {
               resolve({
                 success: true,
                 token: `Bearer ${token}`

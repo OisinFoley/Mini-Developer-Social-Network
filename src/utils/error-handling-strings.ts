@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   user_not_authorised: 'User not authorised',
   post_not_found: 'Could not find post with the id provided',
   posts_not_found: 'No posts found',
@@ -19,7 +19,6 @@ module.exports = {
   school_field_required: 'School field is required',
   degree_field_required: 'Degree field is required',
   fieldOfStudy_field_required: 'Field Of Study field is required',
-  school_field_required: 'School field is required',
   from_date_field_required: 'From date field is required',
   title_field_required: 'Title field is required',
   company_field_required: 'Company field is required',

@@ -119,4 +119,5 @@ let ProfileSchema = new Schema({
   }
 });
 
+// TODO: export with type: mongoose.model<someType>('profile', ProfileSchema);
 export default mongoose.model('profile', ProfileSchema);

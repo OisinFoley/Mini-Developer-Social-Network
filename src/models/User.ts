@@ -23,4 +23,5 @@ let UserSchema = new Schema({
   }
 });
 
+// TODO: export with type: mongoose.model<someType>('user', UserSchema);
 export default mongoose.model('user', UserSchema);

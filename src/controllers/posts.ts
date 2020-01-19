@@ -1,32 +1,40 @@
+import { Request, Response, NextFunction } from "express";
+
 import PostsService from '../services/posts';
 import validatePostInput from '../validation/post';
 import errorMessages from '../utils/error-handling-strings';
 
 class PostsController {
-  getAllPosts (req, res) {
+  getAllPosts (req: Request, res: Response, next: NextFunction) {
     PostsService.getAll()
       .then(posts => res.json(posts));
   };
 
-  getSinglePost (req, res, next)  {
+  getSinglePost (req: Request, res: Response, next: NextFunction) {
+    // TODO: more concrete type for this -> uuid?
     const { id } = req.params;
     PostsService.getPost(id, errorMessages)
       .then(post => res.json(post))
       .catch(err => next(err));
   };
 
-  deleteSinglePost (req, res, next) {
+  deleteSinglePost (req: Request, res: Response, next: NextFunction) {
+    // TODO: more concrete type for this -> uuid?
     const { id } = req.params;
-    const userId = req.user.id;
+    const { user }: any = req;
+    const userId = user.id ? user.id : '';
 
+    // TODO: more concrete type for this -> uuid?
     PostsService.deletePost(id, userId, errorMessages)
       .then(() => res.status(204).json())
       .catch(err => next(err));
   };
 
-  addNewPost (req, res, next) {
+  addNewPost (req: Request, res: Response, next: NextFunction) {
     const { errors, isValid } = validatePostInput(req.body, errorMessages);
-    const postData = {...req.body, user: req.user.id };
+    // TODO: more concrete type for this -> uuid?
+    let { user }: any = req.user? req: {};
+    const postData = {...req.body, user: user.id };
 
     if (!isValid)
       next(errors);
@@ -35,40 +43,50 @@ class PostsController {
       .then(post => res.status(201).json(post));
   };
 
-  addLikeToPost (req, res, next) {
+  addLikeToPost (req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
-    const userId = req.user.id;
+    // TODO: more concrete type for this -> uuid?
+    const { user }: any = req;
+    const userId = user.id ? user.id : '';
 
     PostsService.addLike(id, userId, errorMessages)
+    // TODO: more concrete type for this -> uuid?
       .then(post => res.status(201).json(post))
       .catch(err => next(err));
   };
 
-  removeLikeFromPost (req, res, next) {
+  removeLikeFromPost (req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
-    const userId = req.user.id;
+    // TODO: more concrete type for this -> uuid?
+    const { user }: any = req;
+    const userId = user.id ? user.id : '';
 
     PostsService.removeLike(id, userId, errorMessages)
+    // TODO: more concrete type for this -> uuid?
       .then(post => res.json(post))
       .catch(err => next(err));
   };
 
-  addCommentToPost (req, res, next) {
+  addCommentToPost (req: Request, res: Response, next: NextFunction) {
     const { errors, isValid } = validatePostInput(req.body, errorMessages);
-    const commentData = {...req.body, user: req.user.id };
+    // TODO: more concrete type for this -> uuid?
+    let { user }: any = req.user? req: {};
+    const commentData = {...req.body, user: user.id };
     const { id } = req.params;
 
     if (!isValid)
       next(errors);
   
     PostsService.addComment(id, commentData, errorMessages)
+    // TODO: more concrete type for this -> uuid?
       .then(post => res.status(201).json(post))
       .catch(err => next(err));
   };
 
-  deleteCommentFromPost (req, res, next) {
+  deleteCommentFromPost (req: Request, res: Response, next: NextFunction) {
     const { post_id, comment_id } = req.params;
     PostsService.deleteComment(post_id, comment_id, errorMessages)
+    // TODO: more concrete type for this -> uuid?
       .then(post => res.json(post))
       .catch(err => next(err));
   };

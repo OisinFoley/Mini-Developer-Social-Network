@@ -1,6 +1,7 @@
 import Post from '../models/Post';
 
 class PostsService {
+  // TODO: interface type against these parameters
   getAll() {
     return new Promise(resolve => {
       Post.find()
@@ -9,9 +10,11 @@ class PostsService {
     });
   };
 
-  getPost(postId, errorMessages) {
+  // TODO: interface type against these parameters
+  getPost(postId: any, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
+      // TODO: interface type against these parameters
         .then(post => {
           if (!post)
             reject({ postNotFound: errorMessages.post_not_found });
@@ -22,10 +25,12 @@ class PostsService {
     });
   };
 
-  deletePost(postId, userId, errorMessages) {
+  // TODO: interface type against these parameters
+  deletePost(postId: any, userId: any, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-        .then(post => {
+        .then((post: any) => {
+          // TODO: interface type against these parameters
           if (!post)
             return reject({ postNotFound: errorMessages.post_not_found })
 
@@ -41,25 +46,30 @@ class PostsService {
     });
   };
   
-  addPost(postData) {
+  // TODO: interface type against these parameters
+  addPost(postData: any) {
     return new Promise((resolve, reject) => {
       new Post(postData)
         .save()
+        // TODO: interface type against these parameters
         .then(post => resolve(post))
         .catch(err => reject(err));
     });
   };
 
-  addLike(postId, userId, errorMessages) {
+  // TODO: interface type against these parameters
+  addLike(postId: any, userId: any, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-        .then(post => {
+      // TODO: interface type against these parameters
+        .then((post: any) => {
           if (!post)
             return reject({ postNotFound: errorMessages.post_not_found });
 
           // check if previously liked
           if (
-            post.likes.filter(like => like.user.toString() === userId)
+            // TODO
+            post.likes.filter((like: any) => like.user.toString() === userId)
               .length > 0
           ) {
             return reject({ likedAlready: errorMessages.post_already_liked });
@@ -68,22 +78,26 @@ class PostsService {
           // add to likes array then save
           post.likes.unshift({ user: userId });
   
-          post.save().then(post => resolve(post));
+          // TODO: interface type against these parameters
+          post.save().then((post: any) => resolve(post));
         })
         .catch(err => reject(err));
     });
   };
 
-  removeLike(postId, userId, errorMessages) {
+  // TODO: interface type against these parameters
+  removeLike(postId: any, userId: any, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-        .then(post => {
+      // TODO: interface type against these parameters
+        .then((post: any) => {
           if (!post)
             return reject({ postNotFound: errorMessages.post_not_found });
 
           // check if user has already liked
           const removeIndex = post.likes
-            .map(item => item.user.toString())
+          // TODO: interface type against these parameters
+            .map((item: any) => item.user.toString())
             .indexOf(userId);
           
           if (removeIndex === -1)
@@ -91,21 +105,25 @@ class PostsService {
   
           post.likes.splice(removeIndex, 1);
   
-          post.save().then(post => resolve(post));
+          // TODO: interface type against these parameters
+          post.save().then((post: any) => resolve(post));
         })
         .catch(err => reject(err));
     });
   };
 
-  addComment(postId, commentData, errorMessages) {
+  // TODO: interface type against these parameters
+  addComment(postId: any, commentData: any, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-        .then(post => {
+      // TODO: interface type against these parameters
+        .then((post: any) => {
           if (!post)
             return reject({ postNotFound: errorMessages.post_not_found });
 
           post.comments.unshift(commentData);
-          post.save().then(updatedPost =>
+          // TODO: interface type against these parameters
+          post.save().then((updatedPost: any) =>
             resolve(updatedPost)
           );
         })
@@ -113,22 +131,26 @@ class PostsService {
     });
   };
 
-  deleteComment(requestPostId, requestCommentId, errorMessages) {
+  // TODO: interface type against these parameters
+  deleteComment(requestPostId: any, requestCommentId: any, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Post.findById(requestPostId)
-        .then(post => {
+      // TODO: interface type against these parameters
+        .then((post: any) => {
           if (!post)
             return reject({ postNotFound: errorMessages.post_not_found });
 
           const removeIndex = post.comments
-            .map(item => item.id)
+          // TODO: interface type against these parameters
+            .map((item: any) => item.id)
             .indexOf(requestCommentId);
 
           if (removeIndex === -1)
             return reject({ commentNotFound: errorMessages.comment_not_found });
 
           post.comments.splice(removeIndex, 1);
-          post.save().then(post => resolve(post));
+          // TODO: interface type against these parameters
+          post.save().then((post: any) => resolve(post));
         })
         .catch(err => reject(err));
     });

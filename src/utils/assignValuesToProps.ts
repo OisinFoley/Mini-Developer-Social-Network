@@ -1,10 +1,11 @@
-export const assignSingleValueToManyObjectProps = (obj, propsArray, value) => {
+export const assignSingleValueToManyObjectProps = (obj: any, propsArray: [], value: string | number | boolean) => {
   propsArray.forEach(prop => {
     obj[prop] = value;
   });
 };
 
-export const parseRequestValuesToProfileFields = (profileFields, requestBody) => {
+// TODO: interface type for these 2 args
+export const parseRequestValuesToProfileFields = (profileFields: any, requestBody: any) => {
   profileFields.handle = requestBody.handle || null;
   profileFields.company = requestBody.company || null;
   profileFields.bio = requestBody.bio || null;

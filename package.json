@@ -5,11 +5,13 @@
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
     "server": "nodemon --exec babel-node server.js",
     "client": "BROWSER=none npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "nyc --reporter=text mocha --compilers js:@babel/register"
+    "test": "nyc --reporter=text mocha --compilers js:@babel/register",
+    "tsdev": "ts-node src/server.ts",
+    "start": "nodemon dist/server.js",
+    "build": "tsc"
   },
   "author": "Oisín Foley",
   "license": "MIT",
@@ -19,6 +21,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
+    "@types/node": "^13.1.6",
+    "@types/passport": "^1.0.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
@@ -39,12 +43,21 @@
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.1.0",
     "@babel/register": "^7.0.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/body-parser": "^1.17.1",
+    "@types/express": "^4.17.2",
+    "@types/gravatar": "^1.8.0",
+    "@types/jsonwebtoken": "^8.3.6",
+    "@types/mongoose": "^5.5.41",
+    "@types/passport-jwt": "^3.0.3",
     "babel-plugin-istanbul": "^5.2.0",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
     "mocha": "^2.4.5",
-    "nodemon": "^1.18.3",
+    "nodemon": "^1.19.4",
     "nyc": "^14.1.1",
-    "sinon": "^7.4.1"
+    "sinon": "^7.4.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.4"
   }
 }

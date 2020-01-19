@@ -1,8 +1,12 @@
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
-module.exports = function validateExperienceInput(data, errorMessages) {
-  let errors = {};
+// TODO: should data be of type 'any'
+// add interface for errorMessages
+export default (data: any, errorMessages: any) => {
+  // TODO: add interface where the props are nullable
+  // so email?: string, password?: string etc
+  let errors: any = {};
 
   data.title = !isEmpty(data.title) ? data.title : '';
   data.company = !isEmpty(data.company) ? data.company : '';
