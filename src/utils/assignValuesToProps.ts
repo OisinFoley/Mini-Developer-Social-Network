@@ -1,5 +1,5 @@
-export const assignSingleValueToManyObjectProps = (obj: any, propsArray: [], value: string | number | boolean) => {
-  propsArray.forEach(prop => {
+export const assignSingleValueToManyObjectProps = (obj: any, propsArray: (string | number)[], value: string | number | boolean) => {
+  propsArray.forEach((prop: any) => {
     obj[prop] = value;
   });
 };

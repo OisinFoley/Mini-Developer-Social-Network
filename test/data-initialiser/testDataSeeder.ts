@@ -5,19 +5,19 @@ import Post from '../../src/models/Post';
 import Profile from '../../src/models/Profile';
 import User from '../../src/models/User';
 
-export const addSeedPostsToDb = (callback) => {
+export const addSeedPostsToDb = (callback: Function) => {
   Post.insertMany(mockPosts)
     .then(res => callback())
     .catch(err => console.log(err));
 };
 
-export const addSeedProfilesToDb = (callback) => {
+export const addSeedProfilesToDb = (callback: Function) => {
   Profile.insertMany(mockSeedProfiles)
     .then(res => callback())
     .catch(err => console.log(err));
 };
 
-export const addSeedUsersToDb = (callback) => {
+export const addSeedUsersToDb = (callback: Function) => {
   let newUser = new User({
     name: mockSeedUser.name,
     email: mockSeedUser.email,

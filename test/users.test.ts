@@ -1,25 +1,34 @@
-import chai from 'chai';
-import chaiHttp from 'chai-http';
-import app from '../src/app';
+// import chai from 'chai';
+// import chaiHttp from 'chai-http';
 import mongoose from "mongoose";
-import User from '../src/models/User';
-import mockUsers from './__mocks__/users';
 import sinon from 'sinon';
 import passport from 'passport';
+import { Request, Response, NextFunction } from "express";
+
+
+import app from '../src/app';
+import User from '../src/models/User';
+import mockUsers from './__mocks__/users';
 import errorMessages from '../src/utils/error-handling-strings';
-import { addSeedUsersToDb } from '../test/data-initialiser/testDataSeeder';
+// TODO: can we use default import
+import { addSeedUsersToDb } from './data-initialiser/testDataSeeder';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
-const { request } = chai;
+import BaseTest from './baseTest';
+
+// const { request } = chai;
 
 // Configure chai
-chai.use(chaiHttp);
-chai.should();
+// chai.use(chaiHttp);
+// chai.should();
 
 describe("/api/users/", () => {
+  const test = new BaseTest('/api/users');
+
   let db;
-  let passportStub;
+  let passportStub: any;
 
   before(done => {
+    // TODO: move to constant
     db = mongoose.connect("mongodb://localhost:27017/test", { useNewUrlParser: true }, done);
   })
   after(done => {
@@ -27,9 +36,11 @@ describe("/api/users/", () => {
   });
 
   beforeEach(done => {
-    passportStub =  sinon.stub(passport,"authenticate").callsFake((strategy, options, callback) => {
-      callback(null, mockAuthenticatedUser, null);
-      return (req,res,next)=>{};
+    passportStub =  sinon.stub(passport,"authenticate")
+    // TODO
+      .callsFake((strategy: any , options: any, callback: any) => {
+        callback(null, mockAuthenticatedUser, null);
+        return (req: Request, res: Response, next: NextFunction)=>{};
     });
 
     addSeedUsersToDb(done);
@@ -45,10 +56,11 @@ describe("/api/users/", () => {
         it(`calls endpoint and returns 400 code and 'name length validation' json error`, (done) => {
           let registerData = {...mockUsers[0]};
           registerData.name = 'a';
-          request(app)
-            .post('/api/users/register')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/register`)
             .send(registerData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.name.should.equal(errorMessages.name_invalid_length);
               res.should.have.status(400);
               done();
@@ -59,10 +71,11 @@ describe("/api/users/", () => {
       context(`when registering new User and and name field is null`, () => {
         it(`calls endpoint and returns 400 code and 'name field required' json error`, (done) => {
           let registerData = {...mockUsers[0], name: null };
-          request(app)
-            .post('/api/users/register')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/register`)
             .send(registerData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.name.should.equal(errorMessages.name_field_required);
               res.should.have.status(400);
               done();
@@ -73,10 +86,11 @@ describe("/api/users/", () => {
       context(`when registering new User and email is invalid format`, () => {
         it(`calls endpoint and returns 400 code and 'email is valid' json error`, (done) => {
             let registerData = {...mockUsers[0], email: 'improperEmail' };
-            request(app)
-              .post('/api/users/register')
+            test.chai.request(app)
+              .post(`${test.baseRoute}/register`)
               .send(registerData)
-              .end((err, res) => {
+              // TODO
+            .end((err: any, res: any) => {
                 res.body.hasOwnProperty('email').should.equal(true);
                 res.body.email.should.equal(errorMessages.invalid_email);
                 res.should.have.status(400);
@@ -88,10 +102,11 @@ describe("/api/users/", () => {
       context(`when registering new User and password is less than 6 chars`, () => {
         it(`calls endpoint and returns 400 code and 'password field must be ...' json error`, (done) => {
           let registerData = {...mockUsers[0], password: 'test' };
-          request(app)
-            .post('/api/users/register')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/register`)
             .send(registerData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.hasOwnProperty('password').should.equal(true);
               res.body.password.should.equal(errorMessages.password_invalid_length);
               res.should.have.status(400);
@@ -104,10 +119,11 @@ describe("/api/users/", () => {
         it(`calls endpoint and returns 400 code 
           and 'password field required and confirm password required' json error`, (done) => {
           let registerData = {...mockUsers[0], password: null, password2: null };
-          request(app)
-            .post('/api/users/register')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/register`)
             .send(registerData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               const { password_field_required, confirm_password_field_required } = errorMessages;
               const { password, password2 } = res.body;
 
@@ -125,10 +141,11 @@ describe("/api/users/", () => {
         it(`calls endpoint and returns 400 code 
           and 'passwords must match error' json error`, (done) => {
           let registerData = {...mockUsers[0], password: 'test', password2: 'something_else'};
-          request(app)
-            .post('/api/users/register')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/register`)
             .send(registerData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.hasOwnProperty('password2').should.equal(true);
               res.body.password2.should.equal(errorMessages.passwords_must_match);
               res.should.have.status(400);
@@ -141,10 +158,11 @@ describe("/api/users/", () => {
         it(`calls endpoint and returns 400 code 
           and 'email already taken' json error`, (done) => {
           let registerData = mockUsers[0];
-          request(app)
-            .post('/api/users/register')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/register`)
             .send(registerData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.email.should.equal(errorMessages.email_already_taken);
               res.should.have.status(400);
@@ -157,10 +175,11 @@ describe("/api/users/", () => {
         it(`calls endpoint and returns 201 status code and json containing new User`, (done) => {
           const registerData = {...mockUsers[0]};
           registerData.email = 'alternative_test_email@test.com';
-          request(app)
-            .post('/api/users/register')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/register`)
             .send(registerData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.hasOwnProperty('name').should.equal(true);
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.hasOwnProperty('password').should.equal(true);
@@ -176,10 +195,11 @@ describe("/api/users/", () => {
       context(`when logging in a User and email is in invalid format`, () => {
         it(`calls endpoint and returns 400 code and 'email is valid' json error`, (done) => {
           let loginData = {...mockUsers[0], email: 'improperEmail'};
-          request(app)
-            .post('/api/users/login')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/login`)
             .send(loginData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.email.should.equal(errorMessages.invalid_email);
               res.should.have.status(400);
@@ -191,10 +211,11 @@ describe("/api/users/", () => {
       context(`when logging in a User and email is null`, () => {
         it(`should return 400 code and 'email field is required' json error`, (done) => {
           let loginData = {...mockUsers[0], email: null };
-          request(app)
-            .post('/api/users/login')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/login`)
             .send(loginData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.email.should.equal(errorMessages.email_field_required);
               res.should.have.status(400);
@@ -206,10 +227,11 @@ describe("/api/users/", () => {
       context(`when logging in a User and password field is null`, () => {
         it(`calls endpoint and returns 400 code and 'password field required' json error`, (done) => {
           let loginData = {...mockUsers[0], password: null };
-          request(app)
-            .post('/api/users/login')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/login`)
             .send(loginData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.hasOwnProperty('password').should.equal(true);
               res.body.password.should.equal(errorMessages.password_field_required);
               res.should.have.status(400);
@@ -221,10 +243,11 @@ describe("/api/users/", () => {
       context(`when logging in a User and password does not match value in db`, () => {
         it(`calls endpoint and returns 400 status code and 'password does not match' json error`, (done) => {
           let loginData = {...mockUsers[0], password: 'alternative_test_password'};
-          request(app)
-            .post('/api/users/login')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/login`)
             .send(loginData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.hasOwnProperty('password').should.equal(true);
               res.body.password.should.equal(errorMessages.password_not_match);
               res.should.have.status(400);
@@ -236,10 +259,11 @@ describe("/api/users/", () => {
       context(`when logging in a User and email does not exist in the db`, () => {
         it(`calls endpoint and returns 404 code and 'user not found' json error`, (done) => {
           let loginData = {...mockUsers[0], email: 'alternative_test_email2@test.com'};
-          request(app)
-            .post('/api/users/login')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/login`)
             .send(loginData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.hasOwnProperty('emailNotFound').should.equal(true);
               res.body.emailNotFound.should.equal(errorMessages.no_user_for_email);
               res.should.have.status(404);
@@ -251,10 +275,11 @@ describe("/api/users/", () => {
       context(`when logging in a User and all fields pass validation and password matches value in the db`, () => {
         it(`calls endpoint and returns 200 status code and response has jwt`, (done) => {
           let loginData = {...mockUsers[0]};
-          request(app)
-            .post('/api/users/login')
+          test.chai.request(app)
+            .post(`${test.baseRoute}/login`)
             .send(loginData)
-            .end((err, res) => {
+            // TODO
+            .end((err: any, res: any) => {
               res.body.success.should.equal(true);
               res.body.hasOwnProperty('token').should.equal(true);
               res.should.have.status(200);
