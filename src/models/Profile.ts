@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import IProfile from '../interfaces/IProfile';
 const { Schema } = mongoose;
 
 let ProfileSchema = new Schema({
@@ -20,7 +21,6 @@ let ProfileSchema = new Schema({
   location: {
     type: String
   },
-
   status: {
     type: String,
     required: true
@@ -119,5 +119,4 @@ let ProfileSchema = new Schema({
   }
 });
 
-// TODO: export with type: mongoose.model<someType>('profile', ProfileSchema);
-export default mongoose.model('profile', ProfileSchema);
+export default mongoose.model<IProfile>('profile', ProfileSchema);

@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import mongoose from 'mongoose';
 
 import PostsService from '../services/posts';
 import validatePostInput from '../validation/post';
@@ -11,7 +12,6 @@ class PostsController {
   };
 
   getSinglePost (req: Request, res: Response, next: NextFunction) {
-    // TODO: more concrete type for this -> uuid?
     const { id } = req.params;
     PostsService.getPost(id, errorMessages)
       .then(post => res.json(post))
@@ -19,7 +19,6 @@ class PostsController {
   };
 
   deleteSinglePost (req: Request, res: Response, next: NextFunction) {
-    // TODO: more concrete type for this -> uuid?
     const { id } = req.params;
     const { user }: any = req;
     const userId = user.id ? user.id : '';

@@ -1,53 +1,57 @@
 import Profile from '../models/Profile';
 import User from '../models/User';
+import IProfile from '../interfaces/IProfile';
+import IProfileResponse from '../interfaces/IProfileResponse';
+import IProfileFields from '../interfaces/IProfileFields';
+import IExperience from '../interfaces/IExperience';
+import IEducation from '../interfaces/IEducation';
 
 class ProfilesService {
-  // TODO: interface type against these parameters
-  getByUserId(userId: any, errorMessages: any) {
-    return new Promise((resolve, reject) => {
-      Profile.findOne({ user: userId })
-        .populate('user', ['name', 'avatar'])
-        .then(profile => {
-          if (!profile) {
-            reject({ noProfile: errorMessages.profile_not_found_generic });
-          }
-          resolve(profile);
-        })
-        .catch(err => reject(err));
-    });
-  };
-// TODO: interface type against these parameters
+  // TODO: fix this compiler error
+  // getByUserId(userId: string, errorMessages: any): Promise<IProfileResponse> {
+  //   return new Promise((resolve, reject) => {
+  //     Profile.findOne({ user: userId })
+  //       .populate('user', ['name', 'avatar'])
+  //       .then((profile: IProfile | null) => {
+  //         if (!profile) {
+  //           reject({ noProfile: errorMessages.profile_not_found_generic });
+  //         }
+  //         resolve(profile);
+  //       })
+  //       .catch((err: Error) => reject(err));
+  //   });
+  // };
+
+  // TODO: set func return type
   getAll(errorMessages: any) {
     return new Promise((resolve, reject) => {
       Profile.find()
         .populate('user', ['name', 'avatar'])
-        // TODO: interface type against these parameters
-        .then(profiles => resolve(profiles))
-        .catch(err => reject({ noProfiles: errorMessages.profiles_not_found }));
+        .then((profiles: IProfile[] | null) => resolve(profiles))
+        .catch((err: Error) => reject({ noProfiles: errorMessages.profiles_not_found }));
     });
   };
-// TODO: interface type against these parameters
-  getProfileByHandle(handle: string, errorMessages: any) {
+
+  // TODO: set func return type
+  getProfileByHandle(handle: string, errorMessages: any): Promise<IProfile> {
     return new Promise((resolve, reject) => {
       Profile.findOne({ handle })
         .populate('user', ['name', 'avatar'])
-        // TODO: interface type against these parameters
-        .then(profile => {
+        .then((profile: IProfile | null) => {
           if (!profile) {
             reject({ noProfile: errorMessages.profile_not_found_for_handle });
           }
           resolve(profile);
         })
-        .catch(err => reject(err));
+        .catch((err: Error) => reject(err));
     })
   };
 
-  // TODO: interface type against these parameters
-  setProfileForUser(userId: any, profileFields: any, errorMessages: any) {
+  // TODO: set func return type
+  setProfileForUser(userId: any, profileFields: IProfileFields, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Profile.findOne({ user: userId })
-      // TODO: interface type against these parameters
-        .then(profile => {
+        .then((profile: IProfile | null) => {
           if (profile) {
             //update
             Profile.findOneAndUpdate(
@@ -61,17 +65,18 @@ class ProfilesService {
             //create
       
             // does handle exist
-            Profile.findOne({ handle: profileFields.handle }).then(profile => {
-              // TODO: interface type against these parameters
-              if (profile) {
-                return reject({ handle: errorMessages.handle_already_exists });
-              }
-      
-              // do the save
-              // TODO: interface type against these parameters
-              new Profile(profileFields).save().then(profile => 
-                resolve({ operation: 'create', profile: profile })
-              );
+            Profile.findOne({ handle: profileFields.handle })
+              .then((profile: IProfile | null) => {
+                if (profile) {
+                  return reject({ handle: errorMessages.handle_already_exists });
+                }
+        
+                // TODO: interface type against these parameters
+                new Profile(profileFields)
+                  .save()
+                  .then((profile: IProfile) => {
+                    resolve({ operation: 'create', profile: profile })
+                  });
             });
           }
         })
@@ -79,83 +84,77 @@ class ProfilesService {
     });
   };
 
-  addExperience(userId: any, experienceData: any, errorMessages: any) {
+  // TODO: set func return type
+  addExperience(userId: string, experienceData: IExperience, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Profile.findOne({ user: userId })
-      // TODO: interface type against these parameters
-        .then((profile: any) => {
+        .then((profile: IProfile | null) => {
           if (!profile)
             return reject({ noProfile: errorMessages.profile_not_found_generic });
           
           profile.experience.unshift(experienceData);
-          // TODO: interface type against these parameters
-          profile.save().then((profile: any) => 
-            resolve(profile)
-          );
+          profile
+            .save()
+            .then(profile => resolve(profile));
         })
-        .catch(err => reject(err));
+        .catch((err: Error) => reject(err));
     });
   };
 
-  // TODO: interface type against these parameters
-  deleteExperience(userId: any, exp_id: any, errorMessages: any) {
+  // TODO: set func return type
+  deleteExperience(userId: string, exp_id: string, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Profile.findOne({ user: userId })
-      // TODO: interface type against these parameters
-        .then((profile: any) => {
+        .then((profile: IProfile | null) => {
           if (!profile)
             return reject({ noProfile: errorMessages.profile_not_found_generic });
           
           // get remove index
           const removeIndex = profile.experience
-          // TODO: interface type against these parameters -> IExperience
-            .map((item: any) => item.id)
+            .map((item: IExperience) => item.id)
             .indexOf(exp_id);
 
           if (removeIndex === -1)
             return reject({ experienceNotFound: errorMessages.experience_not_found });
           
-          // remove experience out of the array by its id, then save update
+          // find and remove experience by its id
           profile.experience.splice(removeIndex, 1);
-          // TODO: interface type against these parameters
-          profile.save().then((profile: any) => resolve(profile));
+          profile
+            .save()
+            .then(profile => resolve(profile));
         })
-        // TODO: interface type against these parameters
-        .catch(err => reject(err));
+        .catch((err: Error) => reject(err));
     });
   };
 
-  // TODO: interface type against these parameters
-  addEducation(userId: any, educationData: any, errorMessages: any) {
+  // TODO: set func return type
+  addEducation(userId: string, educationData: IEducation, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Profile.findOne({ user: userId })
-      // TODO: interface type against these parameters
-        .then((profile: any) => {
+        .then((profile: IProfile | null) => {
           if (!profile)
             return reject({ noProfile: errorMessages.profile_not_found_generic });
           
           profile.education.unshift(educationData);
-          // TODO: interface type against these parameters
-          profile.save().then((profile: any) => resolve(profile));
+          profile
+            .save()
+            .then(profile => resolve(profile));
         })
-        // TODO: interface type against these parameters
-        .catch(err => reject(err));
+        .catch((err: Error) => reject(err));
     });
   };
 
-  // TODO: interface type against these parameters
-  deleteEducation(userId: any, edu_id: any, errorMessages: any) {
+  // TODO: set func return type
+  deleteEducation(userId: string, edu_id: string, errorMessages: any) {
     return new Promise((resolve, reject) => {
       Profile.findOne({ user: userId })
-      // TODO: interface type against these parameters
-        .then((profile: any) => {
+        .then((profile: IProfile | null) => {
           if (!profile)
             return reject({ noProfile: errorMessages.profile_not_found_generic });
           
           // get remove index
           const removeIndex = profile.education
-          // TODO: interface type against these parameters -> IEducation
-            .map((item: any) => item.id)
+            .map((item: IEducation) => item.id)
             .indexOf(edu_id);
 
           if (removeIndex === -1)
@@ -165,16 +164,16 @@ class ProfilesService {
           profile.education.splice(removeIndex, 1);
 
           // save the update
-          // TODO: interface type against these parameters
-          profile.save().then((profile: any) => resolve(profile));
+          profile
+            .save()
+            .then(profile => resolve(profile));
         })
-        // TODO: interface type against these parameters
-        .catch(err => reject(err));
+        .catch((err: Error) => reject(err));
     });
   };
 
-  // TODO: interface type against these parameters -> uuid?
-  deleteProfileAndUser(userId: any) {
+  // TODO: set func return type
+  deleteProfileAndUser(userId: string) {
     return new Promise((resolve, reject) => {
       // TODO: we should get something in the response that indicates a success
       // TODO: interface type against these parameters

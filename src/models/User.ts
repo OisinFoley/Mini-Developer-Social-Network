@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-const { Schema } = mongoose;
+import mongoose, { Schema } from 'mongoose';
+import IUser from '../interfaces/IUser';
 
-let UserSchema = new Schema({
+let UserSchema: Schema = new Schema({
   name: {
     type: String,
     required: true
@@ -23,5 +23,4 @@ let UserSchema = new Schema({
   }
 });
 
-// TODO: export with type: mongoose.model<someType>('user', UserSchema);
-export default mongoose.model('user', UserSchema);
+export default mongoose.model<IUser>('user', UserSchema);
