@@ -6,6 +6,7 @@ import User from '../models/User';
 var keys = { secret: 'oisinsSecretKey' };
 import passport from 'passport';
 import { Request, Response, NextFunction } from "express";
+import IUser from "../interfaces/IUser";
 
 const opts: any = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -28,7 +29,7 @@ opts.secretOrKey = keys.secret;
   };
 
   export const authenticate = (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+    passport.authenticate('jwt', { session: false }, (err, user: IUser, info) => {
       if (err) { return next(err); }
       // use interface here
       if (!user) {
@@ -42,6 +43,3 @@ opts.secretOrKey = keys.secret;
       return next();
     })(req, res, next);
   };
-// }
-
-// module.exports = new PassportManager();

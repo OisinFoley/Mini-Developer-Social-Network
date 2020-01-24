@@ -15,11 +15,9 @@ class PostsService {
     });
   };
 
-  // TODO: interface type against these parameters
-  getPost(postId: any, errorMessages: any): Promise<IPost> {
+  getPost(postId: any, errorMessages: any): Promise<IPost | null> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-      // TODO: interface type against these parameters
         .then((post: IPost | null) => {
           if (!post)
             reject({ postNotFound: errorMessages.post_not_found });
@@ -30,12 +28,10 @@ class PostsService {
     });
   };
 
-  // TODO: interface type against these parameters
-  deletePost(postId: string, userId: string, errorMessages: any) {
+  deletePost(postId: string, userId: string, errorMessages: any): Promise<null> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
         .then((post: IPost | null) => {
-          // TODO: interface type against these parameters
           if (!post)
             return reject({ postNotFound: errorMessages.post_not_found })
 
@@ -51,7 +47,7 @@ class PostsService {
     });
   };
   
-  addPost(postData: IPostData) {
+  addPost(postData: IPostData): Promise<IPost> {
     return new Promise((resolve, reject) => {
       new Post(postData)
         .save()
@@ -60,7 +56,7 @@ class PostsService {
     });
   };
 
-  addLike(postId: string, userId: string, errorMessages: any) {
+  addLike(postId: string, userId: string, errorMessages: any): Promise<IPost> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
         .then((post: IPost | null) => {
@@ -83,7 +79,7 @@ class PostsService {
     });
   };
 
-  removeLike(postId: string, userId: string, errorMessages: any) {
+  removeLike(postId: string, userId: string, errorMessages: any): Promise<IPost> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
         .then((post: IPost | null) => {
@@ -101,11 +97,11 @@ class PostsService {
           post.likes.splice(removeIndex, 1);
           post.save().then(post => resolve(post));
         })
-        .catch(err => reject(err));
+        .catch((err: Error) => reject(err));
     });
   };
 
-  addComment(postId: string, commentData: IComment, errorMessages: any) {
+  addComment(postId: string, commentData: IComment, errorMessages: any): Promise<IPost> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
         .then((post: IPost | null) => {
@@ -113,15 +109,13 @@ class PostsService {
             return reject({ postNotFound: errorMessages.post_not_found });
 
           post.comments.unshift(commentData);
-          post
-            .save()
-            .then(updatedPost => resolve(updatedPost));
+          post.save().then(updatedPost => resolve(updatedPost));
         })
         .catch((err: Error) => reject(err));
     });
   };
 
-  deleteComment(requestPostId: string, requestCommentId: string, errorMessages: any) {
+  deleteComment(requestPostId: string, requestCommentId: string, errorMessages: any): Promise<IPost> {
     return new Promise((resolve, reject) => {
       Post.findById(requestPostId)
         .then((post: IPost | null) => {

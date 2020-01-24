@@ -1,7 +1,8 @@
-export const assignSingleValueToManyObjectProps = (obj: any, propsArray: (string | number)[], value: string | number | boolean) => {
-  propsArray.forEach((prop: any) => {
-    obj[prop] = value;
-  });
+export const assignSingleValueToManyObjectProps 
+  = (obj: any, propsArray: (string | number)[], value: string | number | boolean) => {
+    propsArray.forEach((prop: any) => {
+      obj[prop] = value;
+    });
 };
 
 // TODO: interface type for these 2 args
