@@ -1,13 +1,13 @@
 import express from 'express';
 import { Request, Response, NextFunction } from "express";
 import bodyParser from 'body-parser';
-import passport from 'passport';
 import path from 'path';
 
 import userRoutes from './routes/api/users';
 import profileRoutes from './routes/api/profiles';
 import postRoutes from './routes/api/posts';
 import { getStatusCodeFromError } from './utils/responseStatusCalculator';
+import { PassportManager } from './config/passport-manager';
 
 let app = express();
 
@@ -16,8 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // passport middleware
-require('./config/passport-manager').initialize(passport);
-
+PassportManager.initialize();
 
 // use routes
 app.use('/api/users', userRoutes);

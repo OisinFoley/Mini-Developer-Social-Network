@@ -1,19 +1,21 @@
 import { Strategy as JwtStrategy } from "passport-jwt";
 import { ExtractJwt } from "passport-jwt";
+import passport from 'passport';
+import { Request, Response, NextFunction } from "express";
+
 import User from '../models/User';
 // TODO: fix erroneous import of key values
 // import keys from "./keys";
 var keys = { secret: 'oisinsSecretKey' };
-import passport from 'passport';
-import { Request, Response, NextFunction } from "express";
+
 import IUser from "../interfaces/IUser";
 
 const opts: any = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secret;
 
-// class PassportManager {
-  export const initialize = () => {
+export class PassportManager {
+  static initialize = () => {
     passport.use(
       new JwtStrategy(opts, (jwt_payload, done) => {
         User.findById(jwt_payload.id)
@@ -28,10 +30,9 @@ opts.secretOrKey = keys.secret;
     );
   };
 
-  export const authenticate = (req: Request, res: Response, next: NextFunction) => {
+  static authenticate = (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate('jwt', { session: false }, (err, user: IUser, info) => {
       if (err) { return next(err); }
-      // use interface here
       if (!user) {
           if (info.name === "TokenExpiredError") {
               return res.status(401).json({ message: "Your token has expired." });
@@ -43,3 +44,6 @@ opts.secretOrKey = keys.secret;
       return next();
     })(req, res, next);
   };
+}
+
+export default PassportManager;
