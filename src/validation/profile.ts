@@ -1,9 +1,11 @@
+import IProfileInput from "../interfaces/IProfileInput";
+
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
 // TODO: should data be of type 'any'
-// add interface for errorMessages
-export default (data: any, errorMessages: any) => {
+// add interface for errorStrings
+export default (data: IProfileInput, errorStrings: any) => {
   // TODO: add interface where the props are nullable
   // so email?: string, password?: string etc
   let errors: any = {};
@@ -13,54 +15,54 @@ export default (data: any, errorMessages: any) => {
   data.skills = !isEmpty(data.skills) ? data.skills : '';
 
   if (!Validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.handle = errorMessages.handle_invalid_length;
+    errors.handle = errorStrings.handle_invalid_length;
   }
 
   if (Validator.isEmpty(data.handle)) {
-    errors.handle = errorMessages.handle_required;
+    errors.handle = errorStrings.handle_required;
   }
 
   if (Validator.isEmpty(data.status)) {
-    errors.status = errorMessages.status_required;
+    errors.status = errorStrings.status_required;
   }
 
   if (Validator.isEmpty(data.skills)) {
-    errors.skills = errorMessages.skills_required;
+    errors.skills = errorStrings.skills_required;
   }
 
   if (!isEmpty(data.website)) {
     if (!Validator.isURL(data.website)) {
-      errors.website = errorMessages.invalid_url;
+      errors.website = errorStrings.invalid_url;
     }
   }
 
   if (!isEmpty(data.youtube)) {
     if (!Validator.isURL(data.youtube)) {
-      errors.youtube = errorMessages.invalid_url;
+      errors.youtube = errorStrings.invalid_url;
     }
   }
 
   if (!isEmpty(data.twitter)) {
     if (!Validator.isURL(data.twitter)) {
-      errors.twitter = errorMessages.invalid_url;
+      errors.twitter = errorStrings.invalid_url;
     }
   }
 
   if (!isEmpty(data.linkedin)) {
     if (!Validator.isURL(data.linkedin)) {
-      errors.linkedin = errorMessages.invalid_url;
+      errors.linkedin = errorStrings.invalid_url;
     }
   }
 
   if (!isEmpty(data.facebook)) {
     if (!Validator.isURL(data.facebook)) {
-      errors.facebook = errorMessages.invalid_url;
+      errors.facebook = errorStrings.invalid_url;
     }
   }
 
   if (!isEmpty(data.instagram)) {
     if (!Validator.isURL(data.instagram)) {
-      errors.instagram = errorMessages.invalid_url;
+      errors.instagram = errorStrings.invalid_url;
     }
   }
 

@@ -2,23 +2,21 @@ import User from '../models/User';
 import gravatar from 'gravatar';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+
 import IUser from '../interfaces/IUser';
 import ICreateUserInput from '../interfaces/ICreateUserInput';
 import ILoginUserInput from '../interfaces/ILoginUserInput';
 import ILoginResponse from '../interfaces/ILoginResponse';
-
-// TODO: fix erroneous import of key values
-// import keys from '../config/keys';
-var tempSecret = 'oisinsSecretKey';
+import Keys from '../config/keys';
 
 class UsersService {
-  register(userData: ICreateUserInput, errorMessages: any): Promise<IUser> {
+  register(userData: ICreateUserInput, errorStrings: any): Promise<IUser> {
     return new Promise((resolve, reject) => {
       const { email, password } = userData;
       User.findOne({ email })
         .then((user: IUser | null) => {
           if (user) 
-            return reject({ email: errorMessages.email_already_taken });
+            return reject({ email: errorStrings.email_already_taken });
           
           const avatar = gravatar.url(email, {
             s: '200',
@@ -48,24 +46,22 @@ class UsersService {
     });
   };
 
-  login(props: ILoginUserInput, errorMessages: any): Promise<ILoginResponse> {
+  login(props: ILoginUserInput, errorStrings: any): Promise<ILoginResponse> {
     return new Promise((resolve, reject) => {
       const { email, password } = props;
       User.findOne({ email })
         .then((user: IUser | null) => {
           if (!user)
-            return reject({ emailNotFound: errorMessages.no_user_for_email });
+            return reject({ emailNotFound: errorStrings.no_user_for_email });
       
           bcrypt.compare(password, user.password)
             .then(isMatch => {
               if (!isMatch)
-                return reject({ password: errorMessages.password_not_match });
+                return reject({ password: errorStrings.password_not_match });
 
               const payload = { id: user.id, name: user.name, avatar: user.avatar };
               // assign JWT
-              // jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
-              // TODO: remove tempSecret once config import issue is resolved
-              jwt.sign(payload, tempSecret, { expiresIn: 3600 }, (err: Error, token) => {
+              jwt.sign(payload, Keys.secret, { expiresIn: 3600 }, (err, token) => {
                 resolve({
                   success: true,
                   token: `Bearer ${token}`

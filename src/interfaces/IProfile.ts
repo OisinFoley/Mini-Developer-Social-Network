@@ -18,7 +18,3 @@ export default interface IProfile extends Document {
   education: IEducation[];
   social: ISocialLinks[];
 }
-
-// TODO: delete
-// likes: IUser['_id'][],
-//   comments: IComment[],

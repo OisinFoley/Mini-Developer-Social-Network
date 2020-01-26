@@ -1,6 +1,6 @@
 /node_modules
 package-lock.json
-src/config/keys_dev.js
+src/config/keys_dev.ts
 /coverage
 .nyc_output
 .vscode

@@ -4,15 +4,12 @@ import passport from 'passport';
 import { Request, Response, NextFunction } from "express";
 
 import User from '../models/User';
-// TODO: fix erroneous import of key values
-// import keys from "./keys";
-var keys = { secret: 'oisinsSecretKey' };
-
 import IUser from "../interfaces/IUser";
+import Keys from "./keys";
 
 const opts: any = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = keys.secret;
+opts.secretOrKey = Keys.secret;
 
 export class PassportManager {
   static initialize = () => {
