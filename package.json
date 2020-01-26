@@ -5,11 +5,10 @@
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "server": "nodemon --exec babel-node server.js",
+    "server": "ts-node src/server.ts",
     "client": "BROWSER=none npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "mocha -r ts-node/register test/*.test.ts",
-    "tsdev": "ts-node src/server.ts",
     "start": "nodemon dist/server.js",
     "build": "tsc"
   },

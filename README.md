@@ -11,6 +11,7 @@ Startup:
 Features:
 
 - [NodeJs](https://nodejs.org/en/download/) runtime that uses [ExpressJs](https://www.npmjs.com/package/express) middleware to run a server.
+- [Typescript](https://www.typescriptlang.org/) - provides static typing on top of core JavaScript
 - [MongoDb](https://www.npmjs.com/package/mongodb) for data storage, combined with Mongoose for data modelling.
 - [Passport](https://www.npmjs.com/package/passport) for JWT authentication to protect backend routes
 
