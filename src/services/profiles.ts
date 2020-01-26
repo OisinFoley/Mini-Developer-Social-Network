@@ -75,7 +75,6 @@ class ProfilesService {
                     return reject({ handle: errorStrings.handle_already_exists });
                   }
           
-                  // TODO: interface type against these parameters
                   new Profile(profileFields)
                     .save()
                     .then((profile: IProfile) => {

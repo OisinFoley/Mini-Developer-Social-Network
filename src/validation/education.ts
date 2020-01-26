@@ -1,15 +1,13 @@
 import IEducation from "../interfaces/IEducation";
 import invalidDate from '../utils/invalid-date';
+import IErrorResponse from "../interfaces/IErrorResponse";
+import IValidationResponse from "../interfaces/IValidationResponse";
 
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
-// TODO: should data be of type 'any'
-// add interface for errorStrings
-export default (data: IEducation, errorStrings: any) => {
-  // TODO: add interface where the props are nullable
-  // so email?: string, password?: string etc
-  let errors: any = {};
+export default (data: IEducation, errorStrings: any): IValidationResponse => {
+  let errors: IErrorResponse = {};
 
   data.school = !isEmpty(data.school) ? data.school : '';
   data.degree = !isEmpty(data.degree) ? data.degree : '';

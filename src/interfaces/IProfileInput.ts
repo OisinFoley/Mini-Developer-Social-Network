@@ -4,6 +4,10 @@ export default interface IProfileInput {
   status: string;
   skills: string;
   website: string;
+  company: string;
+  bio: string;
+  location: string;
+  githubUsername: string;
   youtube: string;
   twitter: string;
   facebook: string;

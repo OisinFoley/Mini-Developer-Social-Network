@@ -14,7 +14,7 @@ opts.secretOrKey = Keys.secret;
 export class PassportManager {
   static initialize = () => {
     passport.use(
-      new JwtStrategy(opts, (jwt_payload, done) => {
+      new JwtStrategy(opts, (jwt_payload, done): void => {
         User.findById(jwt_payload.id)
           .then(user => {
             if (user) {
@@ -27,7 +27,7 @@ export class PassportManager {
     );
   };
 
-  static authenticate = (req: Request, res: Response, next: NextFunction) => {
+  static authenticate = (req: Request, res: Response, next: NextFunction): void => {
     passport.authenticate('jwt', { session: false }, (err, user: IUser, info) => {
       if (err) { return next(err); }
       if (!user) {

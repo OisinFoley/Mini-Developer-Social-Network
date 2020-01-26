@@ -1,7 +1,12 @@
 export default interface IProfileFields {
-  social?: object;
+  social?: any;
   user: string;
   handle: string | null;
   status: string;
-  skills: string;
+  skills: string[];
+  company: string;
+  bio: string
+  website: string;
+  location: string;
+  githubUsername: string;
 }

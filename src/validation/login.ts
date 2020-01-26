@@ -1,14 +1,12 @@
 import ILoginUserInput from "../interfaces/ILoginUserInput";
+import IErrorResponse from "../interfaces/IErrorResponse";
+import IValidationResponse from "../interfaces/IValidationResponse";
 
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
-// TODO: should data be of type 'any'
-// add interface for errorStrings
-export default (data: ILoginUserInput, errorStrings: any) => {
-  // TODO: add interface where the props are nullable
-  // so email?: string, password?: string etc
-  let errors: any = {};
+export default (data: ILoginUserInput, errorStrings: any): IValidationResponse  => {
+  let errors: IErrorResponse = {};
 
   data.email = !isEmpty(data.email) ? data.email : '';
   data.password = !isEmpty(data.password) ? data.password : '';

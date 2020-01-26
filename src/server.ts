@@ -5,7 +5,7 @@ import config from './config/keys';
 mongoose
   .connect(config.mongoURI, { useNewUrlParser: true })
   .then(() => console.log('MongoDb connected.'))
-  .catch((err: any) => console.log(err));
+  .catch((err: Error) => console.log(err));
 
 const port = process.env.PORT || 5000;
 

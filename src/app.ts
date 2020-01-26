@@ -28,7 +28,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.log(`Error: on request to ${req.headers.origin}${req.url}`);
   console.log(JSON.stringify(err));
 
-  const statusCode = getStatusCodeFromError(err);
+  const statusCode: number = getStatusCodeFromError(err);
   res.status(statusCode).json(err);
 });
 

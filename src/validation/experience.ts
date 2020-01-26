@@ -1,15 +1,13 @@
 import IExperience from "../interfaces/IExperience";
 import invalidDate from '../utils/invalid-date';
+import IErrorResponse from "../interfaces/IErrorResponse";
+import IValidationResponse from "../interfaces/IValidationResponse";
 
 const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
-// TODO: should data be of type 'any'
-// add interface for errorStrings
-export default (data: IExperience, errorStrings: any) => {
-  // TODO: add interface where the props are nullable
-  // so email?: string, password?: string etc
-  let errors: any = {};
+export default (data: IExperience, errorStrings: any): IValidationResponse => {
+  let errors: IErrorResponse = {};
 
   data.title = !isEmpty(data.title) ? data.title : '';
   data.company = !isEmpty(data.company) ? data.company : '';

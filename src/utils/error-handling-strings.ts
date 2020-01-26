@@ -1,40 +1,40 @@
-export default {
-  user_not_authorised: 'User not authorised',
-  post_not_found: 'Could not find post with the id provided',
-  posts_not_found: 'No posts found',
-  comment_not_found: 'Could not find comment with the id provided',
-  text_field_required: 'Text field is required',
-  post_invalid_length: 'Post must be between 6 and 300 characters long',
-  post_not_yet_liked: 'You have not yet liked this post',
-  post_already_liked: 'User has already liked post',
-  profile_not_found_for_current_user: 'Profile not found for current user',
-  profile_not_found_for_user_id: 'Profile not found for given user id',
-  profile_not_found_for_handle: 'Profile not found for given handle',
-  profiles_not_found: 'No profiles found',
-  profile_not_found_generic: 'No profile found',
-  handle_already_exists: 'This handle already exists',
-  email_already_taken: 'Email already taken',
-  no_user_for_email: 'User does not exist for provided email',
-  password_not_match: 'Password does not match',
-  school_field_required: 'School field is required',
-  degree_field_required: 'Degree field is required',
-  fieldOfStudy_field_required: 'Field Of Study field is required',
-  from_date_field_required: 'From date field is required',
-  title_field_required: 'Title field is required',
-  company_field_required: 'Company field is required',
-  invalid_email: 'Email is invalid',
-  email_field_required: 'Email field is required',
-  password_field_required: 'Password field is required',
-  password_invalid_length: 'Password must be between 6 and 30 characters long',
-  confirm_password_field_required: 'Confirm Password field is required',
-  passwords_must_match: 'Passwords must be a match',
-  name_invalid_length: 'Name must be between 2 and 30 characters long',
-  name_field_required: 'Name field is required',
-  handle_invalid_length: 'Handle must be between 2 and 40 characters long',
-  handle_required: 'Profile handle is required',
-  status_required: 'Profile status is required',
-  skills_required: 'Profile skills is required',
-  invalid_url: 'Not a valid URL',
-  experience_not_found: 'Experience not found',
-  education_not_found: 'Education not found',
+export default class ErrorHandlingStrings {
+  static user_not_authorised: string = 'User not authorised';
+  static post_not_found: string = 'Could not find post with the id provided';
+  static posts_not_found: string = 'No posts found';
+  static comment_not_found: string = 'Could not find comment with the id provided';
+  static text_field_required: string = 'Text field is required';
+  static post_invalid_length: string = 'Post must be between 6 and 300 characters long';
+  static post_not_yet_liked: string = 'You have not yet liked this post';
+  static post_already_liked: string = 'User has already liked post';
+  static profile_not_found_for_current_user: string = 'Profile not found for current user';
+  static profile_not_found_for_user_id: string = 'Profile not found for given user id';
+  static profile_not_found_for_handle: string = 'Profile not found for given handle';
+  static profiles_not_found: string = 'No profiles found';
+  static profile_not_found_generic: string = 'No profile found';
+  static handle_already_exists: string = 'This handle already exists';
+  static email_already_taken: string = 'Email already taken';
+  static no_user_for_email: string = 'User does not exist for provided email';
+  static password_not_match: string = 'Password does not match';
+  static school_field_required: string = 'School field is required';
+  static degree_field_required: string = 'Degree field is required';
+  static fieldOfStudy_field_required: string = 'Field Of Study field is required';
+  static from_date_field_required: string = 'From date field is required';
+  static title_field_required: string = 'Title field is required';
+  static company_field_required: string = 'Company field is required';
+  static invalid_email: string = 'Email is invalid';
+  static email_field_required: string = 'Email field is required';
+  static password_field_required: string = 'Password field is required';
+  static password_invalid_length: string = 'Password must be between 6 and 30 characters long';
+  static confirm_password_field_required: string = 'Confirm Password field is required';
+  static passwords_must_match: string = 'Passwords must be a match';
+  static name_invalid_length: string = 'Name must be between 2 and 30 characters long';
+  static name_field_required: string = 'Name field is required';
+  static handle_invalid_length: string = 'Handle must be between 2 and 40 characters long';
+  static handle_required: string = 'Profile handle is required';
+  static status_required: string = 'Profile status is required';
+  static skills_required: string = 'Profile skills is required';
+  static invalid_url: string = 'Not a valid URL';
+  static experience_not_found: string = 'Experience not found';
+  static education_not_found: string = 'Education not found';
 };

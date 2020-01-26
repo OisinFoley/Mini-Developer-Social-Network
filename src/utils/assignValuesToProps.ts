@@ -1,19 +1,21 @@
+import IProfileFields from "../interfaces/IProfileFields";
+import IProfileInput from "../interfaces/IProfileInput";
+
 export const assignSingleValueToManyObjectProps 
-  = (obj: any, propsArray: (string | number)[], value: string | number | boolean) => {
+  = (obj: any, propsArray: (string | number)[], value: string | number | boolean): void => {
     propsArray.forEach((prop: any) => {
       obj[prop] = value;
     });
 };
 
-// TODO: interface type for these 2 args
-export const parseRequestValuesToProfileFields = (profileFields: any, requestBody: any) => {
-  profileFields.handle = requestBody.handle || null;
-  profileFields.company = requestBody.company || null;
-  profileFields.bio = requestBody.bio || null;
-  profileFields.website = requestBody.website || null;
-  profileFields.location = requestBody.location || null;
-  profileFields.status = requestBody.status || null;
-  profileFields.githubUsername = requestBody.githubUsername || null;
+export const parseRequestValuesToProfileFields = (profileFields: IProfileFields, requestBody: IProfileInput): void => {
+  profileFields.handle = requestBody.handle || '';
+  profileFields.company = requestBody.company || '';
+  profileFields.bio = requestBody.bio || '';
+  profileFields.website = requestBody.website || '';
+  profileFields.location = requestBody.location || '';
+  profileFields.status = requestBody.status || '';
+  profileFields.githubUsername = requestBody.githubUsername || '';
 
   //skills needs to be parsed to an array
   if (typeof requestBody.skills !== 'undefined') {

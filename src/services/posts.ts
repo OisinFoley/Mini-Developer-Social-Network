@@ -4,7 +4,6 @@ import IPostData from '../interfaces/IPostData';
 import ILike from '../interfaces/ILike';
 import IComment from '../interfaces/IComment';
 
-// TODO: ensure all funcs have return types
 
 class PostsService {
   getAll(): Promise<IPost[]> {
@@ -24,7 +23,7 @@ class PostsService {
           
           resolve(post);
         })
-        .catch(err => reject());
+        .catch((err: Error) => reject());
     });
   };
 

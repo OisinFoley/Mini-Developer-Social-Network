@@ -8,17 +8,16 @@ import errorStrings from '../utils/error-handling-strings';
 import { parseRequestValuesToProfileFields } from '../utils/assignValuesToProps';
 import IProfile from "../interfaces/IProfile";
 import ISetProfileResponse from "../interfaces/ISetProfileResponse";
+import IErrorResponse from "../interfaces/IErrorResponse";
 
-// TODO ensure all funcs have returns types
 
 class ProfilesController {
   getCurrentUsersProfile(req: Request, res: Response, next: NextFunction): void {
-    // TODO: type
-    const { id = '' }: any = req.user;
+    const { id }: any = req.user;
   
     ProfilesService.getByUserId(id, errorStrings)
       .then((profile: IProfile | null) => res.json(profile))
-      .catch((err: any) => {
+      .catch((err: IErrorResponse) => {
         if (err.noProfile) {
           err.noProfile = errorStrings.profile_not_found_for_current_user;
         }
@@ -29,8 +28,7 @@ class ProfilesController {
   getAllProfiles(req: Request, res: Response, next: NextFunction): void {
     ProfilesService.getAll(errorStrings)
       .then((profiles: IProfile[]) => res.json(profiles))
-      // TODO: can we interface on our custom error coming from the service
-      .catch((err: any) => next(err));
+      .catch((err: IErrorResponse) => next(err));
   };
 
   getProfileByHandle(req: Request, res: Response, next: NextFunction): void {
@@ -38,8 +36,7 @@ class ProfilesController {
 
     ProfilesService.getProfileByHandle(handle, errorStrings)
       .then((profile: IProfile | null) => res.json(profile))
-    // TODO:
-      .catch((err: any) => next(err));
+      .catch((err: IErrorResponse) => next(err));
   };
 
   getProfileByUserId(req: Request, res: Response, next: NextFunction): void {
@@ -47,8 +44,7 @@ class ProfilesController {
 
     ProfilesService.getByUserId(user_id, errorStrings)
       .then((profile: IProfile | null) => res.json(profile))
-    // TODO:
-      .catch((err: any) => {
+      .catch((err: IErrorResponse) => {
         if (err.noProfile) {
           err.noProfile = errorStrings.profile_not_found_for_user_id;
         }
@@ -78,13 +74,11 @@ class ProfilesController {
         if (operation === 'create') res.status(201).json(profile);
         if (operation === 'edit') res.json(profile);
       })
-      // TODO
-      .catch((err: any) => next(err));
+      .catch((err: IErrorResponse) => next(err));
   };
 
   addExperienceToProfile(req: Request, res: Response, next: NextFunction): void {
     const { errors, isValid } = validateExperienceInput(req.body, errorStrings);
-    // TODO: more concrete type for this
     const { id }: any = req.user;
     const experienceData = {...req.body};
 
@@ -92,18 +86,15 @@ class ProfilesController {
   
     ProfilesService.addExperience(id, experienceData, errorStrings)
       .then((profile: IProfile) => res.status(201).json(profile))
-    // TODO:
-      .catch((err: any) => next(err));
+      .catch((err: IErrorResponse) => next(err));
   };
 
   deleteExperienceFromProfileById(req: Request, res: Response, next: NextFunction): void {
     const { exp_id } = req.params;
-    // TODO: more concrete type for this
     const { id }: any = req.user;
     ProfilesService.deleteExperience(id, exp_id, errorStrings)
       .then((profile: IProfile) => res.json(profile))
-    // TODO:
-      .catch((err: any) => next(err));
+      .catch((err: IErrorResponse) => next(err));
   };
 
   addEducationToProfile(req: Request, res: Response, next: NextFunction): void {
@@ -115,23 +106,19 @@ class ProfilesController {
 
     ProfilesService.addEducation(id, educationData, errorStrings)
       .then((profile: IProfile) => res.status(201).json(profile))
-    // TODO:
-      .catch((err: any) => next(err));
+      .catch((err: IErrorResponse) => next(err));
   };
 
   deleteEducationFromProfileById(req: Request, res: Response, next: NextFunction): void {
     const { edu_id } = req.params;
-    // TODO: more concrete type for this
     const { id }: any = req.user;
 
     ProfilesService.deleteEducation(id, edu_id, errorStrings)
       .then((profile: IProfile) => res.json(profile))
-    // TODO:
-      .catch((err: any) => next(err));
+      .catch((err: IErrorResponse) => next(err));
   };
 
   deleteAccountForUser(req: Request, res: Response, next: NextFunction): void {
-    // TODO: more concrete type for this
     const { id }: any = req.user;
     ProfilesService.deleteProfileAndUser(id)
       .then(() => res.status(204).json());

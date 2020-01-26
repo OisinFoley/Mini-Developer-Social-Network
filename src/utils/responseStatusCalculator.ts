@@ -1,4 +1,4 @@
-export const getStatusCodeFromError = (err: string) => {
+export const getStatusCodeFromError = (err: string): number => {
   switch (true) {
     case err.hasOwnProperty('likedAlready'):
     case err.hasOwnProperty('cannotUnlike'):
