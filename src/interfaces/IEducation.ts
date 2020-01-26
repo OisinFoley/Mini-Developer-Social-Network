@@ -1,5 +1,5 @@
 export default interface IEducation {
-  id?: string;
+  _id?: string;
   school: string;
   degree: string;
   fieldOfStudy: string;

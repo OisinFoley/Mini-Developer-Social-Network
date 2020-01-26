@@ -7,13 +7,13 @@ import User from '../../src/models/User';
 
 export const addSeedPostsToDb = (callback: Function) => {
   Post.insertMany(mockPosts)
-    .then(res => callback())
+    .then(() => callback())
     .catch(err => console.log(err));
 };
 
 export const addSeedProfilesToDb = (callback: Function) => {
   Profile.insertMany(mockSeedProfiles)
-    .then(res => callback())
+    .then(() => callback())
     .catch(err => console.log(err));
 };
 

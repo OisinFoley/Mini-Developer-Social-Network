@@ -122,7 +122,7 @@ class PostsService {
             return reject({ postNotFound: errorStrings.post_not_found });
 
           const removeIndex = post.comments
-            .map((item: IComment) => item.id)
+            .map((item: IComment) => item._id)
             .indexOf(requestCommentId);
 
           if (removeIndex === -1)

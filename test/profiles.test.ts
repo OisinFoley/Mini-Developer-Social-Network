@@ -1,6 +1,3 @@
-// import chai from 'chai';
-// import chaiHttp from 'chai-http';
-
 import sinon from 'sinon';
 import passport from 'passport';
 import mongoose from "mongoose";
@@ -8,42 +5,33 @@ import { Request, Response, NextFunction } from "express";
 
 import app from '../src/app';
 import Profile from '../src/models/Profile';
-import mockProfiles from './__mocks__/profiles';
-import errorMessages from '../src/utils/error-handling-strings';
-// TODO: can we make it a default import
 import { addSeedProfilesToDb } from './data-initialiser/testDataSeeder';
+import errorMessages from '../src/utils/error-handling-strings';
+import { assignSingleValueToManyObjectProps } from '../src/utils/assignValuesToProps';
 import seedProfiles from './__mocks__/seed-profiles';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
-import { assignSingleValueToManyObjectProps } from '../src/utils/assignValuesToProps';
+import mockProfiles from './__mocks__/profiles';
 import BaseTest from './baseTest';
-
-// const { request } = chai;
-
-// Configure chai
-// chai.use(chaiHttp);
-// chai.should();
+import constants from './constants/strings';
+import IExperience from '../src/interfaces/IExperience';
+import IEducation from '../src/interfaces/IEducation';
 
 describe("/api/profiles/", () => {
   const test = new BaseTest('/api/profiles');
+  const { testConnectionString } = constants;
 
-  let db;
   let passportStub: any;
   let non_existant_user_id = '5d7b08333b75e22b68335162';
 
   before(done => {
-    db = mongoose
-    // TODO: move to constant
-      .connect("mongodb://localhost:27017/test", {
-        useNewUrlParser: true
-      }, done);
+    mongoose.connect(testConnectionString, { useNewUrlParser: true }, done);
   });
   after(done => {
     mongoose.connection.close(done);
   });
 
   beforeEach(done => {
-    passportStub =  sinon.stub(passport, "authenticate")
-    // TODO
+    passportStub = sinon.stub(passport, "authenticate")
       .callsFake((strategy: any , options: any, callback: any) => {
         callback(null, mockAuthenticatedUser, null);
         return (req: Request, res: Response, next: NextFunction)=>{};
@@ -63,8 +51,7 @@ describe("/api/profiles/", () => {
         it(`calls endpoint and returns 200 status and returns a Profile`, (done) => {
             test.chai.request(app)
               .get(`${test.baseRoute}`)
-              // TODO
-              .end((err: any, res: any) => {
+              .end((err: Error, res: any) => {
                 profileProps.forEach(prop => {
                   res.body.hasOwnProperty(`${prop}`).should.equal(true);
                 });
@@ -75,25 +62,26 @@ describe("/api/profiles/", () => {
         });
       });
 
-      // context(`when fetching Profile for current user and Profile matching authenticated user does not exist in the db`, () => {
-      //   it(`calls endpoint and returns 404 status code and 'Profile not found' json error`, (done) => {
-      //       let altUser = {...mockAuthenticatedUser, id: mockProfiles[0].user.replace('2cb', '123') };
-      //       passport.authenticate.callsFake((strategy, options, callback) => {
-      //         callback(null, altUser, null);
-      //         return (req,res,next)=>{};
-      //       });
+      context(`when fetching Profile for current user and Profile matching authenticated user does not exist in the db`, () => {
+        it(`calls endpoint and returns 404 status code and 'Profile not found' json error`, (done) => {
+            let altUser = {...mockAuthenticatedUser, id: mockProfiles[0].user.replace('2cb', '123') };
 
-      //       test.chai.request(app)
-      //         .get(`${test.baseRoute}`)
-      //         .end((err, res) => {
-      //           res.body.hasOwnProperty('noProfile').should.equal(true);
-      //           res.body.noProfile.should
-      //             .equal(errorMessages.profile_not_found_for_current_user);
-      //           res.should.have.status(404);
-      //           done();
-      //         });
-      //   });
-      // });
+            passportStub.callsFake((strategy: any, options: any, callback: Function) => {
+              callback(null, altUser, null);
+              return (req: Request, res: Response, next: NextFunction)=>{};
+            });
+
+            test.chai.request(app)
+              .get(`${test.baseRoute}`)
+              .end((err: Error, res: any) => {
+                res.body.hasOwnProperty('noProfile').should.equal(true);
+                res.body.noProfile.should
+                  .equal(errorMessages.profile_not_found_for_current_user);
+                res.should.have.status(404);
+                done();
+              });
+        });
+      });
     });
 
     describe("GET api/profiles/all (getAllProfiles)", () => {
@@ -101,8 +89,7 @@ describe("/api/profiles/", () => {
         it(`calls endpoint and returns and 200 status code and Profiles list`, (done) => {
           test.chai.request(app)
             .get(`${test.baseRoute}/all`)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.should.be.a('array');
               res.should.have.status(200);
               done();
@@ -117,8 +104,7 @@ describe("/api/profiles/", () => {
             const handle = 'non_existant_handle';
             test.chai.request(app)
               .get(`${test.baseRoute}/handle/${handle}`)
-              // TODO
-              .end((err: any, res: any) => {
+              .end((err: Error, res: any) => {
                 res.body.hasOwnProperty('noProfile').should.equal(true);
                 res.body.noProfile.should
                   .equal(errorMessages.profile_not_found_for_handle);
@@ -133,8 +119,7 @@ describe("/api/profiles/", () => {
             const requestHandle = mockProfiles[0].handle;
             test.chai.request(app)
               .get(`${test.baseRoute}/handle/${requestHandle}`)
-              // TODO
-              .end((err: any, res: any) => {
+              .end((err: Error, res: any) => {
                 res.body.handle.should.equal(requestHandle);
                 res.should.have.status(200);
                 done();
@@ -148,8 +133,7 @@ describe("/api/profiles/", () => {
         it(`calls endpoint and returns 404 status code and 'noProfile' json error`, (done) => {
             test.chai.request(app)
               .get(`${test.baseRoute}/user/${non_existant_user_id}`)
-              // TODO
-              .end((err: any, res: any) => {
+              .end((err: Error, res: any) => {
                 res.body.hasOwnProperty('noProfile').should.equal(true);
                 res.body.noProfile.should
                   .equal(errorMessages.profile_not_found_for_user_id);
@@ -166,8 +150,7 @@ describe("/api/profiles/", () => {
           const requestUserIdValue = mockProfiles[1].user;
           test.chai.request(app)
             .get(`${test.baseRoute}/user/${requestUserIdValue}`)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.handle.should.equal(mockProfiles[1].handle);
               res.should.have.status(200);
               done();
@@ -188,8 +171,7 @@ describe("/api/profiles/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}`)
             .send(profileData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               const { handle, status, skills } = res.body;
 
               handle.should.equal(errorMessages.handle_required);
@@ -207,15 +189,13 @@ describe("/api/profiles/", () => {
             let profileData = {
               ...mockProfiles[0]
             };
-            // TODO: to constants
             const propsArray: string[] = ['website', 'twitter', 'youtube', 'linkedin', 'instagram', 'facebook'];
             assignSingleValueToManyObjectProps(profileData, propsArray, 'someInvalidUrl');
             
             test.chai.request(app)
               .post(`${test.baseRoute}`)
               .send(profileData)
-              // TODO
-              .end((err: any, res: any) => {
+              .end((err: Error, res: any) => {
                 const { website, twitter, facebook, youtube, instagram, linkedin } = res.body;
                 const NotValidUrlString = errorMessages.invalid_url;
 
@@ -231,30 +211,30 @@ describe("/api/profiles/", () => {
         });
       });
 
-      // context(`when setting user's Profile and the handle in the request body is already used by another user`, () => {
-      //   it(`calls endpoint and returns 400 status code and 'handle already exists' json error`, (done) => {
-      //       let altUser = {...mockAuthenticatedUser, id: mockProfiles[0].user.replace('2cb', '123') };
-      //       passport.authenticate.callsFake((strategy, options, callback) => {
-      //         callback(null, altUser, null);
-      //         return (req,res,next)=>{};
-      //       });
+      context(`when setting user's Profile and the handle in the request body is already used by another user`, () => {
+        it(`calls endpoint and returns 400 status code and 'handle already exists' json error`, (done) => {
+            let altUser = {...mockAuthenticatedUser, id: mockProfiles[0].user.replace('2cb', '123') };
+            passportStub.callsFake((strategy: any, options: any, callback: any) => {
+              callback(null, altUser, null);
+              return (req: Request, res: Response, next: NextFunction)=>{};
+            });
 
-      //       let profileData = {
-      //         ...mockProfiles[0],
-      //         handle: mockProfiles[1].handle
-      //       };
+            let profileData = {
+              ...mockProfiles[0],
+              handle: mockProfiles[1].handle
+            };
             
-      //       test.chai.request(app)
-      //         .post(`${test.baseRoute}`)
-      //         .send(profileData)
-      //         .end((err, res) => {
-      //           res.body.hasOwnProperty('handle').should.equal(true);
-      //           res.body.handle.should.equal(errorMessages.handle_already_exists);
-      //           res.should.have.status(400);
-      //           done();
-      //         });
-      //   });
-      // });
+            test.chai.request(app)
+              .post(`${test.baseRoute}`)
+              .send(profileData)
+              .end((err: Error, res: any) => {
+                res.body.hasOwnProperty('handle').should.equal(true);
+                res.body.handle.should.equal(errorMessages.handle_already_exists);
+                res.should.have.status(400);
+                done();
+              });
+        });
+      });
 
       context(`when setting user's Profile and data is valid and authenticated user id matches user prop of an existing profile`, () => {
         it(`calls endpoint and returns 200 code and updated profile as json featuring new 'company' prop value`, (done) => {
@@ -266,8 +246,7 @@ describe("/api/profiles/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}`)
             .send(profileData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('company').should.equal(true);
               res.body.company.should.equal(updatedCompanyString);
               res.should.have.status(200);
@@ -276,30 +255,30 @@ describe("/api/profiles/", () => {
         });
       });
 
-      // context(`when setting user's Profile and data is valid but authenticated user id does not match user prop of an existing profile`, () => {
-      //   it(`calls endpoint and returns 201 code and a new profile as json`, (done) => {
-      //       let altUser = {...mockAuthenticatedUser, id: mockProfiles[0].user.replace('2cb', '123') };
-      //       passport.authenticate.callsFake((strategy, options, callback) => {
-      //         callback(null, altUser, null);
-      //         return (req,res,next)=>{};
-      //       });
-      //       const updatedHandleString = 'test_handle__new_profile';
-      //       let profileData = {
-      //         ...mockProfiles[0],
-      //         handle: updatedHandleString
-      //       };
-      //       test.chai.request(app)
-      //         .post(`${test.baseRoute}`)
-      //         .send(profileData)
-      //         .end((err, res) => {
-      //           res.body.hasOwnProperty('handle').should.equal(true);
-      //           res.body.handle.should.equal(updatedHandleString);
-      //           res.body.__v.should.equal(0);
-      //           res.should.have.status(201);
-      //           done();
-      //         });
-      //   });
-      // });
+      context(`when setting user's Profile and data is valid but authenticated user id does not match user prop of an existing profile`, () => {
+        it(`calls endpoint and returns 201 code and a new profile as json`, (done) => {
+            let altUser = {...mockAuthenticatedUser, id: mockProfiles[0].user.replace('2cb', '123') };
+            passportStub.callsFake((strategy: any, options: any, callback: Function) => {
+              callback(null, altUser, null);
+              return (req: Request, res: Response, next: NextFunction)=>{};
+            });
+            const updatedHandleString = 'test_handle__new_profile';
+            let profileData = {
+              ...mockProfiles[0],
+              handle: updatedHandleString
+            };
+            test.chai.request(app)
+              .post(`${test.baseRoute}`)
+              .send(profileData)
+              .end((err: Error, res: any) => {
+                res.body.hasOwnProperty('handle').should.equal(true);
+                res.body.handle.should.equal(updatedHandleString);
+                res.body.__v.should.equal(0);
+                res.should.have.status(201);
+                done();
+              });
+        });
+      });
     });
 
     describe("POST api/profiles/experiences (addExperienceToProfile)", () => {
@@ -313,8 +292,7 @@ describe("/api/profiles/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/experiences`)
             .send(experienceData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               const { title, company, from } = res.body;
 
               title.should.equal(errorMessages.title_field_required);
@@ -336,8 +314,7 @@ describe("/api/profiles/", () => {
             test.chai.request(app)
               .post(`${test.baseRoute}/experiences`)
               .send(newExperienceData)
-              // TODO
-              .end((err: any, res: any) => {
+              .end((err: Error, res: any) => {
                 const { user, experience } = res.body;
 
                 user.should.equal(mockAuthenticatedUser.id);
@@ -354,8 +331,6 @@ describe("/api/profiles/", () => {
     describe("DELETE api/profiles/experiences/:exp_id (deleteExperienceFromProfileById)", () => {
       context(`when deleting existing experience from Profile and Profile was created by the authenticated user`, () => {
         it(`calls endpoint and returns 200 code and updated profile json without old experience`, (done) => {
-          // TODO: remove comment
-          // let { _id } = seedProfiles[0].experience[0];
           let _id = '';
           let [seedProfile] = seedProfiles;
           if (seedProfile.experience) {
@@ -363,15 +338,11 @@ describe("/api/profiles/", () => {
           }
           test.chai.request(app)
             .delete(`${test.baseRoute}/experiences/${_id}`)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               let { experience } = res.body;
 
               if (experience) {
-                // TODO
-                experience.forEach((exp: any) => {
-                  // TODO: remove comment
-                  // exp._id.should.not.equal(expId);
+                experience.forEach((exp: IExperience) => {
                   exp._id.should.not.equal(_id);
                 });
               }
@@ -396,8 +367,7 @@ describe("/api/profiles/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/educations`)
             .send(newEducationData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               const { user, education } = res.body;
 
               user.should.equal(mockAuthenticatedUser.id);
@@ -423,8 +393,7 @@ describe("/api/profiles/", () => {
             test.chai.request(app)
               .post(`${test.baseRoute}/educations`)
               .send(newEducationData)
-              // TODO
-              .end((err: any, res: any) => {
+              .end((err: Error, res: any) => {
                 const { school, degree, fieldOfStudy, from } = res.body;
 
                 school.should.equal(errorMessages.school_field_required);
@@ -444,14 +413,12 @@ describe("/api/profiles/", () => {
           let eduId = '5d4c5df704347a3d899893d1';
           test.chai.request(app)
             .delete(`${test.baseRoute}/educations/${eduId}`)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               let { education } = res.body;
 
               if (education) {
-                // TODO:
-                education.forEach((exp: any) => {
-                  exp._id.should.not.equal(eduId);
+                education.forEach((edu: IEducation) => {
+                  edu._id?.should.not.equal(eduId);
                 });
               }
 
@@ -467,8 +434,7 @@ describe("/api/profiles/", () => {
         it(`calls endpoint and returns 204 code`, (done) => {
           test.chai.request(app)
             .delete(`${test.baseRoute}/`)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.should.have.status(204);
               done();
             });

@@ -1,5 +1,5 @@
 export default interface IExperience {
-  id: string;
+  _id: string;
   title: string;
   company: string;
   location?: string;

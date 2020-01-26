@@ -122,7 +122,7 @@ class ProfilesService {
           
           // get remove index
           const removeIndex = profile.experience
-            .map((item: IExperience) => item.id)
+            .map((item: IExperience) => item._id)
             .indexOf(exp_id);
 
           if (removeIndex === -1)
@@ -174,7 +174,7 @@ class ProfilesService {
             
             // get remove index
             const removeIndex = profile.education
-              .map((item: IEducation) => item.id)
+              .map((item: IEducation) => item._id)
               .indexOf(edu_id);
 
             if (removeIndex === -1)

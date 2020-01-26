@@ -1,35 +1,25 @@
-// import chai from 'chai';
-// import chaiHttp from 'chai-http';
 import mongoose from "mongoose";
 import sinon from 'sinon';
 import passport from 'passport';
 import { Request, Response, NextFunction } from "express";
 
-
 import app from '../src/app';
 import User from '../src/models/User';
 import mockUsers from './__mocks__/users';
 import errorMessages from '../src/utils/error-handling-strings';
-// TODO: can we use default import
 import { addSeedUsersToDb } from './data-initialiser/testDataSeeder';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
 import BaseTest from './baseTest';
-
-// const { request } = chai;
-
-// Configure chai
-// chai.use(chaiHttp);
-// chai.should();
+import constants from './constants/strings';
 
 describe("/api/users/", () => {
   const test = new BaseTest('/api/users');
+  const { testConnectionString } = constants;
 
-  let db;
   let passportStub: any;
 
   before(done => {
-    // TODO: move to constant
-    db = mongoose.connect("mongodb://localhost:27017/test", { useNewUrlParser: true }, done);
+    mongoose.connect(testConnectionString, { useNewUrlParser: true }, done);
   })
   after(done => {
     mongoose.connection.close(done);
@@ -37,7 +27,6 @@ describe("/api/users/", () => {
 
   beforeEach(done => {
     passportStub =  sinon.stub(passport,"authenticate")
-    // TODO
       .callsFake((strategy: any , options: any, callback: any) => {
         callback(null, mockAuthenticatedUser, null);
         return (req: Request, res: Response, next: NextFunction)=>{};
@@ -59,8 +48,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/register`)
             .send(registerData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.name.should.equal(errorMessages.name_invalid_length);
               res.should.have.status(400);
               done();
@@ -74,8 +62,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/register`)
             .send(registerData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.name.should.equal(errorMessages.name_field_required);
               res.should.have.status(400);
               done();
@@ -89,8 +76,7 @@ describe("/api/users/", () => {
             test.chai.request(app)
               .post(`${test.baseRoute}/register`)
               .send(registerData)
-              // TODO
-            .end((err: any, res: any) => {
+              .end((err: Error, res: any) => {
                 res.body.hasOwnProperty('email').should.equal(true);
                 res.body.email.should.equal(errorMessages.invalid_email);
                 res.should.have.status(400);
@@ -105,8 +91,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/register`)
             .send(registerData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('password').should.equal(true);
               res.body.password.should.equal(errorMessages.password_invalid_length);
               res.should.have.status(400);
@@ -122,8 +107,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/register`)
             .send(registerData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               const { password_field_required, confirm_password_field_required } = errorMessages;
               const { password, password2 } = res.body;
 
@@ -144,8 +128,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/register`)
             .send(registerData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('password2').should.equal(true);
               res.body.password2.should.equal(errorMessages.passwords_must_match);
               res.should.have.status(400);
@@ -161,8 +144,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/register`)
             .send(registerData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.email.should.equal(errorMessages.email_already_taken);
               res.should.have.status(400);
@@ -178,8 +160,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/register`)
             .send(registerData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('name').should.equal(true);
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.hasOwnProperty('password').should.equal(true);
@@ -198,8 +179,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/login`)
             .send(loginData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.email.should.equal(errorMessages.invalid_email);
               res.should.have.status(400);
@@ -214,8 +194,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/login`)
             .send(loginData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('email').should.equal(true);
               res.body.email.should.equal(errorMessages.email_field_required);
               res.should.have.status(400);
@@ -230,8 +209,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/login`)
             .send(loginData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('password').should.equal(true);
               res.body.password.should.equal(errorMessages.password_field_required);
               res.should.have.status(400);
@@ -246,8 +224,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/login`)
             .send(loginData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('password').should.equal(true);
               res.body.password.should.equal(errorMessages.password_not_match);
               res.should.have.status(400);
@@ -262,8 +239,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/login`)
             .send(loginData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.hasOwnProperty('emailNotFound').should.equal(true);
               res.body.emailNotFound.should.equal(errorMessages.no_user_for_email);
               res.should.have.status(404);
@@ -278,8 +254,7 @@ describe("/api/users/", () => {
           test.chai.request(app)
             .post(`${test.baseRoute}/login`)
             .send(loginData)
-            // TODO
-            .end((err: any, res: any) => {
+            .end((err: Error, res: any) => {
               res.body.success.should.equal(true);
               res.body.hasOwnProperty('token').should.equal(true);
               res.should.have.status(200);
