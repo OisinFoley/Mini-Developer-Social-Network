@@ -1,5 +1,4 @@
 const profiles = [{
-    // "_id": "5d497c57ed8f0b4d00ece2cf",
     "skills": "Javascript, Python, Selenium",
     "date": "2019-08-06T13:06:01.309Z",
     "user": "5d497baeed8f0b4d00ece2cb",
