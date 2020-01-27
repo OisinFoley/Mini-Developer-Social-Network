@@ -4,9 +4,9 @@
     "@babel/plugin-transform-runtime",
     ["istanbul", {
       "exclude": [
-        "**/*.test.js",
-        "src/config/!(passport-manager).js",
-        "src/utils/*.js"
+        "**/*.test.ts",
+        "src/config/!(passport-manager).ts",
+        "src/utils/*.ts"
       ]
     }]
   ]

@@ -5,17 +5,34 @@
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
-    "server": "nodemon --exec babel-node server.js",
+    "server": "ts-node src/server.ts",
     "client": "BROWSER=none npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "nyc --reporter=text mocha --compilers js:@babel/register"
+    "test": "nyc mocha -r ts-node/register test/*.test.ts",
+    "start": "nodemon dist/server.js",
+    "build": "tsc"
   },
   "author": "Oisín Foley",
   "license": "MIT",
   "nyc": {
-    "sourceMap": false,
-    "instrument": false
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/config/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text",
+      "lcov"
+    ],
+    "sourceMap": true,
+    "instrument": true
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
@@ -29,7 +46,6 @@
     "mongoose": "^5.2.7",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "react-moment": "^0.7.9",
     "validator": "^10.5.0"
   },
   "devDependencies": {
@@ -39,12 +55,30 @@
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.1.0",
     "@babel/register": "^7.0.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/body-parser": "^1.17.1",
+    "@types/chai": "^4.2.7",
+    "@types/chai-http": "^4.2.0",
+    "@types/express": "^4.17.2",
+    "@types/gravatar": "^1.8.0",
+    "@types/jsonwebtoken": "^8.3.6",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^13.1.6",
+    "@types/passport": "^1.0.2",
+    "@types/mongoose": "^5.5.41",
+    "@types/passport-jwt": "^3.0.3",
+    "@types/sinon": "^7.5.1",
+    "@types/validator": "^12.0.1",
     "babel-plugin-istanbul": "^5.2.0",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
     "mocha": "^2.4.5",
-    "nodemon": "^1.18.3",
+    "nodemon": "^1.19.4",
     "nyc": "^14.1.1",
-    "sinon": "^7.4.1"
+    "sinon": "^7.4.1",
+    "source-map-support": "^0.5.16",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.4"
   }
 }
