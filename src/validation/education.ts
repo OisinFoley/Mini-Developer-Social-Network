@@ -1,10 +1,10 @@
+import Validator from 'validator';
+
 import IEducation from "../interfaces/IEducation";
 import invalidDate from '../utils/invalid-date';
 import IErrorResponse from "../interfaces/IErrorResponse";
 import IValidationResponse from "../interfaces/IValidationResponse";
-
-const Validator = require('validator');
-const isEmpty = require('./is-empty');
+import isEmpty from './is-empty';
 
 export default (data: IEducation, errorStrings: any): IValidationResponse => {
   let errors: IErrorResponse = {};

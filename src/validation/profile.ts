@@ -1,9 +1,9 @@
+import Validator from 'validator';
+
 import IProfileInput from "../interfaces/IProfileInput";
 import IErrorResponse from "../interfaces/IErrorResponse";
 import IValidationResponse from "../interfaces/IValidationResponse";
-
-const Validator = require('validator');
-const isEmpty = require('./is-empty');
+import isEmpty from './is-empty';
 
 export default (data: IProfileInput, errorStrings: any): IValidationResponse => {
   let errors: IErrorResponse = {};
