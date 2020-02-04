@@ -38,7 +38,7 @@ export default {
         return Promise.resolve({ data: 'fakeUser' } );
       case '/api/users/login': // loginUser()
         return Promise.resolve({ data: { token: 'fakeToken' } } );
-      case '/api/profiles': // createProfile()
+      case '/api/profiles': // setProfile()
         return Promise.resolve({ data: fakeUser } );
       case '/api/profiles/educations': // addEducation()
         return Promise.resolve();

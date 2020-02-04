@@ -3,8 +3,8 @@ import { ExtractJwt } from "passport-jwt";
 import passport from 'passport';
 import { Request, Response, NextFunction } from "express";
 
-import User from '../models/User';
-import IUser from "../interfaces/IUser";
+import UserModel from '../models/User';
+import { User } from "devconnector-types/interfaces";
 import Keys from "./keys";
 
 const opts: any = {};
@@ -15,7 +15,7 @@ export class PassportManager {
   static initialize = () => {
     passport.use(
       new JwtStrategy(opts, (jwt_payload, done): void => {
-        User.findById(jwt_payload.id)
+        UserModel.findById(jwt_payload.id)
           .then(user => {
             if (user) {
               return done(null, user);
@@ -28,7 +28,7 @@ export class PassportManager {
   };
 
   static authenticate = (req: Request, res: Response, next: NextFunction): void => {
-    passport.authenticate('jwt', { session: false }, (err, user: IUser, info) => {
+    passport.authenticate('jwt', { session: false }, (err, user: User, info) => {
       if (err) { return next(err); }
       if (!user) {
           if (info.name === "TokenExpiredError") {

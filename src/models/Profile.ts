@@ -1,6 +1,5 @@
-import mongoose from 'mongoose';
-import IProfile from '../interfaces/IProfile';
-const { Schema } = mongoose;
+import mongoose, { Schema } from 'mongoose';
+import { ProfileModel } from 'devconnector-types/interfaces';
 
 let ProfileSchema = new Schema({
   user: {
@@ -119,4 +118,4 @@ let ProfileSchema = new Schema({
   }
 });
 
-export default mongoose.model<IProfile>('profile', ProfileSchema);
+export default mongoose.model<ProfileModel>('profile', ProfileSchema);

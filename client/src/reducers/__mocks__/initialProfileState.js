@@ -1,5 +1,7 @@
+import { emptyProfile } from "../../utils/empty-object-states";
+
 export const initialProfileState = {
-  profile: null,
-  profiles: null,
+  profile: emptyProfile,
+  profiles: [],
   loading: false
 };;

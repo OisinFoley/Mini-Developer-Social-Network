@@ -1,12 +1,10 @@
 import Validator from 'validator';
 
-import IProfileInput from "../interfaces/IProfileInput";
-import IErrorResponse from "../interfaces/IErrorResponse";
-import IValidationResponse from "../interfaces/IValidationResponse";
+import { ProfileValidationInput, ErrorResponse, ValidationResponse } from "devconnector-types/interfaces";
 import isEmpty from './is-empty';
 
-export default (data: IProfileInput, errorStrings: any): IValidationResponse => {
-  let errors: IErrorResponse = {};
+export default (data: ProfileValidationInput, errorStrings: any): ValidationResponse => {
+  let errors: ErrorResponse = {};
 
   data.handle = !isEmpty(data.handle) ? data.handle : '';
   data.status = !isEmpty(data.status) ? data.status : '';

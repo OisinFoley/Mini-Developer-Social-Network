@@ -1,6 +1,7 @@
 # DevConnector - A Small, Social Network-like app, made using React and NodeJs (MERN Stack)
 
-A SPA, which allows you to create a software developer profile, start threads and add comments to them, to facilitate discussions.
+A Typescript-based SPA, which allows you to create a software developer profile, start threads and add comments to them, to facilitate discussions.  
+Hosted in AWS - using EC2 - at http://developer-connector-mern.com/.
 
 Startup: 
 
@@ -37,13 +38,17 @@ Requirements:
 
 - [Mongo](https://www.mongodb.com/download-center/community): tested on 4.0.0
 
-- A config file under the directory `./src/config/keys_dev.js`, in the format shown below
+- A config file under the directory `./src/config/keys_dev.ts`, in the format shown below
 
 - [CreateReactApp](https://www.npmjs.com/package/create-react-app), if you wish to start the server and client concurrently without opening a new browser tab automatically (*See BROWSER=none in the scripts section of the package.json file*)
 
 ```
-  module.exports = {
-    mongoURI: 'mongodb://something:something@something',
-    secret: 'someValue'
+  import { Config } from "devconnector-types/interfaces";
+
+  class DevelopmentConfig implements Config {
+    mongoURI = 'mongodb://something:something@something';
+    secret = 'someValue';
   };
+
+  export default DevelopmentConfig;
 ```

@@ -1,17 +1,19 @@
 import Profile from '../models/Profile';
 import User from '../models/User';
-import IProfile from '../interfaces/IProfile';
-import IProfileFields from '../interfaces/IProfileFields';
-import IExperience from '../interfaces/IExperience';
-import IEducation from '../interfaces/IEducation';
-import ISetProfileResponse from '../interfaces/ISetProfileResponse';
+import {
+  ProfileModel,
+  ProfileFields,
+  Experience,
+  Education,
+  SetProfileResponse
+} from 'devconnector-types/interfaces';
 
 class ProfilesService {
-  getByUserId(userId: string, errorStrings: any): Promise<IProfile | null> {
+  getByUserId(userId: string, errorStrings: any): Promise<ProfileModel | null> {
     return new Promise((resolve, reject) => {
       Profile.findOne({ user: userId })
         .populate('user', ['name', 'avatar'])
-        .then((profile: IProfile | null) => {
+        .then((profile: ProfileModel | null) => {
           if (!profile) {
             reject({ noProfile: errorStrings.profile_not_found_generic });
           }
@@ -22,20 +24,20 @@ class ProfilesService {
   };
 
   
-  getAll(errorStrings: any): Promise<IProfile[]> {
+  getAll(errorStrings: any): Promise<ProfileModel[]> {
     return new Promise((resolve, reject) => {
       Profile.find()
         .populate('user', ['name', 'avatar'])
-        .then((profiles: IProfile[]) => resolve(profiles))
+        .then((profiles: ProfileModel[]) => resolve(profiles))
         .catch((err: Error) => reject({ noProfiles: errorStrings.profiles_not_found }));
     });
   };
 
-  getProfileByHandle(handle: string, errorStrings: any): Promise<IProfile | null> {
+  getProfileByHandle(handle: string, errorStrings: any): Promise<ProfileModel | null> {
     return new Promise((resolve, reject) => {
       Profile.findOne({ handle })
         .populate('user', ['name', 'avatar'])
-        .then((profile: IProfile | null) => {
+        .then((profile: ProfileModel | null) => {
           if (!profile) {
             reject({ noProfile: errorStrings.profile_not_found_for_handle });
           }
@@ -48,13 +50,13 @@ class ProfilesService {
   
   setProfileForUser(
     userId: string,
-    profileFields: IProfileFields,
+    profileFields: ProfileFields,
     errorStrings: any
   )
-  : Promise<ISetProfileResponse> {
+  : Promise<SetProfileResponse> {
       return new Promise((resolve, reject) => {
         Profile.findOne({ user: userId })
-          .then((profile: IProfile | null) => {
+          .then((profile: ProfileModel | null) => {
             if (profile) {
 
               //update
@@ -70,14 +72,14 @@ class ProfilesService {
         
               // does handle exist
               Profile.findOne({ handle: profileFields.handle })
-                .then((profile: IProfile | null) => {
+                .then((profile: ProfileModel | null) => {
                   if (profile) {
                     return reject({ handle: errorStrings.handle_already_exists });
                   }
           
                   new Profile(profileFields)
                     .save()
-                    .then((profile: IProfile) => {
+                    .then((profile: ProfileModel) => {
                       resolve({ operation: 'create', profile: profile })
                     });
               });
@@ -89,13 +91,13 @@ class ProfilesService {
 
   addExperience(
     userId: string,
-    experienceData: IExperience,
+    experienceData: Experience,
     errorStrings: any
   )
-  : Promise<IProfile> {
+  : Promise<ProfileModel> {
       return new Promise((resolve, reject) => {
         Profile.findOne({ user: userId })
-          .then((profile: IProfile | null) => {
+          .then((profile: ProfileModel | null) => {
             if (!profile)
               return reject({ noProfile: errorStrings.profile_not_found_generic });
             
@@ -113,16 +115,16 @@ class ProfilesService {
     exp_id: string,
     errorStrings: any)
   :
-  Promise<IProfile> {
+  Promise<ProfileModel> {
     return new Promise((resolve, reject) => {
       Profile.findOne({ user: userId })
-        .then((profile: IProfile | null) => {
+        .then((profile: ProfileModel | null) => {
           if (!profile)
             return reject({ noProfile: errorStrings.profile_not_found_generic });
           
           // get remove index
           const removeIndex = profile.experience
-            .map((item: IExperience) => item._id)
+            .map((item: Experience) => item._id)
             .indexOf(exp_id);
 
           if (removeIndex === -1)
@@ -140,13 +142,13 @@ class ProfilesService {
 
   addEducation(
     userId: string,
-    educationData: IEducation,
+    educationData: Education,
     errorStrings: any)
   :
-  Promise<IProfile> {
+  Promise<ProfileModel> {
     return new Promise((resolve, reject) => {
       Profile.findOne({ user: userId })
-        .then((profile: IProfile | null) => {
+        .then((profile: ProfileModel | null) => {
           if (!profile)
             return reject({ noProfile: errorStrings.profile_not_found_generic });
           
@@ -165,16 +167,16 @@ class ProfilesService {
     edu_id: string,
     errorStrings: any
   )
-  : Promise<IProfile> {
+  : Promise<ProfileModel> {
       return new Promise((resolve, reject) => {
         Profile.findOne({ user: userId })
-          .then((profile: IProfile | null) => {
+          .then((profile: ProfileModel | null) => {
             if (!profile)
               return reject({ noProfile: errorStrings.profile_not_found_generic });
             
             // get remove index
             const removeIndex = profile.education
-              .map((item: IEducation) => item._id)
+              .map((item: Education) => item._id)
               .indexOf(edu_id);
 
             if (removeIndex === -1)

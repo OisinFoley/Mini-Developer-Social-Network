@@ -1,5 +1,4 @@
-import IProfileFields from "../interfaces/IProfileFields";
-import IProfileInput from "../interfaces/IProfileInput";
+import { ProfileFields, ProfileInput } from "devconnector-types/interfaces";
 
 export const assignSingleValueToManyObjectProps 
   = (obj: any, propsArray: (string | number)[], value: string | number | boolean): void => {
@@ -8,7 +7,7 @@ export const assignSingleValueToManyObjectProps
     });
 };
 
-export const parseRequestValuesToProfileFields = (profileFields: IProfileFields, requestBody: IProfileInput): void => {
+export const parseRequestValuesToProfileFields = (profileFields: ProfileFields, requestBody: ProfileInput): void => {
   profileFields.handle = requestBody.handle || '';
   profileFields.company = requestBody.company || '';
   profileFields.bio = requestBody.bio || '';

@@ -1,23 +1,19 @@
 import Post from '../models/Post';
-import IPost from '../interfaces/IPost';
-import IPostData from '../interfaces/IPostData';
-import ILike from '../interfaces/ILike';
-import IComment from '../interfaces/IComment';
-
+import { PostModel, PostInput, Like, Comment } from 'devconnector-types/interfaces';
 
 class PostsService {
-  getAll(): Promise<IPost[]> {
+  getAll(): Promise<PostModel[]> {
     return new Promise(resolve => {
       Post.find()
         .sort({ date: -1 })
-        .then((posts: IPost[]) => resolve(posts));
+        .then((posts: PostModel[]) => resolve(posts));
     });
   };
 
-  getPost(postId: any, errorStrings: any): Promise<IPost | null> {
+  getPost(postId: string, errorStrings: any): Promise<PostModel | null> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-        .then((post: IPost | null) => {
+        .then((post: PostModel | null) => {
           if (!post)
             reject({ postNotFound: errorStrings.post_not_found });
           
@@ -30,7 +26,7 @@ class PostsService {
   deletePost(postId: string, userId: string, errorStrings: any): Promise<null> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-        .then((post: IPost | null) => {
+        .then((post: PostModel | null) => {
           if (!post)
             return reject({ postNotFound: errorStrings.post_not_found })
 
@@ -46,25 +42,25 @@ class PostsService {
     });
   };
   
-  addPost(postData: IPostData): Promise<IPost> {
+  addPost(postData: PostInput): Promise<PostModel> {
     return new Promise((resolve, reject) => {
       new Post(postData)
         .save()
-        .then((post: IPost) => resolve(post))
+        .then((post: PostModel) => resolve(post))
         .catch((err: Error) => reject(err));
     });
   };
 
-  addLike(postId: string, userId: string, errorStrings: any): Promise<IPost> {
+  addLike(postId: string, userId: string, errorStrings: any): Promise<PostModel> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-        .then((post: IPost | null) => {
+        .then((post: PostModel | null) => {
           if (!post)
             return reject({ postNotFound: errorStrings.post_not_found });
 
           // check if already liked
           if (
-            post.likes.filter((like: ILike) => like.user.toString() === userId)
+            post.likes.filter((like: Like) => like.user.toString() === userId)
               .length > 0
           ) {
             return reject({ likedAlready: errorStrings.post_already_liked });
@@ -78,16 +74,16 @@ class PostsService {
     });
   };
 
-  removeLike(postId: string, userId: string, errorStrings: any): Promise<IPost> {
+  removeLike(postId: string, userId: string, errorStrings: any): Promise<PostModel> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-        .then((post: IPost | null) => {
+        .then((post: PostModel | null) => {
           if (!post)
             return reject({ postNotFound: errorStrings.post_not_found });
 
           // check if user has already liked
           const removeIndex = post.likes
-            .map((item: ILike) => item.user.toString())
+            .map((item: Like) => item.user.toString())
             .indexOf(userId);
           
           if (removeIndex === -1)
@@ -100,10 +96,10 @@ class PostsService {
     });
   };
 
-  addComment(postId: string, commentData: IComment, errorStrings: any): Promise<IPost> {
+  addComment(postId: string, commentData: Comment, errorStrings: any): Promise<PostModel> {
     return new Promise((resolve, reject) => {
       Post.findById(postId)
-        .then((post: IPost | null) => {
+        .then((post: PostModel | null) => {
           if (!post)
             return reject({ postNotFound: errorStrings.post_not_found });
 
@@ -114,15 +110,15 @@ class PostsService {
     });
   };
 
-  deleteComment(requestPostId: string, requestCommentId: string, errorStrings: any): Promise<IPost> {
+  deleteComment(requestPostId: string, requestCommentId: string, errorStrings: any): Promise<PostModel> {
     return new Promise((resolve, reject) => {
       Post.findById(requestPostId)
-        .then((post: IPost | null) => {
+        .then((post: PostModel | null) => {
           if (!post)
             return reject({ postNotFound: errorStrings.post_not_found });
 
           const removeIndex = post.comments
-            .map((item: IComment) => item._id)
+            .map((item: Comment) => item._id)
             .indexOf(requestCommentId);
 
           if (removeIndex === -1)

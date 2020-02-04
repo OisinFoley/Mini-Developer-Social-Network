@@ -10,8 +10,7 @@ import errorMessages from '../src/utils/error-handling-strings';
 import { addSeedPostsToDb } from './data-initialiser/testDataSeeder';
 import mockAuthenticatedUser from './__mocks__/authenticated-user';
 import BaseTest from './baseTest';
-import ILike from '../src/interfaces/ILike';
-import IComment from '../src/interfaces/IComment';
+import { Like, Comment } from 'devconnector-types/interfaces';
 import constants from './constants/strings';
 
 describe("/api/posts/", () => {
@@ -236,7 +235,7 @@ describe("/api/posts/", () => {
             test.chai.request(app)
               .delete(`${test.baseRoute}/${postId0}/likes`)
               .end((err: Error, res: any) => {
-                res.body.likes.forEach((like: ILike) => {
+                res.body.likes.forEach((like: Like) => {
                   like.user.should.not.equal(mockAuthenticatedUser.id);
                 });
                 res.should.have.status(200);
@@ -369,7 +368,7 @@ describe("/api/posts/", () => {
             test.chai.request(app)
               .delete(`${test.baseRoute}/${postId0}/comments/${commentId}`)
               .end((err: Error, res: any) => {
-                res.body.comments.forEach((comment: IComment) => {
+                res.body.comments.forEach((comment: Comment) => {
                   comment._id.should.not.equal(commentId);
                 });
                 res.should.have.status(200);

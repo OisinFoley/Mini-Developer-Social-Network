@@ -1,12 +1,10 @@
 import Validator from 'validator';
 
-import IRegisterInput from "../interfaces/IRegisterInput";
-import IErrorResponse from "../interfaces/IErrorResponse";
-import IValidationResponse from "../interfaces/IValidationResponse";
+import { RegisterInput, ErrorResponse, ValidationResponse } from "devconnector-types/interfaces";
 import isEmpty from './is-empty';
 
-export default (data: IRegisterInput, errorStrings: any): IValidationResponse => {
-  let errors: IErrorResponse = {};
+export default (data: RegisterInput, errorStrings: any): ValidationResponse => {
+  let errors: ErrorResponse = {};
 
   data.name = !isEmpty(data.name) ? data.name : '';
   data.email = !isEmpty(data.email) ? data.email : '';
