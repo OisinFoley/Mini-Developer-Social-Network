@@ -1,13 +1,11 @@
 import Validator from 'validator';
 
-import IExperience from "../interfaces/IExperience";
+import { Experience, ErrorResponse, ValidationResponse } from "devconnector-types/interfaces";
 import invalidDate from '../utils/invalid-date';
-import IErrorResponse from "../interfaces/IErrorResponse";
-import IValidationResponse from "../interfaces/IValidationResponse";
 import isEmpty from './is-empty';
 
-export default (data: IExperience, errorStrings: any): IValidationResponse => {
-  let errors: IErrorResponse = {};
+export default (data: Experience, errorStrings: any): ValidationResponse => {
+  let errors: ErrorResponse = {};
 
   data.title = !isEmpty(data.title) ? data.title : '';
   data.company = !isEmpty(data.company) ? data.company : '';

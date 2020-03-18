@@ -1,12 +1,10 @@
 import Validator from 'validator';
 
-import ILoginUserInput from "../interfaces/ILoginUserInput";
-import IErrorResponse from "../interfaces/IErrorResponse";
-import IValidationResponse from "../interfaces/IValidationResponse";
+import { LoginInput, ErrorResponse, ValidationResponse } from "devconnector-types/interfaces";
 import isEmpty from './is-empty';
 
-export default (data: ILoginUserInput, errorStrings: any): IValidationResponse  => {
-  let errors: IErrorResponse = {};
+export default (data: LoginInput, errorStrings: any): ValidationResponse  => {
+  let errors: ErrorResponse = {};
 
   data.email = !isEmpty(data.email) ? data.email : '';
   data.password = !isEmpty(data.password) ? data.password : '';

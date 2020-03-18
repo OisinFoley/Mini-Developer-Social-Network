@@ -1,0 +1,24 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "max-classes-per-file": {
+            "options": [2]
+        },
+        "no-default-export": false,
+        "no-submodule-imports": {
+            "options": ["tsutils"]
+        },
+        "restrict-plus-operands": true,
+        "strict-boolean-expressions": false,
+        "quotemark": ["single", "double"],
+        "ordered-imports": false,
+        "trailing-comma": false,
+        "arrow-parens": false,
+        "object-literal-sort-keys": false,
+        "no-trailing-whitespace": [true, "ignore-comments"],
+        "member-access": false,
+        "no-implicit-dependencies": false,
+        "interface-name": false,
+        "no-console": false
+    }
+}

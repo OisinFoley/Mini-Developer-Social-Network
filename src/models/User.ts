@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import IUser from '../interfaces/IUser';
+import { UserModel } from 'devconnector-types/interfaces';
 
 let UserSchema: Schema = new Schema({
   name: {
@@ -23,4 +23,4 @@ let UserSchema: Schema = new Schema({
   }
 });
 
-export default mongoose.model<IUser>('user', UserSchema);
+export default mongoose.model<UserModel>('user', UserSchema);

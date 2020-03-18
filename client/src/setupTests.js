@@ -1,8 +1,15 @@
 import React from 'react';
 import { configure, shallow, render, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+// import Adapter from 'enzyme-adapter-react-16';
 import { mockStore } from './__mocks__/mockStore';
-configure({ adapter: new Adapter() });
+// configure({ adapter: new Adapter() });
+
+// import { configure } from 'enzyme';
+import * as Enzyme from 'enzyme';
+// import * as Adapter from 'enzyme-adapter-react-16';
+import ReactSixteenAdapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new ReactSixteenAdapter() });
 
 const localStorageMock = {
   getItem: jest.fn(),
