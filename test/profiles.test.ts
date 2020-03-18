@@ -13,8 +13,7 @@ import mockAuthenticatedUser from './__mocks__/authenticated-user';
 import mockProfiles from './__mocks__/profiles';
 import BaseTest from './baseTest';
 import constants from './constants/strings';
-import IExperience from '../src/interfaces/IExperience';
-import IEducation from '../src/interfaces/IEducation';
+import { Experience, Education } from 'devconnector-types/interfaces';
 
 describe("/api/profiles/", () => {
   const test = new BaseTest('/api/profiles');
@@ -342,7 +341,7 @@ describe("/api/profiles/", () => {
               let { experience } = res.body;
 
               if (experience) {
-                experience.forEach((exp: IExperience) => {
+                experience.forEach((exp: Experience) => {
                   exp._id.should.not.equal(_id);
                 });
               }
@@ -417,7 +416,7 @@ describe("/api/profiles/", () => {
               let { education } = res.body;
 
               if (education) {
-                education.forEach((edu: IEducation) => {
+                education.forEach((edu: Education) => {
                   edu._id?.should.not.equal(eduId);
                 });
               }

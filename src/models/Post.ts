@@ -1,5 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import IPost from '../interfaces/IPost';
+
+import { PostModel } from 'devconnector-types/interfaces';
 
 const PostSchema: Schema = new Schema({
   user: {
@@ -24,8 +25,8 @@ const PostSchema: Schema = new Schema({
       }
     }
   ],
-  comments: [
-    {
+  comments: { 
+    type: [{
       user: {
         type: Schema.Types.ObjectId,
         ref: 'user'
@@ -45,12 +46,13 @@ const PostSchema: Schema = new Schema({
         type: Date,
         default: Date.now()
       }
-    }
-  ],
+    }],
+    default: []
+  },
   date: {
     type: Date,
     default: Date.now()
   }
 });
 
-export default mongoose.model<IPost>('Post', PostSchema);
+export default mongoose.model<PostModel>('Post', PostSchema);
