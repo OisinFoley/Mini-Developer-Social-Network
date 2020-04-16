@@ -1,8 +1,16 @@
 import { Config } from "devconnector-types/interfaces";
+import { ConfigHelper } from './config-helper';
 
 class ProductionConfig implements Config {
-  mongoURI = process.env.MONGO_URI || '';
-  secret = process.env.SECRET_OR_KEY || '';
+  mongoURI = '';
+  secret = '';
+
+  constructor() {
+    let config = ConfigHelper.buildConfig();
+
+    this.mongoURI = config.mongoURI || ''
+    this.secret = config.secretOrKey || '';
+  }
 };
 
 export default ProductionConfig;
