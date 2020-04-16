@@ -1,12 +1,13 @@
-# DevConnector - A Small, Social Network-like app, made using React and NodeJs (MERN Stack)
+# DevConnector - A Social Network-like app, made using React and NodeJs (MERN Stack)
 
 A Typescript-based SPA, which allows you to create a software developer profile, start threads and add comments to them, to facilitate discussions.  
-Hosted in AWS - using EC2 - at http://developer-connector-mern.com/.
+Hosted in AWS - using EC2 and Docker - at https://www.developer-connector-mern.com/.
 
 Startup: 
 
 - `npm i` from root directory, and `npm i` again when in the `/client` directory.
 - Ensure you have a Mongo instance running locally.
+- You'll need either a config file in one of the formats specified in the `Requirements` section below
 - Run `npm run dev` from the root directory (this will startup both the server and client simultaneously).
 
 Features:
@@ -32,13 +33,15 @@ Good to know:
 
 Requirements:
 
-- Node: tested on 8.4.0 
+- Node: (tested on 8.4.0 )
 
-- NPM: tested on 6.2.0
+- NPM: (tested on 6.2.0)
 
-- [Mongo](https://www.mongodb.com/download-center/community): tested on 4.0.0
+- [Mongo](https://www.mongodb.com/download-center/community): (tested on 4.0.0)
 
 - A config file under the directory `./src/config/keys_dev.ts`, in the format shown below
+
+  - If running in docker, and using secrets to pass environment variables, then place a file (in JSON format) named `secrets.json` at the root of the application, with a `mongoURI` and `secret` property
 
 - [CreateReactApp](https://www.npmjs.com/package/create-react-app), if you wish to start the server and client concurrently without opening a new browser tab automatically (*See BROWSER=none in the scripts section of the package.json file*)
 

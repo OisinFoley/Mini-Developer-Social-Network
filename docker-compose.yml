@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  devconnector-webapp:
+    container_name: devconnector-webapp
+    image: oisinfoley/devconnector-webapp
+    secrets:
+      - my_secret
+  devconnector-nginx:
+    container_name: 'devconnector-nginx'
+    image: oisinfoley/devconnector-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+secrets:
+  my_secret:
+    file: ./secrets.json

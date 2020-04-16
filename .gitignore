@@ -4,3 +4,4 @@ src/config/keys_dev.ts
 .nyc_output
 .vscode
 /dist
+secrets.json

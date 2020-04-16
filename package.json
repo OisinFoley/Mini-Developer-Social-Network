@@ -9,7 +9,7 @@
     "client": "BROWSER=none npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "nyc mocha -r ts-node/register test/*.test.ts",
-    "start": "nodemon dist/server.js",
+    "start": "node dist/server.js",
     "build": "tsc"
   },
   "author": "Oisín Foley",
@@ -35,9 +35,6 @@
     "instrument": true
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.5",
-    "@types/jwt-decode": "^2.2.1",
-    "@types/react-redux": "^7.1.7",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
@@ -52,6 +49,8 @@
     "validator": "^10.5.0"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.5.5",
+    "@types/jwt-decode": "^2.2.1",
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/node": "^7.0.0",
