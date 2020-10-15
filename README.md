@@ -1,7 +1,7 @@
 # DevConnector - A Social Network-like app, made using React and NodeJs (MERN Stack)
 
 A Typescript-based SPA, which allows you to create a software developer profile, start threads and add comments to them, to facilitate discussions.  
-Hosted in AWS - using EC2 and Docker - at https://www.developer-connector-mern.com/.
+Hosted in AWS - using EC2 and Docker - at https://www.oisin-foley.com/.
 
 Startup: 
 
